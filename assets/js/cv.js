@@ -159,28 +159,24 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
   }
   window.addEventListener("hashchange", function () { route(keyFromHash()); });
 
-  /* ── parallax em toda tela-porta (hub + sub-hubs) ── */
+  /* ── parallax global (fundo + títulos) via variáveis no :root ── */
   function initParallax() {
-    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    each(document.querySelectorAll(".door-screen"), function (scr) {
-      each(scr.querySelectorAll("[data-depth]"), function (e2) { e2.style.setProperty("--d", e2.getAttribute("data-depth") || "0"); });
-      if (reduce) { return; }
-      var tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
-      function loop() {
-        cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
-        scr.style.setProperty("--mx", cx.toFixed(4));
-        scr.style.setProperty("--my", cy.toFixed(4));
-        if (Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001) { raf = requestAnimationFrame(loop); } else { raf = null; }
-      }
-      function kick() { if (!raf) { raf = requestAnimationFrame(loop); } }
-      scr.addEventListener("pointermove", function (ev) {
-        var r = scr.getBoundingClientRect();
-        tx = ((ev.clientX - r.left) / r.width - 0.5) * 2;
-        ty = ((ev.clientY - r.top) / r.height - 0.5) * 2;
-        kick();
-      });
-      scr.addEventListener("pointerleave", function () { tx = 0; ty = 0; kick(); });
-    });
+    var root = document.documentElement;
+    each(document.querySelectorAll("[data-depth]"), function (e2) { e2.style.setProperty("--d", e2.getAttribute("data-depth") || "0"); });
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) { return; }
+    var tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+    function loop() {
+      cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
+      root.style.setProperty("--mx", cx.toFixed(4));
+      root.style.setProperty("--my", cy.toFixed(4));
+      if (Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001) { raf = requestAnimationFrame(loop); } else { raf = null; }
+    }
+    function kick() { if (!raf) { raf = requestAnimationFrame(loop); } }
+    window.addEventListener("pointermove", function (ev) {
+      tx = (ev.clientX / window.innerWidth - 0.5) * 2;
+      ty = (ev.clientY / window.innerHeight - 0.5) * 2;
+      kick();
+    }, { passive: true });
   }
 
   /* ── copiar e-mail ── */

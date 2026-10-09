@@ -213,3 +213,22 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
     route(slugFromHash(), true);
   }
 })();
+
+/* ── Verifique! — seletor de plataforma (OffSec / HTB) ── */
+(function () {
+  "use strict";
+  var picks = document.querySelectorAll(".pick-btn");
+  if (!picks.length) { return; }
+  var galO = document.getElementById("gal-offsec");
+  var galH = document.getElementById("gal-htb");
+  function select(plat) {
+    Array.prototype.forEach.call(picks, function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-plat") === plat));
+    });
+    if (galO) { galO.hidden = (plat !== "offsec"); }
+    if (galH) { galH.hidden = (plat !== "htb"); }
+  }
+  Array.prototype.forEach.call(picks, function (b) {
+    b.addEventListener("click", function () { select(b.getAttribute("data-plat")); });
+  });
+})();

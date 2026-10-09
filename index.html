@@ -44,7 +44,7 @@
       <a class="hub-box b-offsec" href="#offsec">
         <span class="hb-num">01</span>
         <span class="hb-name">OffSec</span>
-        <span class="hb-desc" data-en="Certs · Pins · Badges · Labs · Flags">Certificações · Pins · Badges · Labs · Flags</span>
+        <span class="hb-desc" data-en="Certs · Pins &amp; Badges · Labs">Certificações · Pins &amp; Badges · Labs</span>
         <span class="hb-go" aria-hidden="true">→</span>
       </a>
       <a class="hub-box b-htb" href="#htb">
@@ -598,11 +598,29 @@
   </section>
 
   <!-- ══════════ VERIFIQUE ══════════ -->
-  <section class="screen content-screen" id="v-offsec-pins" data-title-pt="Pins" data-title-en="Pins" hidden>
-    <p class="eyebrow">OffSec · Pins</p>
-    <h1>Pins</h1>
-    <p class="lede" data-en="Verifiable OffSec Skill Pins. Each pin opens its credential; on desktop, hover to preview the details.">Skill Pins verificáveis da OffSec. Cada pin abre a sua credencial; no computador, passe o mouse para ver os detalhes.</p>
-    <div class="pin-stage">
+  <!-- ══════════ PINS & BADGES ══════════ -->
+  <section class="screen content-screen" id="v-offsec-pins" data-title-pt="Pins & Badges" data-title-en="Pins & Badges" hidden>
+    <p class="eyebrow">OffSec</p>
+    <h1 data-en="Pins &amp; Badges">Pins &amp; Badges</h1>
+    <p class="lede" data-en="Verifiable OffSec pins, badges and assessments. Pick a category; hover or tap to see the details.">Pins, badges e assessments verificáveis da OffSec. Escolha uma categoria; passe o mouse ou toque para ver os detalhes.</p>
+
+    <div class="pick tri" role="tablist">
+      <button type="button" class="pick-btn" data-group="pins" aria-pressed="true">
+        <span class="pick-name">Pins</span>
+        <span class="pick-sub" data-en="15 Skill Pins">15 Skill Pins</span>
+      </button>
+      <button type="button" class="pick-btn" data-group="badges" aria-pressed="false">
+        <span class="pick-name">Badges</span>
+        <span class="pick-sub">2</span>
+      </button>
+      <button type="button" class="pick-btn" data-group="assess" aria-pressed="false">
+        <span class="pick-name">Assessments</span>
+        <span class="pick-sub" data-en="soon">em breve</span>
+      </button>
+    </div>
+
+    <div class="pb-group" data-group="pins">
+      <div class="pin-stage">
         <div class="gal-grid">
         <a class="badge-card" href="https://credentials.offsec.com/ddcd3375-d4bc-44b4-a5af-2edc69ca19d8#acc.5pdxU6Xc" target="_blank" rel="noopener" title="Web Attack Methodology Skill Path — verificar credencial na OffSec" aria-label="Pin OffSec Web Attack Methodology Skill Path — verificar credencial" data-name="Web Attack Methodology Skill Path" data-meta="OffSec · Skill Pin · Mar 2026">
           <img src="/assets/img/badges/offsec/web-attack-methodology.png" alt="Pin OffSec Web Attack Methodology Skill Path" loading="lazy">
@@ -654,16 +672,37 @@
           <span class="pd-imgwrap"><img class="pd-img" src="" alt="" loading="lazy"></span>
           <h3 class="pd-name"></h3>
           <p class="pd-meta"></p>
+          <p class="pd-desc"></p>
           <a class="pd-link" href="#" target="_blank" rel="noopener" data-en="Verify credential ↗">Verificar credencial ↗</a>
-          <p class="pd-hint" data-en="Hover a pin to see its details.">Passe o mouse em um pin para ver os detalhes.</p>
+          <p class="pd-hint" data-en="Hover a pin to see its details.">Passe o mouse para ver os detalhes.</p>
         </aside>
       </div>
-  </section>
+    </div>
 
-  <section class="screen content-screen" id="v-offsec-badges" data-title-pt="Badges" data-title-en="Badges" hidden>
-    <p class="eyebrow">OffSec · Badges</p>
-    <h1>Badges</h1>
-    <div class="empty"><p data-en="Soon: badges earned on OffSec.">Em breve: badges conquistados na OffSec.</p></div>
+    <div class="pb-group" data-group="badges" hidden>
+      <div class="pin-stage">
+        <div class="gal-grid">
+          <a class="badge-card" href="https://credentials.offsec.com/1b13f50c-392b-41c4-94aa-3c1efb9b98cf#acc.4HbQBR2I" target="_blank" rel="noopener" title="Web Application Assessment Essentials — verificar na OffSec" aria-label="Badge OffSec Web Application Assessment Essentials" data-name="Web Application Assessment Essentials" data-meta="OffSec · Badge" data-desc="A base da ofensiva web: mapear a superfície de ataque de uma aplicação, entender autenticação e sessão, e reconhecer onde a entrada vira injeção. O primeiro passo para transformar um alvo HTTP numa cadeia de exploração." data-desc-en="The groundwork of web offense: mapping an application’s attack surface, understanding authentication and sessions, and spotting where input becomes injection. The first step in turning an HTTP target into an exploitation chain.">
+            <img src="/assets/img/badges/offsec/webapp-assessment-essentials.png" alt="Badge OffSec Web Application Assessment Essentials" loading="lazy">
+          </a>
+          <a class="badge-card" href="https://credentials.offsec.com/acd382b5-0413-41dd-b55e-447d4c1e1684#acc.Lpbt3r9v" target="_blank" rel="noopener" title="Network Penetration Testing Essentials — verificar na OffSec" aria-label="Badge OffSec Network Penetration Testing Essentials" data-name="Network Penetration Testing Essentials" data-meta="OffSec · Badge" data-desc="O alicerce do pentest de rede: enumerar serviços, ler a topologia e identificar o vetor que abre a porta. A disciplina de transformar portas abertas em ponto de entrada — e um ponto de entrada em movimento." data-desc-en="The foundation of network pentesting: enumerating services, reading the topology and finding the vector that opens the door. The discipline of turning open ports into a foothold — and a foothold into movement.">
+            <img src="/assets/img/badges/offsec/network-pentest-essentials.png" alt="Badge OffSec Network Penetration Testing Essentials" loading="lazy">
+          </a>
+        </div>
+        <aside class="pin-detail" aria-live="polite">
+          <span class="pd-imgwrap"><img class="pd-img" src="" alt="" loading="lazy"></span>
+          <h3 class="pd-name"></h3>
+          <p class="pd-meta"></p>
+          <p class="pd-desc"></p>
+          <a class="pd-link" href="#" target="_blank" rel="noopener" data-en="Verify credential ↗">Verificar credencial ↗</a>
+          <p class="pd-hint" data-en="Hover a pin to see its details.">Passe o mouse para ver os detalhes.</p>
+        </aside>
+      </div>
+    </div>
+
+    <div class="pb-group" data-group="assess" hidden>
+      <div class="empty"><p data-en="Soon: OffSec assessments.">Em breve: assessments da OffSec.</p></div>
+    </div>
   </section>
 
   <section class="screen content-screen" id="v-htb-pins" data-title-pt="Pins & Badges" data-title-en="Pins & Badges" hidden>
@@ -753,18 +792,12 @@
       </a>
       <a class="hub-box b-offsec" href="#offsec-pins">
         <span class="hb-num">02</span>
-        <span class="hb-name" data-en="Pins">Pins</span>
-        <span class="hb-desc" data-en="15 verifiable Skill Pins.">15 Skill Pins verificáveis.</span>
-        <span class="hb-go" aria-hidden="true">→</span>
-      </a>
-      <a class="hub-box b-offsec" href="#offsec-badges">
-        <span class="hb-num">03</span>
-        <span class="hb-name" data-en="Badges">Badges</span>
-        <span class="hb-desc" data-en="Platform achievements.">Conquistas da plataforma.</span>
+        <span class="hb-name" data-en="Pins &amp; Badges">Pins &amp; Badges</span>
+        <span class="hb-desc" data-en="15 pins · 2 badges · assessments">15 pins · 2 badges · assessments</span>
         <span class="hb-go" aria-hidden="true">→</span>
       </a>
       <a class="hub-box b-offsec" href="#pg-practice">
-        <span class="hb-num">04</span>
+        <span class="hb-num">03</span>
         <span class="hb-name" data-en="Labs">Labs</span>
         <span class="hb-desc" data-en="Proving Grounds and mini-labs.">Proving Grounds e mini-labs.</span>
         <span class="hb-go" aria-hidden="true">→</span>

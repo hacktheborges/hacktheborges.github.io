@@ -853,3 +853,23 @@ body{background:#060410}
 
 /* acentos de marca das caixas (mantêm diferenciação) */
 .b-cert{--bx:#c86bff}
+
+/* ── caixas com painel fosco escuro: nebulosa não lava mais o texto ── */
+.hub-box{background:linear-gradient(160deg,rgba(16,12,26,.60),rgba(9,7,16,.50));
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.hub-box .hb-desc{color:#b4accb}
+.hub-box .hb-num{color:#8980a0}
+
+/* título OffSec maior */
+.sub-title.big{font-size:clamp(2.6rem,8.5vw,5rem)}
+
+/* selo (Em construção) */
+.construcao{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--amber);border:1px solid color-mix(in srgb,var(--amber) 45%,var(--line));
+  border-radius:5px;padding:6px 11px;display:inline-block;margin:2px 0 22px}
+
+/* guard de desempenho no celular: nebulosa estática e mais leve */
+@media (max-width:720px){
+  .bg-aurora{animation:none;filter:blur(22px)}
+  .bg-pix{display:none}
+}

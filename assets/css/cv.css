@@ -752,3 +752,61 @@ body.hub-on #hub{display:block}
 
 /* placeholder de história nas certificações */
 .story .story-ph{color:var(--muted);font-style:italic;max-width:64ch}
+
+/* ═══════════════ Navegação em telas (hub → mundo → assunto) ═══════════════ */
+html,body{height:100%}
+body{overflow:hidden}                 /* cada tela rola por dentro */
+
+.screen{position:fixed;inset:0;z-index:40}
+.door-screen{overflow:hidden;background:#0b0608;color:#eaf1f8;font-family:var(--font-sans)}
+.content-screen{overflow-y:auto;overflow-x:hidden;background:var(--paper);color:var(--ink);-webkit-overflow-scrolling:touch}
+.content-screen .screen-inner{max-width:980px;margin:0 auto;padding:30px clamp(20px,4vw,56px) 90px;animation:viewIn var(--t-slow) var(--ease)}
+
+/* sub-hubs: título um pouco menor, não colar no topo */
+.sub-title{font-size:clamp(2rem,6.5vw,3.6rem)}
+.sub-inner{padding-top:104px}
+/* arranjo especial de 5 caixas é só da home; sub-hubs fluem naturalmente */
+.sub-hub .hub-grid .hub-box:nth-child(4),
+.sub-hub .hub-grid .hub-box:nth-child(5){grid-column:auto}
+
+/* ── barra de topo ── */
+.topbar{display:flex;align-items:center;gap:14px;z-index:6}
+.content-screen .topbar{position:sticky;top:0;
+  background:color-mix(in srgb,var(--paper) 90%,transparent);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+  padding:10px clamp(16px,3vw,28px);padding-top:calc(10px + env(safe-area-inset-top,0px))}
+.door-screen .topbar{position:absolute;top:0;left:0;right:0;background:transparent;
+  padding:calc(16px + env(safe-area-inset-top,0px)) clamp(16px,4vw,42px) 0}
+
+.tb-nav{display:flex;gap:8px;align-items:center}
+.tb-btn{display:inline-flex;align-items:center;gap:6px;text-decoration:none;
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;
+  border:1px solid var(--line);border-radius:6px;padding:6px 10px;color:var(--muted);
+  transition:color var(--t) var(--ease),border-color var(--t) var(--ease),background var(--t) var(--ease),transform var(--t) var(--ease)}
+.tb-btn:hover{color:var(--ink);border-color:var(--ink)}
+.tb-btn:active{transform:scale(.96)}
+.tb-home{padding:6px 9px;font-size:14px}
+.door-screen .tb-btn{border-color:rgba(160,185,220,.26);color:#9fb0c4;background:rgba(255,255,255,.05)}
+.door-screen .tb-btn:hover{color:#fff;border-color:rgba(255,255,255,.5)}
+
+.tb-crumb{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-right:auto;min-width:0;
+  font-family:var(--font-mono);font-size:12px}
+.tb-cr{color:var(--muted);text-decoration:none;white-space:nowrap}
+.tb-cr:hover{color:var(--ink)}
+.tb-cr[aria-current="page"]{color:var(--ink);font-weight:600}
+.tb-sep{color:var(--muted);opacity:.55}
+.door-screen .tb-crumb .tb-cr{color:#9fb0c4}
+.door-screen .tb-crumb .tb-cr:hover{color:#fff}
+.door-screen .tb-crumb .tb-cr[aria-current="page"]{color:#fff}
+.door-screen .tb-sep{color:#6f8097}
+
+.tb-switch{flex:none}
+.door-screen .tb-switch{border-color:rgba(160,185,220,.28);background:rgba(255,255,255,.05)}
+.door-screen .tb-switch button{color:#9fb0c4}
+.door-screen .tb-switch button[aria-pressed="true"]{background:#eaf1f8;color:#0b1016}
+
+@media (max-width:560px){
+  .tb-crumb{font-size:11px;gap:6px}
+  .tb-back span[data-en]{display:none}   /* só a seta no mobile */
+}

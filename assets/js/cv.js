@@ -265,3 +265,4 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
     stage.addEventListener("mouseleave", function () { panel.classList.remove("on"); });
   });
 })();
+

@@ -22,7 +22,7 @@
 </head>
 <body>
 
-<section id="hub" aria-label="Início">
+<section id="hub" class="screen door-screen home" aria-label="Início">
   <div class="hub-sky" aria-hidden="true">
     <span class="hub-layer hub-grid" data-depth="18"></span>
     <span class="hub-layer hub-aurora" data-depth="40"></span>
@@ -75,68 +75,10 @@
   </div>
 </section>
 
-<div class="bar">
-  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="rail">Menu</button>
-  <span class="nm">Artur Borges</span>
-  <div class="switch" role="group" aria-label="Idioma / Language">
-    <button type="button" data-lang="pt" aria-pressed="true">PT</button>
-    <button type="button" data-lang="en" aria-pressed="false">EN</button>
-  </div>
-</div>
 <div class="fall" aria-hidden="true"></div>
 
-<div class="shell">
-
-  <div class="scrim" id="scrim" hidden></div>
-
-  <aside class="rail" id="rail">
-    <div class="brand">
-      <div class="brand-row">
-        <span class="brand-av" role="img" aria-label="Avatar em pixel: uma figura de capuz com um prompt de terminal no visor."></span>
-        <span class="who">
-          <span class="nm">Artur Borges</span>
-          <span class="hd">hacktheborges</span>
-        </span>
-        <div class="switch" role="group" aria-label="Idioma / Language">
-          <button type="button" data-lang="pt" aria-pressed="true">PT</button>
-          <button type="button" data-lang="en" aria-pressed="false">EN</button>
-        </div>
-      </div>
-      <span class="rl" data-en="Offensive Security">Segurança Ofensiva</span>
-    </div>
-
-    <nav class="tree" aria-label="Seções">
-      <a class="top home" href="#hub" data-en="Home">⌂ Início</a>
-      <a class="top" href="#offsec">OffSec</a>
-      <a class="top" href="#htb">Hack The Box</a>
-      <a class="top hot" href="#curriculo" data-en="CV">Currículo</a>
-      <a class="top verify" href="#verifique" data-en="Verify!">Verifique!</a>
-
-      <details class="grp" open>
-        <summary data-en="Certifications">Certificações</summary>
-        <a href="#security-plus">CompTIA Security+</a>
-        <a href="#crta">CRTA</a>
-        <a href="#oscp"><span data-en="OSCP">OSCP</span><span class="tag">23 out</span></a>
-      </details>
-
-      <a class="top" href="#sobre" data-en="About">Sobre</a>
-
-    </nav>
-
-    <div class="rail-foot">
-      <div class="out">
-        <a href="https://github.com/hacktheborges">GitHub ↗</a>
-        <a href="https://www.linkedin.com/in/arturborgges/">LinkedIn ↗</a>
-        <a href="https://profile.hackthebox.com/profile/019e2c5e-b1eb-7093-b9fa-ec20945bbefb">HTB ↗</a>
-        <a href="https://portal.offsec.com/public-profile/de8b0b16-ad26-3aa0-ad2f-3c49183ca217">OffSec ↗</a>
-      </div>
-    </div>
-  </aside>
-
-  <main>
-
-  <!-- ══════════ CURRÍCULO ══════════ -->
-  <section class="view" id="v-curriculo" data-title-pt="Currículo" data-title-en="CV">
+<!-- ══════════ CURRÍCULO ══════════ -->
+  <section class="screen content-screen" id="v-curriculo" data-title-pt="Currículo" data-title-en="CV">
     <p class="eyebrow" data-en="Offensive Security">Segurança Ofensiva</p>
     <h1>Artur Borges<span class="term-caret" aria-hidden="true"></span></h1>
     <p class="lede" data-en="Information security analyst. Currently hunting the Offensive Security Certified Professional (OSCP) certification.">Analista de segurança da informação. Caçando no momento a certificação Offensive Security Certified Professional (OSCP).</p>
@@ -248,7 +190,7 @@
   </section>
 
   <!-- ══════════ SECURITY+ ══════════ -->
-  <section class="view" id="v-security-plus" data-title-pt="CompTIA Security+" data-title-en="CompTIA Security+" hidden>
+  <section class="screen content-screen" id="v-security-plus" data-title-pt="CompTIA Security+" data-title-en="CompTIA Security+" hidden>
     <p class="eyebrow" data-en="Certification">Certificação</p>
     <h1>CompTIA Security+</h1>
     <p class="lede" data-en="The market's baseline certification in information security fundamentals. Vendor-neutral, it covers everything from controls and cryptography to incident response and risk governance. It is the floor for most analyst roles.">A certificação base do mercado em fundamentos de segurança da informação. Neutra em relação a fabricante, cobre desde controles e criptografia até resposta a incidentes e governança de risco. É o piso exigido em boa parte das vagas de analista.</p>
@@ -328,7 +270,7 @@
   </section>
 
   <!-- ══════════ CRTA ══════════ -->
-  <section class="view" id="v-crta" data-title-pt="CRTA" data-title-en="CRTA" hidden>
+  <section class="screen content-screen" id="v-crta" data-title-pt="CRTA" data-title-en="CRTA" hidden>
     <p class="eyebrow" data-en="Certification">Certificação</p>
     <h1>CRTA</h1>
     <p class="lede" data-en="A hands-on red team certification, examined inside a simulated corporate lab. It covers the full chain in an Active Directory environment: enumeration, lateral movement and domain compromise. It grades execution, not theory.">Certificação prática de red team, com exame executado em laboratório corporativo simulado. Cobre a cadeia completa dentro de um ambiente Active Directory: enumeração, movimentação lateral e comprometimento de domínio. Avalia execução, não teoria.</p>
@@ -395,7 +337,7 @@
   </section>
 
   <!-- ══════════ OSCP ══════════ -->
-  <section class="view" id="v-oscp" data-title-pt="OSCP" data-title-en="OSCP" hidden>
+  <section class="screen content-screen" id="v-oscp" data-title-pt="OSCP" data-title-en="OSCP" hidden>
     <p class="eyebrow" data-en="In progress">Em andamento</p>
     <h1>OSCP</h1>
     <p class="lede" data-en="The most recognised credential in offensive security. A 24-hour hands-on exam on an isolated network — exploitation, privilege escalation and an Active Directory set — followed by a technical report that is graded too. It is the certification pentest roles ask for by name.">A credencial mais reconhecida em segurança ofensiva. Exame prático de 24 horas em rede isolada, com exploração, escalação de privilégios e um conjunto de Active Directory, seguido de relatório técnico que também é avaliado. É a certificação que as vagas de pentest pedem pelo nome.</p>
@@ -451,7 +393,7 @@
   </section>
 
   <!-- ══════════ PRÁTICA — VISÃO GERAL ══════════ -->
-  <section class="view" id="v-pratica" data-title-pt="Prática" data-title-en="Hands-on" hidden>
+  <section class="screen content-screen" id="v-pratica" data-title-pt="Prática" data-title-en="Hands-on" hidden>
     <p class="eyebrow" data-en="Hands-on">Prática</p>
     <h1 data-en="Hands-on record">Prática registrada</h1>
     <div class="road">
@@ -519,7 +461,7 @@
   </section>
 
   <!-- ══════════ PG PRACTICE ══════════ -->
-  <section class="view" id="v-pg-practice" data-title-pt="Laboratórios" data-title-en="Labs" hidden>
+  <section class="screen content-screen" id="v-pg-practice" data-title-pt="Laboratórios" data-title-en="Labs" hidden>
     <p class="eyebrow">OffSec · Hack The Box</p>
     <h1>Laboratórios</h1>
     <p class="lede" data-en="OffSec and HTB labs.">Laboratórios OffSec e HTB.</p>
@@ -567,7 +509,7 @@
   </section>
 
   <!-- ══════════ HTB ACADEMY ══════════ -->
-  <section class="view" id="v-htb-academy" data-title-pt="HTB Academy" data-title-en="HTB Academy" hidden>
+  <section class="screen content-screen" id="v-htb-academy" data-title-pt="HTB Academy" data-title-en="HTB Academy" hidden>
     <p class="eyebrow">Hack The Box</p>
     <h1>Academy</h1>
     <p class="lede" data-en="32 modules completed, grouped by attack phase rather than listed by name — a coverage map reads in five seconds; a list of 32 titles reads in none.">32 módulos concluídos, agrupados por fase do ataque em vez de listados por nome — um mapa de cobertura se lê em cinco segundos; uma lista de 32 títulos não se lê.</p>
@@ -656,86 +598,45 @@
   </section>
 
   <!-- ══════════ SOBRE ══════════ -->
-  <section class="view" id="v-sobre" data-title-pt="Sobre" data-title-en="About" hidden>
-    <p class="eyebrow">whoami</p>
-    <h1 data-en="About">Sobre</h1>
-    <p class="lede" data-en="Artur Borges — hacktheborges. Information security analyst in Passo Fundo, RS, heading for offensive security.">Artur Borges — hacktheborges. Analista de segurança da informação em Passo Fundo, RS, com destino à segurança ofensiva.</p>
-
-    <p data-en="The classic IT technician who realised that setting up and maintaining computers no longer satisfied the urge to find out what was going on in the layers you can't see.">O clássico técnico em informática que percebeu que configuração e manutenção em computadores já não supria a necessidade de descobrir o que estava acontecendo em camadas não visíveis.</p>
-
-    <h2 class="sub-h" data-en="Focus">Foco</h2>
-    <div class="tools">
-      <span class="tool">Active Directory</span>
-      <span class="tool">Pentest</span>
-      <span class="tool">Web Security</span>
-      <span class="tool" data-en="Vulnerability exploitation">Exploração de vulnerabilidades</span>
-      <span class="tool" data-en="Reporting">Relatório</span>
+  <section class="screen door-screen sub-hub" id="v-sobre" data-title-pt="Sobre" data-title-en="About" hidden>
+    <div class="hub-sky" aria-hidden="true">
+      <span class="hub-layer hub-grid" data-depth="18"></span>
+      <span class="hub-layer hub-aurora" data-depth="40"></span>
+      <span class="hub-layer hub-pix" data-depth="64"></span>
     </div>
-
-    <h2 class="sub-h" data-en="Certifications">Certificações</h2>
-    <div class="tools">
-      <span class="tool">CompTIA Security+</span>
-      <span class="tool">Certified Red Team Analyst (CRTA)</span>
-      <span class="tool">Offensive Security Certified Professional (OSCP) <span class="load">(loading)</span></span>
+    <div class="hub-inner sub-inner">
+      <p class="hub-kicker" data-en="whoami">whoami</p>
+      <h1 class="hub-title sub-title" data-depth="10" data-en="About">Sobre</h1>
+      <p class="hub-sub" data-en="Pick a topic.">Escolha um assunto.</p>
+      <nav class="hub-grid" data-depth="5" aria-label="Sobre">
+      <a class="hub-box b-sobre" href="#sobre-perfil">
+        <span class="hb-num">01</span>
+        <span class="hb-name" data-en="Profile">Perfil</span>
+        <span class="hb-desc" data-en="Who I am and my focus.">Quem sou e meu foco.</span>
+        <span class="hb-go" aria-hidden="true">→</span>
+      </a>
+      <a class="hub-box b-sobre" href="#curriculo">
+        <span class="hb-num">02</span>
+        <span class="hb-name" data-en="CV">Currículo</span>
+        <span class="hb-desc" data-en="Role, numbers and track record.">Cargo, números e trajetória.</span>
+        <span class="hb-go" aria-hidden="true">→</span>
+      </a>
+      <a class="hub-box b-sobre" href="#contato">
+        <span class="hb-num">03</span>
+        <span class="hb-name" data-en="Contact">Contato</span>
+        <span class="hb-desc" data-en="Let's talk.">Vamos conversar.</span>
+        <span class="hb-go" aria-hidden="true">→</span>
+      </a>
+      </nav>
     </div>
-
-    <h2 class="sub-h" data-en="Education">Formação</h2>
-    <p data-en="Technologist in Cybersecurity — Universidade Cruzeiro do Sul (2024–2026).">Tecnologia em Cibersegurança — Universidade Cruzeiro do Sul (2024–2026).</p>
-
-    <h2 class="sub-h" data-en="Languages">Idiomas</h2>
-    <div class="tools">
-      <span class="tool" data-en="Portuguese — native">Português — nativo</span>
-      <span class="tool" data-en="English — advanced">Inglês — avançado</span>
-    </div>
-
-    <h2 class="sub-h" data-en="Disclaimer">Aviso</h2>
-    <p data-en="I'm a really nice guy.">Sou um cara muito legal.</p>
-    <hr class="rule">
-    <h2 class="sub-h" data-en="Contact">Contato</h2>
-    <p data-en="Open to conversations about red team, pentest and offensive security roles.">Aberto a conversas sobre vagas de red team, pentest e segurança ofensiva.</p>
-
-    <div class="chat-anim" role="img" aria-label="Animação em pixel: 0xB conversa com um recrutador dos dois lados de uma mesa, enquanto o recrutador marca itens de um checklist."></div>
-
-    <div class="contact">
-      <span class="mail" data-mail>arturborges.contato@gmail.com</span>
-      <button class="copy" type="button" data-copy data-en="Copy">Copiar</button>
-    </div>
-
-    <div class="meta">
-      <a class="chip" href="https://www.linkedin.com/in/arturborgges/">LinkedIn ↗</a>
-      <a class="chip" href="https://github.com/hacktheborges">GitHub ↗</a>
-      <a class="chip" href="https://profile.hackthebox.com/profile/019e2c5e-b1eb-7093-b9fa-ec20945bbefb">Hack The Box ↗</a>
-      <a class="chip" href="https://portal.offsec.com/public-profile/de8b0b16-ad26-3aa0-ad2f-3c49183ca217">OffSec ↗</a>
-    </div>
-
-    <p class="fine">
-      <span data-en="Last updated">Última atualização</span> <span data-updated></span> ·
-      <span data-en="Static page, no trackers, no cookies">Página estática, sem rastreadores, sem cookies</span>
-    </p>
-
   </section>
 
   <!-- ══════════ VERIFIQUE ══════════ -->
-  <section class="view" id="v-verifique" data-title-pt="Verifique!" data-title-en="Verify!" hidden>
-    <p class="eyebrow" data-en="Verify!">Verifique!</p>
-    <h1 data-en="Certifications · Pins · Badges">Certificações · Pins · Badges</h1>
-    <p class="verify-sub"><span class="v-os">OffSec</span><span class="sep">·</span><span class="v-htb">Hack The Box</span></p>
-    <p class="note" data-en="Choose one.">Escolha um.</p>
-
-    <div class="pick">
-      <button type="button" class="pick-btn offsec-pick" data-plat="offsec" aria-pressed="false">
-        <span class="pick-name">OffSec</span>
-        <span class="pick-sub" data-en="Proving Grounds · certifications · badges">Proving Grounds · certificações · badges</span>
-      </button>
-      <button type="button" class="pick-btn htb-pick" data-plat="htb" aria-pressed="false">
-        <span class="pick-name">Hack The Box</span>
-        <span class="pick-sub" data-en="Machines · modules · badges">Máquinas · módulos · badges</span>
-      </button>
-    </div>
-
-    <div class="gallery" id="gal-offsec" hidden>
-      <h2 class="sub-h">OffSec — Pins</h2>
-      <div class="pin-stage">
+  <section class="screen content-screen" id="v-offsec-pins" data-title-pt="Pins" data-title-en="Pins" hidden>
+    <p class="eyebrow">OffSec · Pins</p>
+    <h1>Pins</h1>
+    <p class="lede" data-en="Verifiable OffSec Skill Pins. Hover a pin to see its details and open the credential.">Skill Pins verificáveis da OffSec. Passe o mouse em um pin para ver os detalhes e abrir a credencial.</p>
+    <div class="pin-stage">
         <div class="gal-grid">
         <a class="badge-card" href="https://credentials.offsec.com/ddcd3375-d4bc-44b4-a5af-2edc69ca19d8#acc.5pdxU6Xc" target="_blank" rel="noopener" title="Web Attack Methodology Skill Path — verificar credencial na OffSec" aria-label="Pin OffSec Web Attack Methodology Skill Path — verificar credencial" data-name="Web Attack Methodology Skill Path" data-meta="OffSec · Skill Pin · Mar 2026">
           <img src="/assets/img/badges/offsec/web-attack-methodology.png" alt="Pin OffSec Web Attack Methodology Skill Path" loading="lazy">
@@ -791,100 +692,211 @@
           <p class="pd-hint" data-en="Hover a pin to see its details.">Passe o mouse em um pin para ver os detalhes.</p>
         </aside>
       </div>
+  </section>
+
+  <section class="screen content-screen" id="v-offsec-badges" data-title-pt="Badges" data-title-en="Badges" hidden>
+    <p class="eyebrow">OffSec · Badges</p>
+    <h1>Badges</h1>
+    <div class="empty"><p data-en="Soon: badges earned on OffSec.">Em breve: badges conquistados na OffSec.</p></div>
+  </section>
+
+  <section class="screen content-screen" id="v-offsec-flags" data-title-pt="Flags" data-title-en="Flags" hidden>
+    <p class="eyebrow">OffSec · Flags</p>
+    <h1>Flags</h1>
+    <div class="empty"><p data-en="Under construction: proof-of-compromise from retired labs.">Em construção: provas de comprometimento de labs aposentados.</p></div>
+  </section>
+
+  <section class="screen content-screen" id="v-htb-pins" data-title-pt="Pins & Badges" data-title-en="Pins & Badges" hidden>
+    <p class="eyebrow">Hack The Box · Pins & Badges</p>
+    <h1>Pins & Badges</h1>
+    <div class="empty"><p data-en="Soon: Hack The Box pins and badges.">Em breve: pins e badges do Hack The Box.</p></div>
+  </section>
+
+  <section class="screen content-screen" id="v-htb-flags" data-title-pt="Flags" data-title-en="Flags" hidden>
+    <p class="eyebrow">Hack The Box · Flags</p>
+    <h1>Flags</h1>
+    <div class="empty"><p data-en="Under construction: proof-of-compromise from retired machines.">Em construção: provas de comprometimento de máquinas aposentadas.</p></div>
+  </section>
+
+  <section class="screen content-screen" id="v-sobre-perfil" data-title-pt="Perfil" data-title-en="Profile" hidden>
+    <p class="eyebrow">whoami</p>
+    <h1 data-en="Profile">Perfil</h1>
+    <p class="lede" data-en="Artur Borges — hacktheborges. Information security analyst in Passo Fundo, RS, heading for offensive security.">Artur Borges — hacktheborges. Analista de segurança da informação em Passo Fundo, RS, com destino à segurança ofensiva.</p>
+
+    <p data-en="The classic IT technician who realised that setting up and maintaining computers no longer satisfied the urge to find out what was going on in the layers you can't see.">O clássico técnico em informática que percebeu que configuração e manutenção em computadores já não supria a necessidade de descobrir o que estava acontecendo em camadas não visíveis.</p>
+
+    <h2 class="sub-h" data-en="Focus">Foco</h2>
+    <div class="tools">
+      <span class="tool">Active Directory</span>
+      <span class="tool">Pentest</span>
+      <span class="tool">Web Security</span>
+      <span class="tool" data-en="Vulnerability exploitation">Exploração de vulnerabilidades</span>
+      <span class="tool" data-en="Reporting">Relatório</span>
     </div>
-    <div class="gallery" id="gal-htb" hidden>
-      <h2 class="sub-h" data-en="Hack The Box — achievements">Hack The Box — conquistas</h2>
-      <div class="gal-grid"></div>
-      <p class="fine" data-en="Badges and certificates will be placed here.">As badges e certificados entram aqui.</p>
+
+    <h2 class="sub-h" data-en="Certifications">Certificações</h2>
+    <div class="tools">
+      <span class="tool">CompTIA Security+</span>
+      <span class="tool">Certified Red Team Analyst (CRTA)</span>
+      <span class="tool">Offensive Security Certified Professional (OSCP) <span class="load">(loading)</span></span>
+    </div>
+
+    <h2 class="sub-h" data-en="Education">Formação</h2>
+    <p data-en="Technologist in Cybersecurity — Universidade Cruzeiro do Sul (2024–2026).">Tecnologia em Cibersegurança — Universidade Cruzeiro do Sul (2024–2026).</p>
+
+    <h2 class="sub-h" data-en="Languages">Idiomas</h2>
+    <div class="tools">
+      <span class="tool" data-en="Portuguese — native">Português — nativo</span>
+      <span class="tool" data-en="English — advanced">Inglês — avançado</span>
+    </div>
+
+    <h2 class="sub-h" data-en="Disclaimer">Aviso</h2>
+    <p data-en="I'm a really nice guy.">Sou um cara muito legal.</p>
+  </section>
+
+  <section class="screen content-screen" id="v-contato" data-title-pt="Contato" data-title-en="Contact" hidden>
+    <p class="eyebrow" data-en="Contact">Contato</p>
+    <h1 data-en="Let's talk">Vamos conversar</h1>
+    <p class="lede" data-en="Open to conversations about red team, pentest and offensive security roles.">Aberto a conversas sobre vagas de red team, pentest e segurança ofensiva.</p>
+
+    <div class="chat-anim" role="img" aria-label="Animação em pixel: 0xB conversa com um recrutador dos dois lados de uma mesa, enquanto o recrutador marca itens de um checklist."></div>
+
+    <div class="contact">
+      <span class="mail" data-mail>arturborges.contato@gmail.com</span>
+      <button class="copy" type="button" data-copy data-en="Copy">Copiar</button>
+    </div>
+
+    <div class="meta">
+      <a class="chip" href="https://www.linkedin.com/in/arturborgges/">LinkedIn ↗</a>
+      <a class="chip" href="https://github.com/hacktheborges">GitHub ↗</a>
+      <a class="chip" href="https://profile.hackthebox.com/profile/019e2c5e-b1eb-7093-b9fa-ec20945bbefb">Hack The Box ↗</a>
+      <a class="chip" href="https://portal.offsec.com/public-profile/de8b0b16-ad26-3aa0-ad2f-3c49183ca217">OffSec ↗</a>
+    </div>
+
+    <p class="fine">
+      <span data-en="Last updated">Última atualização</span> <span data-updated></span> ·
+      <span data-en="Static page, no trackers, no cookies">Página estática, sem rastreadores, sem cookies</span>
+    </p>
+  </section>
+
+  <section class="screen door-screen sub-hub" id="v-offsec" data-title-pt="OffSec" data-title-en="OffSec" hidden>
+    <div class="hub-sky" aria-hidden="true">
+      <span class="hub-layer hub-grid" data-depth="18"></span>
+      <span class="hub-layer hub-aurora" data-depth="40"></span>
+      <span class="hub-layer hub-pix" data-depth="64"></span>
+    </div>
+    <div class="hub-inner sub-inner">
+      <p class="hub-kicker" data-en="OffSec">OffSec</p>
+      <h1 class="hub-title sub-title" data-depth="10" data-en="OffSec">OffSec</h1>
+      <p class="hub-sub" data-en="Pick a topic.">Escolha um assunto.</p>
+      <nav class="hub-grid" data-depth="5" aria-label="OffSec">
+      <a class="hub-box b-offsec" href="#oscp">
+        <span class="hb-num">01</span>
+        <span class="hb-name" data-en="Certifications">Certificações</span>
+        <span class="hb-desc" data-en="OSCP and beyond.">OSCP e o que vier.</span>
+        <span class="hb-go" aria-hidden="true">→</span>
+      </a>
+      <a class="hub-box b-offsec" href="#offsec-pins">
+        <span class="hb-num">02</span>
+        <span class="hb-name" data-en="Pins">Pins</span>
+        <span class="hb-desc" data-en="15 verifiable Skill Pins.">15 Skill Pins verificáveis.</span>
+        <span class="hb-go" aria-hidden="true">→</span>
+      </a>
+      <a class="hub-box b-offsec" href="#offsec-badges">
+        <span class="hb-num">03</span>
+        <span class="hb-name" data-en="Badges">Badges</span>
+        <span class="hb-desc" data-en="Platform achievements.">Conquistas da plataforma.</span>
+        <span class="hb-go" aria-hidden="true">→</span>
+      </a>
+      <a class="hub-box b-offsec" href="#pg-practice">
+        <span class="hb-num">04</span>
+        <span class="hb-name" data-en="Labs">Labs</span>
+        <span class="hb-desc" data-en="Proving Grounds and mini-labs.">Proving Grounds e mini-labs.</span>
+        <span class="hb-go" aria-hidden="true">→</span>
+      </a>
+      <a class="hub-box b-offsec" href="#offsec-flags">
+        <span class="hb-num">05</span>
+        <span class="hb-name" data-en="Flags">Flags</span>
+        <span class="hb-desc" data-en="Proof-of-compromise flags.">Provas de comprometimento.</span>
+        <span class="hb-go" aria-hidden="true">→</span>
+      </a>
+      </nav>
     </div>
   </section>
 
-  <section class="view" id="v-offsec" data-title-pt="OffSec" data-title-en="OffSec" hidden>
-    <p class="eyebrow">OffSec</p>
-    <h1>OffSec</h1>
-    <p class="lede" data-en="Certifications, skill pins, badges and labs on the OffSec track.">Certificações, pins, badges e laboratórios na trilha OffSec.</p>
-    <div class="grid">
-      <a class="card" href="#oscp">
-        <span class="status s-ok" data-en="Active">Ativo</span>
-        <h3 data-en="Certifications">Certificações</h3>
-        <p data-en="OSCP and what comes next.">OSCP e o que vier depois.</p>
+  <section class="screen door-screen sub-hub" id="v-htb" data-title-pt="Hack The Box" data-title-en="Hack The Box" hidden>
+    <div class="hub-sky" aria-hidden="true">
+      <span class="hub-layer hub-grid" data-depth="18"></span>
+      <span class="hub-layer hub-aurora" data-depth="40"></span>
+      <span class="hub-layer hub-pix" data-depth="64"></span>
+    </div>
+    <div class="hub-inner sub-inner">
+      <p class="hub-kicker" data-en="Hack The Box">Hack The Box</p>
+      <h1 class="hub-title sub-title" data-depth="10" data-en="Hack The Box">Hack The Box</h1>
+      <p class="hub-sub" data-en="Pick a topic.">Escolha um assunto.</p>
+      <nav class="hub-grid" data-depth="5" aria-label="Hack The Box">
+      <a class="hub-box b-htb" href="#htb-academy">
+        <span class="hb-num">01</span>
+        <span class="hb-name" data-en="Academy">Academy</span>
+        <span class="hb-desc" data-en="Modules and paths.">Módulos e trilhas.</span>
+        <span class="hb-go" aria-hidden="true">→</span>
       </a>
-      <a class="card" href="#verifique">
-        <span class="status s-ok" data-en="15">15</span>
-        <h3 data-en="Pins">Pins</h3>
-        <p data-en="15 verifiable Skill Pins.">15 Skill Pins verificáveis.</p>
+      <a class="hub-box b-htb" href="#pratica">
+        <span class="hb-num">02</span>
+        <span class="hb-name" data-en="Machines">Máquinas</span>
+        <span class="hb-desc" data-en="Labs, Sherlocks and challenges.">Labs, Sherlocks e desafios.</span>
+        <span class="hb-go" aria-hidden="true">→</span>
       </a>
-      <div class="card ">
-        <span class="status s-plan" data-en="Soon">Em breve</span>
-        <h3 data-en="Badges">Badges</h3>
-        <p data-en="Platform achievements.">Conquistas da plataforma.</p>
-      </div>
-      <a class="card" href="#pg-practice">
-        <span class="status s-ok" data-en="Active">Ativo</span>
-        <h3 data-en="Labs">Labs</h3>
-        <p data-en="Proving Grounds and mini-labs.">Proving Grounds e mini-labs.</p>
+      <a class="hub-box b-htb" href="#htb-pins">
+        <span class="hb-num">03</span>
+        <span class="hb-name" data-en="Pins & Badges">Pins & Badges</span>
+        <span class="hb-desc" data-en="Verifiable achievements.">Conquistas verificáveis.</span>
+        <span class="hb-go" aria-hidden="true">→</span>
       </a>
-      <div class="card ">
-        <span class="status s-plan" data-en="Under construction">Em construção</span>
-        <h3 data-en="Flags">Flags</h3>
-        <p data-en="Proof-of-compromise flags.">Provas de comprometimento.</p>
-      </div>
+      <a class="hub-box b-htb" href="#htb-flags">
+        <span class="hb-num">04</span>
+        <span class="hb-name" data-en="Flags">Flags</span>
+        <span class="hb-desc" data-en="Proof-of-compromise flags.">Provas de comprometimento.</span>
+        <span class="hb-go" aria-hidden="true">→</span>
+      </a>
+      </nav>
     </div>
   </section>
 
-  <section class="view" id="v-htb" data-title-pt="Hack The Box" data-title-en="Hack The Box" hidden>
-    <p class="eyebrow">Hack The Box</p>
-    <h1>Hack The Box</h1>
-    <p class="lede" data-en="Academy, machines, badges and flags on Hack The Box.">Academy, máquinas, badges e flags no Hack The Box.</p>
-    <div class="grid">
-      <a class="card" href="#htb-academy">
-        <span class="status s-ok" data-en="32">32</span>
-        <h3 data-en="Academy">Academy</h3>
-        <p data-en="HTB Academy modules and paths.">Módulos e trilhas da HTB Academy.</p>
+  <section class="screen door-screen sub-hub" id="v-certificacoes" data-title-pt="Certificações" data-title-en="Certifications" hidden>
+    <div class="hub-sky" aria-hidden="true">
+      <span class="hub-layer hub-grid" data-depth="18"></span>
+      <span class="hub-layer hub-aurora" data-depth="40"></span>
+      <span class="hub-layer hub-pix" data-depth="64"></span>
+    </div>
+    <div class="hub-inner sub-inner">
+      <p class="hub-kicker" data-en="Certifications">Certificações</p>
+      <h1 class="hub-title sub-title" data-depth="10" data-en="Certifications">Certificações</h1>
+      <p class="hub-sub" data-en="Pick a certification.">Escolha uma certificação.</p>
+      <nav class="hub-grid" data-depth="5" aria-label="Certificações">
+      <a class="hub-box b-cert" href="#security-plus">
+        <span class="hb-num">01</span>
+        <span class="hb-name" data-en="CompTIA Security+">CompTIA Security+</span>
+        <span class="hb-desc" data-en="Security fundamentals.">Fundamentos de segurança.</span>
+        <span class="hb-go" aria-hidden="true">→</span>
       </a>
-      <a class="card" href="#pratica">
-        <span class="status s-ok" data-en="Active">Ativo</span>
-        <h3 data-en="Machines">Máquinas</h3>
-        <p data-en="Labs, Sherlocks and challenges.">Labs, Sherlocks e desafios.</p>
+      <a class="hub-box b-cert" href="#crta">
+        <span class="hb-num">02</span>
+        <span class="hb-name" data-en="CRTA">CRTA</span>
+        <span class="hb-desc" data-en="Certified Red Team Analyst.">Certified Red Team Analyst.</span>
+        <span class="hb-go" aria-hidden="true">→</span>
       </a>
-      <div class="card ">
-        <span class="status s-plan" data-en="Soon">Em breve</span>
-        <h3 data-en="Pins & Badges">Pins & Badges</h3>
-        <p data-en="Verifiable achievements.">Conquistas verificáveis.</p>
-      </div>
-      <div class="card ">
-        <span class="status s-plan" data-en="Under construction">Em construção</span>
-        <h3 data-en="Flags">Flags</h3>
-        <p data-en="Proof-of-compromise flags.">Provas de comprometimento.</p>
-      </div>
+      <a class="hub-box b-cert" href="#oscp">
+        <span class="hb-num">03</span>
+        <span class="hb-name" data-en="OSCP">OSCP</span>
+        <span class="hb-desc" data-en="In prep — Oct 23.">Em preparação — 23 out.</span>
+        <span class="hb-go" aria-hidden="true">→</span>
+      </a>
+      </nav>
     </div>
   </section>
 
-  <section class="view" id="v-certificacoes" data-title-pt="Certificações" data-title-en="Certifications" hidden>
-    <p class="eyebrow" data-en="Certifications">Certificações</p>
-    <h1 data-en="Certifications">Certificações</h1>
-    <p class="lede" data-en="Every certification I've earned — click one to read the story behind it.">Todas as certificações que obtive — clique em uma para ler a história por trás dela.</p>
-    <div class="grid">
-      <a class="card" href="#security-plus">
-        <span class="status s-ok" data-en="Earned">Obtida</span>
-        <h3 data-en="CompTIA Security+">CompTIA Security+</h3>
-        <p data-en="Security fundamentals.">Fundamentos de segurança.</p>
-      </a>
-      <a class="card" href="#crta">
-        <span class="status s-ok" data-en="Earned">Obtida</span>
-        <h3 data-en="CRTA">CRTA</h3>
-        <p data-en="Certified Red Team Analyst.">Certified Red Team Analyst.</p>
-      </a>
-      <a class="card" href="#oscp">
-        <span class="status s-ok" data-en="In progress">Em andamento</span>
-        <h3 data-en="OSCP">OSCP</h3>
-        <p data-en="In prep — exam Oct 23.">Em preparação — exame 23 out.</p>
-      </a>
-    </div>
-    <p class="note" data-en="Each page ends with a first-person account of how that certification went.">Cada página termina com um relato, em primeira pessoa, de como foi aquela certificação.</p>
-  </section>
-
-  <section class="view" id="v-play" data-title-pt="Do you wanna play?" data-title-en="Do you wanna play?" hidden>
+  <section class="screen content-screen" id="v-play" data-title-pt="Do you wanna play?" data-title-en="Do you wanna play?" hidden>
     <p class="eyebrow">Do you wanna play?</p>
     <h1>Do you wanna play?</h1>
     <p class="lede" data-en="A small game is being built here. Come back soon.">Um pequeno jogo está sendo construído aqui. Volte em breve.</p>
@@ -892,9 +904,6 @@
       <p data-en="Idea in the works — a terminal-style mini-game starring 0xB. Stay tuned.">Ideia em andamento — um mini jogo em estilo terminal estrelando o 0xB. Em breve.</p>
     </div>
   </section>
-  </main>
-</div>
-
 <div class="lb" id="lb" hidden>
   <button class="lb-x" id="lb-x" type="button" aria-label="Fechar">✕</button>
   <img id="lb-img" alt="">

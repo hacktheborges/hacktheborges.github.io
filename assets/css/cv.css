@@ -11,6 +11,7 @@
   --signal:#b3261e;
   --amber:#8a5a00;
   --ok:#14684a;
+  --os1:#1b74d0;--os2:#5a32cf;--htb:#5c8a00;
   --font-sans:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
   --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   --rail-w:272px;
@@ -27,6 +28,7 @@
     --signal:#ff6b5e;
     --amber:#d99a2b;
     --ok:#3fbf8f;
+    --os1:#3f9be8;--os2:#7d5bf0;--htb:#9fef00;
     color-scheme:dark;
   }
 }
@@ -40,6 +42,7 @@
   --signal:#ff6b5e;
   --amber:#d99a2b;
   --ok:#3fbf8f;
+  --os1:#3f9be8;--os2:#7d5bf0;--htb:#9fef00;
   color-scheme:dark;
 }
 
@@ -233,6 +236,12 @@ a.card.proof:hover{border-color:var(--signal)}
 .stat{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:14px 16px;min-width:0}
 .stat .v{font-family:var(--font-mono);font-size:1.9rem;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.1}
 .stat .v.on{color:var(--ok)}
+.statset{display:flex;flex-direction:column;gap:16px}
+.statset .cap{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+/* cores de marca: OffSec (gradiente azul→roxo) e Hack The Box (verde) */
+.offsec .cap,.offsec .v{background:linear-gradient(135deg,var(--os1),var(--os2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--os2)}
+.offsec .v .unit{-webkit-text-fill-color:var(--muted);color:var(--muted)}
+.htb .cap,.htb .v,.htb .v.on{color:var(--htb);-webkit-text-fill-color:currentColor}
 .stat .v .unit{font-size:1.05rem;font-weight:500;color:var(--muted);margin-left:1px}
 .stat .k{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:4px}
 

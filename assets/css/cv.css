@@ -644,7 +644,7 @@ body.hub-on .shell,body.hub-on .bar,body.hub-on .fall{display:none}
 #hub{display:none}
 body.hub-on #hub{display:block}
 
-#hub{position:fixed;inset:0;z-index:50;overflow:hidden;background:#070a0f;color:#eaf1f8;
+#hub{position:fixed;inset:0;z-index:50;overflow:hidden;background:#0b0608;color:#eaf1f8;
   font-family:var(--font-sans)}
 
 /* camadas de fundo (parallax) */
@@ -654,17 +654,17 @@ body.hub-on #hub{display:block}
   transform:translate3d(calc(var(--mx,0)*var(--d,0)*-1px),calc(var(--my,0)*var(--d,0)*-1px),0)}
 .hub-grid{
   background-image:
-    linear-gradient(rgba(120,150,220,.10) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(120,150,220,.10) 1px,transparent 1px);
+    linear-gradient(rgba(220,90,80,.09) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(220,90,80,.09) 1px,transparent 1px);
   background-size:52px 52px;
   -webkit-mask-image:radial-gradient(ellipse 70% 70% at 50% 42%,#000 35%,transparent 100%);
   mask-image:radial-gradient(ellipse 70% 70% at 50% 42%,#000 35%,transparent 100%)}
 .hub-aurora{
   background:
-    radial-gradient(38% 42% at 24% 30%,rgba(63,155,232,.28),transparent 70%),
-    radial-gradient(40% 44% at 78% 28%,rgba(125,91,240,.26),transparent 70%),
-    radial-gradient(44% 48% at 62% 82%,rgba(159,239,0,.14),transparent 72%),
-    radial-gradient(34% 40% at 18% 80%,rgba(255,107,94,.16),transparent 72%);
+    radial-gradient(46% 48% at 50% 16%,rgba(255,72,62,.22),transparent 70%),
+    radial-gradient(40% 44% at 82% 82%,rgba(255,120,80,.14),transparent 72%),
+    radial-gradient(40% 44% at 14% 80%,rgba(180,20,42,.17),transparent 72%),
+    radial-gradient(30% 36% at 76% 24%,rgba(125,91,240,.10),transparent 72%);
   filter:blur(8px)}
 .hub-pix{opacity:.5;
   background-image:radial-gradient(rgba(180,205,255,.5) 1.4px,transparent 1.6px);
@@ -685,10 +685,10 @@ body.hub-on #hub{display:block}
   display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
   padding:92px clamp(18px,5vw,48px) 64px;gap:4px}
 .hub-kicker{font-family:var(--font-mono);font-size:12px;letter-spacing:.28em;text-transform:uppercase;
-  color:#7fd0ff;margin:0 0 14px;opacity:0;animation:hubUp .6s var(--ease) .05s forwards}
+  color:#ff9a8a;margin:0 0 14px;opacity:0;animation:hubUp .6s var(--ease) .05s forwards}
 .hub-title{font-size:clamp(2.6rem,9vw,5.6rem);line-height:.98;font-weight:700;letter-spacing:-.03em;
   margin:0;color:#f4f8fc;max-width:none;
-  text-shadow:0 0 18px rgba(63,155,232,.45),0 0 42px rgba(125,91,240,.30);
+  text-shadow:0 0 18px rgba(255,86,72,.5),0 0 46px rgba(220,40,50,.3);
   opacity:0;animation:hubUp .7s var(--ease) .12s forwards}
 .hub-sub{font-size:1.05rem;color:#9fb0c4;margin:12px 0 0;
   opacity:0;animation:hubUp .7s var(--ease) .2s forwards}

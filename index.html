@@ -107,8 +107,9 @@
 
     <nav class="tree" aria-label="Seções">
       <a class="top home" href="#hub" data-en="Home">⌂ Início</a>
+      <a class="top" href="#offsec">OffSec</a>
+      <a class="top" href="#htb">Hack The Box</a>
       <a class="top hot" href="#curriculo" data-en="CV">Currículo</a>
-      <a class="top hot" href="#contato" data-en="Contact">Contato</a>
       <a class="top verify" href="#verifique" data-en="Verify!">Verifique!</a>
 
       <details class="grp" open>
@@ -118,19 +119,7 @@
         <a href="#oscp"><span data-en="OSCP">OSCP</span><span class="tag">23 out</span></a>
       </details>
 
-      <details class="grp">
-        <summary data-en="Hands-on">Prática</summary>
-        <a href="#pratica" data-en="Overview">Visão geral</a>
-        <a href="#pg-practice" data-en="Labs">Laboratórios</a>
-        <a href="#htb-academy"><span>HTB Academy</span><span class="tag">32</span></a>
-      </details>
-
-      <details class="grp">
-        <summary data-en="Track record">Trajetória</summary>
-        <a href="#experiencia" data-en="Experience">Experiência</a>
-        <a href="#ferramental" data-en="Toolkit">Ferramental</a>
-        <a href="#sobre" data-en="About">Sobre</a>
-      </details>
+      <a class="top" href="#sobre" data-en="About">Sobre</a>
 
     </nav>
 
@@ -241,9 +230,6 @@
             <li data-en="Log analysis and endpoint forensics with CrowdStrike">Análise de logs e forense em endpoints com CrowdStrike</li>
             <li data-en="Fortinet firewalls and Active Directory administration">Firewall Fortinet e administração de Active Directory</li>
           </ul>
-          <div class="meta">
-            <a class="chip" href="#experiencia"><span data-en="Full history ↗">Trajetória completa ↗</span></a>
-          </div>
         </div>
       </article>
     </div>
@@ -669,71 +655,6 @@
     <p class="note" data-en="The thin rows are the honest ones: one module on lateral movement and three on Active Directory, against eleven on foundations. That is the gap the OSCP will test hardest.">As linhas magras são as honestas: um módulo de movimentação lateral e três de Active Directory, contra onze de fundamentos. É exatamente essa a lacuna que o OSCP mais cobra.</p>
   </section>
 
-  <!-- ══════════ EXPERIÊNCIA ══════════ -->
-  <section class="view" id="v-experiencia" data-title-pt="Experiência" data-title-en="Experience" hidden>
-    <p class="eyebrow" data-en="Track record">Trajetória</p>
-    <h1 data-en="Experience">Experiência</h1>
-    <p class="lede" data-en="I came into security from the operator's side — the person who deployed and kept the infrastructure running. Today I test the same systems I learned to hold up.">Vim para a segurança pelo lado de quem opera — quem implantava e mantinha a infraestrutura de pé. Hoje testo os mesmos sistemas que aprendi a manter em funcionamento.</p>
-
-    <div class="tl">
-      <article class="job">
-        <div class="when">2025 — <span data-en="present">atualmente</span></div>
-        <div>
-          <h3 data-en="Information Security Analyst">Analista de Segurança da Informação</h3>
-          <p class="org">Farmácias São João</p>
-          <ul>
-            <li data-en="Internal pentest on web applications and sites — recon, enumeration, vulnerability validation, evidence collection and technical recommendations.">Pentest interno em aplicações e sites — reconhecimento, enumeração, validação de vulnerabilidades, coleta de evidências e recomendações técnicas.</li>
-            <li data-en="Log analysis and security event response with CrowdStrike, including endpoint forensics.">Análise de logs e resposta a eventos de segurança com CrowdStrike, incluindo forense em endpoints.</li>
-            <li data-en="Rules, segmentation and traffic control on Fortinet firewalls, and Active Directory administration.">Regras, segmentação e controle de tráfego em firewall Fortinet, e administração de Active Directory.</li>
-            <li data-en="Support for data protection and privacy initiatives (LGPD).">Apoio às iniciativas de privacidade e proteção de dados (LGPD).</li>
-          </ul>
-        </div>
-      </article>
-      <article class="job">
-        <div class="when">2024 — 2025</div>
-        <div>
-          <h3 data-en="IT Equipment Maintenance Technician">Técnico em Manutenção de Equipamentos de Informática</h3>
-          <p class="org">Farmácias São João</p>
-          <ul>
-            <li data-en="Deployment and configuration of store endpoints and infrastructure: workstations, servers, switches and printers.">Implantação e configuração de endpoints e infraestrutura das lojas: estações, servidores, switches e impressoras.</li>
-            <li data-en="Preventive and corrective maintenance — diagnosing hardware, software and connectivity faults.">Manutenção preventiva e corretiva — diagnóstico de falhas de hardware, software e conectividade.</li>
-            <li data-en="It taught me how the infrastructure is really put together — which is exactly what I look for when I attack it today.">Me ensinou como a infraestrutura é montada por dentro — que é exatamente o que eu procuro quando a ataco hoje.</li>
-          </ul>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- ══════════ FERRAMENTAL ══════════ -->
-  <section class="view" id="v-ferramental" data-title-pt="Ferramental" data-title-en="Toolkit" hidden>
-    <p class="eyebrow" data-en="Track record">Trajetória</p>
-    <h1 data-en="Toolkit">Ferramental</h1>
-    <p class="lede" data-en="Organised by attack phase, not alphabetically. A tool list says what you installed; a phase map says how you think.">Organizado por fase do ataque, não em ordem alfabética. Lista de ferramentas diz o que você instalou; mapa de fases diz como você pensa.</p>
-
-    <div class="phases">
-      <div class="phase">
-        <div class="ph"><b data-en="Reconnaissance">Reconhecimento</b>TA0043</div>
-        <div class="tools"><span class="tool">nmap</span><span class="tool">masscan</span><span class="tool">amass</span><span class="tool">ffuf</span><span class="tool">Shodan</span></div>
-      </div>
-      <div class="phase">
-        <div class="ph"><b data-en="Initial access">Acesso inicial</b>TA0001</div>
-        <div class="tools"><span class="tool">Burp Suite</span><span class="tool">sqlmap</span><span class="tool">Metasploit</span><span class="tool">Responder</span></div>
-      </div>
-      <div class="phase">
-        <div class="ph"><b data-en="Privilege escalation">Escalação de privilégios</b>TA0004</div>
-        <div class="tools"><span class="tool">linPEAS</span><span class="tool">winPEAS</span><span class="tool">GTFOBins</span><span class="tool">PowerUp</span></div>
-      </div>
-      <div class="phase">
-        <div class="ph"><b>Active Directory</b>TA0006 · TA0008</div>
-        <div class="tools"><span class="tool">BloodHound</span><span class="tool">impacket</span><span class="tool">NetExec</span><span class="tool">Rubeus</span><span class="tool">mimikatz</span></div>
-      </div>
-      <div class="phase">
-        <div class="ph"><b data-en="Scripting &amp; reporting">Scripting e relatório</b>—</div>
-        <div class="tools"><span class="tool">Python</span><span class="tool">Bash</span><span class="tool">PowerShell</span><span class="tool">CVSS v3.1</span><span class="tool">MITRE ATT&amp;CK</span></div>
-      </div>
-    </div>
-  </section>
-
   <!-- ══════════ SOBRE ══════════ -->
   <section class="view" id="v-sobre" data-title-pt="Sobre" data-title-en="About" hidden>
     <p class="eyebrow">whoami</p>
@@ -769,13 +690,9 @@
 
     <h2 class="sub-h" data-en="Disclaimer">Aviso</h2>
     <p data-en="I'm a really nice guy.">Sou um cara muito legal.</p>
-  </section>
-
-  <!-- ══════════ CONTATO ══════════ -->
-  <section class="view" id="v-contato" data-title-pt="Contato" data-title-en="Contact" hidden>
-    <p class="eyebrow" data-en="Contact">Contato</p>
-    <h1 data-en="Get in touch">Vamos conversar</h1>
-    <p class="lede" data-en="Open to conversations about red team, pentest and offensive security roles.">Aberto a conversas sobre vagas de red team, pentest e segurança ofensiva.</p>
+    <hr class="rule">
+    <h2 class="sub-h" data-en="Contact">Contato</h2>
+    <p data-en="Open to conversations about red team, pentest and offensive security roles.">Aberto a conversas sobre vagas de red team, pentest e segurança ofensiva.</p>
 
     <div class="chat-anim" role="img" aria-label="Animação em pixel: 0xB conversa com um recrutador dos dois lados de uma mesa, enquanto o recrutador marca itens de um checklist."></div>
 
@@ -795,6 +712,7 @@
       <span data-en="Last updated">Última atualização</span> <span data-updated></span> ·
       <span data-en="Static page, no trackers, no cookies">Página estática, sem rastreadores, sem cookies</span>
     </p>
+
   </section>
 
   <!-- ══════════ VERIFIQUE ══════════ -->

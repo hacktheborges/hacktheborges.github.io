@@ -6,7 +6,7 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
 (function () {
   "use strict";
 
-  var HOME = "curriculo";
+  var HOME = "hub";
   var SITE = "Artur Borges";
 
   var strings = {
@@ -84,11 +84,27 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
 
   function slugFromHash() {
     var h = (location.hash || "").replace(/^#/, "");
-    return document.getElementById("v-" + h) ? h : HOME;
+    if (h === "" || h === "hub" || h === "home") { return "hub"; }
+    return document.getElementById("v-" + h) ? h : "hub";
   }
 
   function route(slug, quiet) {
     current = slug;
+
+    if (slug === "hub") {
+      document.body.classList.add("hub-on");
+      each(views, function (v) { v.hidden = true; });
+      each(links, function (a) {
+        a.classList.toggle("on", a.getAttribute("href") === "#hub");
+        a.removeAttribute("aria-current");
+      });
+      document.title = SITE;
+      closeRail();
+      if (!quiet) { window.scrollTo(0, 0); }
+      return;
+    }
+    document.body.classList.remove("hub-on");
+
     var target = document.getElementById("v-" + slug);
 
     each(views, function (v) { v.hidden = (v !== target); });
@@ -259,4 +275,32 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
     });
     stage.addEventListener('mouseleave', function(){ panel.classList.remove('on'); });
   });
+})();
+
+/* Hub — parallax por movimento do cursor/toque (respeita reduce-motion) */
+(function(){
+  var hub = document.getElementById("hub");
+  if(!hub) return;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var layers = hub.querySelectorAll("[data-depth]");
+  Array.prototype.forEach.call(layers, function(el){
+    el.style.setProperty("--d", el.getAttribute("data-depth") || "0");
+  });
+  if(reduce) return;
+  var tx=0,ty=0,cx=0,cy=0,raf=null;
+  function loop(){
+    cx += (tx-cx)*0.08; cy += (ty-cy)*0.08;
+    hub.style.setProperty("--mx", cx.toFixed(4));
+    hub.style.setProperty("--my", cy.toFixed(4));
+    if(Math.abs(tx-cx)>0.001 || Math.abs(ty-cy)>0.001){ raf=requestAnimationFrame(loop); }
+    else { raf=null; }
+  }
+  function kick(){ if(!raf) raf=requestAnimationFrame(loop); }
+  hub.addEventListener("pointermove", function(e){
+    var r = hub.getBoundingClientRect();
+    tx = ((e.clientX - r.left)/r.width - 0.5)*2;   /* -1 .. 1 */
+    ty = ((e.clientY - r.top)/r.height - 0.5)*2;
+    kick();
+  });
+  hub.addEventListener("pointerleave", function(){ tx=0; ty=0; kick(); });
 })();

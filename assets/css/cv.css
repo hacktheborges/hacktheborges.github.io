@@ -34,16 +34,16 @@
   }
 }
 :root[data-theme="dark"]{
-  --paper:#080611;
-  --surface:#15111f;
-  --rail:#0f0b18;
-  --ink:#e8e6f2;
-  --muted:#9890ad;
-  --line:#2a2340;
-  --signal:#b794f6;
+  --paper:#0c0c0e;
+  --surface:#17181b;
+  --rail:#121316;
+  --ink:#eceef1;
+  --muted:#9aa1a9;
+  --line:#2b2d33;
+  --signal:#e23b3b;
   --amber:#d9a92b;
   --ok:#3fbf8f;
-  --os1:#5aa6ef;--os2:#9d7bff;--htb:#9fef00;
+  --os1:#e05a5f;--os2:#c94b74;--htb:#9fef00;
   color-scheme:dark;
 }
 
@@ -782,50 +782,49 @@ body{overflow:hidden}                 /* cada tela rola por dentro */
   .tb-back span[data-en]{display:none}   /* só a seta no mobile */
 }
 
-/* ═══════════════ fundo global com parallax (preto + roxo) ═══════════════ */
+/* ═══════════════ fundo global com parallax (preto suave + cinza) ═══════════════ */
 body::before{content:none}                 /* HUD antigo desligado */
-body{background:#060410}
-#bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:#060410}
+body{background:#070708}
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:#070708}
 .bg-layer{position:absolute;inset:-100px;display:block}
 [data-depth]{will-change:transform;
   transform:translate3d(calc(var(--mx,0)*var(--d,0)*-1px),calc(var(--my,0)*var(--d,0)*-1px),0)}
-/* efeito: Nebulosa — nuvens roxas suaves, respiração lenta */
+/* efeito: névoa grafite — tons de cinza com leve brasa vermelha, respiração lenta */
 .bg-aurora{inset:-220px;
   background:
-    radial-gradient(40% 44% at 30% 26%,rgba(150,95,250,.42),transparent 70%),
-    radial-gradient(46% 50% at 74% 38%,rgba(190,130,255,.30),transparent 72%),
-    radial-gradient(52% 56% at 55% 88%,rgba(95,40,200,.32),transparent 72%),
-    radial-gradient(34% 40% at 16% 84%,rgba(70,30,150,.26),transparent 72%);
-  filter:blur(34px);
-  animation:nebula 26s ease-in-out infinite}
+    radial-gradient(42% 46% at 30% 24%,rgba(120,124,134,.20),transparent 70%),
+    radial-gradient(48% 52% at 74% 40%,rgba(140,144,152,.14),transparent 72%),
+    radial-gradient(54% 58% at 55% 90%,rgba(190,50,55,.16),transparent 72%);
+  filter:blur(32px);
+  animation:nebula 24s ease-in-out infinite}
 @keyframes nebula{
-  0%,100%{filter:blur(34px) hue-rotate(0deg);opacity:.92}
-  50%    {filter:blur(44px) hue-rotate(16deg);opacity:1}
+  0%,100%{filter:blur(30px);opacity:.84}
+  50%    {filter:blur(40px);opacity:1}
 }
 .bg-grid{display:none}
-.bg-pix{opacity:.28;
-  background-image:radial-gradient(rgba(190,170,255,.5) 1.2px,transparent 1.6px);
-  background-size:150px 150px}
+.bg-pix{opacity:.20;
+  background-image:radial-gradient(rgba(170,174,182,.45) 1.1px,transparent 1.5px);
+  background-size:160px 160px}
 @media (prefers-reduced-motion:reduce){.bg-aurora{animation:none}}
 
 /* telas de conteúdo: véu escuro translúcido — parallax discreto por trás, texto legível */
-.content-screen{background:rgba(7,5,16,.84)}
-.content-screen .topbar{background:color-mix(in srgb,#0b0818 86%,transparent)}
+.content-screen{background:rgba(10,10,12,.86)}
+.content-screen .topbar{background:color-mix(in srgb,#070708 86%,transparent)}
 
-/* ── nome hacktheborges: glow roxo + leve borda de sombra ── */
+/* ── nome hacktheborges: neon vermelho + leve borda de sombra ── */
 .hub-title{
-  color:#f3f1fc;
+  color:#f6f3f4;
   text-shadow:
-    0 1px 0 rgba(0,0,0,.45),
+    0 1px 0 rgba(0,0,0,.5),
     0 2px 12px rgba(0,0,0,.6),
-    0 0 22px rgba(157,123,255,.55),
-    0 0 48px rgba(126,86,230,.34);
+    0 0 20px rgba(226,59,59,.55),
+    0 0 46px rgba(200,30,40,.32);
 }
-.hub-kicker{color:#c3aaff}
-.hub-count b{color:#b794f6}
+.hub-kicker{color:#e88a84}
+.hub-count b{color:#e23b3b}
 
 /* acentos de marca das caixas (mantêm diferenciação) */
-.b-cert{--bx:#c86bff}
+.b-cert{--bx:#e23b3b}
 
 /* ── caixas com painel fosco escuro: nebulosa não lava mais o texto ── */
 .hub-box{background:linear-gradient(160deg,rgba(16,12,26,.60),rgba(9,7,16,.50));

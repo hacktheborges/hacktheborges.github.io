@@ -232,3 +232,31 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
     b.addEventListener("click", function () { select(b.getAttribute("data-plat")); });
   });
 })();
+
+/* Verifique! — painel de detalhe do pin no hover/foco */
+(function(){
+  var stages = document.querySelectorAll('.pin-stage');
+  stages.forEach(function(stage){
+    var panel = stage.querySelector('.pin-detail');
+    if(!panel) return;
+    var img  = panel.querySelector('.pd-img');
+    var name = panel.querySelector('.pd-name');
+    var meta = panel.querySelector('.pd-meta');
+    var link = panel.querySelector('.pd-link');
+    function fill(card){
+      var cimg = card.querySelector('img');
+      var src = cimg ? cimg.src : '';
+      var nm  = card.getAttribute('data-name') || '';
+      if(img){ img.src = src; img.alt = nm; }
+      if(name) name.textContent = nm;
+      if(meta) meta.textContent = card.getAttribute('data-meta') || '';
+      if(link) link.href = card.getAttribute('href') || '#';
+      panel.classList.add('on');
+    }
+    stage.querySelectorAll('.badge-card').forEach(function(card){
+      card.addEventListener('mouseenter', function(){ fill(card); });
+      card.addEventListener('focus',      function(){ fill(card); });
+    });
+    stage.addEventListener('mouseleave', function(){ panel.classList.remove('on'); });
+  });
+})();

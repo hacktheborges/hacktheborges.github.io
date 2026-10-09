@@ -870,3 +870,19 @@ body{background:#060410}
   #hub .hub-kicker{font-size:10px;letter-spacing:.17em;max-width:none;white-space:nowrap}
 }
 @media (max-width:360px){#hub .hub-title-v{font-size:1.65rem}}
+
+/* ═══════════════ Pins & Badges (OffSec): seletor de 3 categorias + descrição ═══════════════ */
+.pick.tri{max-width:860px;grid-template-columns:repeat(3,1fr)}
+.pick.tri .pick-btn[aria-pressed="true"]{border-color:color-mix(in srgb,var(--os1) 60%,var(--line));
+  box-shadow:0 0 24px -6px color-mix(in srgb,var(--os1) 50%,transparent)}
+.pick.tri .pick-btn[aria-pressed="true"] .pick-name{color:color-mix(in srgb,var(--os1) 78%,#fff)}
+@media (max-width:620px){.pick.tri{grid-template-columns:1fr}}
+.pb-group[hidden]{display:none}
+/* descrição (resumo) do badge no painel de detalhe */
+.pin-detail .pd-desc{display:none;font-size:.86rem;line-height:1.55;color:var(--muted);margin:2px 0 0;max-width:26ch}
+.pin-detail.on .pd-desc{display:block}
+/* glow do painel e dos pins na página fundida (não usa #gal-offsec) */
+.pb-group .pin-detail.on{border-color:color-mix(in srgb,var(--os1) 45%,var(--line));
+  box-shadow:0 0 30px -10px color-mix(in srgb,var(--os1) 45%,transparent)}
+.pb-group .badge-card:hover,.pb-group .badge-card:focus-visible{
+  filter:drop-shadow(0 8px 16px color-mix(in srgb,var(--os1) 55%,transparent)) drop-shadow(0 0 10px color-mix(in srgb,var(--os2) 45%,transparent))}

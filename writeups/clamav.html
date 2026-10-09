@@ -131,6 +131,19 @@ footer{margin-top:46px;padding-top:22px;border-top:1px solid var(--line);text-al
 .lb .x{position:absolute;top:16px;right:18px;width:40px;height:40px;border-radius:5px;font-family:var(--mono);font-size:16px;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.3);cursor:pointer}
 
 @media (max-width:560px){.hero{padding-top:30px}section{scroll-margin-top:150px}}
+
+/* interações: hover, clique, seleção (mesma fluidez do site) */
+::selection{background:color-mix(in srgb,var(--signal) 24%,transparent)}
+a,button,.frame,.m,.chip,.steps a,.back,.copy{transition:color .18s cubic-bezier(.22,1,.36,1),background-color .18s cubic-bezier(.22,1,.36,1),border-color .18s cubic-bezier(.22,1,.36,1),transform .18s cubic-bezier(.22,1,.36,1),box-shadow .34s cubic-bezier(.22,1,.36,1)}
+.back:hover{transform:translateY(-1px)}
+.back:active,.copy:active{transform:scale(.95)}
+.steps a:active{transform:scale(.97)}
+figure .frame{overflow:hidden}
+figure .frame:hover{transform:translateY(-3px);box-shadow:0 16px 36px -18px rgba(10,20,45,.5)}
+figure .frame img{transition:transform .5s cubic-bezier(.22,1,.36,1)}
+figure .frame:hover img{transform:scale(1.012)}
+.meta .m:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--ink) 22%,var(--line))}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>

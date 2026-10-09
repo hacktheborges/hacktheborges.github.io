@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="/assets/css/cv.css">
+<link rel="stylesheet" href="/assets/css/cv.css?v=8">
 </head>
 <body>
 
@@ -374,17 +374,6 @@
       </div>
     </div>
 
-    <h2 class="sub-h" data-en="Exam format">Formato do exame</h2>
-    <ul class="rows">
-      <li><span class="sev sev-c">40</span><span class="name" data-en="Active Directory set">Conjunto de Active Directory</span><span class="tags" data-en="all or nothing on the chain">tudo ou nada na cadeia</span></li>
-      <li><span class="sev sev-m">60</span><span class="name" data-en="Three standalone machines">Três máquinas independentes</span><span class="tags">20 <span data-en="each">cada</span></span></li>
-      <li><span class="sev sev-l">70</span><span class="name" data-en="Passing score">Nota de aprovação</span><span class="tags" data-en="of 100 points">de 100 pontos</span></li>
-    </ul>
-
-    <h2 class="sub-h" data-en="Preparation routine">Rotina de preparação</h2>
-    <p data-en="PEN-200 lab machines on weekdays. Every weekend, one full Proving Grounds box under the same 24-hour constraint, with a written report at the end — because an unreported compromise scores zero in this exam, exactly as it does in a real engagement.">Máquinas do laboratório PEN-200 durante a semana. A cada fim de semana, uma máquina completa do Proving Grounds sob a mesma restrição de 24 horas, com relatório escrito ao final — porque comprometimento sem relatório vale zero neste exame, exatamente como num trabalho real.</p>
-    <p class="note" data-en="The writeup template I use is in the repository, under writeups/TEMPLATE.html.">O modelo de writeup que eu uso está no repositório, em writeups/TEMPLATE.html.</p>
-
     <hr class="rule">
     <section class="story" aria-label="A história">
       <h2 class="sub-h" data-en="The story">A história</h2>
@@ -394,7 +383,7 @@
 
   <!-- ══════════ PRÁTICA — VISÃO GERAL ══════════ -->
   <section class="screen content-screen" id="v-pratica" data-title-pt="Prática" data-title-en="Hands-on" hidden>
-    <p class="eyebrow" data-en="Hands-on">Prática</p>
+    <p class="eyebrow">Hack The Box</p>
     <h1 data-en="Hands-on record">Prática registrada</h1>
     <div class="road">
       <div class="pose pose-flag" role="img" aria-label="O personagem em pixel segurando uma bandeira."></div>
@@ -404,16 +393,6 @@
     </div>
 
     <div class="statset">
-      <div class="offsec">
-        <p class="cap">OffSec</p>
-        <div class="stats">
-          <div class="stat"><div class="v">91</div><div class="k" data-en="Labs">Labs</div></div>
-          <div class="stat"><div class="v">215</div><div class="k" data-en="flags captured">Flags capturadas</div></div>
-          <div class="stat"><div class="v">569<span class="unit">h</span></div><div class="k" data-en="in labs">Em laboratório</div></div>
-          <div class="stat"><div class="v">25</div><div class="k" data-en="Pins &amp; badges">Pin &amp; Badges</div></div>
-          <div class="stat"><div class="v">2</div><div class="k">Assessments</div></div>
-        </div>
-      </div>
       <div class="htb">
         <p class="cap">Hack The Box</p>
         <div class="stats">
@@ -427,15 +406,8 @@
       </div>
     </div>
 
-    <h2 class="sub-h" data-en="Verified profiles">Perfis verificados</h2>
-    <p data-en="The proof is one click away — open either profile and check everything above.">A prova está a um clique — abra qualquer perfil e confira tudo que está aqui.</p>
+    <h2 class="sub-h" data-en="Verified profile">Perfil verificado</h2>
     <div class="grid">
-      <a class="card proof" href="https://portal.offsec.com/public-profile/de8b0b16-ad26-3aa0-ad2f-3c49183ca217" target="_blank" rel="noopener">
-        <span class="sub">OffSec</span>
-        <h3>Proving Grounds</h3>
-        <p class="lvl" data-en="Level 31 · 25 badges">Nível 31 · 25 badges</p>
-        <span class="go" data-en="Open profile ↗">Abrir perfil ↗</span>
-      </a>
       <a class="card proof" href="https://profile.hackthebox.com/profile/019e2c5e-b1eb-7093-b9fa-ec20945bbefb" target="_blank" rel="noopener">
         <span class="sub">Hack The Box</span>
         <h3 data-en="Machines">Máquinas</h3>
@@ -444,43 +416,7 @@
       </a>
     </div>
 
-    <h2 class="sub-h" data-en="Platforms">Plataformas</h2>
-    <div class="grid">
-      <a class="card" href="#pg-practice">
-        <span class="sub">OffSec · Hack The Box</span>
-        <h3>Laboratórios</h3>
-        <p data-en="OffSec and HTB labs.">Laboratórios OffSec e HTB.</p>
-      </a>
-      <a class="card" href="#htb-academy">
-        <span class="sub">Hack The Box</span>
-        <h3>Academy</h3>
-        <p data-en="32 modules completed, mapped to attack phases.">32 módulos concluídos, mapeados por fase do ataque.</p>
-      </a>
-    </div>
-
-  </section>
-
-  <!-- ══════════ PG PRACTICE ══════════ -->
-  <section class="screen content-screen" id="v-pg-practice" data-title-pt="Laboratórios" data-title-en="Labs" hidden>
-    <p class="eyebrow">OffSec · Hack The Box</p>
-    <h1>Laboratórios</h1>
-    <p class="lede" data-en="OffSec and HTB labs.">Laboratórios OffSec e HTB.</p>
-
-    <div class="stats">
-      <div class="stat"><div class="v fill">[--]</div><div class="k" data-en="machines">Máquinas</div></div>
-      <div class="stat"><div class="v fill">[--]</div><div class="k" data-en="with report">Com relatório</div></div>
-      <div class="stat"><div class="v fill">[--]</div><div class="k" data-en="under 24h">Em menos de 24h</div></div>
-    </div>
-
-    <h2 class="sub-h" data-en="Machines &amp; writeups">Máquinas e writeups</h2>
-    <ul class="rows">
-      <li><span class="sev sev-m">MED</span><a class="name link" href="writeups/clamav.html">ClamAV</a><span class="tags">Linux · Sendmail/clamav-milter · RCE</span></li>
-      <li><span class="sev sev-m">MED</span><a class="name link" href="writeups/pelican.html">Pelican</a><span class="tags">Linux · Exhibitor/ZooKeeper · RCE → sudo gcore</span></li>
-      <li><span class="sev sev-m">MED</span><span class="name fill">[nome]</span><span class="tags fill">Windows · [vetor]</span></li>
-      <li><span class="sev sev-c">HARD</span><span class="name fill">[nome]</span><span class="tags fill">AD · [vetor]</span></li>
-    </ul>
-
-    <h2 class="sub-h">Hack The Box — Mini Pro Labs</h2>
+    <h2 class="sub-h">Mini Pro Labs</h2>
     <p data-en-html="<b>Puppet.</b> A very complete lab, because it mixes Windows and Linux in a realistic attack chain. You start with initial access via Sliver, exploit a local privilege flaw, abuse service accounts for lateral movement, and finish by compromising the Puppet Master and the Domain Controller. The most interesting part is that it forces you to really understand identity, permissions, Active Directory, C2, pivoting and the abuse of automation infrastructure, instead of relying only on isolated exploits."><b>Puppet.</b> É um lab bem completo, porque mistura ambiente Windows e Linux em uma cadeia de ataque realista. Você começa com acesso inicial via Sliver, explora uma falha de privilégio local, abusa de contas de serviço para movimentação lateral e termina comprometendo o Puppet Master e o Domain Controller. O mais interessante é que ele força a entender bem identidade, permissões, Active Directory, C2, pivoting e abuso de infraestrutura de automação, em vez de depender só de exploits isolados.</p>
     <div class="meta">
       <span class="chip">07 Out 2026</span>
@@ -504,8 +440,44 @@
       </a>
       <figcaption data-en="Click to enlarge">Clique para ampliar</figcaption>
     </figure>
+  </section>
 
-    <p class="fine" data-en="Under construction.">Em construção.</p>
+  <!-- ══════════ PG PRACTICE ══════════ -->
+  <section class="screen content-screen" id="v-pg-practice" data-title-pt="Laboratórios" data-title-en="Labs" hidden>
+    <p class="eyebrow">OffSec</p>
+    <h1>Laboratórios</h1>
+    <p class="lede" data-en="OffSec labs and Proving Grounds.">Laboratórios OffSec e Proving Grounds.</p>
+
+    <p class="construcao" data-en="(Under construction)">(Em construção)</p>
+
+    <div class="statset">
+      <div class="offsec">
+        <p class="cap">OffSec</p>
+        <div class="stats">
+          <div class="stat"><div class="v">91</div><div class="k" data-en="Labs">Labs</div></div>
+          <div class="stat"><div class="v">215</div><div class="k" data-en="flags captured">Flags capturadas</div></div>
+          <div class="stat"><div class="v">569<span class="unit">h</span></div><div class="k" data-en="in labs">Em laboratório</div></div>
+          <div class="stat"><div class="v">25</div><div class="k" data-en="Pins &amp; badges">Pin &amp; Badges</div></div>
+          <div class="stat"><div class="v">2</div><div class="k">Assessments</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="sub-h" data-en="Verified profile">Perfil verificado</h2>
+    <div class="grid">
+      <a class="card proof" href="https://portal.offsec.com/public-profile/de8b0b16-ad26-3aa0-ad2f-3c49183ca217" target="_blank" rel="noopener">
+        <span class="sub">OffSec</span>
+        <h3>Proving Grounds</h3>
+        <p class="lvl" data-en="Level 31 · 25 badges">Nível 31 · 25 badges</p>
+        <span class="go" data-en="Open profile ↗">Abrir perfil ↗</span>
+      </a>
+    </div>
+
+    <h2 class="sub-h" data-en="Machines &amp; writeups">Máquinas e writeups</h2>
+    <ul class="rows">
+      <li><span class="sev sev-m">MED</span><a class="name link" href="writeups/clamav.html">ClamAV</a><span class="tags">Linux · Sendmail/clamav-milter · RCE</span></li>
+      <li><span class="sev sev-m">MED</span><a class="name link" href="writeups/pelican.html">Pelican</a><span class="tags">Linux · Exhibitor/ZooKeeper · RCE → sudo gcore</span></li>
+    </ul>
   </section>
 
   <!-- ══════════ HTB ACADEMY ══════════ -->
@@ -594,7 +566,6 @@
       </div>
     </div>
 
-    <p class="note" data-en="The thin rows are the honest ones: one module on lateral movement and three on Active Directory, against eleven on foundations. That is the gap the OSCP will test hardest.">As linhas magras são as honestas: um módulo de movimentação lateral e três de Active Directory, contra onze de fundamentos. É exatamente essa a lacuna que o OSCP mais cobra.</p>
   </section>
 
   <!-- ══════════ SOBRE ══════════ -->
@@ -630,7 +601,7 @@
   <section class="screen content-screen" id="v-offsec-pins" data-title-pt="Pins" data-title-en="Pins" hidden>
     <p class="eyebrow">OffSec · Pins</p>
     <h1>Pins</h1>
-    <p class="lede" data-en="Verifiable OffSec Skill Pins. Hover a pin to see its details and open the credential.">Skill Pins verificáveis da OffSec. Passe o mouse em um pin para ver os detalhes e abrir a credencial.</p>
+    <p class="lede" data-en="Verifiable OffSec Skill Pins. Each pin opens its credential; on desktop, hover to preview the details.">Skill Pins verificáveis da OffSec. Cada pin abre a sua credencial; no computador, passe o mouse para ver os detalhes.</p>
     <div class="pin-stage">
         <div class="gal-grid">
         <a class="badge-card" href="https://credentials.offsec.com/ddcd3375-d4bc-44b4-a5af-2edc69ca19d8#acc.5pdxU6Xc" target="_blank" rel="noopener" title="Web Attack Methodology Skill Path — verificar credencial na OffSec" aria-label="Pin OffSec Web Attack Methodology Skill Path — verificar credencial" data-name="Web Attack Methodology Skill Path" data-meta="OffSec · Skill Pin · Mar 2026">
@@ -693,12 +664,6 @@
     <p class="eyebrow">OffSec · Badges</p>
     <h1>Badges</h1>
     <div class="empty"><p data-en="Soon: badges earned on OffSec.">Em breve: badges conquistados na OffSec.</p></div>
-  </section>
-
-  <section class="screen content-screen" id="v-offsec-flags" data-title-pt="Flags" data-title-en="Flags" hidden>
-    <p class="eyebrow">OffSec · Flags</p>
-    <h1>Flags</h1>
-    <div class="empty"><p data-en="Under construction: proof-of-compromise from retired labs.">Em construção: provas de comprometimento de labs aposentados.</p></div>
   </section>
 
   <section class="screen content-screen" id="v-htb-pins" data-title-pt="Pins & Badges" data-title-en="Pins & Badges" hidden>
@@ -776,8 +741,8 @@
 
   <section class="screen door-screen sub-hub" id="v-offsec" data-title-pt="OffSec" data-title-en="OffSec" hidden>
     <div class="hub-inner sub-inner">
-      <p class="hub-kicker" data-en="OffSec">OffSec</p>
-      <h1 class="hub-title sub-title" data-depth="10" data-en="OffSec">OffSec</h1>
+      <p class="hub-kicker" data-en="Offensive Security">Offensive Security</p>
+      <h1 class="hub-title sub-title big" data-depth="10" data-en="OffSec">OffSec</h1>
       <p class="hub-sub" data-en="Pick a topic.">Escolha um assunto.</p>
       <nav class="hub-grid" data-depth="5" aria-label="OffSec">
       <a class="hub-box b-offsec" href="#oscp">
@@ -802,12 +767,6 @@
         <span class="hb-num">04</span>
         <span class="hb-name" data-en="Labs">Labs</span>
         <span class="hb-desc" data-en="Proving Grounds and mini-labs.">Proving Grounds e mini-labs.</span>
-        <span class="hb-go" aria-hidden="true">→</span>
-      </a>
-      <a class="hub-box b-offsec" href="#offsec-flags">
-        <span class="hb-num">05</span>
-        <span class="hb-name" data-en="Flags">Flags</span>
-        <span class="hb-desc" data-en="Proof-of-compromise flags.">Provas de comprometimento.</span>
         <span class="hb-go" aria-hidden="true">→</span>
       </a>
       </nav>
@@ -889,6 +848,6 @@
   <img id="lb-img" alt="">
 </div>
 
-<script src="/assets/js/cv.js"></script>
+<script src="/assets/js/cv.js?v=8"></script>
 </body>
 </html>

@@ -592,8 +592,48 @@ a.card:hover{box-shadow:0 14px 32px -18px rgba(10,20,45,.5),var(--card-glow)}
 /* galeria de conquistas (recebe as imagens depois) */
 .gallery{margin-top:22px}
 .gallery[hidden]{display:none}
-.gal-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));margin-top:10px}
 .gal-grid:empty{display:none}
-.gal-grid img{width:100%;height:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface);padding:8px;cursor:zoom-in;
-  transition:transform var(--t-slow) var(--ease),box-shadow var(--t-slow) var(--ease),border-color var(--t) var(--ease)}
-.gal-grid img:hover{transform:translateY(-3px);border-color:var(--ink);box-shadow:0 12px 30px -16px rgba(10,20,45,.5)}
+
+/* palco do pin: grade à esquerda, painel de detalhe à direita */
+.pin-stage{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:30px;align-items:start;margin-top:12px}
+.pin-stage .gal-grid{display:grid;gap:26px 18px;grid-template-columns:repeat(auto-fill,minmax(116px,1fr));place-items:center;margin:0}
+
+/* pin solto — sem cartão, cresce no hover */
+.badge-card{display:block;line-height:0;text-decoration:none;color:inherit;border-radius:50%;
+  transition:transform var(--t-slow) var(--ease-spring),filter var(--t-slow) var(--ease)}
+.badge-card img{width:112px;height:112px;display:block;border-radius:50%;object-fit:contain}
+.badge-card:hover,.badge-card:focus-visible{outline:none;transform:scale(1.14)}
+#gal-offsec .badge-card:hover,#gal-offsec .badge-card:focus-visible{
+  filter:drop-shadow(0 8px 16px color-mix(in srgb,var(--os1) 55%,transparent)) drop-shadow(0 0 10px color-mix(in srgb,var(--os2) 45%,transparent))}
+#gal-htb .badge-card:hover,#gal-htb .badge-card:focus-visible{
+  filter:drop-shadow(0 8px 16px color-mix(in srgb,var(--htb) 55%,transparent))}
+
+/* painel de detalhe, fixo na rolagem */
+.pin-detail{position:sticky;top:24px;background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  padding:22px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;min-height:180px;justify-content:center;
+  transition:border-color var(--t) var(--ease),box-shadow var(--t-slow) var(--ease)}
+#gal-offsec .pin-detail.on{border-color:color-mix(in srgb,var(--os1) 45%,var(--line));
+  box-shadow:0 0 30px -10px color-mix(in srgb,var(--os1) 45%,transparent)}
+#gal-htb .pin-detail.on{border-color:color-mix(in srgb,var(--htb) 45%,var(--line));
+  box-shadow:0 0 30px -10px color-mix(in srgb,var(--htb) 45%,transparent)}
+.pin-detail .pd-imgwrap{line-height:0}
+.pin-detail .pd-img{width:96px;height:96px;border-radius:50%;object-fit:contain}
+.pin-detail .pd-name{font-size:1rem;font-weight:600;line-height:1.3;margin:0}
+.pin-detail .pd-meta{font-family:var(--font-mono);font-size:11px;letter-spacing:.02em;color:var(--muted);margin:0}
+.pin-detail .pd-link{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;text-decoration:none;
+  border:1px solid var(--line);border-radius:4px;padding:7px 12px;color:var(--os2);margin-top:4px;
+  transition:border-color var(--t) var(--ease),color var(--t) var(--ease),transform var(--t) var(--ease)}
+.pin-detail .pd-link:hover{border-color:var(--os1);transform:translateY(-1px)}
+.pin-detail .pd-hint{font-family:var(--font-mono);font-size:11.5px;color:var(--muted);line-height:1.5;margin:0;max-width:22ch}
+/* estado padrão: só a dica; ao ativar, mostra o conteúdo */
+.pin-detail .pd-imgwrap,.pin-detail .pd-name,.pin-detail .pd-meta,.pin-detail .pd-link{display:none}
+.pin-detail.on .pd-hint{display:none}
+.pin-detail.on .pd-imgwrap,.pin-detail.on .pd-name,.pin-detail.on .pd-meta,.pin-detail.on .pd-link{display:block}
+.pin-detail .pd-img{display:block}
+
+@media (max-width:720px){
+  .pin-stage{grid-template-columns:minmax(0,1fr)}
+  .pin-detail{display:none}
+  .pin-stage .gal-grid{grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:22px 14px}
+  .badge-card img{width:96px;height:96px}
+}

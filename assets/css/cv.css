@@ -232,6 +232,7 @@ a.card.proof:hover{border-color:var(--signal)}
 .stats{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(148px,1fr))}
 .stat{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:14px 16px;min-width:0}
 .stat .v{font-family:var(--font-mono);font-size:1.9rem;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .v.on{color:var(--ok)}
 .stat .v .unit{font-size:1.05rem;font-weight:500;color:var(--muted);margin-left:1px}
 .stat .k{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:4px}
 

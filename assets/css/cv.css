@@ -350,21 +350,8 @@ a.card.proof:hover{border-color:var(--signal)}
 }
 
 /* Road to — trajeto até a certificação, com o personagem em pixel */
-.road{display:grid;grid-template-columns:132px minmax(0,1fr);gap:22px;align-items:start}
+.road{display:grid;grid-template-columns:156px minmax(0,1fr);gap:22px;align-items:start}
 .road .empty{margin:0}
-.pixel{
-  width:120px;height:120px;flex:none;
-  background-image:url(/assets/img/hatch.png);
-  background-repeat:no-repeat;
-  background-size:1920px 120px;
-  image-rendering:pixelated;
-  image-rendering:crisp-edges;
-  animation:hatch 3.2s steps(16) infinite;
-}
-@keyframes hatch{from{background-position:0 0}to{background-position:-1920px 0}}
-@media (prefers-reduced-motion:reduce){
-  .pixel{animation:none;background-position:-1800px 0}
-}
 @media (max-width:860px){
   .road{grid-template-columns:minmax(0,1fr);gap:14px;justify-items:start}
 }
@@ -387,46 +374,32 @@ h1 + .meta{margin-top:16px}
 .rank-k{font-family:var(--font-mono);font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
 .track .chip{align-self:flex-start;margin-top:4px}
 
-/* marca e poses do personagem */
+/* Personagem V — imagens transparentes e poses consistentes. */
 .brand-av{
-  width:28px;height:28px;flex:none;margin-top:2px;
-  background:url(/assets/img/avatar-48.png) center/contain no-repeat;
+  width:32px;height:32px;flex:none;margin-top:2px;
+  background:url(/assets/img/v/avatar.png) center/contain no-repeat;
   image-rendering:pixelated;
 }
 .brand-row{flex-wrap:wrap}
 .pose{
-  width:120px;height:120px;flex:none;
+  width:144px;height:166px;flex:none;
   background-repeat:no-repeat;background-position:center top;background-size:contain;
   image-rendering:pixelated;
 }
-.pose-root{background-image:url(/assets/img/pose-root.png)}
-.pose-term{background-image:url(/assets/img/pose-term.png)}
-.pose-flag{background-image:url(/assets/img/pose-flag.png)}
+.pose-security{background-image:url(/assets/img/v/security-plus.png)}
+.pose-crta{background-image:url(/assets/img/v/crta.png)}
+.pose-oscp{background-image:url(/assets/img/v/oscp.png)}
+.pose-flag{background-image:url(/assets/img/v/practice-flag.png)}
+.v-character{animation:vIdle 5s ease-in-out infinite}
+@keyframes vIdle{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 
-/* 0xB conversando com um recrutador — animação da seção Contato */
+/* V conversando com a recrutadora, sem as antigas folhas de sprites. */
 .chat-anim{
-  width:352px;height:192px;margin:26px 0 4px;
-  background-image:url(/assets/img/chat.png);
-  background-repeat:no-repeat;
-  background-size:5632px 192px;
+  width:min(460px,100%);height:auto;aspect-ratio:2/1;margin:26px 0 18px;
+  background:url(/assets/img/v/contact.png) center/contain no-repeat;
   image-rendering:pixelated;
-  animation:chat 6.4s steps(16) infinite;
 }
-@keyframes chat{from{background-position:0 0}to{background-position:-5632px 0}}
-@media (max-width:460px){
-  .chat-anim{
-    width:264px;height:144px;
-    background-size:4224px 144px;
-    animation-name:chat-s;
-  }
-  @keyframes chat-s{from{background-position:0 0}to{background-position:-4224px 0}}
-}
-@media (prefers-reduced-motion:reduce){
-  .chat-anim{animation:none;background-position:-5280px 0}
-}
-@media (prefers-reduced-motion:reduce) and (max-width:460px){
-  .chat-anim{background-position:-3960px 0}
-}
+@media (prefers-reduced-motion:reduce){.v-character{animation:none}}
 
 /* badges da HTB Academy — tile com descrição no hover e no foco */
 .phase{position:relative}
@@ -672,8 +645,8 @@ a.card:hover{box-shadow:0 14px 32px -18px rgba(10,20,45,.5),var(--card-glow)}
 .hub-top{position:absolute;top:0;left:0;right:0;z-index:3;
   display:flex;align-items:center;justify-content:space-between;
   padding:calc(18px + env(safe-area-inset-top,0px)) clamp(18px,4vw,42px) 0}
-.hub-mark{width:30px;height:30px;display:block;image-rendering:pixelated;
-  background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAA30lEQVR4nO3YvQ3CMBAF4AdiBxagouCnhAGQ6DMmPRIDQMlPQcUCTAGVJSuAdTi2Txe/r3aUO79zFBkgIqIOBrEPrjfNK2Uhx8MuqpZhyiI0mG9AHJsbmcf9kq0YAJhMFwDkI9XvBPyDmnvn21wSQDiNfiZQat6lQufCfALmGxhJF96u55x1fJjNl6J19STQ5u9Q6XR85hMw30D0CPncOH0bped29fO58f7U+d1MAAgf4hS7HFJvApqfTp/5BMw3IB4h6b9JaeYTYAPazDfAWwltf9/MlVLNzRwRERFpegOtPTdMZ4WzZAAAAABJRU5ErkJggg==) center/contain no-repeat}
+.hub-mark{width:40px;height:40px;display:block;image-rendering:pixelated;
+  background:url(/assets/img/v/avatar.png) center/contain no-repeat}
 .hub-top .switch{border-color:rgba(160,185,220,.28);background:rgba(255,255,255,.05)}
 .hub-top .switch button{color:#9fb0c4}
 .hub-top .switch button[aria-pressed="true"]{background:#eaf1f8;color:#0b1016}
@@ -873,3 +846,26 @@ body{background:#060410}
   .bg-aurora{animation:none;filter:blur(22px)}
   .bg-pix{display:none}
 }
+
+
+/* V espiando sobre "hack": a própria palavra forma a borda do muro. */
+#hub{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+#hub .hub-inner{padding-top:100px;padding-bottom:48px}
+#hub .hub-title-v{
+  font-size:clamp(1.75rem,8.5vw,5.6rem);
+  padding-top:1.9em;white-space:nowrap;isolation:isolate;
+}
+.hub-hack{position:relative;display:inline-block}
+.hub-hack-word{position:relative;z-index:1}
+.hub-peek{
+  position:absolute;z-index:2;left:50%;bottom:calc(100% - .25em);
+  width:calc(100% + .35em);max-width:none;height:auto;
+  transform:translateX(-50%);image-rendering:pixelated;
+  pointer-events:none;user-select:none;
+}
+@media (max-width:720px){
+  #hub .hub-inner{padding-top:92px;padding-bottom:38px}
+  #hub .hub-title-v{padding-top:1.95em}
+  #hub .hub-kicker{font-size:10px;letter-spacing:.17em;max-width:none;white-space:nowrap}
+}
+@media (max-width:360px){#hub .hub-title-v{font-size:1.65rem}}

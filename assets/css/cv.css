@@ -848,24 +848,25 @@ body{background:#060410}
 }
 
 
-/* V espiando sobre "hack": a própria palavra forma a borda do muro. */
+/* V espiando apenas sobre "ac": as duas letras formam a borda do muro. */
 #hub{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
 #hub .hub-inner{padding-top:100px;padding-bottom:48px}
 #hub .hub-title-v{
   font-size:clamp(1.75rem,8.5vw,5.6rem);
-  padding-top:1.9em;white-space:nowrap;isolation:isolate;
+  padding-top:1.25em;white-space:nowrap;isolation:isolate;
 }
 .hub-hack{position:relative;display:inline-block}
 .hub-hack-word{position:relative;z-index:1}
+.hub-ac{position:relative;display:inline-block}
 .hub-peek{
-  position:absolute;z-index:2;left:50%;bottom:calc(100% - .25em);
-  width:calc(100% + .35em);max-width:none;height:auto;
+  position:absolute;z-index:2;left:50%;bottom:calc(100% - .35em);
+  width:100%;max-width:none;height:auto;
   transform:translateX(-50%);image-rendering:pixelated;
   pointer-events:none;user-select:none;
 }
 @media (max-width:720px){
   #hub .hub-inner{padding-top:92px;padding-bottom:38px}
-  #hub .hub-title-v{padding-top:1.95em}
+  #hub .hub-title-v{padding-top:1.3em}
   #hub .hub-kicker{font-size:10px;letter-spacing:.17em;max-width:none;white-space:nowrap}
 }
 @media (max-width:360px){#hub .hub-title-v{font-size:1.65rem}}

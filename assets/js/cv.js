@@ -23,7 +23,6 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
     sobre:            { kind: "door",    parent: "hub" },
     play:             { kind: "content", parent: "hub" },
     "offsec-pins":    { kind: "content", parent: "offsec" },
-    "offsec-badges":  { kind: "content", parent: "offsec" },
     "pg-practice":    { kind: "content", parent: "offsec" },
     "oscp":           { kind: "content", parent: "certificacoes" },
     "security-plus":  { kind: "content", parent: "certificacoes" },
@@ -240,7 +239,7 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
   route(keyFromHash(), true);
 })();
 
-/* Pins — painel de detalhe no hover/foco */
+/* Pins — painel de detalhe no hover/foco (com descrição de badge) */
 (function () {
   var stages = document.querySelectorAll(".pin-stage");
   Array.prototype.forEach.call(stages, function (stage) {
@@ -249,12 +248,18 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
     var img = panel.querySelector(".pd-img");
     var name = panel.querySelector(".pd-name");
     var meta = panel.querySelector(".pd-meta");
+    var desc = panel.querySelector(".pd-desc");
     var link = panel.querySelector(".pd-link");
     function fill(card) {
       var cimg = card.querySelector("img");
       if (img) { img.src = cimg ? cimg.src : ""; img.alt = card.getAttribute("data-name") || ""; }
       if (name) { name.textContent = card.getAttribute("data-name") || ""; }
       if (meta) { meta.textContent = card.getAttribute("data-meta") || ""; }
+      if (desc) {
+        var en = document.documentElement.lang === "en";
+        var d = (en && card.getAttribute("data-desc-en")) || card.getAttribute("data-desc") || "";
+        desc.textContent = d; desc.hidden = !d;
+      }
       if (link) { link.href = card.getAttribute("href") || "#"; }
       panel.classList.add("on");
     }
@@ -266,3 +271,14 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
   });
 })();
 
+/* Pins & Badges — seletor de categoria (Pins / Badges / Assessments) */
+(function () {
+  var picks = document.querySelectorAll(".pick.tri .pick-btn");
+  if (!picks.length) { return; }
+  var groups = document.querySelectorAll(".pb-group");
+  function sel(g) {
+    Array.prototype.forEach.call(picks, function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-group") === g)); });
+    Array.prototype.forEach.call(groups, function (gr) { gr.hidden = (gr.getAttribute("data-group") !== g); });
+  }
+  Array.prototype.forEach.call(picks, function (b) { b.addEventListener("click", function () { sel(b.getAttribute("data-group")); }); });
+})();

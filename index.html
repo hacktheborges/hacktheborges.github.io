@@ -22,6 +22,59 @@
 </head>
 <body>
 
+<section id="hub" aria-label="Início">
+  <div class="hub-sky" aria-hidden="true">
+    <span class="hub-layer hub-grid" data-depth="18"></span>
+    <span class="hub-layer hub-aurora" data-depth="40"></span>
+    <span class="hub-layer hub-pix" data-depth="64"></span>
+  </div>
+  <div class="hub-top">
+    <span class="hub-mark" role="img" aria-label="0xB"></span>
+    <div class="switch" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="pt" aria-pressed="true">PT</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+  <div class="hub-inner">
+    <p class="hub-kicker" data-en="Offensive security portfolio">Portfólio de segurança ofensiva</p>
+    <h1 class="hub-title" data-depth="10" data-glitch="hacktheborges">hacktheborges</h1>
+    <p class="hub-sub" data-en="Pick a door.">Escolha uma porta.</p>
+    <nav class="hub-grid" data-depth="5" aria-label="Seções principais">
+      <a class="hub-box b-offsec" href="#offsec">
+        <span class="hb-num">01</span>
+        <span class="hb-name">OffSec</span>
+        <span class="hb-desc" data-en="Certs · Pins · Badges · Labs · Flags">Certificações · Pins · Badges · Labs · Flags</span>
+        <span class="hb-go" aria-hidden="true">→</span>
+      </a>
+      <a class="hub-box b-htb" href="#htb">
+        <span class="hb-num">02</span>
+        <span class="hb-name">Hack The Box</span>
+        <span class="hb-desc" data-en="Academy · Machines · Badges · Flags">Academy · Máquinas · Badges · Flags</span>
+        <span class="hb-go" aria-hidden="true">→</span>
+      </a>
+      <a class="hub-box b-cert" href="#certificacoes">
+        <span class="hb-num">03</span>
+        <span class="hb-name" data-en="Certifications">Certificações</span>
+        <span class="hb-desc" data-en="Every cert — and the story behind each">Todas as certs — e a história de cada uma</span>
+        <span class="hb-go" aria-hidden="true">→</span>
+      </a>
+      <a class="hub-box b-sobre" href="#sobre">
+        <span class="hb-num">04</span>
+        <span class="hb-name" data-en="About">Sobre</span>
+        <span class="hb-desc" data-en="Who I am and where I'm headed">Quem sou e para onde vou</span>
+        <span class="hb-go" aria-hidden="true">→</span>
+      </a>
+      <a class="hub-box b-play" href="#play">
+        <span class="hb-num">05</span>
+        <span class="hb-name">Do you wanna play?</span>
+        <span class="hb-desc" data-en="A mini-game — soon">Um mini jogo — em breve</span>
+        <span class="hb-go" aria-hidden="true">→</span>
+      </a>
+    </nav>
+    <p class="hub-count"><b data-days>—</b> <span data-en="days to the OSCP exam">dias para o exame OSCP</span></p>
+  </div>
+</section>
+
 <div class="bar">
   <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="rail">Menu</button>
   <span class="nm">Artur Borges</span>
@@ -53,6 +106,7 @@
     </div>
 
     <nav class="tree" aria-label="Seções">
+      <a class="top home" href="#hub" data-en="Home">⌂ Início</a>
       <a class="top hot" href="#curriculo" data-en="CV">Currículo</a>
       <a class="top hot" href="#contato" data-en="Contact">Contato</a>
       <a class="top verify" href="#verifique" data-en="Verify!">Verifique!</a>
@@ -279,6 +333,12 @@
         <div class="tools"><span class="tool" data-en="Risk">Risco</span><span class="tool" data-en="Third parties">Terceiros</span><span class="tool" data-en="Compliance">Conformidade</span><span class="tool" data-en="Audit">Auditoria</span></div>
       </div>
     </div>
+
+    <hr class="rule">
+    <section class="story" aria-label="A história">
+      <h2 class="sub-h" data-en="The story">A história</h2>
+      <p class="story-ph" data-en="— soon: how studying for and passing Security+ went.">— em breve: como foi estudar e passar na Security+.</p>
+    </section>
   </section>
 
   <!-- ══════════ CRTA ══════════ -->
@@ -340,6 +400,12 @@
         <div class="tools"><span class="tool" data-en="Domain enumeration">Enumeração de domínio</span><span class="tool">DCSync</span><span class="tool">Pass-the-Hash</span><span class="tool">Evil-WinRM</span></div>
       </div>
     </div>
+
+    <hr class="rule">
+    <section class="story" aria-label="A história">
+      <h2 class="sub-h" data-en="The story">A história</h2>
+      <p class="story-ph" data-en="— soon: the road to CRTA.">— em breve: o caminho até a CRTA.</p>
+    </section>
   </section>
 
   <!-- ══════════ OSCP ══════════ -->
@@ -390,6 +456,12 @@
     <h2 class="sub-h" data-en="Preparation routine">Rotina de preparação</h2>
     <p data-en="PEN-200 lab machines on weekdays. Every weekend, one full Proving Grounds box under the same 24-hour constraint, with a written report at the end — because an unreported compromise scores zero in this exam, exactly as it does in a real engagement.">Máquinas do laboratório PEN-200 durante a semana. A cada fim de semana, uma máquina completa do Proving Grounds sob a mesma restrição de 24 horas, com relatório escrito ao final — porque comprometimento sem relatório vale zero neste exame, exatamente como num trabalho real.</p>
     <p class="note" data-en="The writeup template I use is in the repository, under writeups/TEMPLATE.html.">O modelo de writeup que eu uso está no repositório, em writeups/TEMPLATE.html.</p>
+
+    <hr class="rule">
+    <section class="story" aria-label="A história">
+      <h2 class="sub-h" data-en="The story">A história</h2>
+      <p class="story-ph" data-en="— soon: preparing for the OSCP, day by day.">— em breve: a preparação para o OSCP, dia a dia.</p>
+    </section>
   </section>
 
   <!-- ══════════ PRÁTICA — VISÃO GERAL ══════════ -->
@@ -809,6 +881,99 @@
     </div>
   </section>
 
+  <section class="view" id="v-offsec" data-title-pt="OffSec" data-title-en="OffSec" hidden>
+    <p class="eyebrow">OffSec</p>
+    <h1>OffSec</h1>
+    <p class="lede" data-en="Certifications, skill pins, badges and labs on the OffSec track.">Certificações, pins, badges e laboratórios na trilha OffSec.</p>
+    <div class="grid">
+      <a class="card" href="#oscp">
+        <span class="status s-ok" data-en="Active">Ativo</span>
+        <h3 data-en="Certifications">Certificações</h3>
+        <p data-en="OSCP and what comes next.">OSCP e o que vier depois.</p>
+      </a>
+      <a class="card" href="#verifique">
+        <span class="status s-ok" data-en="15">15</span>
+        <h3 data-en="Pins">Pins</h3>
+        <p data-en="15 verifiable Skill Pins.">15 Skill Pins verificáveis.</p>
+      </a>
+      <div class="card ">
+        <span class="status s-plan" data-en="Soon">Em breve</span>
+        <h3 data-en="Badges">Badges</h3>
+        <p data-en="Platform achievements.">Conquistas da plataforma.</p>
+      </div>
+      <a class="card" href="#pg-practice">
+        <span class="status s-ok" data-en="Active">Ativo</span>
+        <h3 data-en="Labs">Labs</h3>
+        <p data-en="Proving Grounds and mini-labs.">Proving Grounds e mini-labs.</p>
+      </a>
+      <div class="card ">
+        <span class="status s-plan" data-en="Under construction">Em construção</span>
+        <h3 data-en="Flags">Flags</h3>
+        <p data-en="Proof-of-compromise flags.">Provas de comprometimento.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="v-htb" data-title-pt="Hack The Box" data-title-en="Hack The Box" hidden>
+    <p class="eyebrow">Hack The Box</p>
+    <h1>Hack The Box</h1>
+    <p class="lede" data-en="Academy, machines, badges and flags on Hack The Box.">Academy, máquinas, badges e flags no Hack The Box.</p>
+    <div class="grid">
+      <a class="card" href="#htb-academy">
+        <span class="status s-ok" data-en="32">32</span>
+        <h3 data-en="Academy">Academy</h3>
+        <p data-en="HTB Academy modules and paths.">Módulos e trilhas da HTB Academy.</p>
+      </a>
+      <a class="card" href="#pratica">
+        <span class="status s-ok" data-en="Active">Ativo</span>
+        <h3 data-en="Machines">Máquinas</h3>
+        <p data-en="Labs, Sherlocks and challenges.">Labs, Sherlocks e desafios.</p>
+      </a>
+      <div class="card ">
+        <span class="status s-plan" data-en="Soon">Em breve</span>
+        <h3 data-en="Pins & Badges">Pins & Badges</h3>
+        <p data-en="Verifiable achievements.">Conquistas verificáveis.</p>
+      </div>
+      <div class="card ">
+        <span class="status s-plan" data-en="Under construction">Em construção</span>
+        <h3 data-en="Flags">Flags</h3>
+        <p data-en="Proof-of-compromise flags.">Provas de comprometimento.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="v-certificacoes" data-title-pt="Certificações" data-title-en="Certifications" hidden>
+    <p class="eyebrow" data-en="Certifications">Certificações</p>
+    <h1 data-en="Certifications">Certificações</h1>
+    <p class="lede" data-en="Every certification I've earned — click one to read the story behind it.">Todas as certificações que obtive — clique em uma para ler a história por trás dela.</p>
+    <div class="grid">
+      <a class="card" href="#security-plus">
+        <span class="status s-ok" data-en="Earned">Obtida</span>
+        <h3 data-en="CompTIA Security+">CompTIA Security+</h3>
+        <p data-en="Security fundamentals.">Fundamentos de segurança.</p>
+      </a>
+      <a class="card" href="#crta">
+        <span class="status s-ok" data-en="Earned">Obtida</span>
+        <h3 data-en="CRTA">CRTA</h3>
+        <p data-en="Certified Red Team Analyst.">Certified Red Team Analyst.</p>
+      </a>
+      <a class="card" href="#oscp">
+        <span class="status s-ok" data-en="In progress">Em andamento</span>
+        <h3 data-en="OSCP">OSCP</h3>
+        <p data-en="In prep — exam Oct 23.">Em preparação — exame 23 out.</p>
+      </a>
+    </div>
+    <p class="note" data-en="Each page ends with a first-person account of how that certification went.">Cada página termina com um relato, em primeira pessoa, de como foi aquela certificação.</p>
+  </section>
+
+  <section class="view" id="v-play" data-title-pt="Do you wanna play?" data-title-en="Do you wanna play?" hidden>
+    <p class="eyebrow">Do you wanna play?</p>
+    <h1>Do you wanna play?</h1>
+    <p class="lede" data-en="A small game is being built here. Come back soon.">Um pequeno jogo está sendo construído aqui. Volte em breve.</p>
+    <div class="empty">
+      <p data-en="Idea in the works — a terminal-style mini-game starring 0xB. Stay tuned.">Ideia em andamento — um mini jogo em estilo terminal estrelando o 0xB. Em breve.</p>
+    </div>
+  </section>
   </main>
 </div>
 

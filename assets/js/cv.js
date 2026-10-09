@@ -24,7 +24,6 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
     play:             { kind: "content", parent: "hub" },
     "offsec-pins":    { kind: "content", parent: "offsec" },
     "offsec-badges":  { kind: "content", parent: "offsec" },
-    "offsec-flags":   { kind: "content", parent: "offsec" },
     "pg-practice":    { kind: "content", parent: "offsec" },
     "oscp":           { kind: "content", parent: "certificacoes" },
     "security-plus":  { kind: "content", parent: "certificacoes" },

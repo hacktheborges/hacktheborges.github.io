@@ -509,6 +509,11 @@ a.card:active{transform:translateY(-1px)}
 
 /* tiles de número respondem de leve ao mouse */
 .stat:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--ink) 22%,var(--line))}
+/* glow de marca no hover: OffSec azul→roxo, HTB verde */
+.offsec .stat:hover{border-color:color-mix(in srgb,var(--os1) 55%,var(--line));
+  box-shadow:0 10px 26px -16px rgba(10,20,45,.5),0 0 22px -6px color-mix(in srgb,var(--os1) 55%,transparent),0 0 26px -8px color-mix(in srgb,var(--os2) 55%,transparent)}
+.htb .stat:hover{border-color:color-mix(in srgb,var(--htb) 50%,var(--line));
+  box-shadow:0 10px 26px -16px rgba(10,20,45,.5),0 0 24px -6px color-mix(in srgb,var(--htb) 55%,transparent)}
 
 /* botões e chips: leve toque ao clicar, leve subida no hover */
 .switch button:active,.burger:active,a.chip:active,.out a:active{transform:scale(.95)}
@@ -518,3 +523,34 @@ a.chip:hover,.out a:hover{transform:translateY(-1px)}
 
 /* certificados: leve zoom ao passar o mouse (recorte já escondido) */
 .cert a:hover img{transform:scale(1.02)}
+
+/* ═══════════ high-tech: HUD, neon, transições (neon só no escuro) ═══════════ */
+:root{--glow:none;--glow-strong:none;--card-glow:0 0 0 0 transparent;--hud:0}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--glow:0 0 12px color-mix(in srgb,var(--signal) 50%,transparent);--glow-strong:0 0 22px color-mix(in srgb,var(--signal) 55%,transparent);--card-glow:0 0 26px -4px color-mix(in srgb,var(--signal) 42%,transparent);--hud:1}}
+:root[data-theme="dark"]{--glow:0 0 12px color-mix(in srgb,var(--signal) 50%,transparent);--glow-strong:0 0 22px color-mix(in srgb,var(--signal) 55%,transparent);--card-glow:0 0 26px -4px color-mix(in srgb,var(--signal) 42%,transparent);--hud:1}
+:root[data-theme="light"]{--glow:none;--glow-strong:none;--card-glow:0 0 0 0 transparent;--hud:0}
+
+/* grade de HUD + scanline no fundo (atrás do conteúdo, só no escuro) */
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    repeating-linear-gradient(to bottom,rgba(150,180,230,.05) 0 1px,transparent 1px 3px),
+    linear-gradient(rgba(110,140,210,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(110,140,210,.06) 1px,transparent 1px);
+  background-size:100% 3px,46px 46px,46px 46px;
+  opacity:var(--hud);transition:opacity .6s ease}
+
+/* neon suave nos acentos vermelhos */
+.eyebrow{text-shadow:var(--glow)}
+.brand .rl{text-shadow:var(--glow)}
+.count .num{text-shadow:var(--glow-strong)}
+
+/* bloom vermelho nos cards ao passar o mouse */
+a.card:hover{box-shadow:0 14px 32px -18px rgba(10,20,45,.5),var(--card-glow)}
+
+/* transição ao trocar de seção */
+@keyframes viewIn{from{opacity:0;transform:translateY(8px)}}
+.view{animation:viewIn .42s cubic-bezier(.22,1,.36,1)}
+
+/* cursor de terminal piscando */
+.term-caret{display:inline-block;width:.56ch;height:.9em;margin-left:.14em;background:var(--signal);vertical-align:-1px;border-radius:1px;box-shadow:var(--glow);animation:blink 1.15s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}

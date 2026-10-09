@@ -258,6 +258,7 @@ a.card.proof:hover{border-color:var(--signal)}
 .phase .ph b{display:block;color:var(--ink);font-size:13px;letter-spacing:0;font-weight:600;margin-bottom:2px}
 .tools{display:flex;flex-wrap:wrap;gap:6px}
 .tool{font-family:var(--font-mono);font-size:12px;border:1px solid var(--line);background:var(--surface);padding:3px 8px;border-radius:2px}
+.tool .load{color:var(--amber);font-style:italic}
 
 .contact{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:16px}
 .mail{

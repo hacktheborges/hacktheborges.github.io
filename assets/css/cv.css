@@ -15,6 +15,7 @@
   --font-sans:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
   --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   --rail-w:272px;
+  --ease:cubic-bezier(.22,1,.36,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);--t:.18s;--t-slow:.34s;
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){
@@ -486,3 +487,34 @@ h1 + .meta{margin-top:16px}
 .rows a.name.link{color:var(--signal);text-decoration:none;font-weight:600}
 .rows a.name.link::after{content:" ↗";font-family:var(--font-mono);font-size:.85em}
 .rows a.name.link:hover{text-decoration:underline;text-underline-offset:2px}
+
+/* ─────────── interações: hover, clique, foco, seleção ─────────── */
+::selection{background:color-mix(in srgb,var(--signal) 24%,transparent)}
+
+/* transições suaves nos elementos interativos */
+.tree a,.grp>summary,.card,a.chip,.out a,.switch button,.burger,.stat,.rows a.name.link,.cert a img{
+  transition:color var(--t) var(--ease),background-color var(--t) var(--ease),
+             border-color var(--t) var(--ease),transform var(--t) var(--ease),
+             box-shadow var(--t-slow) var(--ease);
+}
+
+/* navegação lateral: desliza no hover, afunda no clique */
+.tree a:hover{transform:translateX(3px)}
+.tree a:active{transform:translateX(1px)}
+.grp>summary:active{transform:scale(.99)}
+
+/* cards: sobem com sombra suave no hover, tátil no clique */
+a.card:hover{transform:translateY(-3px);box-shadow:0 14px 32px -18px rgba(10,20,45,.5)}
+a.card:active{transform:translateY(-1px)}
+
+/* tiles de número respondem de leve ao mouse */
+.stat:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--ink) 22%,var(--line))}
+
+/* botões e chips: leve toque ao clicar, leve subida no hover */
+.switch button:active,.burger:active,a.chip:active,.out a:active{transform:scale(.95)}
+a.chip:hover,.out a:hover{transform:translateY(-1px)}
+.switch button:not([aria-pressed="true"]):hover{color:var(--ink)}
+.burger:hover{border-color:var(--ink)}
+
+/* certificados: leve zoom ao passar o mouse (recorte já escondido) */
+.cert a:hover img{transform:scale(1.02)}

@@ -639,10 +639,8 @@ a.card:hover{box-shadow:0 14px 32px -18px rgba(10,20,45,.5),var(--card-glow)}
 }
 
 /* ═══════════════ HUB / porta de entrada com parallax ═══════════════ */
-/* quando o hub está ativo, o resto da página some */
-body.hub-on .shell,body.hub-on .bar,body.hub-on .fall{display:none}
-#hub{display:none}
-body.hub-on #hub{display:block}
+/* a visibilidade das telas é controlada por [hidden]; .fall ficou obsoleto */
+.fall{display:none}
 
 #hub{position:fixed;inset:0;z-index:50;overflow:hidden;background:#0b0608;color:#eaf1f8;
   font-family:var(--font-sans)}

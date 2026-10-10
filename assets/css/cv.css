@@ -829,18 +829,31 @@ body{background:#070708}
 .hub-box.has-art{
   background:
     linear-gradient(90deg,rgba(7,7,9,.94),rgba(7,7,9,.72) 44%,rgba(7,7,9,.30) 100%),
-    var(--art,none) center/cover no-repeat;
+    var(--art,none) var(--artpos,center)/cover no-repeat;
   backdrop-filter:none;-webkit-backdrop-filter:none}
 .hub-box.has-art:hover,.hub-box.has-art:focus-visible{
   background:
     linear-gradient(90deg,rgba(7,7,9,.90),rgba(7,7,9,.56) 46%,rgba(7,7,9,.16) 100%),
-    var(--art,none) center/cover no-repeat}
+    var(--art,none) var(--artpos,center)/cover no-repeat}
 .hub-box.has-art .hb-name,.hub-box.has-art .hb-num{
   text-shadow:0 1px 10px rgba(0,0,0,.92),0 0 4px rgba(0,0,0,.85)}
 .art-offsec{--art:url(/assets/img/worlds/offsec.webp)}
 .art-htb{--art:url(/assets/img/worlds/htb.webp)}
 .art-cert{--art:url(/assets/img/worlds/cert.webp)}
-.art-play{--art:url(/assets/img/worlds/play.webp)}
+.art-play{--art:url(/assets/img/worlds/play.webp?v=3);--artpos:center 78%}
+/* Play/Sonic: caixa mais alta + scrim claro no centro p/ o Sonic aparecer */
+.hub-box.art-play{min-height:200px}
+.hub-box.art-play,
+.hub-box.art-play:hover,
+.hub-box.art-play:focus-visible{
+  background:
+    linear-gradient(90deg,rgba(7,7,9,.95) 0%,rgba(7,7,9,.82) 24%,rgba(7,7,9,.34) 48%,rgba(7,7,9,.08) 74%,rgba(7,7,9,0) 100%),
+    var(--art,none) var(--artpos,center)/cover no-repeat}
+#hub .hub-grid .b-sobre{justify-content:center}
+/* Sonic animado: frame estático quando o visitante pede menos movimento */
+@media (prefers-reduced-motion:reduce){
+  .art-play{--art:url(/assets/img/worlds/play-static.webp)}
+}
 
 /* título OffSec maior */
 .sub-title.big{font-size:clamp(2.6rem,8.5vw,5rem)}

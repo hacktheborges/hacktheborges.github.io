@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-7vtFPK5yFS6slewQGkG1gWmMEJUheqYVSvCOfX38rXQ='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-NM1EAno3mDJqc4tcWxqSRxDiwS8R3exCK/OUeMMC0yA='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-9fVrOfoPUcdF7KIoy1yCngoclPm2qcngm4v06bAHlvo='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-NM1EAno3mDJqc4tcWxqSRxDiwS8R3exCK/OUeMMC0yA='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="description" content="Artur Borges (hacktheborges) - analista de seguranca da informacao em trilha para seguranca ofensiva. Certificacoes, laboratorios, writeups e ferramental.">
 <meta name="color-scheme" content="light dark">
@@ -173,14 +173,15 @@ body[data-world="offsec"] #dust{opacity:1}
 #bg .offsec-backdrop-art{
   display:none;position:absolute;left:0;top:0;bottom:0;
   width:clamp(300px,44vw,720px);overflow:hidden;z-index:1;
+  transform:translateX(-16%);
   pointer-events:none;user-select:none;
-  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 52%,transparent 100%);
-  mask-image:linear-gradient(90deg,#000 0%,#000 52%,transparent 100%);
+  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 36%,rgba(0,0,0,.92) 48%,rgba(0,0,0,.65) 64%,rgba(0,0,0,.28) 80%,rgba(0,0,0,.06) 93%,transparent 100%);
+  mask-image:linear-gradient(90deg,#000 0%,#000 36%,rgba(0,0,0,.92) 48%,rgba(0,0,0,.65) 64%,rgba(0,0,0,.28) 80%,rgba(0,0,0,.06) 93%,transparent 100%);
 }
 body[data-page="offsec"] #bg .offsec-backdrop-art{display:block}
 #bg .offsec-backdrop-art img{
   display:block;width:100%;height:100%;object-fit:cover;object-position:42% 42%;
-  transform:translateX(-16%);
+
   filter:grayscale(1) brightness(.62) sepia(.32) hue-rotate(135deg) saturate(.6);
   opacity:.86;
 }
@@ -218,6 +219,13 @@ body[data-page="offsec"] #bg .offsec-backdrop-art{display:block}
   #v-offsec.offsec-world .hub-inner{width:100%;margin:0;padding-left:24px;padding-right:24px}
   #v-offsec .offsec-about{padding-left:14px}
   #v-offsec .offsec-about p{font-size:.94rem}
+}
+
+/* Navegação sobre o fundo contínuo de OffSec, sem faixa no topo. */
+#v-offsec .topbar,
+body[data-world="offsec"] .offsec-world .topbar{
+  background:transparent;border:0;box-shadow:none;
+  backdrop-filter:none;-webkit-backdrop-filter:none;
 }
 </style>
 </head>

@@ -840,6 +840,7 @@ body{background:#070708}
 .art-offsec{--art:url(/assets/img/worlds/offsec.webp)}
 .art-htb{--art:url(/assets/img/worlds/htb.webp)}
 .art-cert{--art:url(/assets/img/worlds/cert.webp)}
+.art-play{--art:url(/assets/img/worlds/play.webp)}
 
 /* título OffSec maior */
 .sub-title.big{font-size:clamp(2.6rem,8.5vw,5rem)}

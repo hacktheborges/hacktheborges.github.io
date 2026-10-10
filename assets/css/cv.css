@@ -837,19 +837,20 @@ body{background:#070708}
     var(--art,none) var(--artpos,center)/cover no-repeat}
 .hub-box.has-art .hb-name,.hub-box.has-art .hb-num{
   text-shadow:0 1px 10px rgba(0,0,0,.92),0 0 4px rgba(0,0,0,.85)}
-.art-offsec{--art:url(/assets/img/worlds/offsec.webp)}
+.art-offsec{--art:url(/assets/img/worlds/offsec.webp);--artpos:center 15%}
 .art-htb{--art:url(/assets/img/worlds/htb.webp)}
 .art-cert{--art:url(/assets/img/worlds/cert.webp)}
-.art-play{--art:url(/assets/img/worlds/play.webp?v=3);--artpos:center 78%}
-/* Play/Sonic: caixa mais alta + scrim claro no centro p/ o Sonic aparecer */
-.hub-box.art-play{min-height:200px}
+.art-sobre{--art:url(/assets/img/worlds/sobre.webp)}
+.art-play{--art:url(/assets/img/worlds/play.webp?v=4);--artpos:center 78%}
+/* todas as portas da home com a mesma altura maior */
+#hub .hub-grid .hub-box{min-height:200px}
+/* Play/Sonic (lado esquerdo): scrim vertical — topo escuro p/ texto, base clara p/ o Sonic */
 .hub-box.art-play,
 .hub-box.art-play:hover,
 .hub-box.art-play:focus-visible{
   background:
-    linear-gradient(90deg,rgba(7,7,9,.95) 0%,rgba(7,7,9,.82) 24%,rgba(7,7,9,.34) 48%,rgba(7,7,9,.08) 74%,rgba(7,7,9,0) 100%),
+    linear-gradient(180deg,rgba(7,7,9,.92) 0%,rgba(7,7,9,.74) 30%,rgba(7,7,9,.34) 62%,rgba(7,7,9,.12) 100%),
     var(--art,none) var(--artpos,center)/cover no-repeat}
-#hub .hub-grid .b-sobre{justify-content:center}
 /* Sonic animado: frame estático quando o visitante pede menos movimento */
 @media (prefers-reduced-motion:reduce){
   .art-play{--art:url(/assets/img/worlds/play-static.webp)}

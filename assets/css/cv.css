@@ -902,3 +902,26 @@ body{background:#070708}
   box-shadow:0 0 30px -10px color-mix(in srgb,var(--os1) 45%,transparent)}
 .pb-group .badge-card:hover,.pb-group .badge-card:focus-visible{
   filter:drop-shadow(0 8px 16px color-mix(in srgb,var(--os1) 55%,transparent)) drop-shadow(0 0 10px color-mix(in srgb,var(--os2) 45%,transparent))}
+/* Suaviza todas as bordas dessas duas imagens no hub. */
+#hub .art-cert::after,
+#hub .art-play::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 38px 14px rgba(7, 7, 9, .9);
+  pointer-events: none;
+}
+
+#hub .art-cert .hb-name,
+#hub .art-cert .hb-num,
+#hub .art-play .hb-name,
+#hub .art-play .hb-num {
+  position: relative;
+  z-index: 1;
+}
+
+#hub .art-cert .hb-go,
+#hub .art-play .hb-go {
+  z-index: 1;
+}

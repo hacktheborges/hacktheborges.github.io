@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-nmIVA6/NinPgCKWljqynEBAC5PA0J0qulcgJ/jTyqrs='; font-src https://fonts.gstatic.com; script-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="description" content="Artur Borges (hacktheborges) - analista de seguranca da informacao em trilha para seguranca ofensiva. Certificacoes, laboratorios, writeups e ferramental.">
 <meta name="color-scheme" content="light dark">
@@ -19,6 +19,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/assets/css/cv.css?v=24">
+<style>
+/* Pins & Badges: duas categorias, preservando o seletor usado pelo JavaScript. */
+#v-offsec-pins .pick.tri{max-width:640px;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:620px){#v-offsec-pins .pick.tri{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 
@@ -596,7 +601,7 @@
   <section class="screen content-screen" id="v-offsec-pins" data-title-pt="Pins & Badges" data-title-en="Pins & Badges" hidden>
     <p class="eyebrow">OffSec</p>
     <h1 data-en="Pins &amp; Badges">Pins &amp; Badges</h1>
-    <p class="lede" data-en="Verifiable OffSec pins, badges and assessments. Pick a category; hover or tap to see the details.">Pins, badges e assessments verificáveis da OffSec. Escolha uma categoria; passe o mouse ou toque para ver os detalhes.</p>
+    <p class="lede" data-en="Verifiable OffSec pins and badges. Pick a category; hover or tap to see the details.">Pins e badges verificáveis da OffSec. Escolha uma categoria; passe o mouse ou toque para ver os detalhes.</p>
 
     <div class="pick tri" role="tablist">
       <button type="button" class="pick-btn" data-group="pins" aria-pressed="true">
@@ -606,10 +611,6 @@
       <button type="button" class="pick-btn" data-group="badges" aria-pressed="false">
         <span class="pick-name">Badges</span>
         <span class="pick-sub">2</span>
-      </button>
-      <button type="button" class="pick-btn" data-group="assess" aria-pressed="false">
-        <span class="pick-name">Assessments</span>
-        <span class="pick-sub" data-en="soon">em breve</span>
       </button>
     </div>
 
@@ -694,9 +695,6 @@
       </div>
     </div>
 
-    <div class="pb-group" data-group="assess" hidden>
-      <div class="empty"><p data-en="Soon: OffSec assessments.">Em breve: assessments da OffSec.</p></div>
-    </div>
   </section>
 
   <section class="screen content-screen" id="v-htb-pins" data-title-pt="Pins & Badges" data-title-en="Pins & Badges" hidden>
@@ -787,7 +785,7 @@
       <a class="hub-box b-offsec" href="#offsec-pins">
         <span class="hb-num">02</span>
         <span class="hb-name" data-en="Pins &amp; Badges">Pins &amp; Badges</span>
-        <span class="hb-desc" data-en="15 pins · 2 badges · assessments">15 pins · 2 badges · assessments</span>
+        <span class="hb-desc" data-en="15 pins · 2 badges">15 pins · 2 badges</span>
         <span class="hb-go" aria-hidden="true">→</span>
       </a>
       <a class="hub-box b-offsec" href="#pg-practice">
@@ -894,3 +892,4 @@
 <script src="/assets/js/cv.js?v=10"></script>
 </body>
 </html>
+

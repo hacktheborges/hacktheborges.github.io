@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-H9gUnGsqZaDQKPX5t5egGJP0mKsJdZZURXC3lby/Mn0='; font-src https://fonts.gstatic.com; script-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-Ju4J0q18oGln4eGCpRUlQHenuq1W6IV7GHUG5fFcyJE='; font-src https://fonts.gstatic.com; script-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="description" content="Artur Borges (hacktheborges) - analista de seguranca da informacao em trilha para seguranca ofensiva. Certificacoes, laboratorios, writeups e ferramental.">
 <meta name="color-scheme" content="light dark">
@@ -41,6 +41,76 @@
 #v-curriculo .exam .num,
 #v-curriculo .exam .rank-v{color:var(--os1)}
 #v-curriculo .exam .prog i{background:linear-gradient(90deg,var(--os1),var(--os2))}
+
+/* Mundo OffSec: tema local, introdução e navegação responsiva. */
+#v-offsec{
+  --os1:#63d6d0;--os2:#b59aff;--bx:var(--os1);
+  overflow-y:auto;overflow-x:hidden;
+  background:radial-gradient(ellipse at 8% 10%,rgba(49,166,161,.15),transparent 52%),
+    radial-gradient(ellipse at 94% 80%,rgba(128,81,205,.16),transparent 58%),#090d16;
+  color:#ecf2fa;
+}
+#v-offsec .hub-inner{
+  width:min(1140px,100%);margin:0 auto;min-height:100%;
+  padding:132px clamp(24px,5vw,50px) 70px;gap:0;
+  align-items:stretch;text-align:left;
+}
+#v-offsec .offsec-intro{
+  display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.3fr);
+  gap:clamp(30px,5vw,72px);align-items:center;
+}
+#v-offsec .offsec-kicker{
+  margin:0 0 18px;color:#8bddda;font-family:var(--font-mono);
+  font-size:11px;line-height:1.8;letter-spacing:.15em;text-transform:uppercase;
+}
+#v-offsec .hub-title{
+  margin:0;background:none;color:#f5f8ff;-webkit-text-fill-color:#f5f8ff;
+  font-size:clamp(3.8rem,7.5vw,6.5rem);line-height:1.05;letter-spacing:-.045em;
+  text-shadow:0 0 38px rgba(99,214,208,.16);
+  opacity:1;animation:none;transform:none;
+}
+#v-offsec .offsec-motto{
+  color:#bda7f2;font-family:var(--font-mono);font-size:1rem;
+  letter-spacing:.1em;margin:20px 0 0;
+}
+#v-offsec .offsec-about{border-left:2px solid rgba(99,214,208,.45);padding-left:28px}
+#v-offsec .offsec-about h2{font-size:1.15rem;color:#f1f5fd;margin:0 0 14px}
+#v-offsec .offsec-about p{font-size:.98rem;line-height:1.8;color:#c0cadb;margin:0 0 14px;max-width:62ch}
+#v-offsec .offsec-source{
+  color:#8bddda;font-family:var(--font-mono);font-size:.75rem;
+  display:inline-block;margin-top:4px;text-underline-offset:5px;
+}
+#v-offsec .offsec-source:hover{color:#eee7ff}
+#v-offsec .offsec-journey{margin-top:48px}
+#v-offsec .offsec-journey h2{font-size:1.2rem;margin:0;color:#eef3fc}
+#v-offsec .offsec-journey p{margin:6px 0 0;font-size:.93rem;color:#9facbf}
+#v-offsec .hub-grid{width:100%;margin:22px 0 0;gap:18px}
+#v-offsec .hub-box{
+  --bx:var(--os1);min-width:0;min-height:164px;
+  background:linear-gradient(135deg,rgba(24,53,62,.64),rgba(29,24,51,.7));
+  border-color:rgba(139,165,197,.23);
+  opacity:1;animation:none;
+}
+#v-offsec .hub-box::before{background:linear-gradient(180deg,var(--os1),var(--os2));opacity:1}
+#v-offsec .hub-box .hb-num{color:#93bcbf}
+#v-offsec .hub-box .hb-desc{color:#b6c3d5}
+#v-offsec .hub-box .hb-go{opacity:1;transform:none;color:#9be7e0}
+#v-offsec .hub-box:hover,#v-offsec .hub-box:focus-visible{
+  border-color:#63d6d0;background:linear-gradient(135deg,rgba(30,74,80,.7),rgba(51,33,78,.8));
+  box-shadow:0 12px 32px -18px rgba(99,214,208,.5);
+}
+#v-offsec a:focus-visible{outline:2px solid #c3adff;outline-offset:4px}
+#v-offsec .topbar{background:rgba(9,13,22,.94)}
+@media(max-width:800px){
+  #v-offsec .offsec-intro{grid-template-columns:1fr;gap:28px}
+  #v-offsec .hub-inner{justify-content:flex-start;padding-top:106px}
+  #v-offsec .offsec-about{padding-left:20px}
+  #v-offsec .offsec-journey{margin-top:36px}
+}
+@media(max-width:720px){
+  #v-offsec .hub-grid{grid-template-columns:1fr}
+  #v-offsec .hub-box{min-height:140px}
+}
 </style>
 </head>
 <body>
@@ -848,10 +918,24 @@
 
   <section class="screen door-screen sub-hub" id="v-offsec" data-title-pt="OffSec" data-title-en="OffSec" hidden>
     <div class="hub-inner sub-inner">
-      <p class="hub-kicker" data-en="Offensive Security">Offensive Security</p>
-      <h1 class="hub-title sub-title big" data-depth="10" data-en="OffSec">OffSec</h1>
-      <p class="hub-sub" data-en="Pick a topic.">Escolha um assunto.</p>
-      <nav class="hub-grid" data-depth="5" aria-label="OffSec">
+      <header class="offsec-intro">
+        <div class="offsec-heading">
+          <p class="offsec-kicker" data-en="My offensive security journey">Minha jornada na segurança ofensiva</p>
+          <h1 class="hub-title sub-title big">OffSec</h1>
+          <p class="offsec-motto">Try Harder.</p>
+        </div>
+        <div class="offsec-about">
+          <h2 data-en="Learning through practice">Aprender na prática</h2>
+          <p data-en="OffSec is a cybersecurity training and certification company and the creator of Kali Linux, a distribution widely used in penetration testing and security assessments.">A OffSec é uma empresa de treinamento e certificação em cibersegurança e a criadora do Kali Linux, distribuição amplamente utilizada em testes de intrusão e avaliações de segurança.</p>
+          <p data-en="Its hands-on approach and internationally recognized certifications, such as OSCP, OSWE, OSEP and OSED, have made it a reference in offensive security training. The focus is on applying knowledge to technical challenges and developing practical skills.">Sua abordagem prática e certificações reconhecidas internacionalmente, como OSCP, OSWE, OSEP e OSED, fazem dela uma referência na formação em segurança ofensiva. O foco está em aplicar conhecimento a desafios técnicos e desenvolver habilidades práticas.</p>
+          <a class="offsec-source" href="https://www.offsec.com/" target="_blank" rel="noopener noreferrer"><span data-en="Explore the official OffSec website">Conheça o site oficial da OffSec</span> ↗</a>
+        </div>
+      </header>
+      <div class="offsec-journey">
+        <h2 data-en="My journey at OffSec">Minha trajetória na OffSec</h2>
+        <p data-en="Certifications, achievements and hands-on practice, all in one place.">Certificações, conquistas e prática em laboratório, em um só lugar.</p>
+      </div>
+      <nav class="hub-grid" aria-label="OffSec">
       <a class="hub-box b-offsec" href="#offsec-certs">
         <span class="hb-num">01</span>
         <span class="hb-name" data-en="Certifications">Certificações</span>
@@ -968,5 +1052,6 @@
 <script src="/assets/js/cv.js?v=10"></script>
 </body>
 </html>
+
 
 

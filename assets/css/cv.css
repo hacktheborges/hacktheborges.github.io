@@ -925,3 +925,9 @@ body{background:#070708}
 #hub .art-play .hb-go {
   z-index: 1;
 }
+#hub .art-cert,
+#hub .art-play {
+  background-origin: padding-box;
+  background-clip: padding-box;
+  overflow: hidden;
+}

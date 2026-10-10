@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-nmIVA6/NinPgCKWljqynEBAC5PA0J0qulcgJ/jTyqrs='; font-src https://fonts.gstatic.com; script-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-H9gUnGsqZaDQKPX5t5egGJP0mKsJdZZURXC3lby/Mn0='; font-src https://fonts.gstatic.com; script-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="description" content="Artur Borges (hacktheborges) - analista de seguranca da informacao em trilha para seguranca ofensiva. Certificacoes, laboratorios, writeups e ferramental.">
 <meta name="color-scheme" content="light dark">
@@ -23,6 +23,24 @@
 /* Pins & Badges: duas categorias, preservando o seletor usado pelo JavaScript. */
 #v-offsec-pins .pick.tri{max-width:640px;grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:620px){#v-offsec-pins .pick.tri{grid-template-columns:1fr}}
+
+/* Acentos OffSec inspirados no degradê verde-azulado → roxo da marca. */
+:root,:root[data-theme="dark"]{--os1:#58c8c8;--os2:#a18af5}
+:root[data-theme="light"]{--os1:#087d85;--os2:#6941c6}
+.b-offsec{--bx:var(--os1)}
+#v-offsec .sub-title,
+#v-offsec .eyebrow,
+#v-offsec-stats .eyebrow,
+#v-offsec-pins .eyebrow,
+#v-offsec-certs .eyebrow{
+  background:linear-gradient(135deg,var(--os1),var(--os2));
+  -webkit-background-clip:text;background-clip:text;
+  color:var(--os1);-webkit-text-fill-color:transparent;
+}
+#v-curriculo .exam{border-left-color:var(--os1)}
+#v-curriculo .exam .num,
+#v-curriculo .exam .rank-v{color:var(--os1)}
+#v-curriculo .exam .prog i{background:linear-gradient(90deg,var(--os1),var(--os2))}
 </style>
 </head>
 <body>
@@ -80,7 +98,7 @@
   <section class="screen content-screen" id="v-curriculo" data-title-pt="Currículo" data-title-en="CV">
     <p class="eyebrow" data-en="Offensive Security">Segurança Ofensiva</p>
     <h1>Artur Borges<span class="term-caret" aria-hidden="true"></span></h1>
-    <p class="lede" data-en="Information security analyst. Currently hunting the Offensive Security Certified Professional (OSCP) certification.">Analista de segurança da informação. Caçando no momento a certificação Offensive Security Certified Professional (OSCP).</p>
+    <p class="lede" data-en="Information security analyst with corporate experience in application, endpoint, network and identity security. CompTIA Security+ and CRTA certified, with a career focus on penetration testing and offensive security. Currently preparing for OSCP.">Analista de segurança da informação com experiência corporativa em segurança de aplicações, endpoints, redes e identidade. Certificado CompTIA Security+ e CRTA, com foco de carreira em pentest e segurança ofensiva. Em preparação para a OSCP.</p>
 
     <div class="meta">
       <span class="chip"><span class="dot"></span><span data-en="Available for red team roles">Disponível para vagas de red team</span></span>
@@ -159,18 +177,76 @@
     </div>
     <p class="note" data-en="These are the numbers that do the polishing.">São esses números que lapidam.</p>
 
-    <h2 class="sub-h" data-en="Current role">Cargo atual</h2>
+    <h2 class="sub-h" data-en="Professional experience">Experiência profissional</h2>
     <div class="tl">
       <article class="job">
         <div class="when">2025 — <span data-en="present">atualmente</span></div>
         <div>
-          <h3 data-en="Information Security Analyst">Analista de Segurança da Informação</h3>
+          <h3 data-en="Junior Information Security Analyst">Analista de Segurança da Informação Jr.</h3>
           <p class="org">Farmácias São João</p>
           <ul>
-            <li data-en="Internal pentest on web applications and sites">Pentest interno em aplicações e sites</li>
-            <li data-en="Log analysis and endpoint forensics with CrowdStrike">Análise de logs e forense em endpoints com CrowdStrike</li>
-            <li data-en="Fortinet firewalls and Active Directory administration">Firewall Fortinet e administração de Active Directory</li>
+            <li data-en="Penetration testing of internal and external applications and websites, including reconnaissance, enumeration, vulnerability validation, evidence collection and technical recommendations.">Pentests em aplicações e sites internos e externos, incluindo reconhecimento, enumeração, validação de vulnerabilidades, coleta de evidências e recomendações técnicas.</li>
+            <li data-en="Log analysis, security event investigation and endpoint forensics with CrowdStrike, examining processes, behavior and potentially malicious artifacts.">Análise de logs, investigação de eventos de segurança e forense em endpoints com CrowdStrike, avaliando processos, comportamentos e artefatos potencialmente maliciosos.</li>
+            <li data-en="Configuration of rules, services and traffic controls on Fortinet firewalls, supporting corporate network security and segmentation.">Configuração de regras, serviços e controles de tráfego em firewalls Fortinet, apoiando a segurança e a segmentação de redes corporativas.</li>
+            <li data-en="Active Directory administration, including users, groups, permissions and access controls.">Administração de Active Directory, incluindo usuários, grupos, permissões e controles de acesso.</li>
+            <li data-en="Support for privacy and data protection initiatives, including consent management and activities in Privacy Tools.">Apoio às iniciativas de privacidade e proteção de dados, incluindo gestão de consentimentos e atividades na plataforma Privacy Tools.</li>
           </ul>
+        </div>
+      </article>
+      <article class="job">
+        <div class="when">2024 — 2025</div>
+        <div>
+          <h3 data-en="IT Equipment Maintenance Technician">Técnico em Manutenção de Equipamentos de Informática</h3>
+          <p class="org">Farmácias São João</p>
+          <ul>
+            <li data-en="Configuration and deployment of computers, servers, switches and printers used by the stores.">Configuração e implantação de computadores, servidores, switches e impressoras utilizados nas lojas.</li>
+            <li data-en="Preventive and corrective maintenance, diagnosing hardware, software and connectivity issues.">Manutenção preventiva e corretiva, com diagnóstico de falhas de hardware, software e conectividade.</li>
+            <li data-en="Technical support for store devices and infrastructure, supporting day-to-day operations.">Suporte técnico aos dispositivos e à infraestrutura das lojas, apoiando a continuidade da operação.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="job">
+        <div class="when">2012 — 2014</div>
+        <div>
+          <h3 data-en="IT Technical Assistant">Auxiliar Técnico em Informática</h3>
+          <p class="org">InfoWeb</p>
+        </div>
+      </article>
+    </div>
+
+    <h2 class="sub-h" data-en="Volunteer service">Serviço voluntário</h2>
+    <div class="tl">
+      <article class="job">
+        <div class="when">2016 — 2018</div>
+        <div>
+          <h3 data-en="Full-time Missionary">Missionário de Tempo Integral</h3>
+          <p class="org" data-en="The Church of Jesus Christ of Latter-day Saints">A Igreja de Jesus Cristo dos Santos dos Últimos Dias</p>
+        </div>
+      </article>
+    </div>
+
+    <h2 class="sub-h" data-en="Additional experience">Outras experiências</h2>
+    <div class="tl">
+      <article class="job">
+        <div class="when">2019 — 2024</div>
+        <div><h3 data-en="Security Guard">Vigilante</h3></div>
+      </article>
+      <article class="job">
+        <div class="when">2014 — 2015</div>
+        <div>
+          <h3 data-en="Compulsory Military Service">Serviço Militar Obrigatório</h3>
+          <p class="org" data-en="Brazilian Army">Exército Brasileiro</p>
+        </div>
+      </article>
+    </div>
+
+    <h2 class="sub-h" data-en="Education">Formação acadêmica</h2>
+    <div class="tl">
+      <article class="job">
+        <div class="when">2024 — 2026<br><span data-en="in progress">cursando</span></div>
+        <div>
+          <h3 data-en="Technology Degree in Cybersecurity">Tecnologia em Cibersegurança</h3>
+          <p class="org">Universidade Cruzeiro do Sul</p>
         </div>
       </article>
     </div>
@@ -892,4 +968,5 @@
 <script src="/assets/js/cv.js?v=10"></script>
 </body>
 </html>
+
 

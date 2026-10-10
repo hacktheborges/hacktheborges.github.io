@@ -24,6 +24,7 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
     play:             { kind: "content", parent: "hub" },
     "offsec-pins":    { kind: "content", parent: "offsec" },
     "pg-practice":    { kind: "content", parent: "offsec" },
+    "offsec-certs":   { kind: "door",    parent: "offsec" },
     "oscp":           { kind: "content", parent: "certificacoes" },
     "security-plus":  { kind: "content", parent: "certificacoes" },
     "crta":           { kind: "content", parent: "certificacoes" },
@@ -35,6 +36,9 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
     "curriculo":      { kind: "content", parent: "sobre" },
     "contato":        { kind: "content", parent: "sobre" }
   };
+  /* de onde o visitante chegou a cada tela (clique) — back/trilha dinâmicos */
+  var nav = {};
+  function parentOf(key) { return nav[key] || (REG[key] ? REG[key].parent : null); }
   function el(key) { return key === "hub" ? document.getElementById("hub") : document.getElementById("v-" + key); }
   function titleOf(key) {
     if (key === "hub") { return strings[lang].home; }
@@ -90,7 +94,7 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
     var c = e.querySelector(".tb-crumb");
     if (!c) { return; }
     var chain = [], k = key;
-    while (k) { chain.unshift(k); k = REG[k] ? REG[k].parent : null; }
+    while (k) { chain.unshift(k); k = parentOf(k); }
     c.innerHTML = "";
     chain.forEach(function (k2, i) {
       if (i > 0) {
@@ -152,6 +156,10 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
     if (key !== "hub") { setCrumb(key); }
     document.title = key === "hub" ? SITE : SITE + " — " + titleOf(key);
     var e = el(key);
+    if (e && key !== "hub") {
+      var bk = e.querySelector(".tb-back");
+      if (bk) { bk.setAttribute("href", "#" + (parentOf(key) || "hub")); }
+    }
     if (e) { try { e.scrollTop = 0; } catch (x) {} }
     if (!quiet) { window.scrollTo(0, 0); }
   }
@@ -224,6 +232,8 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
   document.addEventListener("click", function (e) {
     var b = e.target.closest ? e.target.closest("[data-lang]") : null;
     if (b) { setLang(b.getAttribute("data-lang")); }
+    var a = e.target.closest ? e.target.closest("a.hub-box, a.card") : null;
+    if (a) { var h = (a.getAttribute("href") || "").replace(/^#/, ""); if (h && h !== "hub") { nav[h] = current; } }
   });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && lb && !lb.hidden) { closeLb(); }

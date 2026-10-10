@@ -844,7 +844,8 @@ body{background:#070708}
 /* todas as portas da home com a mesma altura maior */
 #hub .hub-grid .hub-box{min-height:200px}
 /* cards de Certificações: badge completo e grande à direita (igual aos mundos) */
-#v-certificacoes .hub-box.has-art{--artsize:auto 76%;--artpos:right center}
+#v-certificacoes .hub-box.has-art,
+#v-offsec-certs .hub-box.has-art{--artsize:auto 76%;--artpos:right center}
 .art-secplus{--art:url(/assets/img/certs/secplus-badge.webp)}
 .art-crta{--art:url(/assets/img/certs/crta-badge.webp?v=2)}
 .art-oscp{--art:url(/assets/img/certs/oscp-badge.webp)}

@@ -282,3 +282,62 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
   }
   Array.prototype.forEach.call(picks, function (b) { b.addEventListener("click", function () { sel(b.getAttribute("data-group")); }); });
 })();
+
+/* Poeira de pixels — fundo global animado (#dust) */
+(function () {
+  var cv = document.getElementById("dust");
+  if (!cv || !cv.getContext) { return; }
+  var ctx = cv.getContext("2d");
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var W = 0, H = 0, DPR = 1, parts = [], raf = null;
+
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    var r = cv.getBoundingClientRect();
+    W = r.width; H = r.height;
+    cv.width = Math.max(1, Math.round(W * DPR));
+    cv.height = Math.max(1, Math.round(H * DPR));
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  function mk(init) {
+    return { x: Math.random() * W, y: init ? Math.random() * H : -2,
+      s: Math.random() < 0.18 ? 2 : 1,
+      vx: (Math.random() - 0.5) * 0.08, vy: 0.12 + Math.random() * 0.22,
+      a: 0.12 + Math.random() * 0.33, red: Math.random() < 0.14 };
+  }
+  function seed() {
+    var n = Math.round(W * H / 16000);
+    n = Math.max(24, Math.min(W < 720 ? 48 : 95, n));
+    parts = [];
+    for (var i = 0; i < n; i++) { parts.push(mk(true)); }
+  }
+  function draw(moving) {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i];
+      if (moving) {
+        p.x += p.vx; p.y += p.vy;
+        if (p.y > H + 2) { parts[i] = mk(false); continue; }
+      }
+      ctx.globalAlpha = p.a;
+      ctx.fillStyle = p.red ? "rgba(226,59,59,1)" : "rgba(190,205,235,1)";
+      ctx.fillRect(p.x | 0, p.y | 0, p.s, p.s);
+    }
+    ctx.globalAlpha = 1;
+  }
+  function loop() { draw(true); raf = requestAnimationFrame(loop); }
+  function start() { if (!raf && !reduce) { raf = requestAnimationFrame(loop); } }
+  function stop() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
+
+  resize(); seed();
+  if (reduce) { draw(false); } else { start(); }
+
+  var rt;
+  window.addEventListener("resize", function () {
+    clearTimeout(rt);
+    rt = setTimeout(function () { resize(); seed(); if (reduce) { draw(false); } }, 200);
+  }, { passive: true });
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) { stop(); } else { start(); }
+  });
+})();

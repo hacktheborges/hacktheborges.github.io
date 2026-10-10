@@ -789,23 +789,16 @@ body{background:#070708}
 .bg-layer{position:absolute;inset:-100px;display:block}
 [data-depth]{will-change:transform;
   transform:translate3d(calc(var(--mx,0)*var(--d,0)*-1px),calc(var(--my,0)*var(--d,0)*-1px),0)}
-/* efeito: névoa grafite — tons de cinza com leve brasa vermelha, respiração lenta */
-.bg-aurora{inset:-220px;
+/* efeito: poeira de pixels — base grafite calma + brasa sutil no topo (sem blur ofuscante) */
+.bg-aurora{inset:0;
   background:
-    radial-gradient(42% 46% at 30% 24%,rgba(120,124,134,.20),transparent 70%),
-    radial-gradient(48% 52% at 74% 40%,rgba(140,144,152,.14),transparent 72%),
-    radial-gradient(54% 58% at 55% 90%,rgba(190,50,55,.16),transparent 72%);
-  filter:blur(32px);
-  animation:nebula 24s ease-in-out infinite}
-@keyframes nebula{
-  0%,100%{filter:blur(30px);opacity:.84}
-  50%    {filter:blur(40px);opacity:1}
-}
+    radial-gradient(60% 42% at 50% -6%,rgba(226,59,59,.10),transparent 70%),
+    radial-gradient(55% 55% at 50% 48%,rgba(120,124,134,.05),transparent 76%),
+    linear-gradient(180deg,#0b0b0d,#070708 62%)}
 .bg-grid{display:none}
-.bg-pix{opacity:.20;
-  background-image:radial-gradient(rgba(170,174,182,.45) 1.1px,transparent 1.5px);
-  background-size:160px 160px}
-@media (prefers-reduced-motion:reduce){.bg-aurora{animation:none}}
+.bg-pix{display:none}
+/* poeira de pixels à deriva (desenhada em #dust via cv.js) */
+#dust{position:absolute;inset:0;width:100%;height:100%;display:block}
 
 /* telas de conteúdo: véu escuro translúcido — parallax discreto por trás, texto legível */
 .content-screen{background:rgba(10,10,12,.86)}
@@ -840,9 +833,8 @@ body{background:#070708}
   color:var(--amber);border:1px solid color-mix(in srgb,var(--amber) 45%,var(--line));
   border-radius:5px;padding:6px 11px;display:inline-block;margin:2px 0 22px}
 
-/* guard de desempenho no celular: nebulosa estática e mais leve */
+/* guard de desempenho no celular: menos partículas de poeira (ver cv.js) */
 @media (max-width:720px){
-  .bg-aurora{animation:none;filter:blur(22px)}
   .bg-pix{display:none}
 }
 

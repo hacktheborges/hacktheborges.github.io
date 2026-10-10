@@ -623,13 +623,8 @@ a.card:hover{box-shadow:0 14px 32px -18px rgba(10,20,45,.5),var(--card-glow)}
 .hub-layer{position:absolute;inset:-90px;display:block}
 #hub [data-depth]{will-change:transform;
   transform:translate3d(calc(var(--mx,0)*var(--d,0)*-1px),calc(var(--my,0)*var(--d,0)*-1px),0)}
-.hub-grid{
-  background-image:
-    linear-gradient(rgba(220,90,80,.09) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(220,90,80,.09) 1px,transparent 1px);
-  background-size:52px 52px;
-  -webkit-mask-image:radial-gradient(ellipse 70% 70% at 50% 42%,#000 35%,transparent 100%);
-  mask-image:radial-gradient(ellipse 70% 70% at 50% 42%,#000 35%,transparent 100%)}
+/* (removido: grade/máscara do design antigo que vazava no <nav class="hub-grid">,
+   mascarando o rodapé das caixas da linha de baixo e deixando linhas nos vãos) */
 .hub-aurora{
   background:
     radial-gradient(46% 48% at 50% 16%,rgba(255,72,62,.22),transparent 70%),

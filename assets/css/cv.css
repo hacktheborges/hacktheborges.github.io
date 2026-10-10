@@ -839,6 +839,7 @@ body{background:#070708}
   text-shadow:0 1px 10px rgba(0,0,0,.92),0 0 4px rgba(0,0,0,.85)}
 .art-offsec{--art:url(/assets/img/worlds/offsec.webp)}
 .art-htb{--art:url(/assets/img/worlds/htb.webp)}
+.art-cert{--art:url(/assets/img/worlds/cert.webp)}
 
 /* título OffSec maior */
 .sub-title.big{font-size:clamp(2.6rem,8.5vw,5rem)}

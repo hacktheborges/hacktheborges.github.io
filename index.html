@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-ADHr3SN430uzj3MPqTNKSpTKR7jj2kfskUdZxyp97zc='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-dew11r07sRwsD+x5NjcLq0gi0NAoolY3BtDC0HqasBY='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-DBkKQNm1bfsWWhv02DD4ciIJtEhbtshKZZs5gj9VahU='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-dew11r07sRwsD+x5NjcLq0gi0NAoolY3BtDC0HqasBY='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="description" content="Artur Borges (hacktheborges) - analista de seguranca da informacao em trilha para seguranca ofensiva. Certificacoes, laboratorios, writeups e ferramental.">
 <meta name="color-scheme" content="light dark">
@@ -519,6 +519,19 @@ body[data-page="hub"] #dust{opacity:.72}
  #v-sobre-perfil .profile-portrait{width:96px;height:142px;margin:0 0 10px 12px}
  #v-play .game-victory{gap:12px}
  #v-play .game-victory .v-shared-portrait{width:72px;height:102px}
+}
+
+
+/* Neon estático no nome: núcleo claro e brilho vermelho difuso. */
+#hub .hub-title{
+ color:#fff0ef;
+ text-shadow:0 0 2px rgba(255,241,237,.95),
+  0 0 10px rgba(255,112,104,.7),
+  0 0 24px rgba(244,69,73,.48),
+  0 0 48px rgba(210,35,54,.3);
+}
+@media(max-width:600px){
+ #hub .hub-title{text-shadow:0 0 2px rgba(255,241,237,.9),0 0 8px rgba(255,112,104,.65),0 0 20px rgba(244,69,73,.4),0 0 32px rgba(210,35,54,.25)}
 }
 
 </style>

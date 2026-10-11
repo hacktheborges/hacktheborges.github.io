@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-LAc3SvrRX/8itl8l1YXIC+a1gw/BriMfgYJfVeqlpGI='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-R3w9cj7rfF4smIOwRgcDxuWQimNmdFTt67sjvWYqRZE='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-cjTIpBpODiGSCLRElsgsB3+kY1IExIb5PL0KRiIYWqo='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-R3w9cj7rfF4smIOwRgcDxuWQimNmdFTt67sjvWYqRZE='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="description" content="Artur Borges (hacktheborges) - analista de seguranca da informacao em trilha para seguranca ofensiva. Certificacoes, laboratorios, writeups e ferramental.">
 <meta name="color-scheme" content="light dark">
@@ -553,6 +553,32 @@ body[data-page="hub"] #dust{opacity:.72}
  transition:border-color .2s,box-shadow .2s,background-color .2s,color .2s;
 }
 
+
+/* Fundos contínuos para as credenciais, sem painel delimitado no centro. */
+body[data-page="security-plus"]{--cert-base:#170d10;--cert-glow:218,41,58;--cert-accent:#ff929d;--cert-line:#66333d}
+body[data-page="crta"]{--cert-base:#140b12;--cert-glow:164,25,67;--cert-accent:#ed819f;--cert-line:#593040}
+body[data-page="security-plus"],body[data-page="crta"],
+body[data-page="security-plus"] #bg,body[data-page="crta"] #bg{background:var(--cert-base)}
+body[data-page="security-plus"] .bg-aurora,body[data-page="crta"] .bg-aurora{
+ background:radial-gradient(ellipse at 8% 10%,rgba(var(--cert-glow),.22),transparent 58%),
+ radial-gradient(ellipse at 95% 82%,rgba(var(--cert-glow),.12),transparent 65%),var(--cert-base);
+}
+body[data-page="security-plus"] #v-security-plus,body[data-page="crta"] #v-crta{
+ --paper:var(--cert-base);--surface:rgba(36,20,28,.8);--line:var(--cert-line);
+ --signal:var(--cert-accent);--ink:#f5edf0;--muted:#c6b5be;
+ background:transparent;border:0;box-shadow:none;
+}
+#v-security-plus .screen-inner,#v-crta .screen-inner{
+ background:transparent;border:0;border-radius:0;box-shadow:none;
+}
+#v-security-plus .eyebrow,#v-crta .eyebrow{color:var(--cert-accent)}
+#v-security-plus .topbar,#v-crta .topbar{background:transparent;border:0;box-shadow:none}
+#v-security-plus .switch button[aria-pressed="true"],#v-crta .switch button[aria-pressed="true"]{
+ background:var(--cert-accent);color:var(--cert-base);
+}
+#v-security-plus a:focus-visible,#v-crta a:focus-visible,
+#v-security-plus button:focus-visible,#v-crta button:focus-visible{outline-color:var(--cert-accent)}
+
 </style>
 </head>
 <body>
@@ -851,12 +877,6 @@ body[data-page="hub"] #dust{opacity:.72}
         <div class="tools"><span class="tool" data-en="Risk">Risco</span><span class="tool" data-en="Third parties">Terceiros</span><span class="tool" data-en="Compliance">Conformidade</span><span class="tool" data-en="Audit">Auditoria</span></div>
       </div>
     </div>
-
-    <hr class="rule">
-    <section class="story" aria-label="A história">
-      <h2 class="sub-h" data-en="The story">A história</h2>
-      <p class="story-ph" data-en="— soon: how studying for and passing Security+ went.">— em breve: como foi estudar e passar na Security+.</p>
-    </section>
   </section>
 
   <!-- ══════════ CRTA ══════════ -->
@@ -917,12 +937,6 @@ body[data-page="hub"] #dust{opacity:.72}
         <div class="tools"><span class="tool" data-en="Domain enumeration">Enumeração de domínio</span><span class="tool">DCSync</span><span class="tool">Pass-the-Hash</span><span class="tool">Evil-WinRM</span></div>
       </div>
     </div>
-
-    <hr class="rule">
-    <section class="story" aria-label="A história">
-      <h2 class="sub-h" data-en="The story">A história</h2>
-      <p class="story-ph" data-en="— soon: the road to CRTA.">— em breve: o caminho até a CRTA.</p>
-    </section>
   </section>
 
   <!-- ══════════ OSCP ══════════ -->
@@ -953,20 +967,6 @@ body[data-page="hub"] #dust{opacity:.72}
         <a class="chip" href="https://portal.offsec.com/public-profile/de8b0b16-ad26-3aa0-ad2f-3c49183ca217"><span data-en="OffSec public profile">Perfil público OffSec</span> ↗</a>
       </div>
     </div>
-
-
-    <h2 class="sub-h">Road to OSCP</h2>
-    <div class="road">
-      <div class="empty">
-        <p data-en="In progress: this is where the exam preparation gets written down, week by week.">Em andamento: é aqui que a preparação para o exame vai sendo registrada, semana a semana.</p>
-      </div>
-    </div>
-
-    <hr class="rule">
-    <section class="story" aria-label="A história">
-      <h2 class="sub-h" data-en="The story">A história</h2>
-      <p class="story-ph" data-en="— soon: preparing for the OSCP, day by day.">— em breve: a preparação para o OSCP, dia a dia.</p>
-    </section>
   </section>
 
   <!-- ══════════ PRÁTICA — VISÃO GERAL ══════════ -->

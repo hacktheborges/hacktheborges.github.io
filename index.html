@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-x4YGMFvSveksXMZgCutAKlhgQVWOKS9iFhVitsoy/to='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-ynxWQ69eoBlernOCweXpLykBRzNRu8y5zZGi2H+JzRI='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-ADHr3SN430uzj3MPqTNKSpTKR7jj2kfskUdZxyp97zc='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-dew11r07sRwsD+x5NjcLq0gi0NAoolY3BtDC0HqasBY='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="description" content="Artur Borges (hacktheborges) - analista de seguranca da informacao em trilha para seguranca ofensiva. Certificacoes, laboratorios, writeups e ferramental.">
 <meta name="color-scheme" content="light dark">
@@ -503,6 +503,23 @@ body[data-page="hub"] #dust{opacity:.72}
  animation-duration:.3s;animation-delay:0s;
 }
 @media(max-width:720px){#hub .hub-inner{padding-top:108px}}
+
+
+/* Retratos reutilizam a única imagem já incorporada no OffSec. */
+.v-shared-portrait{display:block;object-fit:cover;object-position:42% 35%;
+ filter:grayscale(1) brightness(.85) sepia(.15);opacity:.8;
+ -webkit-mask-image:radial-gradient(ellipse 68% 67% at 50% 44%,#000 36%,rgba(0,0,0,.9) 59%,transparent 86%);
+ mask-image:radial-gradient(ellipse 68% 67% at 50% 44%,#000 36%,rgba(0,0,0,.9) 59%,transparent 86%);
+}
+#v-sobre-perfil .profile-portrait{float:right;width:160px;height:220px;margin:0 0 18px 28px;pointer-events:none}
+#v-sobre-perfil .screen-inner::after{content:"";display:block;clear:both}
+#v-play .game-victory{display:flex;align-items:center;gap:22px}
+#v-play .game-victory .v-shared-portrait{width:112px;height:150px;flex:none;object-fit:cover;image-rendering:auto;filter:grayscale(1) brightness(.9) sepia(.22);opacity:.85}
+@media(max-width:600px){
+ #v-sobre-perfil .profile-portrait{width:96px;height:142px;margin:0 0 10px 12px}
+ #v-play .game-victory{gap:12px}
+ #v-play .game-victory .v-shared-portrait{width:72px;height:102px}
+}
 
 </style>
 </head>
@@ -1237,6 +1254,7 @@ body[data-page="hub"] #dust{opacity:.72}
   </section>
 
   <section class="screen content-screen" id="v-sobre-perfil" data-title-pt="Perfil" data-title-en="Profile" hidden>
+    <img class="v-shared-portrait profile-portrait" data-shared-portrait width="160" height="220" alt="" decoding="async" loading="lazy" aria-hidden="true">
     <p class="eyebrow">whoami</p>
     <h1 data-en="Profile">Perfil</h1>
     <p class="lede" data-en="Artur Borges — hacktheborges. Information security analyst in Passo Fundo, RS, heading for offensive security.">Artur Borges — hacktheborges. Analista de segurança da informação em Passo Fundo, RS, com destino à segurança ofensiva.</p>
@@ -1601,7 +1619,13 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
       var bk = e.querySelector(".tb-back");
       if (bk) { bk.setAttribute("href", "#" + (parentOf(key) || "hub")); }
     }
-    if (e) { try { e.scrollTop = 0; } catch (x) {} }
+    if (e) {
+      var portraitSource = document.querySelector(".offsec-backdrop-art img");
+      if (portraitSource) { each(e.querySelectorAll("[data-shared-portrait]"), function (portrait) {
+        if (!portrait.hasAttribute("src")) { portrait.src = portraitSource.getAttribute("src"); }
+      }); }
+      try { e.scrollTop = 0; } catch (x) {}
+    }
     if (!quiet) { window.scrollTo(0, 0); }
   }
   window.addEventListener("hashchange", function () { route(keyFromHash()); });
@@ -1959,6 +1983,8 @@ function createSaveGame(os, english) {
  function append(text,kind){if(!text)return;const row=document.createElement('div');row.className='terminal-line '+(kind||'');row.textContent=text;output.appendChild(row);trim();}
  function finale(){
   const card=document.createElement('div');card.className='game-victory';
+  const source=document.querySelector('.offsec-backdrop-art img');
+  if(source){const portrait=document.createElement('img');portrait.className='v-shared-portrait';portrait.src=source.getAttribute('src');portrait.alt='V';portrait.width=112;portrait.height=150;portrait.decoding='async';card.appendChild(portrait);}
   const words=document.createElement('div'),title=document.createElement('strong'),text=document.createElement('p');title.textContent=say('VOCÊ ENCONTROU A SAÍDA','YOU FOUND THE WAY');text.textContent=say('Três máquinas. Uma saída. Foi você quem encontrou.','Three machines. One way out. You found it.');words.append(title,text);card.append(words);output.appendChild(card);trim();
  }
  function update(){

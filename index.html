@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-G+nsKOWWqOnRWYEy0ijKCVCsNjAEj5PAjdaMVRWfwj4='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-FaHiS7PXV75hlvpW6e3qEMXvjaxpsTQ+xgfo7qtx59I='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-G+nsKOWWqOnRWYEy0ijKCVCsNjAEj5PAjdaMVRWfwj4='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-D3nBbdM5vtUPB9mp0za88cKkItSqa4xl9BjuFMu7+PA='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="description" content="Artur Borges (hacktheborges) - analista de seguranca da informacao em trilha para seguranca ofensiva. Certificacoes, laboratorios, writeups e ferramental.">
 <meta name="color-scheme" content="light dark">
@@ -1367,7 +1367,7 @@ body[data-world="game"] #v-play{--paper:#090c20;--ink:#f1effb;--muted:#b6b7cf;--
 
   <section class="screen content-screen game-world" id="v-play" data-title-pt="savetheborges" data-title-en="savetheborges" hidden>
     <div class="game-stage">
-      <div class="game-hud"><span>01 / INSERT COMMAND</span><span data-en="PLAYER 1 · READY">PLAYER 1 · PRONTO</span></div>
+      <div class="game-hud"><span data-en="01 / INSERT COMMAND">01 / INSIRA UM COMANDO</span><span data-en="PLAYER 1 · READY">JOGADOR 1 · PRONTO</span></div>
       <header class="game-heading"><p class="eyebrow">TERMINAL ARCADE</p><h1>save<span>the</span>borges</h1><p data-en="Three machines. One way out.">Três máquinas. Uma saída.</p></header>
       <div id="game-select">
         <div class="game-dialog"><img src="/assets/img/v/avatar.png" width="96" height="96" alt="Borges, personagem com máscara e chapéu" class="game-guide"><div><b>BORGES_</b><p data-en="Hello, player! There is a hidden file. Choose your path and go find it.">Olá, jogador! Existe um arquivo escondido. Escolhe seu caminho e vá encontrar.</p></div></div>
@@ -1770,7 +1770,7 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
 function createSaveGame(os, english) {
  const win=os==='windows',home=win?'/Users/hacktheborges':'/home/hacktheborges',arcade=home+'/arcade',m2=home+'/maquina2',secret=win?'proof.txt':'.proof.txt',trace=win?'/ProgramData/Arcade/Logs/sistema.log':'/var/log/arcade/sistema.log';
  const say=(p,e)=>english()?e:p,display=p=>win?'C:'+p.replaceAll('/','\\'):p;
- let cwd=home,stage=0,located=false,listed=false,enteredArcade=false,hiddenFound=false,readBrief=false,signalFound=false,logFound=false;
+ let cwd=home,stage=0,located=false,listed=false,enteredArcade=false,hiddenFound=false,readBrief=false,signalFound=false,logFound=false,clueRead=false,machineListed=false;
  const fs=new Map(),key=p=>win?p.toLowerCase():p;
  const add=(p,type,body,extra={})=>fs.set(key(p),{path:p,type,body,...extra});
  const directory=p=>{if(p!=='/'&&!fs.has(key(p.slice(0,p.lastIndexOf('/'))||'/')))directory(p.slice(0,p.lastIndexOf('/'))||'/');add(p,'dir');};
@@ -1784,14 +1784,14 @@ function createSaveGame(os, english) {
  file(home+'/Pista2.txt','O quarto bilhete jura que sabe de tudo. Foi ele mesmo quem me contou.','The fourth note swears it knows everything. It told me so itself.');
  file(home+'/Pista3.txt','As luzes se apagaram, mas as fichas continuam espalhadas pelo arcade. Não lembro de ter deixado aquele lugar vazio.','The lights went out, but tokens still lie around the arcade. I do not remember leaving that place empty.');
  file(home+'/Pista4.txt','não acredite em tudo que você vê na internet.','Do not believe everything you see on the internet.',{troll:true});
- file(arcade+'/'+secret,'TRANSMISSÃO 01 / BORGES\n\nVocê viu o que não estava à vista. Bom sinal.\nExiste outro gabinete na sua home: maquina2. Ele estava sem energia; encontrar esta mensagem religou o circuito. Volte para casa.\n\nSe ouvir estática, não escute tudo de uma vez. Procure o SINAL.','TRANSMISSION 01 / BORGES\n\nYou saw what was out of sight. A good sign.\nThere is another cabinet in your home: maquina2. It had no power; finding this message restored its circuit. Go back home.\n\nIf you hear static, do not listen to everything at once. Look for the SINAL.',{hidden:true,event:'first'});
- file(m2+'/leia-me.txt','MÁQUINA 02 / ENTRE O RUÍDO\n\nO monitor repete eventos antigos. Uma palavra sobreviveu à interferência: SINAL.\nO operador deixou tudo em registros.log. Só uma frequência ainda responde.\n\n— B.','MACHINE 02 / THROUGH THE NOISE\n\nThe monitor repeats old events. One word survived the interference: SINAL.\nThe operator left everything in registros.log. Only one frequency still responds.\n\n— B.',{event:'brief'});
- add(m2+'/registros.log','file',()=>Array.from({length:36},(_,i)=>i===23?'[00:24] SINAL confirmado: canais'+(win?'\\':'/')+'07.txt':`[00:${String(i+1).padStart(2,'0')}] ${say(['ESTÁTICA · eco sem origem','MONITOR · aguardando ficha','RUÍDO · frequência vazia'][i%3],['STATIC · echo without a source','MONITOR · waiting for a token','NOISE · empty frequency'][i%3])}`).join('\n'));
+ file(arcade+'/'+secret,'TRANSMISSÃO 01 / BORGES\n\nVocê viu o que não estava à vista. Bom sinal.\nExiste outro gabinete na sua home: maquina2. Ele estava sem energia; encontrar esta mensagem religou o circuito. Volte para casa.\n\nSe ouvir estática, não escute tudo de uma vez. Procure o SIGNAL.','TRANSMISSION 01 / BORGES\n\nYou saw what was out of sight. A good sign.\nThere is another cabinet in your home: maquina2. It had no power; finding this message restored its circuit. Go back home.\n\nIf you hear static, do not listen to everything at once. Look for the SIGNAL.',{hidden:true,event:'first'});
+ file(m2+'/leia-me.txt','MÁQUINA 02 / ENTRE O RUÍDO\n\nO monitor repete eventos antigos. Uma palavra sobreviveu à interferência: SIGNAL.\nO operador deixou tudo em registros.log. Só uma frequência ainda responde.\n\n— B.','MACHINE 02 / THROUGH THE NOISE\n\nThe monitor repeats old events. One word survived the interference: SIGNAL.\nThe operator left everything in registros.log. Only one frequency still responds.\n\n— B.',{event:'brief'});
+ add(m2+'/registros.log','file',()=>Array.from({length:36},(_,i)=>i===23?say('[00:24] SIGNAL confirmado: canais','[00:24] SIGNAL confirmed: canais')+(win?'\\':'/')+'07.txt':`[00:${String(i+1).padStart(2,'0')}] ${say(['ESTÁTICA · eco sem origem','MONITOR · aguardando ficha','RUÍDO · frequência vazia'][i%3],['STATIC · echo without a source','MONITOR · waiting for a token','NOISE · empty frequency'][i%3])}`).join('\n'));
  file(m2+'/canais/02.txt','Só o som da chuva. Este canal não responde.','Only the sound of rain. This channel does not answer.');
  file(m2+'/canais/07.txt','TRANSMISSÃO 02 / CIRCUITO RESTAURADO\n\nA segunda máquina voltou. O último gabinete não está na sua home. Para encontrá-lo, volte ao começo de todos os caminhos.\n\n'+(win?'O programa guardou a memória da noite em ProgramData. Siga o nome do fliperama.':'Os relatos do sistema mudam a cada noite. Procure entre os dados variáveis, nos registros do fliperama.')+'\n\nAlgumas portas só se abrem quando entendemos de onde viemos.','TRANSMISSION 02 / CIRCUIT RESTORED\n\nThe second machine is back. The last cabinet is not in your home. Find the beginning of every path.\n\n'+(win?'The program stored its memory of the night in ProgramData. Follow the arcade name.':'System accounts change every night. Look among variable data, in the arcade logs.')+'\n\nSome doors only open when we understand where we came from.',{event:'second'});
  file(m2+'/canais/13.txt','Uma voz gravada promete atalhos. A fita termina antes de dizer quais.','A recorded voice promises shortcuts. The tape ends before it says which ones.');
  file(trace,'MÁQUINA 03 / A ÚLTIMA PORTA\n\n00:41 — A cidade achou que o fliperama estava vazio.\n00:42 — Borges ainda estava aqui.\n00:43 — A saída não foi apagada. Foi esquecida.\n00:44 — Destino recuperado: '+display('/root')+'\n00:45 — Permissão do gabinete concedida.\n\nNo último arquivo, o nome de quem pode terminar esta história. Três letras.','MACHINE 03 / THE LAST DOOR\n\n00:41 — The city thought the arcade was empty.\n00:42 — Borges was still here.\n00:43 — The exit was not erased. It was forgotten.\n00:44 — Destination recovered: '+display('/root')+'\n00:45 — Cabinet access granted.\n\nThe last file is named after the person who can finish this story. Three letters.',{event:'trace'});
- file('/root/you.txt','YOU FOUND THE WAY\n\nBorges atravessa a última porta. Os três gabinetes acendem, e o fliperama volta à vida.\n\n“Você não precisava conhecer todos os caminhos. Precisava ter coragem para começar e curiosidade para continuar. Cada erro ensinou algo. Cada tentativa abriu uma porta. Continue: o próximo passo também pode mudar a sua história.”\n\nO arquivo era you.txt porque a saída sempre precisou de você.\n\nBORGES SAVED · 3/3 MÁQUINAS\nObrigado por jogar savetheborges.','YOU FOUND THE WAY\n\nBorges steps through the last door. The three cabinets light up, and the arcade comes back to life.\n\n“You did not need to know every path. You needed the courage to start and the curiosity to keep going. Every mistake taught you something. Every attempt opened a door. Keep going: your next step can change your story too.”\n\nThe file was you.txt because the way out always needed you.\n\nBORGES SAVED · 3/3 MACHINES\nThank you for playing savetheborges.',{event:'final'});
+ file('/root/you.txt','VOCÊ ENCONTROU A SAÍDA\n\nBorges atravessa a última porta. Os três gabinetes acendem, e o fliperama volta à vida.\n\n“Você não precisava conhecer todos os caminhos. Precisava ter coragem para começar e curiosidade para continuar. Cada erro ensinou algo. Cada tentativa abriu uma porta. Continue: o próximo passo também pode mudar a sua história.”\n\nO arquivo era you.txt porque a saída sempre precisou de você.\n\nBORGES SALVO · 3/3 MÁQUINAS\nObrigado por jogar savetheborges.','YOU FOUND THE WAY\n\nBorges steps through the last door. The three cabinets light up, and the arcade comes back to life.\n\n“You did not need to know every path. You needed the courage to start and the curiosity to keep going. Every mistake taught you something. Every attempt opened a door. Keep going: your next step can change your story too.”\n\nThe file was you.txt because the way out always needed you.\n\nBORGES SAVED · 3/3 MACHINES\nThank you for playing savetheborges.',{event:'final'});
  function under(p,base){return key(p)===key(base)||key(p).startsWith(key(base)+'/');}
  function allowed(p){
   if(under(p,'/root'))return stage>=3;
@@ -1807,15 +1807,30 @@ function createSaveGame(os, english) {
   return '/'+parts.join('/');
  }
  function children(p){return [...fs.values()].filter(e=>e.path!=='/'&&(e.path.slice(0,e.path.lastIndexOf('/'))||'/')===p&&(allowed(e.path)||(e.path==='/root'&&stage>=2)));}
+ function snapshot(){return {cwd,stage,located,listed,enteredArcade,hiddenFound,readBrief,signalFound,logFound,clueRead,machineListed};}
+ function restore(v){({cwd,stage,located,listed,enteredArcade,hiddenFound,readBrief,signalFound,logFound,clueRead,machineListed}=v);}
+ function translateSearch(v){const e=fs.get(key(v.path));const text=e.body().split('\n');return v.indices.map(i=>(v.numbers?(i+1)+':':'')+text[i]).join('\n')||say('(Nenhuma linha encontrada.)','(No matching lines.)');}
  function objective(){
-  if(stage===4)return say('As luzes voltaram. Borges está livre. E você já não é o mesmo jogador que entrou aqui.','The lights are back. Borges is free. And you are no longer the player who first entered here.');
-  if(stage===3)return say('A última porta respondeu. Quem falta para terminar esta história?','The last door answered. Who is missing from the end of this story?');
-  if(stage===2)return say('A casa ficou para trás. Onde esta máquina guarda a memória do que aconteceu?','Home is behind you. Where does this machine keep the memory of what happened?');
-  if(stage===1){if(!under(cwd,m2))return say('Um segundo monitor acendeu perto de onde tudo começou. O que mudou por lá?','A second monitor lit up near where it all began. What changed back there?');return say('Entre tantos ecos, apenas um parece ter origem. Que palavra atravessou a estática?','Among so many echoes, only one seems to have a source. Which word crossed the static?');}
-  if(!located)return say('A tela acendeu em um lugar desconhecido. Antes de seguir uma pista, como você descobriria onde está?','The screen lit up in an unfamiliar place. Before following a clue, how would you find out where you are?');
-  if(!listed)return say('Agora você tem um ponto de partida. O que foi deixado ao seu redor?','Now you have a starting point. What was left around you?');
-  if(!enteredArcade)return say('Quatro bilhetes, quatro vozes. Qual deles merece mais do que uma leitura?','Four notes, four voices. Which deserves more than a passing glance?');
-  return say('O arcade parece vazio. Mas uma sala silenciosa não é necessariamente uma sala sem segredos.','The arcade looks empty. But a quiet room is not necessarily a room without secrets.');
+  if(stage===4)return say('Parabéns! Você concluiu as três máquinas e salvou Borges.','Congratulations! You completed all three machines and saved Borges.');
+  if(stage===3)return cwd==='/root'?say('Qual comando lê o conteúdo de you.txt?','Which command reads the contents of you.txt?'):say('Qual comando entra na pasta root indicada no registro?','Which command opens the root folder named in the log?');
+  if(stage===2){
+   if(cwd===trace.slice(0,trace.lastIndexOf('/')))return say('Qual comando lê o arquivo sistema.log?','Which command reads sistema.log?');
+   if(under(cwd,home))return say('Qual comando leva você à raiz do sistema?','Which command takes you to the system root?');
+   return say('Qual comando lista as pastas aqui? Encontre os registros do arcade e entre na pasta correspondente.','Which command lists the folders here? Find the arcade logs and open their folder.');
+  }
+  if(stage===1){
+   if(!under(cwd,m2))return say('Qual comando entra na pasta maquina2, que foi liberada na sua home?','Which command opens maquina2, now unlocked in your home directory?');
+   if(!machineListed)return say('Qual comando lista os arquivos da segunda máquina?','Which command lists the files on the second machine?');
+   if(!readBrief)return say('Qual comando mostra o conteúdo de leia-me.txt?','Which command displays the contents of leia-me.txt?');
+   if(!signalFound)return say('Qual comando busca a palavra SIGNAL dentro de registros.log?','Which command searches for SIGNAL inside registros.log?');
+   return say('Qual comando lê o arquivo indicado pela linha SIGNAL?','Which command reads the file indicated by the SIGNAL line?');
+  }
+  if(!located)return say('Qual é o comando que mostra onde você está?','Which command shows where you are?');
+  if(!listed)return say('Qual comando lista os arquivos no diretório?','Which command lists the files in the directory?');
+  if(!enteredArcade){if(clueRead)return say('Qual comando entra na pasta arcade mencionada na pista?','Which command opens the arcade folder mentioned in the clue?');return say('Qual comando abre um arquivo de texto? Leia as pistas para descobrir a próxima pasta.','Which command reads a text file? Read the clues to find the next folder.');}
+  if(cwd!==arcade)return say('Qual comando leva você de volta à pasta arcade?','Which command takes you back to the arcade folder?');
+  if(!hiddenFound)return say('Qual comando lista também os arquivos ocultos?','Which command also lists hidden files?');
+  return say('Qual comando lê o arquivo oculto que você encontrou?','Which command reads the hidden file you found?');
  }
  function hint(level){
   const read=win?'type':'cat',list=win?'dir':'ls';let h;
@@ -1823,7 +1838,7 @@ function createSaveGame(os, english) {
   else if(stage===3)h=[say('O registro da terceira máquina deixou um endereço.','The third machine log left an address.'),say('Abra a última pasta e leia o arquivo com nome em inglês.','Open the last folder and read the file with an English name.'),'cd '+display('/root')+' → '+list+' → '+read+' you.txt'];
   else if(stage===2)h=[say('Procure os registros do fliperama fora da sua home.','Look for the arcade logs outside your home.'),win?'C:\\ProgramData\\Arcade\\Logs':'/var/log/arcade','cd '+display(trace.slice(0,trace.lastIndexOf('/')))+' → '+list+' → '+read+' sistema.log'];
   else if(stage===1&&!under(cwd,m2))h=[say('Volte para sua home. Há uma nova pasta acessível.','Return to your home. A new folder is now accessible.'),say('Navegue até maquina2; caminhos completos também funcionam.','Navigate to maquina2; full paths work too.'),'cd '+display(m2)+' → '+list];
-  else if(stage===1)h=[say('Leia o bilhete do operador. Uma palavra serve de filtro.','Read the operator note. One word acts as a filter.'),say('Buscar texto ajuda a separar informação de ruído.','Searching text helps separate information from noise.'),(win?'findstr SINAL ':'grep SINAL ')+display(m2+'/registros.log')+' → '+read+' '+display(m2+'/canais/07.txt')];
+  else if(stage===1)h=[say('Leia o bilhete do operador. Uma palavra serve de filtro.','Read the operator note. One word acts as a filter.'),say('Buscar texto ajuda a separar informação de ruído.','Searching text helps separate information from noise.'),(win?'findstr SIGNAL ':'grep SIGNAL ')+display(m2+'/registros.log')+' → '+read+' '+display(m2+'/canais/07.txt')];
   else if(!located)h=[say('Seu terminal sabe o endereço atual.','Your terminal knows the current address.'),say('Existe um comando que mostra o diretório atual.','There is a command that displays the current directory.'),win?'cd':'pwd'];
   else if(!listed)h=[say('Observe os nomes antes de escolher uma pista.','Look at the names before choosing a clue.'),say('Liste o conteúdo da pasta atual.','List the current folder contents.'),list];
   else if(!enteredArcade)h=[say('Nem todo bilhete diz a verdade. O terceiro lembra um lugar.','Not every note tells the truth. The third remembers a place.'),read+' '+display(home+'/Pista3.txt'),'cd '+display(arcade)];
@@ -1831,6 +1846,8 @@ function createSaveGame(os, english) {
   return h[Math.min(level-1,h.length-1)];
  }
  function trigger(entry){
+  if(entry.path===home+'/Pista3.txt')clueRead=true;
+  if(entry.path===m2+'/registros.log')signalFound=true;
   if(entry.event==='first'&&stage===0)stage=1;
   if(entry.event==='brief')readBrief=true;
   if(entry.event==='second'&&stage===1)stage=2;
@@ -1839,7 +1856,10 @@ function createSaveGame(os, english) {
  }
  const fail=(p,e)=>({text:say(p,e),error:true});
  function lookup(raw){const path=resolve(raw),entry=path===null?null:fs.get(key(path));if(!entry)return {error:fail('Arquivo ou diretório não encontrado. Confira o caminho e as letras.','File or directory not found. Check the path and spelling.')};if(!allowed(entry.path))return {error:fail('O circuito deste gabinete ainda está fechado. Outro sinal precisa chegar primeiro.','This cabinet circuit is still closed. Another signal must arrive first.')};return {entry};}
- function help(){return win?'cd [pasta]          localização / navegar\ndir [/a] [pasta]    listar; /a inclui ocultos\ntype arquivo        ler texto\nfindstr [/i] TEXTO arquivo   buscar linhas\ncls                 limpar a tela\nhelp                este guia\n\nCaminhos: .. volta; \\ aponta para a raiz. Use aspas para nomes com espaços.':'pwd                 localização atual\nls [-a] [pasta]     listar; -a inclui ocultos\ncat arquivo         ler texto\ncd pasta            navegar\ngrep [-i] TEXTO arquivo      buscar linhas\nclear               limpar a tela\nhelp                este guia\n\nCaminhos: .. volta; / aponta para a raiz; ~ para sua home. Use aspas para nomes com espaços.';}
+ function help(){
+  if(win)return say('cd [pasta]               localização / navegar\ndir [/a] [pasta]         listar; /a inclui ocultos\ntype arquivo             ler texto\nfindstr [/i] TEXTO arquivo  buscar linhas\ncls                      limpar a tela\nhelp                     este guia\n\nCaminhos: .. volta; \\ aponta para a raiz. Use aspas para nomes com espaços.','cd [folder]              show location / change folder\ndir [/a] [folder]        list; /a includes hidden files\ntype file                read text\nfindstr [/i] TEXT file    search lines\ncls                      clear the screen\nhelp                     this guide\n\nPaths: .. goes up; \\ points to the root. Quote names containing spaces.');
+  return say('pwd                      localização atual\nls [-a] [pasta]          listar; -a inclui ocultos\ncat arquivo              ler texto\ncd pasta                 navegar\ngrep [-i] TEXTO arquivo   buscar linhas\nclear                    limpar a tela\nhelp                     este guia\n\nCaminhos: .. volta; / aponta para a raiz; ~ para sua home. Use aspas para nomes com espaços.','pwd                      current location\nls [-a] [folder]         list; -a includes hidden files\ncat file                 read text\ncd folder                change folder\ngrep [-i] TEXT file       search lines\nclear                    clear the screen\nhelp                     this guide\n\nPaths: .. goes up; / points to the root; ~ points to your home. Quote names containing spaces.');
+ }
  function run(raw){
   // Tokenização preserva barras invertidas do CMD e aceita caminhos entre aspas.
   const tokens=[];let current='',quote=null,active=false;
@@ -1861,6 +1881,7 @@ function createSaveGame(os, english) {
    if(paths.length>1)return fail('Liste uma pasta por vez.','List one folder at a time.');
    const found=lookup(paths[0]||display(cwd));if(found.error)return found.error;const entry=found.entry;
    if(entry.path===home)listed=true;
+   if(entry.path===m2)machineListed=true;
    let entries=entry.type==='dir'?children(entry.path).filter(e=>(hidden||!e.hidden)&&(!onlyHidden||e.hidden)):[entry];
    if(entry.path===arcade&&hidden)hiddenFound=true;
    entries.sort((a,b)=>a.path.localeCompare(b.path));
@@ -1879,47 +1900,68 @@ function createSaveGame(os, english) {
    if(/[\[\]\\^$*.+?(){}|]/.test(args[0]))return fail('Nesta aventura, busque uma palavra ou frase literal, sem padrões.','In this adventure, search for a literal word or phrase, without patterns.');
    const needle=insensitive?args[0].toLowerCase():args[0];
    const lines=e.body().split('\n').map((text,i)=>({text,i})).filter(({text})=>(insensitive?text.toLowerCase():text).includes(needle));
-   if(e.path===m2+'/registros.log'&&lines.some(x=>x.text.includes('SINAL')))signalFound=true;
+   if(e.path===m2+'/registros.log'&&lines.some(x=>x.text.includes('SIGNAL')))signalFound=true;
    // Ler o conteúdo relevante por busca também é um caminho válido de investigação.
    if(lines.length)trigger(e);
-   return {text:lines.map(x=>(numbers?(x.i+1)+':':'')+x.text).join('\n')||say('(Nenhuma linha encontrada.)','(No matching lines.)'),solved:stage===4&&e.event==='final'};
+   return {search:{path:e.path,indices:lines.map(x=>x.i),numbers},text:lines.map(x=>(numbers?(x.i+1)+':':'')+x.text).join('\n')||say('(Nenhuma linha encontrada.)','(No matching lines.)'),solved:stage===4&&e.event==='final'};
   }
   return fail('Comando não reconhecido neste terminal de treino. Digite help para consultar os comandos disponíveis.','Command not recognized in this training terminal. Type help to see available commands.');
  }
- return {run,mission:objective,hint,prompt:()=>win?display(cwd)+'>':'hacktheborges@arcade:'+(cwd===home?'~':cwd.startsWith(home+'/')?'~'+cwd.slice(home.length):cwd)+'$',chapter:()=>stage===4?3:stage>=2?3:stage+1,completed:()=>stage===4?3:Math.min(stage,2),checkpoint:()=>[stage,located,listed,enteredArcade,hiddenFound,readBrief,signalFound,logFound].join(':'),title:()=>stage===4?say('RESGATE CONCLUÍDO','RESCUE COMPLETE'):stage>=2?say('03 / A ÚLTIMA PORTA','03 / THE LAST DOOR'):stage===1?say('02 / ENTRE O RUÍDO','02 / THROUGH THE NOISE'):say('01 / FORA DE VISTA','01 / OUT OF SIGHT')};
+ return {snapshot,restore,translateSearch,run,mission:objective,hint,prompt:()=>win?display(cwd)+'>':'hacktheborges@arcade:'+(cwd===home?'~':cwd.startsWith(home+'/')?'~'+cwd.slice(home.length):cwd)+'$',chapter:()=>stage===4?3:stage>=2?3:stage+1,completed:()=>stage===4?3:Math.min(stage,2),checkpoint:()=>[stage,located,listed,enteredArcade,hiddenFound,readBrief,signalFound,logFound,clueRead,machineListed,cwd].join(':'),title:()=>stage===4?say('RESGATE CONCLUÍDO','RESCUE COMPLETE'):stage>=2?say('03 / A ÚLTIMA PORTA','03 / THE LAST DOOR'):stage===1?say('02 / ENTRE O RUÍDO','02 / THROUGH THE NOISE'):say('01 / FORA DE VISTA','01 / OUT OF SIGHT')};
 }
 (function(){
  const $=id=>document.getElementById(id),select=$('game-select'),session=$('game-session'),input=$('game-command'),output=$('game-output'),play=$('v-play');
- let game=null,os='linux',history=[],cursor=0,hintLevel=0;
+ let game=null,os='linux',history=[],cursor=0,hintLevel=0,events=[];
  const english=()=>document.documentElement.lang.startsWith('en'),say=(p,e)=>english()?e:p;
  function trim(){while(output.children.length>120)output.firstElementChild.remove();output.scrollTop=output.scrollHeight;}
  function append(text,kind){if(!text)return;const row=document.createElement('div');row.className='terminal-line '+(kind||'');row.textContent=text;output.appendChild(row);trim();}
  function finale(){
   const card=document.createElement('div');card.className='game-victory';
   const image=document.createElement('img');image.src='/assets/img/v/practice-flag.png';image.alt=say('V em pixel art erguendo uma bandeira de vitória','Pixel art V raising a victory flag');image.width=144;image.height=166;
-  const words=document.createElement('div'),title=document.createElement('strong'),text=document.createElement('p');title.textContent='YOU FOUND THE WAY';text.textContent=say('Três máquinas. Uma saída. Foi você quem encontrou.','Three machines. One way out. You found it.');words.append(title,text);card.append(image,words);output.appendChild(card);trim();
+  const words=document.createElement('div'),title=document.createElement('strong'),text=document.createElement('p');title.textContent=say('VOCÊ ENCONTROU A SAÍDA','YOU FOUND THE WAY');text.textContent=say('Três máquinas. Uma saída. Foi você quem encontrou.','Three machines. One way out. You found it.');words.append(title,text);card.append(image,words);output.appendChild(card);trim();
  }
  function update(){
   if(!game)return;$('game-prompt').textContent=game.prompt();$('game-mission-text').textContent=game.mission();$('game-progress').textContent=game.completed()+' / 3';$('game-case-title').textContent=game.title();
   $('game-terminal-name').textContent=os==='linux'?'hacktheborges@arcade — bash':'C:\\Windows\\System32\\cmd.exe';
   document.querySelectorAll('[data-machine]').forEach(node=>{const n=Number(node.getAttribute('data-machine'));node.classList.toggle('complete',n<=game.completed());node.classList.toggle('current',n===game.chapter()&&game.completed()<3);node.setAttribute('aria-label',say('Máquina ','Machine ')+n+': '+(n<=game.completed()?say('concluída','complete'):n===game.chapter()?say('atual','current'):say('bloqueada','locked')));});
  }
- document.querySelectorAll('[data-game-os]').forEach(button=>button.addEventListener('click',()=>{
-  os=button.getAttribute('data-game-os');game=createSaveGame(os,english);history=[];cursor=0;hintLevel=0;output.replaceChildren();input.value='';select.hidden=true;session.hidden=false;play.classList.add('game-running');session.setAttribute('data-os',os);$('game-troll').hidden=true;
+ function intro(){
   append(os==='linux'?'GNU/Linux · savetheborges · Bash':'Microsoft Windows [savetheborges]\nC:\\Windows\\System32\\cmd.exe','terminal-system');
-  append(say('BORGES: O fliperama fechou. Três máquinas ficaram ligadas. Quando tentei sair, a porta já não estava lá.\nSe você está lendo isto, ainda existe um caminho.\n\nDigite help para consultar comandos. As dicas são opcionais.','BORGES: The arcade closed. Three machines stayed on. When I tried to leave, the door was gone.\nIf you are reading this, there is still a way out.\n\nType help for commands. Hints are optional.'),'terminal-story');update();input.focus();
- }));
- $('game-form').addEventListener('submit',event=>{
-  event.preventDefault();const raw=input.value.trim();if(!raw||!game)return;history.push(raw);if(history.length>80)history.shift();cursor=history.length;
-  append(game.prompt()+' '+raw,'terminal-command');const before=game.checkpoint(),oldChapter=game.title(),result=game.run(raw);input.value='';
+  append(say('BORGES: O fliperama fechou. Três máquinas ficaram ligadas. Quando tentei sair, a porta já não estava lá.\nSe você está lendo isto, ainda existe um caminho.\n\nDigite help para consultar comandos. As dicas são opcionais.','BORGES: The arcade closed. Three machines stayed on. When I tried to leave, the door was gone.\nIf you are reading this, there is still a way out.\n\nType help for commands. Hints are optional.'),'terminal-story');
+ }
+ function execute(raw,event){
+  append(game.prompt()+' '+raw,'terminal-command');const before=game.checkpoint(),oldChapter=game.title(),result=game.run(raw);
+  if(event&&event.state){if(event.search)result.text=game.translateSearch(event.search);result.solved=event.solved;game.restore(event.state);}else if(event){event.state=game.snapshot();event.search=result.search;event.solved=result.solved;}
   if(result.clear)output.replaceChildren();if(result.text)append(result.text,result.error?'terminal-error':result.solved?'terminal-success':'');$('game-troll').hidden=!result.troll;
   if(result.troll)append(say('[Uma risada debochada ecoa do fliperama.]','[A mocking laugh echoes from the arcade.]'),'terminal-story');
-  if(result.solved)finale();if(game.checkpoint()!==before)hintLevel=0;update();if(game.title()!==oldChapter&&!result.solved)append(game.title(),'terminal-chapter');input.focus();
+  if(result.solved)finale();if(game.checkpoint()!==before)hintLevel=0;
+  if(game.title()!==oldChapter&&!result.solved)append(game.title(),'terminal-chapter');
+ }
+ function showHint(){hintLevel=Math.min(3,hintLevel+1);append(say('DICA ','HINT ')+hintLevel+'/3: '+game.hint(hintLevel),'terminal-story');}
+ function labels(){
+  input.setAttribute('aria-label',say('Digite um comando','Enter a command'));
+  output.setAttribute('aria-label',say('Histórico do terminal','Terminal history'));
+  $('game-troll').querySelector('img').alt=say('Rosto de troll com um sorriso debochado','Troll face with a mocking grin');
+  play.querySelector('.game-guide').alt=say('Borges, personagem com máscara e chapéu','Borges, a character wearing a mask and hat');
+  play.querySelector('.game-machines').setAttribute('aria-label',say('Progresso das máquinas','Machine progress'));
+ }
+ function translateTranscript(){
+  labels();if(!game)return;
+  const draft=input.value;game=createSaveGame(os,english);hintLevel=0;output.replaceChildren();$('game-troll').hidden=true;intro();
+  events.forEach(event=>event.kind==='command'?execute(event.text,event):showHint());update();input.value=draft;
+ }
+ document.querySelectorAll('[data-game-os]').forEach(button=>button.addEventListener('click',()=>{
+  os=button.getAttribute('data-game-os');game=createSaveGame(os,english);history=[];events=[];cursor=0;hintLevel=0;output.replaceChildren();input.value='';select.hidden=true;session.hidden=false;play.classList.add('game-running');session.setAttribute('data-os',os);$('game-troll').hidden=true;
+  intro();labels();update();input.focus();
+ }));
+ $('game-form').addEventListener('submit',event=>{
+  event.preventDefault();const raw=input.value.trim();if(!raw||!game)return;history.push(raw);if(history.length>80)history.shift();cursor=history.length;const action={kind:'command',text:raw};events.push(action);execute(raw,action);input.value='';update();input.focus();
  });
  input.addEventListener('keydown',event=>{if(event.key==='ArrowUp'||event.key==='ArrowDown'){event.preventDefault();cursor=Math.max(0,Math.min(history.length,cursor+(event.key==='ArrowUp'?-1:1)));input.value=history[cursor]||'';}});
- $('game-hint').addEventListener('click',()=>{if(game){hintLevel=Math.min(3,hintLevel+1);append(say('DICA ','HINT ')+hintLevel+'/3: '+game.hint(hintLevel),'terminal-story');}input.focus();});
+ $('game-hint').addEventListener('click',()=>{if(game){events.push({kind:'hint'});showHint();}input.focus();});
  $('game-reset').addEventListener('click',()=>{select.hidden=false;session.hidden=true;play.classList.remove('game-running');document.querySelector('[data-game-os="'+os+'"]').focus();game=null;});
- new MutationObserver(update).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+ labels();
+ new MutationObserver(translateTranscript).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 })();
 
 </script>

@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-VLsuUtnPgUFz58tAL7rq+8tIZ8XnoZPSXi8MpKonUHQ='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-dew11r07sRwsD+x5NjcLq0gi0NAoolY3BtDC0HqasBY='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-LAc3SvrRX/8itl8l1YXIC+a1gw/BriMfgYJfVeqlpGI='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-R3w9cj7rfF4smIOwRgcDxuWQimNmdFTt67sjvWYqRZE='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="description" content="Artur Borges (hacktheborges) - analista de seguranca da informacao em trilha para seguranca ofensiva. Certificacoes, laboratorios, writeups e ferramental.">
 <meta name="color-scheme" content="light dark">
-<meta property="og:title" content="Artur Borges - Offensive Security">
+<meta property="og:title" content="hacktheborges">
 <meta property="og:description" content="Certificacoes, laboratorios, writeups e ferramental.">
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://hacktheborges.github.io/">
-<title>Artur Borges</title>
+<title>hacktheborges</title>
 <link rel="icon" href="/favicon.ico?v=9" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/avatar-32.png?v=9">
 <link rel="apple-touch-icon" href="/assets/img/avatar-180.png?v=9">
@@ -542,6 +542,15 @@ body[data-page="hub"] #dust{opacity:.72}
 #hub .hub-box,#hub .hub-box:hover,#hub .hub-box:focus-visible,#hub .hub-box:active{
  transform:none;translate:none;rotate:none;scale:none;animation:none;opacity:1;
  transition:border-color .2s,box-shadow .2s,background-color .2s;
+}
+
+
+/* Cards estáticos em todos os mundos; mantém cores, bordas e brilho no hover. */
+.screen .hub-grid{transform:none!important;will-change:auto}
+.screen .hub-box,.screen .card,.screen .game-choice{
+ transform:none!important;translate:none!important;rotate:none!important;scale:none!important;
+ animation:none!important;opacity:1;will-change:auto;
+ transition:border-color .2s,box-shadow .2s,background-color .2s,color .2s;
 }
 
 </style>
@@ -1152,7 +1161,7 @@ body[data-page="hub"] #dust{opacity:.72}
       <p class="hub-kicker" data-en="whoami">whoami</p>
       <h1 class="hub-title sub-title" data-depth="10" data-en="About">Sobre</h1>
       <p class="hub-sub" data-en="Pick a topic.">Escolha um assunto.</p>
-      <nav class="hub-grid" data-depth="5" aria-label="Sobre">
+      <nav class="hub-grid" aria-label="Sobre">
       <a class="hub-box b-sobre" href="#sobre-perfil">
         <span class="hb-num">01</span>
         <span class="hb-name" data-en="Profile">Perfil</span>
@@ -1387,7 +1396,7 @@ body[data-page="hub"] #dust{opacity:.72}
       <p class="hub-kicker">Offensive Security</p>
       <h1 class="hub-title sub-title" data-depth="10" data-en="OffSec certifications">Certificações OffSec</h1>
       <p class="hub-sub" data-en="Pick a certification.">Escolha uma certificação.</p>
-      <nav class="hub-grid" data-depth="5" aria-label="Certificações OffSec">
+      <nav class="hub-grid" aria-label="Certificações OffSec">
       <a class="hub-box b-offsec has-art art-oscp" href="#oscp">
         <span class="hb-num">01</span>
         <span class="hb-name" data-en="OSCP">OSCP</span>
@@ -1403,7 +1412,7 @@ body[data-page="hub"] #dust{opacity:.72}
       <p class="hub-kicker htb-motto">think out of the box.</p>
       <h1 class="hub-title sub-title" data-depth="10">HackTheBox</h1>
       <p class="hub-sub" data-en="Pick a topic.">Escolha um assunto.</p>
-      <nav class="hub-grid" data-depth="5" aria-label="Hack The Box">
+      <nav class="hub-grid" aria-label="Hack The Box">
       <a class="hub-box b-htb" href="#htb-academy">
         <span class="hb-num">01</span>
         <span class="hb-name" data-en="Academy">Academy</span>
@@ -1425,7 +1434,7 @@ body[data-page="hub"] #dust{opacity:.72}
       <p class="hub-kicker cert-motto"><q>Never, ever, ever give up.</q> <span class="cert-quote-author">- Michael Scott</span></p>
       <h1 class="hub-title sub-title" data-depth="10" data-en="Certifications">Certificações</h1>
       <p class="hub-sub" data-en="Pick a certification.">Escolha uma certificação.</p>
-      <nav class="hub-grid" data-depth="5" aria-label="Certificações">
+      <nav class="hub-grid" aria-label="Certificações">
       <a class="hub-box b-cert has-art art-secplus" href="#security-plus">
         <span class="hb-num">01</span>
         <span class="hb-name" data-en="CompTIA Security+">CompTIA Security+</span>
@@ -1488,7 +1497,7 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
 (function () {
   "use strict";
 
-  var SITE = "Artur Borges";
+  var SITE = "hacktheborges";
   var strings = {
     pt: { examOn: "Exame em ", copy: "Copiar", copied: "Copiado", passed: "Exame realizado", home: "Início" },
     en: { examOn: "Exam on ",  copy: "Copy",   copied: "Copied",  passed: "Exam taken",      home: "Home" }

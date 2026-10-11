@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-VobTAqHOJ518204tUULBhCfLYnjLDAYbD5nUcL/RiO8='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-3Fd3+5xQ7qDl6pnVW2oxamzxt1HiwmQz59ixK/4/rAM='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-Ul4yQYZ8J7vuZg0QHpsfUK7ljqUFy+qZQ3J8vx4gpII='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-3Fd3+5xQ7qDl6pnVW2oxamzxt1HiwmQz59ixK/4/rAM='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="description" content="Artur Borges (hacktheborges) - analista de seguranca da informacao em trilha para seguranca ofensiva. Certificacoes, laboratorios, writeups e ferramental.">
 <meta name="color-scheme" content="light dark">
@@ -282,6 +282,15 @@ body[data-world="htb"] #bg .htb-backdrop{display:block}
  #bg .htb-symbol{opacity:.07;max-width:52vw}
 }
 @media(prefers-reduced-motion:reduce){#bg .htb-symbol{animation:none;will-change:auto;left:auto;right:6%;top:18%}}
+
+
+/* Frases pessoais preservadas em inglês nos dois idiomas. */
+#v-htb .htb-motto{text-transform:none;letter-spacing:.12em}
+#v-htb .hub-title{white-space:nowrap;font-size:clamp(2rem,8vw,3.6rem)}
+#v-certificacoes .cert-motto{text-transform:none;letter-spacing:.04em;line-height:1.7;max-width:54ch;text-wrap:balance}
+#v-certificacoes .cert-motto q{quotes:"“" "”"}
+#v-certificacoes .cert-quote-author{display:inline-block;white-space:nowrap;color:#a3b3bc}
+#v-certificacoes{overflow-y:auto;overflow-x:hidden}
 
 </style>
 </head>
@@ -1142,8 +1151,8 @@ body[data-world="htb"] #bg .htb-backdrop{display:block}
 
   <section class="screen door-screen sub-hub htb-world" id="v-htb" data-title-pt="Hack The Box" data-title-en="Hack The Box" hidden>
     <div class="hub-inner sub-inner">
-      <p class="hub-kicker" data-en="Hack The Box">Hack The Box</p>
-      <h1 class="hub-title sub-title" data-depth="10" data-en="Hack The Box">Hack The Box</h1>
+      <p class="hub-kicker htb-motto">think out of the box.</p>
+      <h1 class="hub-title sub-title" data-depth="10">HackTheBox</h1>
       <p class="hub-sub" data-en="Pick a topic.">Escolha um assunto.</p>
       <nav class="hub-grid" data-depth="5" aria-label="Hack The Box">
       <a class="hub-box b-htb" href="#htb-academy">
@@ -1164,7 +1173,7 @@ body[data-world="htb"] #bg .htb-backdrop{display:block}
 
   <section class="screen door-screen sub-hub" id="v-certificacoes" data-title-pt="Certificações" data-title-en="Certifications" hidden>
     <div class="hub-inner sub-inner">
-      <p class="hub-kicker" data-en="Certifications">Certificações</p>
+      <p class="hub-kicker cert-motto"><q>Never, ever, ever give up.</q> <span class="cert-quote-author">- Michael Scott</span></p>
       <h1 class="hub-title sub-title" data-depth="10" data-en="Certifications">Certificações</h1>
       <p class="hub-sub" data-en="Pick a certification.">Escolha uma certificação.</p>
       <nav class="hub-grid" data-depth="5" aria-label="Certificações">

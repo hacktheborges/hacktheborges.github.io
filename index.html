@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-sFSU2VNPYvMsYC+eU8GWM/WZ2CrfBH5lcSkeyhaMp+k='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-D3nBbdM5vtUPB9mp0za88cKkItSqa4xl9BjuFMu7+PA='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-CHLjG7Fc4dietxPplJ0DHAzxDlnQtGdiSZlr7CwERCs='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-D3nBbdM5vtUPB9mp0za88cKkItSqa4xl9BjuFMu7+PA='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="description" content="Artur Borges (hacktheborges) - analista de seguranca da informacao em trilha para seguranca ofensiva. Certificacoes, laboratorios, writeups e ferramental.">
 <meta name="color-scheme" content="light dark">
@@ -457,43 +457,39 @@ body[data-world="game"] #v-play{--paper:#090c20;--ink:#f1effb;--muted:#b6b7cf;--
 @media(max-width:600px){.game-victory{padding:16px;gap:14px}.game-victory img{width:88px;height:112px}.game-victory p{font-size:11px}.terminal-case-heading{gap:6px}#game-case-title{font-size:9px;letter-spacing:0}.game-machines span{padding:3px 5px;font-size:9px}}
 
 
-/* Entrada em grafite: fundo e painéis com contraste mais suave. */
-body[data-page="hub"]{background:#22262d}
-body[data-page="hub"] #bg{background:#22262d}
+/* Hub: preto com luz branca, conforme a prévia escolhida. */
+body[data-page="hub"]{background:#111317}
+body[data-page="hub"] #bg{background:#111317}
 body[data-page="hub"] .bg-aurora{
- background:radial-gradient(ellipse at 50% 8%,rgba(180,117,111,.09),transparent 56%),
- radial-gradient(ellipse at 15% 55%,rgba(132,152,178,.07),transparent 60%),
- linear-gradient(155deg,#2d3139 0%,#252a32 48%,#22262d 100%);
+ background:radial-gradient(ellipse 72% 47% at 50% -3%,rgba(255,255,255,.32),transparent 78%),
+ radial-gradient(ellipse at 50% 75%,rgba(255,255,255,.035),transparent 70%),#111317;
 }
 body[data-page="hub"] #dust{opacity:.72}
-#hub{--paper:#252a32;--surface:#303640;--line:#4b5360;--ink:#f0f2f5;--muted:#bcc4d0;--signal:#e5a29c;color:var(--ink)}
-#hub .hub-title{color:#f0f2f5;text-shadow:0 2px 4px rgba(17,21,27,.35),0 0 30px rgba(218,136,130,.12)}
-#hub .hub-kicker{color:#e5b0a9}
-#hub .hub-sub{color:#c0c8d3}
-#hub .hub-count{color:#b3bdca}
-#hub .hub-count b{color:#e9aaa1}
-#hub .hub-top .switch{background:#303640;border-color:#56606e}
-#hub .hub-top .switch button{color:#c4cdd9}
-#hub .hub-top .switch button[aria-pressed="true"]{background:#e0e5ec;color:#252a32}
-#hub .hub-box{border-color:rgba(155,169,190,.3);box-shadow:0 12px 26px -20px rgba(8,13,21,.6)}
+#hub{--paper:#111317;--surface:#14171d;--line:#44474d;--ink:#f2f4f8;--muted:#bbc3ce;--signal:#e7aaa3;color:var(--ink)}
+#hub .hub-title{color:#f4f6f8;text-shadow:0 2px 14px rgba(0,0,0,.2)}
+#hub .hub-kicker{color:#e7aaa3}
+#hub .hub-sub,#hub .hub-count{color:#bbc3ce}
+#hub .hub-count b{color:#e7aaa3}
+#hub .hub-top .switch{background:rgba(20,23,29,.6);border-color:rgba(255,255,255,.28)}
+#hub .hub-top .switch button{color:#bbc3ce}
+#hub .hub-top .switch button[aria-pressed="true"]{background:#e9edf2;color:#22262e}
+#hub .hub-box{border-color:rgba(255,255,255,.2);box-shadow:0 10px 22px -18px rgba(0,0,0,.6)}
 #hub .hub-box.has-art{
- background-color:#2b3039;
- background-image:linear-gradient(90deg,rgba(38,43,52,.97),rgba(38,43,52,.83) 44%,rgba(38,43,52,.36)),var(--art,none);
+ background-color:#14171d;
+ background-image:linear-gradient(90deg,rgba(20,23,29,.97),rgba(20,23,29,.76) 45%,rgba(20,23,29,.3)),var(--art,none);
 }
 #hub .hub-box.has-art:hover,#hub .hub-box.has-art:focus-visible{
- background-image:linear-gradient(90deg,rgba(43,49,59,.96),rgba(43,49,59,.74) 44%,rgba(43,49,59,.27)),var(--art,none);
+ background-image:linear-gradient(90deg,rgba(25,29,36,.96),rgba(25,29,36,.7) 45%,rgba(25,29,36,.24)),var(--art,none);
  border-color:color-mix(in srgb,var(--bx) 55%,#778291);
- box-shadow:0 14px 30px -22px rgba(8,13,21,.65),0 0 22px -16px var(--bx);
+ box-shadow:0 14px 30px -22px rgba(0,0,0,.65),0 0 22px -16px var(--bx);
 }
-#hub .hub-box .hb-name{color:#f0f3f8}
-#hub .hub-box .hb-num{color:#c2cad6}
-#hub .hub-box.has-art .hb-name,#hub .hub-box.has-art .hb-num{text-shadow:0 1px 5px rgba(16,22,30,.8)}
-#hub .hub-box .hb-desc{color:#c1cad7}
-#hub .hub-box .hb-go{color:#d5dce6}
-#hub .b-cert{--bx:#dea09a}
-#hub .art-cert::after,#hub .art-play::after{box-shadow:inset 0 0 38px 14px rgba(38,43,52,.9)}
-#hub a:focus-visible,#hub button:focus-visible{outline:2px solid #e8b9ae;outline-offset:4px}
-
+#hub .hub-box .hb-name{color:#f1f5fa}
+#hub .hub-box .hb-num,#hub .hub-box .hb-desc{color:#bbc3ce}
+#hub .hub-box.has-art .hb-name,#hub .hub-box.has-art .hb-num{text-shadow:0 1px 6px rgba(0,0,0,.8)}
+#hub .hub-box .hb-go{color:#d6dfeb;opacity:1;transform:none}
+#hub .b-cert{--bx:#e7aaa3}
+#hub .art-cert::after,#hub .art-play::after{box-shadow:inset 0 0 34px 12px rgba(20,23,29,.8)}
+#hub a:focus-visible,#hub button:focus-visible{outline:2px solid #e7aaa3;outline-offset:4px}
 </style>
 </head>
 <body>

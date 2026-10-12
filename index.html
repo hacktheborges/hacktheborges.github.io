@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-lvsfQX6jvmPAHXfYbve5jrPEYTOQ9MD/w9zR0u5xdTY='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-cAs24cmPDgUGQlgh8GsIJvHgdjINkbHjQ/zGDNdQ4Kc='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-lvsfQX6jvmPAHXfYbve5jrPEYTOQ9MD/w9zR0u5xdTY='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-DJ49ttfy8XgH52qPNDkn3kUpXHSb2lxuFaY9YLSb1sE='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="description" content="Artur Borges (hacktheborges) - analista de seguranca da informacao em trilha para seguranca ofensiva. Certificacoes, laboratorios, writeups e ferramental.">
 <meta name="color-scheme" content="light dark">
@@ -1911,7 +1911,7 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
  A pasta C:\root é um gabinete fictício desta história; não é uma pasta padrão do Windows.
 */
 function createSaveGame(os, english) {
- const win=os==='windows',home=win?'/Users/hacktheborges':'/home/hacktheborges',arcade=home+'/arcade',m2=home+'/maquina2',secret=win?'proof.txt':'.proof.txt',trace=win?'/ProgramData/Arcade/Logs/sistema.log':'/var/log/arcade/sistema.log';
+ const win=os==='windows',home=win?'/Users/hacktheborges':'/home/hacktheborges',arcade='/home/arcade',m2=home+'/maquina2',secret=win?'proof.txt':'.proof.txt',trace=win?'/ProgramData/Arcade/Logs/sistema.log':'/var/log/arcade/sistema.log';
  const say=(p,e)=>english()?e:p,display=p=>win?'C:'+p.replaceAll('/','\\'):p;
  let cwd=home,stage=0,located=false,listed=false,enteredArcade=false,hiddenFound=false,readBrief=false,signalFound=false,logFound=false,clueRead=false,machineListed=false;
  const fs=new Map(),key=p=>win?p.toLowerCase():p;
@@ -1923,10 +1923,10 @@ function createSaveGame(os, english) {
  directory(trace.slice(0,trace.lastIndexOf('/')));
  if(win){directory('/Windows/System32');directory('/Users/Public');}else{directory('/usr/bin');directory('/etc/arcade');}
  const file=(p,pt,en,extra={})=>add(p,'file',()=>say(pt,en),extra);
- file(home+'/Pista1.txt','o que você está procurando aqui? Uma pista? Hahaha que piada!','What are you looking for here? A clue? Hahaha, what a joke!',{troll:false});
- file(home+'/Pista2.txt','O quarto bilhete jura que sabe de tudo. Foi ele mesmo quem me contou.','The fourth note swears it knows everything. It told me so itself.');
- file(home+'/Pista3.txt','As luzes se apagaram, mas as fichas continuam espalhadas pelo arcade. Não lembro de ter deixado aquele lugar vazio.','The lights went out, but tokens still lie around the arcade. I do not remember leaving that place empty.');
- file(home+'/Pista4.txt','não acredite em tudo que você vê na internet.','Do not believe everything you see on the internet.',{troll:true});
+ file(home+'/Pista1.txt','tá procurando o que aqui?','What are you looking for here?');
+ file(home+'/Pista2.txt','a pista 4 tem o que você procura','Clue 4 has what you are looking for.');
+ file(home+'/Pista3.txt','você precisa se mover para o diretório '+display('/home'),'You need to move to the directory '+display('/home'));
+ file(home+'/Pista4.txt','não acredite em tudo o que você vê na internet','Do not believe everything you see on the internet.',{troll:true});
  file(arcade+'/'+secret,'TRANSMISSÃO 01 / BORGES\n\nVocê viu o que não estava à vista. Bom sinal.\nExiste outro gabinete na sua home: maquina2. Ele estava sem energia; encontrar esta mensagem religou o circuito. Volte para casa.\n\nSe ouvir estática, não escute tudo de uma vez. Procure o SIGNAL.','TRANSMISSION 01 / BORGES\n\nYou saw what was out of sight. A good sign.\nThere is another cabinet in your home: maquina2. It had no power; finding this message restored its circuit. Go back home.\n\nIf you hear static, do not listen to everything at once. Look for the SIGNAL.',{hidden:true,event:'first'});
  file(m2+'/leia-me.txt','MÁQUINA 02 / ENTRE O RUÍDO\n\nO monitor repete eventos antigos. Uma palavra sobreviveu à interferência: SIGNAL.\nO operador deixou tudo em registros.log. Só uma frequência ainda responde.\n\n— B.','MACHINE 02 / THROUGH THE NOISE\n\nThe monitor repeats old events. One word survived the interference: SIGNAL.\nThe operator left everything in registros.log. Only one frequency still responds.\n\n— B.',{event:'brief'});
  add(m2+'/registros.log','file',()=>Array.from({length:36},(_,i)=>i===23?say('[00:24] SIGNAL confirmado: canais','[00:24] SIGNAL confirmed: canais')+(win?'\\':'/')+'07.txt':`[00:${String(i+1).padStart(2,'0')}] ${say(['ESTÁTICA · eco sem origem','MONITOR · aguardando ficha','RUÍDO · frequência vazia'][i%3],['STATIC · echo without a source','MONITOR · waiting for a token','NOISE · empty frequency'][i%3])}`).join('\n'));
@@ -1939,7 +1939,7 @@ function createSaveGame(os, english) {
  function allowed(p){
   if(under(p,'/root'))return stage>=3;
   if(under(p,m2))return stage>=1;
-  if(under(p,home)||p==='/'||key(p)===key(home.slice(0,home.lastIndexOf('/'))))return true;
+  if(under(p,arcade)||key(p)===key('/home')||under(p,home)||p==='/'||key(p)===key(home.slice(0,home.lastIndexOf('/'))))return true;
   return stage>=2;
  }
  function resolve(raw){
@@ -1970,7 +1970,7 @@ function createSaveGame(os, english) {
   }
   if(!located)return say('Qual é o comando que mostra onde você está?','Which command shows where you are?');
   if(!listed)return say('Qual comando lista os arquivos no diretório?','Which command lists the files in the directory?');
-  if(!enteredArcade){if(clueRead)return say('Qual comando entra na pasta arcade mencionada na pista?','Which command opens the arcade folder mentioned in the clue?');return say('Qual comando abre um arquivo de texto? Leia as pistas para descobrir a próxima pasta.','Which command reads a text file? Read the clues to find the next folder.');}
+  if(!enteredArcade){if(clueRead)return cwd==='/home'?say('Qual comando lista as pastas deste diretório? Explore o que encontrar.','Which command lists the folders in this directory? Explore what you find.'):say('Qual comando leva ao diretório indicado na pista 3?','Which command takes you to the directory indicated in clue 3?');return say('Qual comando abre um arquivo de texto? Leia as pistas para descobrir a próxima pasta.','Which command reads a text file? Read the clues to find the next folder.');}
   if(cwd!==arcade)return say('Qual comando leva você de volta à pasta arcade?','Which command takes you back to the arcade folder?');
   if(!hiddenFound)return say('Qual comando lista também os arquivos ocultos?','Which command also lists hidden files?');
   return say('Qual comando lê o arquivo oculto que você encontrou?','Which command reads the hidden file you found?');
@@ -1984,7 +1984,7 @@ function createSaveGame(os, english) {
   else if(stage===1)h=[say('Leia o bilhete do operador. Uma palavra serve de filtro.','Read the operator note. One word acts as a filter.'),say('Buscar texto ajuda a separar informação de ruído.','Searching text helps separate information from noise.'),(win?'findstr SIGNAL ':'grep SIGNAL ')+display(m2+'/registros.log')+' → '+read+' '+display(m2+'/canais/07.txt')];
   else if(!located)h=[say('Seu terminal sabe o endereço atual.','Your terminal knows the current address.'),say('Existe um comando que mostra o diretório atual.','There is a command that displays the current directory.'),win?'cd':'pwd'];
   else if(!listed)h=[say('Observe os nomes antes de escolher uma pista.','Look at the names before choosing a clue.'),say('Liste o conteúdo da pasta atual.','List the current folder contents.'),list];
-  else if(!enteredArcade)h=[say('Nem todo bilhete diz a verdade. O terceiro lembra um lugar.','Not every note tells the truth. The third remembers a place.'),read+' '+display(home+'/Pista3.txt'),'cd '+display(arcade)];
+  else if(!enteredArcade)h=[say('Nem todo bilhete diz a verdade. Leia a terceira pista.','Not every note tells the truth. Read the third clue.'),say('Vá ao diretório indicado e liste seu conteúdo.','Go to the indicated directory and list its contents.'),'cd '+display('/home')+' → '+list];
   else h=[say('Algumas coisas não aparecem na primeira olhada.','Some things do not appear at first glance.'),say('Uma listagem pode incluir arquivos ocultos.','A listing can include hidden files.'),(win?'dir /a ':'ls -a ')+display(arcade)+' → '+read+' '+display(arcade+'/'+secret)];
   return h[Math.min(level-1,h.length-1)];
  }

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-mVKwowSTwmmKs34KzicwBW3xempxFc0D8X9IRce4zk8='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-3h7tjvT5FKYeD1EIzOSTxRnt89hzZKceu5I7w9IdDWI='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-LBBekdvnxFv/qPVuGHopaZcobOfDg3S7TijKx6Q2fjs='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-P7d0rqfVpu6CpitRunKwxm5HUUS+ULG06G6UbSGo/rg='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="description" content="Artur Borges (hacktheborges) - analista de seguranca da informacao em trilha para seguranca ofensiva. Certificacoes, laboratorios, writeups e ferramental.">
 <meta name="color-scheme" content="light dark">
@@ -638,6 +638,7 @@ body[data-page="oscp"] #dust{opacity:1}
 #v-contato .contact-scene img{display:block;width:100%;height:auto;object-fit:contain;image-rendering:pixelated;border:0;background:transparent}
 @media(max-width:600px){#v-contato .contact-scene{margin:20px auto 24px}}
 
+
 </style>
 </head>
 <body>
@@ -878,6 +879,7 @@ body[data-page="oscp"] #dust{opacity:1}
       <span class="chip"><span data-en="valid until 02 Aug 2028">válida até 02 ago 2028</span></span>
     </div>
 
+
     <h2 class="sub-h" data-en="Credential">Credencial</h2>
     <div class="meta">
       <a class="chip" href="https://www.credly.com/badges/8da335bc-2437-4841-8bf9-838ec94d4391"><span data-en="Verified badge on Credly">Badge verificado no Credly</span> ↗</a>
@@ -949,6 +951,7 @@ body[data-page="oscp"] #dust{opacity:1}
       <span class="chip">CyberWarFare Labs</span>
     </div>
 
+
     <h2 class="sub-h" data-en="Credential">Credencial</h2>
     <div class="meta">
       <a class="chip" href="https://labs.cyberwarfare.live/credential/achievement/6a775867a8dc97c4c7dddcd0"><span data-en="Verify at CyberWarFare Labs">Verificar na CyberWarFare Labs</span> ↗</a>
@@ -967,9 +970,19 @@ body[data-page="oscp"] #dust{opacity:1}
     <h2 class="sub-h">Road to CRTA</h2>
     <div class="road">
       <div class="road-body">
-        <p data-en="The CRTA exam is genuinely fun. You get a scope and you go capturing the flags — I captured every flag the exam asks for. I finished in around four hours because I decided to take it calmly, no rush. I treated it as a learning bridge toward future hands-on certifications.">O exame CRTA é bem divertido. Você recebe um escopo e precisa ir capturando as flags, eu consegui capturar todas as flags que o exame pede. Fechei a prova em torno de 4 horas porque decidi fazer ela com calma, sem pressa. Tratei ela como uma ponte de aprendizado para futuras certificações hands-on.</p>
+        <p data-en="The CRTA exam is really fun. You get a scope and work your way through the flags. I managed to capture every flag the exam asks for. I finished in around four hours because I decided to take it calmly, without rushing. I treated it as a learning bridge toward future hands-on certifications.">O exame CRTA é bem divertido. Você recebe um escopo e precisa ir capturando as flags, eu consegui capturar todas as flags que o exame pede. Fechei a prova em torno de 4 horas porque decidi fazer ela com calma, sem pressa. Tratei ela como uma ponte de aprendizado para futuras certificações hands-on.</p>
 
-        <p data-en="Enumeration is the key. Enumerating calmly and, if you find nothing, enumerating again makes all the difference. It was not a certification where I felt lost. My study material for it was through HTB — the Academy content is always predictable for me when it comes to certifications.">A enumeração é a chave. Enumerar com calma e se não encontrar nada, enumerar de novo faz toda a diferença. Não foi uma certificação que me senti perdido. O material de estudo para ela foi através do HTB, o conteúdo do Academy é sempre previsível pra mim em certificações.</p>
+        <p data-en="I started by understanding the scope and adjusting my scan to exclude the address that could not be tested. With Nmap, I identified open ports and took my time examining each service. On the web side, I used feroxbuster and dirsearch to look for directories. Both led me to the same files, but what made the difference was actually reading their contents. Even a CSS file contained information that helped me understand the environment. Sometimes we look for something complicated and miss what is right in front of us.">Comecei entendendo o escopo e ajustando a varredura para deixar de fora o endereço que não podia ser testado. Com o Nmap, fui identificando as portas abertas e olhando cada serviço com calma. Na parte web, usei feroxbuster e dirsearch para procurar diretórios. Os dois me levaram aos mesmos arquivos, mas o que fez diferença foi parar para olhar o conteúdo deles. Até um arquivo CSS tinha informações que ajudavam a entender o ambiente. Às vezes a gente fica procurando algo muito complicado e deixa passar o que já está na nossa frente.</p>
+
+        <p data-en="Another service allowed me to read files from the host, and that eventually opened the way to SSH access. From there, I enumerated the Linux system: my user, groups, permissions, and what I could run with sudo. At one point, I was trying to crack a hash to access the application and was getting nowhere. Going back to the basic checks is what got me unstuck. A sudo permission allowed privilege escalation through a text editor. The simpler path was right there, and I almost missed it.">Outro serviço permitia ler arquivos do host, e essa leitura acabou abrindo o caminho para o acesso por SSH. A partir dali, fui enumerando o Linux: usuário, grupos, permissões e o que eu conseguia executar com sudo. Em um momento, fiquei tentando quebrar um hash para entrar na aplicação e não estava chegando a lugar nenhum. Voltar para as verificações básicas foi o que destravou essa parte. Havia uma permissão de sudo que permitia elevar os privilégios usando um editor de texto. O caminho mais simples estava ali e eu quase passei por ele.</p>
+
+        <p data-en="After getting root, I looked into how the application was running. I traced the port back to the service and found the application inside a Docker container. Its environment variables contained the information I was missing to access the panel. I really enjoyed this part because it showed me that looking only at the page in a browser is not enough. The process, the container, and the configuration also tell the story of an application.">Depois de conseguir root, fui entender melhor como a aplicação estava rodando. Relacionei a porta com o serviço e encontrei a aplicação em um container Docker. Olhando as variáveis de ambiente do container, encontrei a informação que faltava para acessar o painel. Foi uma parte que gostei bastante, porque mostrou na prática que não adianta olhar só para a página no navegador. O processo, o container e a configuração também contam a história da aplicação.</p>
+
+        <p data-en="The logs mattered too. I found a reference to another host and followed the clues into the internal network, within what the scope allowed to reach the objective. Along the way, an exposed file on another server provided domain access information. The exam connected web, Linux, and Active Directory in a very natural way. Each discovery helped me understand the next step, but I still had to stop, read, and put the pieces together.">Os logs também fizeram diferença. Encontrei neles uma referência a outro host e fui seguindo as pistas para chegar à rede interna, dentro do que o escopo permitia para alcançar o objetivo. Nesse caminho, um arquivo exposto em outro servidor trouxe informações de acesso ao domínio. A prova foi conectando web, Linux e Active Directory de uma maneira bem natural. Cada descoberta ajudava a entender o próximo passo, mas eu precisava parar, ler e juntar as informações.</p>
+
+        <p data-en="In the Active Directory stage, I identified the domain controller through its available services and worked with the account I had found. It had permissions that allowed DCSync, which opened the way to retrieving domain account hashes. I then used Pass-the-Hash to access Windows with Evil-WinRM and reach the target file. It was great to see topics I had been studying come together as part of a complete sequence.">Na parte de Active Directory, identifiquei o controlador de domínio pelos serviços disponíveis e trabalhei com a conta que havia encontrado. Ela tinha permissões que permitiam DCSync, e isso abriu o caminho para obter hashes de contas do domínio. Depois, consegui usar Pass-the-Hash para acessar o Windows com Evil-WinRM e chegar ao arquivo que era o objetivo final. Foi legal ver esses assuntos, que eu já vinha estudando, fazendo sentido dentro de uma sequência completa.</p>
+
+        <p data-en="Enumeration is the key. Taking your time and enumerating again when you find nothing makes all the difference. This exam really reinforced that for me: before insisting on an attempt that is not working, it is worth going back and checking what you have not looked at yet. I did not feel lost during this certification. I studied through HTB, and the Academy content helped me recognize the scenarios and understand what I was doing. Beyond finishing the flags, I came away feeling that I had connected the things I had been learning much better.">A enumeração é a chave. Enumerar com calma e, se não encontrar nada, enumerar de novo faz toda a diferença. Pra mim, essa prova reforçou muito isso: antes de insistir em uma tentativa que não está funcionando, vale voltar e olhar o que ainda não foi verificado. Não foi uma certificação em que me senti perdido. Estudei pelo HTB, e o conteúdo do Academy me ajudou a reconhecer os cenários e entender o que estava fazendo. Mais do que terminar as flags, saí com a sensação de ter conectado melhor as coisas que vinha aprendendo.</p>
       </div>
     </div>
 
@@ -1003,6 +1016,7 @@ body[data-page="oscp"] #dust{opacity:1}
     <p class="eyebrow" data-en="In progress">Em andamento</p>
     <h1>OSCP</h1>
     <p class="lede" data-en="The most recognised credential in offensive security. A 24-hour hands-on exam on an isolated network — exploitation, privilege escalation and an Active Directory set — followed by a technical report that is graded too. It is the certification pentest roles ask for by name.">A credencial mais reconhecida em segurança ofensiva. Exame prático de 24 horas em rede isolada, com exploração, escalação de privilégios e um conjunto de Active Directory, seguido de relatório técnico que também é avaliado. É a certificação que as vagas de pentest pedem pelo nome.</p>
+
 
     <div class="exam">
       <div class="count">
@@ -2184,6 +2198,9 @@ function createSaveGame(os, english) {
  labels();
  new MutationObserver(translateTranscript).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 })();
+
+
+
 
 </script>
 </body>

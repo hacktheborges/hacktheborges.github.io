@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-lvsfQX6jvmPAHXfYbve5jrPEYTOQ9MD/w9zR0u5xdTY='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-DJ49ttfy8XgH52qPNDkn3kUpXHSb2lxuFaY9YLSb1sE='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-Ys/EWHPdOijoppzP6+ukegf/vfXbsJT6HdBQPTWV5SA='; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-3h7tjvT5FKYeD1EIzOSTxRnt89hzZKceu5I7w9IdDWI='; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="description" content="Artur Borges (hacktheborges) - analista de seguranca da informacao em trilha para seguranca ofensiva. Certificacoes, laboratorios, writeups e ferramental.">
 <meta name="color-scheme" content="light dark">
@@ -623,6 +623,14 @@ body[data-world="game"] .game-sun{background:repeating-linear-gradient(0deg,tran
 @keyframes cyberConfetti{0%{opacity:0;transform:translate3d(0,-20px,0) rotate(0)}12%{opacity:1}70%{opacity:.9}100%{opacity:0;transform:translate3d(var(--drift),260px,0) rotate(var(--spin))}}
 @media(max-width:600px){#v-play .game-face{width:100px;height:116px}#game-mission-text{font-size:16px;line-height:1.45}.game-celebration i{box-shadow:0 0 5px var(--c)}}
 @media(prefers-reduced-motion:reduce){#game-session .terminal-case.mission-new{animation:none;box-shadow:inset 3px 0 #77efff}.game-celebration{display:none}}
+
+
+/* Fogos suaves nas galerias e páginas de certificação. */
+body[data-page="certificacoes"] #dust,
+body[data-page="offsec-certs"] #dust,
+body[data-page="security-plus"] #dust,
+body[data-page="crta"] #dust,
+body[data-page="oscp"] #dust{opacity:1}
 
 </style>
 </head>
@@ -1834,9 +1842,62 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
   var cv = document.getElementById("dust");
   if (!cv || !cv.getContext) { return; }
   var ctx = cv.getContext("2d");
-  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var reduce = motion.matches;
   var W = 0, H = 0, DPR = 1, parts = [], raf = null;
 
+  var rockets = [], sparks = [], fireTime = 0, nextFire = .35, fireIndex = 0, lastFrame = 0;
+  function isCertification() {
+    return /^(certificacoes|offsec-certs|security-plus|crta|oscp)$/.test(document.body.getAttribute("data-page") || "");
+  }
+  function resetFireworks() { rockets = []; sparks = []; fireTime = 0; nextFire = .35; lastFrame = 0; }
+  function fireColors() {
+    var page = document.body.getAttribute("data-page");
+    if (page === "oscp" || page === "offsec-certs") return ["137,217,216", "188,172,229", "204,216,232"];
+    if (page === "security-plus") return ["227,153,162", "219,201,180", "205,212,227"];
+    if (page === "crta") return ["216,137,169", "213,181,204", "205,212,227"];
+    return ["211,181,121", "193,208,232", "233,215,175"];
+  }
+  function drawFireworks(dt) {
+    ctx.clearRect(0, 0, W, H); ctx.globalAlpha = 1;
+    if (reduce) return;
+    fireTime += dt;
+    if (fireTime >= nextFire) {
+      var places = [.16, .84, .29, .73], colors = fireColors();
+      rockets.push({x: W * places[fireIndex % 4], y: H + 8,
+        target: H * (W < 620 ? .13 : .16) + (fireIndex % 3) * 23,
+        speed: Math.max(180, H * .64), trail: [], color: colors[fireIndex % colors.length]});
+      fireIndex++; nextFire = fireTime + 2.9;
+    }
+    for (var r = rockets.length - 1; r >= 0; r--) {
+      var rocket = rockets[r]; rocket.y -= rocket.speed * dt;
+      rocket.trail.unshift({x:rocket.x, y:rocket.y}); if (rocket.trail.length > 13) rocket.trail.pop();
+      rocket.trail.forEach(function(t, i) {
+        ctx.fillStyle = "rgba(" + rocket.color + "," + (.32 * (1 - i / 13)) + ")";
+        ctx.fillRect(Math.round(t.x), Math.round(t.y), 2, 3);
+      });
+      ctx.fillStyle = "rgba(" + rocket.color + ",.72)";
+      ctx.fillRect(Math.round(rocket.x)-1, Math.round(rocket.y)-1, 3, 3);
+      if (rocket.y <= rocket.target) {
+        var count = W < 620 ? 30 : 42;
+        for (var i = 0; i < count; i++) {
+          var angle = Math.PI * 2 * i / count + (Math.random() - .5) * .12, speed = 25 + Math.random() * 48;
+          sparks.push({x:rocket.x, y:rocket.y, vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed,
+            age:0, life:2.3+Math.random()*1.5, size:Math.random()<.7?2:3, color:rocket.color});
+        }
+        rockets.splice(r, 1);
+      }
+    }
+    var drag = Math.exp(-.75 * dt);
+    sparks.forEach(function(pixel) {
+      pixel.age += dt; pixel.vx *= drag; pixel.vy = pixel.vy * drag + 25 * dt;
+      pixel.x += pixel.vx * dt; pixel.y += pixel.vy * dt;
+      var alpha = .55 * Math.pow(Math.max(0, 1-pixel.age/pixel.life), .85);
+      ctx.fillStyle = "rgba("+pixel.color+","+alpha+")";
+      ctx.fillRect(Math.round(pixel.x), Math.round(pixel.y), pixel.size, pixel.size);
+    });
+    sparks = sparks.filter(function(pixel) { return pixel.age < pixel.life; });
+  }
   function resize() {
     DPR = Math.min(window.devicePixelRatio || 1, 2);
     var r = cv.getBoundingClientRect();
@@ -1857,7 +1918,8 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
     parts = [];
     for (var i = 0; i < n; i++) { parts.push(mk(true)); }
   }
-  function draw(moving) {
+  function draw(moving, dt) {
+    if (isCertification()) { drawFireworks(moving ? dt : 0); return; }
     ctx.clearRect(0, 0, W, H);
     var world = document.body.getAttribute("data-world");
     var offsecWorld = world === "offsec", htbWorld = world === "htb", certWorld = world === "certs", gameWorld = world === "game";
@@ -1878,18 +1940,20 @@ var UPDATED   = "2026-09-29";   /* data da última atualização      */
     }
     ctx.globalAlpha = 1;
   }
-  function loop() { draw(true); raf = requestAnimationFrame(loop); }
-  function start() { if (!raf && !reduce) { raf = requestAnimationFrame(loop); } }
-  function stop() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
+  function loop(time) { var dt = lastFrame ? Math.min((time-lastFrame)/1000,.04) : 0; lastFrame = time; draw(true, dt); raf = requestAnimationFrame(loop); }
+  function start() { if (!raf && !reduce && !document.hidden) { raf = requestAnimationFrame(loop); } }
+  function stop() { lastFrame = 0; if (raf) { cancelAnimationFrame(raf); raf = null; } }
 
   resize(); seed();
   if (reduce) { draw(false); } else { start(); }
 
-  window.addEventListener("hashchange", function () { if (reduce) { draw(false); } });
+  new MutationObserver(function () { resetFireworks(); ctx.clearRect(0,0,W,H); if (reduce) { draw(false); } })
+    .observe(document.body, {attributes:true, attributeFilter:["data-page"]});
+  motion.addEventListener("change", function () { reduce = motion.matches; stop(); resetFireworks(); if (reduce) { draw(false); } else { start(); } });
   var rt;
   window.addEventListener("resize", function () {
     clearTimeout(rt);
-    rt = setTimeout(function () { resize(); seed(); if (reduce) { draw(false); } }, 200);
+    rt = setTimeout(function () { resize(); seed(); resetFireworks(); if (reduce) { draw(false); } }, 200);
   }, { passive: true });
   document.addEventListener("visibilitychange", function () {
     if (document.hidden) { stop(); } else { start(); }
@@ -2114,6 +2178,7 @@ function createSaveGame(os, english) {
 </script>
 </body>
 </html>
+
 
 
 

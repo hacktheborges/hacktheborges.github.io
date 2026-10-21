@@ -2,895 +2,986 @@
 <html lang="pt-BR" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
-<meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="description" content="Artur Borges (hacktheborges) - analista de seguranca da informacao em trilha para seguranca ofensiva. Certificacoes, laboratorios, writeups e ferramental.">
-<meta name="color-scheme" content="light dark">
-<meta property="og:title" content="Artur Borges - Offensive Security">
-<meta property="og:description" content="Certificacoes, laboratorios, writeups e ferramental.">
-<meta property="og:type" content="profile">
-<meta property="og:url" content="https://hacktheborges.github.io/">
-<title>Artur Borges</title>
-<link rel="icon" href="/favicon.ico?v=9" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/avatar-32.png?v=9">
-<link rel="apple-touch-icon" href="/assets/img/avatar-180.png?v=9">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="/assets/css/cv.css?v=24">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>hacktheborges</title>
+<meta name="description" content="Artur Borges (hacktheborges) — analista de segurança da informação em trilha para segurança ofensiva. Apresentado por Nyx & Byte: certificações, laboratórios e conquistas.">
+<style>
+:root{
+  --bg:#0e1016; --bg2:#12151f; --panel:#171a24; --panel2:#1d2130; --line:#272c3b;
+  --ink:#eef1f7; --mut:#9aa3b8; --soft:#6f7891;
+  --nyx:#ff4d8d; --nyx-soft:#ff7fb0;
+  --byte:#35b6ff; --byte-soft:#8fd6ff;
+  --ok:#49d49d; --warn:#ffcf5c;
+  --radius:16px; --radius-s:10px;
+  --mono:ui-monospace,"JetBrains Mono","Cascadia Code",Menlo,Consolas,monospace;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --shadow:0 18px 50px -24px rgba(0,0,0,.75);
+  color-scheme:dark;
+}
+:root[data-theme="light"]{
+  --bg:#f4f5f8; --bg2:#eceef3; --panel:#ffffff; --panel2:#f3f5fa; --line:#e2e6ef;
+  --ink:#171a22; --mut:#5a6377; --soft:#8891a6;
+  --shadow:0 18px 50px -28px rgba(20,24,40,.35);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;padding:0}
+body{
+  background:radial-gradient(1200px 700px at 78% -10%,rgba(53,182,255,.10),transparent 60%),
+             radial-gradient(1000px 650px at 12% 108%,rgba(255,77,141,.10),transparent 60%),
+             var(--bg);
+  color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:15.5px;
+  -webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden;
+}
+a{color:inherit}
+h1,h2,h3{line-height:1.2;margin:0 0 .4em}
+h1{font-size:clamp(1.9rem,4.2vw,2.9rem);letter-spacing:-.02em;font-weight:800}
+h2{font-size:1.28rem;font-weight:750;letter-spacing:-.01em}
+h3{font-size:1.02rem;font-weight:700}
+p{margin:0 0 .8em}
+.mono{font-family:var(--mono)}
+.mut{color:var(--mut)}
+
+/* ===== top bar ===== */
+.top{
+  position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:12px;
+  padding:12px clamp(14px,4vw,34px);
+  padding-top:calc(12px + env(safe-area-inset-top,0));
+  background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.brand{font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:.02em;display:flex;align-items:center;gap:9px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--nyx);box-shadow:0 0 0 4px rgba(255,77,141,.18);animation:pulse 2.4s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(255,77,141,0)}}
+.brand b{color:var(--byte-soft)}
+.top .sp{flex:1}
+.tbtn{
+  font-family:var(--mono);font-size:12px;border:1px solid var(--line);background:var(--panel);
+  color:var(--mut);border-radius:999px;padding:7px 12px;cursor:pointer;display:inline-flex;gap:6px;align-items:center;
+  transition:.18s;white-space:nowrap;
+}
+.tbtn:hover{color:var(--ink);border-color:var(--soft)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--panel)}
+.seg button{font-family:var(--mono);font-size:12px;border:0;background:transparent;color:var(--mut);padding:7px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.menu-wrap{position:relative}
+#menu-pop{
+  position:absolute;right:0;top:calc(100% + 8px);width:230px;background:var(--panel);border:1px solid var(--line);
+  border-radius:14px;box-shadow:var(--shadow);padding:7px;display:none;flex-direction:column;z-index:60;
+}
+#menu-pop.open{display:flex}
+#menu-pop button{
+  font-family:var(--mono);font-size:12.5px;text-align:left;background:transparent;border:0;color:var(--mut);
+  padding:9px 10px;border-radius:9px;cursor:pointer;display:flex;gap:9px;align-items:center
+}
+#menu-pop button:hover{background:var(--panel2);color:var(--ink)}
+#menu-pop button .ix{color:var(--byte);font-size:11px;width:16px}
+
+/* ===== stage ===== */
+.stage-wrap{max-width:940px;margin:0 auto;padding:clamp(18px,4vw,40px) clamp(16px,4vw,26px) 230px;position:relative;min-height:70vh}
+.panel{display:none;animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+.panel.active{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--nyx-soft);margin:0 0 10px;font-weight:600}
+.lede{font-size:1.08rem;color:var(--mut);max-width:62ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.chip{font-family:var(--mono);font-size:12px;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 11px;color:var(--mut);display:inline-flex;gap:7px;align-items:center;text-decoration:none;transition:.18s}
+a.chip:hover{border-color:var(--byte);color:var(--ink)}
+.chip .d{width:7px;height:7px;border-radius:50%;background:var(--ok)}
+
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.grid{display:grid;gap:14px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:720px){.g3,.g2{grid-template-columns:1fr}}
+
+/* countdown */
+.count{display:flex;flex-wrap:wrap;gap:22px;align-items:center;background:linear-gradient(120deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin:18px 0}
+.count .big{font-family:var(--mono);font-weight:800;font-size:clamp(2.4rem,8vw,3.6rem);line-height:1;color:var(--ink);letter-spacing:-.02em}
+.count .big.done{color:var(--ok)}
+.count .k{font-family:var(--mono);font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.1em}
+.count .rk{margin-left:auto;display:flex;flex-direction:column;gap:6px;align-items:flex-end;text-align:right}
+.count .rk b{font-family:var(--mono);font-size:14px}
+.count .rk span{font-size:11px;color:var(--soft);font-family:var(--mono)}
+
+/* stats */
+.statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-top:12px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-s);padding:14px}
+.stat .v{font-family:var(--mono);font-weight:800;font-size:1.7rem;letter-spacing:-.02em}
+.stat .v .u{font-size:.9rem;color:var(--mut)}
+.stat .k{font-size:11.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.caprow{display:flex;align-items:center;gap:9px;margin:20px 0 6px}
+.caprow .c{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+.caprow .ln{flex:1;height:1px;background:var(--line)}
+
+/* cert cards */
+.cert{position:relative;display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;transition:.2s;overflow:hidden}
+.cert:hover{border-color:var(--byte);transform:translateY(-3px)}
+.cert::after{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--nyx),var(--byte))}
+.cert .st{font-family:var(--mono);font-size:11px;padding:3px 8px;border-radius:999px;display:inline-block;margin-bottom:10px}
+.st.ok{background:rgba(73,212,157,.14);color:var(--ok)}
+.st.prog{background:rgba(255,207,92,.16);color:var(--warn)}
+.cert .sub{font-family:var(--mono);font-size:12px;color:var(--mut)}
+.cert .go{position:absolute;right:16px;bottom:14px;color:var(--soft);font-family:var(--mono);font-size:12px}
+
+/* detail / road */
+.back{font-family:var(--mono);font-size:12px;color:var(--mut);background:transparent;border:1px solid var(--line);border-radius:999px;padding:7px 12px;cursor:pointer;margin-bottom:16px;display:inline-flex;gap:7px}
+.back:hover{color:var(--ink)}
+.road p{color:var(--mut);max-width:70ch}
+.road .shout{font-family:var(--mono);color:var(--ok);font-weight:700}
+.phases{display:grid;gap:10px;margin-top:10px}
+.phase{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-s);padding:13px 15px}
+.phase b{display:block;margin-bottom:8px}
+.tags{display:flex;flex-wrap:wrap;gap:7px}
+.tag{font-family:var(--mono);font-size:11.5px;background:var(--panel2);border:1px solid var(--line);border-radius:7px;padding:4px 8px;color:var(--mut)}
+
+/* timeline */
+.tl{position:relative;margin-top:10px;padding-left:22px}
+.tl::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.job{position:relative;padding:0 0 20px}
+.job::before{content:"";position:absolute;left:-21px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--byte)}
+.job.red::before{border-color:var(--nyx)}
+.job .when{font-family:var(--mono);font-size:12px;color:var(--soft)}
+.job .org{color:var(--byte-soft);font-family:var(--mono);font-size:12.5px;margin:2px 0 6px}
+.job ul{margin:6px 0 0;padding-left:18px;color:var(--mut);font-size:14px}
+.job li{margin-bottom:5px}
+
+/* contact */
+.mailbox{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin:14px 0}
+.mailbox .m{font-family:var(--mono);font-size:15px}
+.copy{font-family:var(--mono);font-size:12px;border:1px solid var(--byte);color:var(--byte);background:transparent;border-radius:999px;padding:7px 14px;cursor:pointer}
+.copy:hover{background:var(--byte);color:var(--bg)}
+
+/* ===== VN dock ===== */
+.vn{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  padding:0 clamp(10px,3vw,22px) calc(14px + env(safe-area-inset-bottom,0));
+  pointer-events:none;
+}
+.vn-inner{
+  max-width:940px;margin:0 auto;pointer-events:auto;
+  background:color-mix(in srgb,var(--panel) 94%,transparent);
+  border:1px solid var(--line);border-top-width:2px;
+  border-radius:18px;box-shadow:var(--shadow);backdrop-filter:blur(10px);
+  padding:14px 16px 12px;position:relative;
+}
+.cast{display:flex;gap:4px;position:absolute;top:-62px;left:14px;align-items:flex-end;z-index:2}
+.ava{width:60px;height:76px;filter:grayscale(.65) opacity(.5);transition:filter .3s;transform-origin:bottom center}
+.ava svg{width:100%;height:100%;display:block;overflow:visible}
+.ava.nyx{animation:floatA 3.4s ease-in-out infinite}
+.ava.byte{animation:floatB 3.9s ease-in-out infinite}
+.ava.on{animation:talkBob .66s ease-in-out infinite}
+.ava.nyx.on{filter:drop-shadow(0 8px 16px rgba(255,77,141,.5))}
+.ava.byte.on{filter:drop-shadow(0 8px 16px rgba(53,182,255,.5))}
+@keyframes floatA{50%{transform:translateY(-4px)}}
+@keyframes floatB{50%{transform:translateY(-5px)}}
+@keyframes talkBob{0%,100%{transform:translateY(0) scale(1.04)}50%{transform:translateY(-4px) scale(1.07)}}
+.vn-name{font-family:var(--mono);font-weight:700;font-size:13px;margin:4px 0 4px 134px;min-height:18px}
+.vn-name.nyx{color:var(--nyx-soft)}
+.vn-name.byte{color:var(--byte-soft)}
+.vn-text{min-height:3.2em;font-size:15.5px;color:var(--ink)}
+.vn-text .caret{display:inline-block;width:8px;height:1.05em;vertical-align:-2px;background:var(--nyx);margin-left:2px;animation:bl 1s steps(1) infinite}
+.vn-text.byte .caret{background:var(--byte)}
+@keyframes bl{50%{opacity:0}}
+.vn-ctl{display:flex;align-items:center;gap:10px;margin-top:10px}
+.vn-ctl .pg{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.vn-ctl .sp{flex:1}
+.vn-ctl button{font-family:var(--mono);font-size:12px;border:1px solid var(--line);background:var(--panel2);color:var(--mut);border-radius:999px;padding:7px 13px;cursor:pointer;transition:.16s}
+.vn-ctl button:hover{color:var(--ink);border-color:var(--soft)}
+.vn-ctl .go{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.vn-ctl .go:hover{opacity:.9;color:var(--bg)}
+.hintline{font-family:var(--mono);font-size:11px;color:var(--soft);margin:7px 0 0 2px}
+
+/* ===== terminal game ===== */
+.term-shell{background:#0a0c12;border:1px solid #272c3b;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);margin-top:6px;
+  --ink:#eef1f7;--mut:#9aa3b8;--soft:#6f7891;--line:#272c3b;--panel:#11141d;--panel2:#1d2130;color:#cdd6e6}
+.term-bar{display:flex;align-items:center;gap:8px;padding:9px 13px;background:#11141d;border-bottom:1px solid var(--line)}
+.term-bar .b{width:11px;height:11px;border-radius:50%}
+.b1{background:#ff5f57}.b2{background:#febc2e}.b3{background:#28c840}
+.term-bar .t{font-family:var(--mono);font-size:11.5px;color:var(--soft);margin-left:6px}
+.term-bar .os{margin-left:auto;display:flex;gap:6px}
+.term-bar .os button{font-family:var(--mono);font-size:11px;border:1px solid var(--line);background:transparent;color:var(--mut);border-radius:7px;padding:4px 9px;cursor:pointer}
+.term-bar .os button[aria-pressed="true"]{color:var(--ink);border-color:var(--byte)}
+.term-mission{display:flex;gap:10px;align-items:center;padding:9px 13px;background:#0d1017;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px}
+.term-mission .pz{color:var(--byte)}
+.term-mission .ms{color:var(--ink)}
+.term-mission .pr{margin-left:auto;color:var(--ok)}
+.term-out{font-family:var(--mono);font-size:13px;line-height:1.55;padding:13px;height:300px;overflow-y:auto;color:#cdd6e6;white-space:pre-wrap;word-break:break-word}
+.ln{margin:0 0 2px}
+.ln.cmd{color:#eaf0fb}.ln.cmd .p{color:var(--byte)}
+.ln.err{color:#ff8a8a}.ln.ok{color:var(--ok)}
+.ln.sys{color:var(--soft)}
+.ln.nyx{color:var(--nyx-soft)}.ln.byte{color:var(--byte-soft)}
+.term-in{display:flex;align-items:center;gap:8px;border-top:1px solid var(--line);padding:10px 13px;background:#0d1017}
+.term-in .p{font-family:var(--mono);color:var(--byte);font-size:13px}
+.term-in input{flex:1;background:transparent;border:0;outline:0;color:var(--ink);font-family:var(--mono);font-size:13px}
+.term-in button{font-family:var(--mono);font-size:11px;border:1px solid var(--line);background:transparent;color:var(--mut);border-radius:7px;padding:5px 9px;cursor:pointer}
+.term-start{display:flex;flex-direction:column;gap:12px;align-items:flex-start;padding:22px}
+.term-start .os-pick{display:flex;gap:10px;flex-wrap:wrap}
+.pick{font-family:var(--mono);font-size:13px;border:1px solid var(--line);background:#11141d;color:var(--ink);border-radius:10px;padding:11px 16px;cursor:pointer;transition:.18s}
+.pick:hover{border-color:var(--byte);transform:translateY(-2px)}
+.win-badge{background:linear-gradient(120deg,rgba(255,77,141,.16),rgba(53,182,255,.16));border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-family:var(--mono);font-size:12.5px;color:var(--ink);margin-top:10px}
+
+.foot{max-width:940px;margin:0 auto;padding:10px clamp(16px,4vw,26px) 0;color:var(--soft);font-family:var(--mono);font-size:11px}
+.disclaim{color:var(--soft);font-size:12px;font-family:var(--mono);margin-top:18px;border-left:2px solid var(--line);padding-left:12px}
+::selection{background:var(--nyx);color:#fff}
+
+/* ===== intro / opening cinematic ===== */
+.intro{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;
+  background:radial-gradient(900px 620px at 50% 42%,rgba(53,182,255,.09),transparent 60%),
+             radial-gradient(700px 500px at 50% 80%,rgba(255,77,141,.08),transparent 60%),var(--bg);
+  transition:opacity .6s ease}
+.intro.done{opacity:0;pointer-events:none}
+.intro-scene{display:flex;align-items:center;justify-content:center;gap:clamp(5px,1.6vw,16px);
+  font-family:var(--mono);font-weight:800;letter-spacing:-.03em}
+.intro .word{font-size:clamp(1.7rem,8vw,4.2rem);line-height:1;white-space:nowrap}
+.intro .w-the{color:var(--soft);opacity:.45;transform:scale(.88);animation:theWake .5s 1.35s forwards}
+@keyframes theWake{to{color:var(--ink);opacity:1;transform:none}}
+.intro .w-hack{color:var(--nyx-soft);text-shadow:0 0 22px rgba(255,77,141,.35)}
+.intro .w-borges{color:var(--byte-soft);text-shadow:0 0 22px rgba(53,182,255,.35)}
+.carry{display:flex;align-items:center;gap:clamp(3px,1.2vw,12px)}
+.carry.left{animation:inLeft 1.5s cubic-bezier(.2,.85,.2,1) both}
+.carry.right{animation:inRight 1.5s cubic-bezier(.2,.85,.2,1) both}
+@keyframes inLeft{0%{transform:translateX(-88vw) rotate(-6deg);opacity:0}70%{opacity:1}100%{transform:none}}
+@keyframes inRight{0%{transform:translateX(88vw) rotate(6deg);opacity:0}70%{opacity:1}100%{transform:none}}
+.intro .char{width:clamp(66px,12vw,108px);height:auto;flex:none;filter:drop-shadow(0 14px 26px rgba(0,0,0,.5))}
+.intro .char svg{width:100%;height:auto;display:block;overflow:visible}
+.intro .char-nyx{animation:bobA 2.4s ease-in-out 1.5s infinite}
+.intro .char-byte{animation:bobB 2.7s ease-in-out 1.5s infinite}
+@keyframes bobA{50%{transform:translateY(-8px)}}
+@keyframes bobB{50%{transform:translateY(-6px)}}
+.intro-scene.lock{animation:lockPulse .6s 1.65s}
+@keyframes lockPulse{40%{filter:drop-shadow(0 0 20px rgba(255,77,141,.55)) drop-shadow(0 0 20px rgba(53,182,255,.55))}}
+.intro-tag{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);opacity:0;animation:tagIn .6s 2s forwards}
+@keyframes tagIn{to{opacity:1}}
+.intro-skip{position:absolute;bottom:24px;right:24px;font-family:var(--mono);font-size:12px;color:var(--mut);background:transparent;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}
+.intro-skip:hover{color:var(--ink);border-color:var(--soft)}
+@media(max-width:480px){.intro .char{width:52px}.intro .word{font-size:1.55rem}}
+@media(prefers-reduced-motion:reduce){.carry,.intro .w-the,.intro .char,.intro-tag{animation:none!important;opacity:1!important;transform:none!important;color:inherit}}
+</style>
 </head>
 <body>
 
-<div id="bg" aria-hidden="true">
-  <span class="bg-layer bg-aurora"></span>
-  <canvas id="dust" class="bg-layer"></canvas>
-</div>
+<!-- ===== character sprites (Nyx & Byte) ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="char-nyx" viewBox="0 0 120 150">
+    <style>
+      #char-nyx .nx-eye{transform-box:fill-box;transform-origin:center;animation:nxBlink 4.2s infinite}
+      @keyframes nxBlink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+      #char-nyx .nx-glow{animation:nxGlow 2.8s ease-in-out infinite}
+      @keyframes nxGlow{50%{opacity:.6}}
+    </style>
+    <path d="M30 70 Q60 58 90 70 L104 150 L16 150 Z" fill="#241020" stroke="#ff4d8d" stroke-width="2"/>
+    <path d="M44 80 Q60 72 76 80 L82 150 L38 150 Z" fill="#180b14"/>
+    <path d="M32 64 Q60 10 88 64 Q80 82 60 82 Q40 82 32 64 Z" fill="#2e1326" stroke="#ff4d8d" stroke-width="2"/>
+    <path d="M60 13 L67 31 L53 31 Z" fill="#ff4d8d" opacity=".45"/>
+    <ellipse cx="60" cy="58" rx="18" ry="16" fill="#120810"/>
+    <ellipse class="nx-glow" cx="52" cy="57" rx="7.5" ry="7.5" fill="#ff4d8d" opacity=".28"/>
+    <ellipse class="nx-glow" cx="68" cy="57" rx="7.5" ry="7.5" fill="#ff4d8d" opacity=".28"/>
+    <path class="nx-eye" d="M47 58 Q52 51 57 58 Q52 62 47 58 Z" fill="#ff7fb0"/>
+    <path class="nx-eye" d="M63 58 Q68 51 73 58 Q68 62 63 58 Z" fill="#ff7fb0"/>
+    <path d="M50 68 Q60 77 72 66" fill="none" stroke="#ff7fb0" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M66 70 l2 4.5 l2 -4.5 z" fill="#ff7fb0"/>
+    <circle class="nx-glow" cx="99" cy="52" r="2.6" fill="#ff4d8d"/>
+    <circle class="nx-glow" cx="21" cy="74" r="2.1" fill="#ff4d8d"/>
+  </symbol>
+  <symbol id="char-byte" viewBox="0 0 120 150">
+    <style>
+      #char-byte .by-eye{transform-box:fill-box;transform-origin:center;animation:byBlink 3.6s infinite}
+      @keyframes byBlink{0%,90%,100%{transform:scaleY(1)}94%{transform:scaleY(.12)}}
+      #char-byte .by-pulse{animation:byPulse 2.4s ease-in-out infinite}
+      @keyframes byPulse{50%{opacity:.35}}
+    </style>
+    <line x1="60" y1="16" x2="60" y2="30" stroke="#35b6ff" stroke-width="2"/>
+    <circle class="by-pulse" cx="60" cy="13" r="4" fill="#35b6ff"/>
+    <rect x="18" y="86" width="11" height="30" rx="5" fill="#142231" stroke="#35b6ff" stroke-width="1.6"/>
+    <rect x="91" y="86" width="11" height="30" rx="5" fill="#142231" stroke="#35b6ff" stroke-width="1.6"/>
+    <rect x="33" y="80" width="54" height="50" rx="13" fill="#142231" stroke="#35b6ff" stroke-width="2"/>
+    <circle class="by-pulse" cx="60" cy="104" r="6" fill="#35b6ff"/>
+    <rect x="42" y="128" width="12" height="16" rx="4" fill="#142231" stroke="#35b6ff" stroke-width="1.6"/>
+    <rect x="66" y="128" width="12" height="16" rx="4" fill="#142231" stroke="#35b6ff" stroke-width="1.6"/>
+    <rect x="28" y="30" width="64" height="50" rx="15" fill="#182636" stroke="#35b6ff" stroke-width="2"/>
+    <rect x="34" y="37" width="52" height="37" rx="11" fill="#0b131d"/>
+    <rect class="by-eye" x="44" y="48" width="9" height="12" rx="3.5" fill="#8fd6ff"/>
+    <rect class="by-eye" x="67" y="48" width="9" height="12" rx="3.5" fill="#8fd6ff"/>
+    <path d="M50 67 Q60 72 70 67" fill="none" stroke="#35b6ff" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+</defs></svg>
 
-<section id="hub" class="screen door-screen home" aria-label="Início">
-  <div class="hub-top">
-    <span class="hub-mark" role="img" aria-label="Avatar do V de Vingança em pixel art"></span>
-    <div class="switch" role="group" aria-label="Idioma / Language">
-      <button type="button" data-lang="pt" aria-pressed="true">PT</button>
-      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+<!-- ===== opening cinematic ===== -->
+<div id="intro" class="intro">
+  <div class="intro-scene" id="intro-scene">
+    <div class="carry left">
+      <div class="char char-nyx"><svg viewBox="0 0 120 150" aria-hidden="true"><use href="#char-nyx"/></svg></div>
+      <span class="word w-hack">hack</span>
+    </div>
+    <span class="word w-the">the</span>
+    <div class="carry right">
+      <span class="word w-borges">borges</span>
+      <div class="char char-byte"><svg viewBox="0 0 120 150" aria-hidden="true"><use href="#char-byte"/></svg></div>
     </div>
   </div>
-  <div class="hub-inner">
-    <p class="hub-kicker" data-en="Offensive security portfolio">Portfólio de segurança ofensiva</p>
-    <h1 class="hub-title hub-title-v" data-depth="10" data-glitch="hacktheborges" aria-label="hacktheborges"><span class="hub-hack" aria-hidden="true"><span class="hub-hack-word">h<span class="hub-ac">ac<img class="hub-peek" src="/assets/img/v/hub-peek.png" width="512" height="341" alt="" decoding="async" fetchpriority="high"></span>k</span></span><span aria-hidden="true">theborges</span></h1>
-    <p class="hub-sub" data-en="Pick a door.">Escolha uma porta.</p>
-    <nav class="hub-grid" data-depth="5" aria-label="Seções principais">
-      <a class="hub-box b-offsec has-art art-offsec" href="#offsec">
-        <span class="hb-num">4444</span>
-        <span class="hb-name">OffSec</span>
-        <span class="hb-go" aria-hidden="true">→</span>
-      </a>
-      <a class="hub-box b-htb has-art art-htb" href="#htb">
-        <span class="hb-num">5986</span>
-        <span class="hb-name">Hackthebox</span>
-        <span class="hb-go" aria-hidden="true">→</span>
-      </a>
-      <a class="hub-box b-cert has-art art-cert" href="#certificacoes">
-        <span class="hb-num">443</span>
-        <span class="hb-name" data-en="Certifications">Certificações</span>
-        <span class="hb-go" aria-hidden="true">→</span>
-      </a>
-      <a class="hub-box b-sobre has-art art-sobre" href="#sobre">
-        <span class="hb-num">80</span>
-        <span class="hb-name" data-en="About">Sobre</span>
-        <span class="hb-go" aria-hidden="true">→</span>
-      </a>
-      <a class="hub-box b-play has-art art-play" href="#play">
-        <span class="hb-num">21</span>
-        <span class="hb-name">Do you wanna play?</span>
-        <span class="hb-go" aria-hidden="true">→</span>
-      </a>
-    </nav>
-    <p class="hub-count"><b data-days>—</b> <span data-en="days to the OSCP exam">dias para o exame OSCP</span></p>
+  <div class="intro-tag" data-en="interactive CV &middot; guided by Nyx &amp; Byte">currículo interativo &middot; guiado por Nyx &amp; Byte</div>
+  <button class="intro-skip" id="intro-skip" data-en="skip &#9197;">pular &#9197;</button>
+</div>
+
+<header class="top">
+  <div class="brand"><span class="dot"></span>hack<b>the</b>borges</div>
+  <div class="sp"></div>
+  <div class="seg" role="group" aria-label="idioma">
+    <button data-lang="pt" aria-pressed="true">PT</button>
+    <button data-lang="en" aria-pressed="false">EN</button>
   </div>
-</section>
+  <button class="tbtn" id="theme" aria-label="tema">◐</button>
+  <div class="menu-wrap">
+    <button class="tbtn" id="menu-btn" aria-haspopup="true" aria-expanded="false">☰ <span data-en="Chapters">Capítulos</span></button>
+    <div id="menu-pop" role="menu"></div>
+  </div>
+</header>
 
+<main class="stage-wrap" id="stage">
 
-<!-- ══════════ CURRÍCULO ══════════ -->
-  <section class="screen content-screen" id="v-curriculo" data-title-pt="Currículo" data-title-en="CV">
-    <p class="eyebrow" data-en="Offensive Security">Segurança Ofensiva</p>
-    <h1>Artur Borges<span class="term-caret" aria-hidden="true"></span></h1>
-    <p class="lede" data-en="Information security analyst. Currently hunting the Offensive Security Certified Professional (OSCP) certification.">Analista de segurança da informação. Caçando no momento a certificação Offensive Security Certified Professional (OSCP).</p>
-
-    <div class="meta">
-      <span class="chip"><span class="dot"></span><span data-en="Available for red team roles">Disponível para vagas de red team</span></span>
-      <span class="chip"><span data-en="English — advanced">Inglês — avançado</span></span>
-      <span class="chip"><span data-en="Flag hunter">Caçador de Flags</span></span>
+  <!-- 0 INTRO -->
+  <section class="panel" data-panel="intro">
+    <p class="eyebrow" data-en="Offensive security · interactive CV">Segurança ofensiva · currículo interativo</p>
+    <h1>Artur Borges</h1>
+    <p class="lede" data-en="Information security analyst on a path to offensive security. Two guides — Nyx and Byte — will walk you through who I am and what I have earned. Press continue, or jump anywhere from the menu.">Analista de segurança da informação em trilha para a segurança ofensiva. Dois guias — Nyx e Byte — vão te conduzir por quem eu sou e pelo que conquistei. Aperte continuar, ou pule pra qualquer parte pelo menu.</p>
+    <div class="chips">
+      <span class="chip"><span class="d"></span><span data-en="Available for red team roles">Disponível para red team</span></span>
+      <span class="chip" data-en="English — advanced">Inglês — avançado</span>
+      <span class="chip" data-en="Flag hunter">Caçador de flags</span>
       <span class="chip">Passo Fundo, RS — Brasil</span>
     </div>
+  </section>
 
-    <hr class="rule">
-
-    <div class="exam">
-      <div class="count">
-        <span class="num" data-days>—</span>
-        <span class="lbl" data-en="days to the OSCP">dias para o OSCP</span>
-        <span class="date" data-examdate></span>
-      </div>
-      <div class="track">
-        <div class="bar-row">
-          <div class="bar-top"><span data-en="OffSec labs completed">Labs OffSec concluídos</span><b>91</b></div>
-          <div class="prog"><i class="ok w72"></i></div>
-        </div>
-        <div class="rank">
-          <span class="rank-v">#3 <span data-en="Brazil">Brasil</span></span>
-          <span class="rank-k">OffSec Rank Leaderboard</span>
-        </div>
-        <div class="rank">
-          <span class="rank-v">Under 300 <span data-en="World">Mundo</span></span>
-          <span class="rank-k">OffSec Rank Leaderboard</span>
-        </div>
-        <a class="chip" href="https://portal.offsec.com/public-profile/de8b0b16-ad26-3aa0-ad2f-3c49183ca217"><span data-en="OffSec public profile">Perfil público OffSec</span> ↗</a>
-      </div>
-    </div>
-
-    <h2 class="sub-h" data-en="Certifications">Certificações</h2>
-    <div class="grid">
-      <a class="card" href="#oscp">
-        <span class="status s-prog" data-en="exam 23 Oct 2026">exame 23 out 2026</span>
-        <h3>OSCP</h3>
-        <span class="sub">OffSec · PEN-200</span>
-      </a>
-      <a class="card" href="#crta">
-        <span class="status s-ok" data-en="certified">obtida</span>
-        <h3>CRTA</h3>
-        <span class="sub">CyberWarFare Labs · <span data-en="Aug 2026">ago 2026</span></span>
-      </a>
-      <a class="card" href="#security-plus">
-        <span class="status s-ok" data-en="certified">obtida</span>
-        <h3>CompTIA Security+</h3>
-        <span class="sub"><span data-en="Aug 2025">ago 2025</span></span>
-      </a>
-    </div>
-
-    <h2 class="sub-h" data-en="Hands-on record">Prática registrada</h2>
-    <div class="statset">
-      <div class="offsec">
-        <p class="cap">OffSec</p>
-        <div class="stats">
-          <div class="stat"><div class="v">91</div><div class="k" data-en="Labs">Labs</div></div>
-          <div class="stat"><div class="v">215</div><div class="k" data-en="flags captured">Flags capturadas</div></div>
-          <div class="stat"><div class="v">569<span class="unit">h</span></div><div class="k" data-en="in labs">Em laboratório</div></div>
-          <div class="stat"><div class="v">25</div><div class="k" data-en="Pins &amp; badges">Pin &amp; Badges</div></div>
-          <div class="stat"><div class="v">2</div><div class="k">Assessments</div></div>
-        </div>
-      </div>
-      <div class="htb">
-        <p class="cap">Hack The Box</p>
-        <div class="stats">
-          <div class="stat"><div class="v">32</div><div class="k" data-en="modules">Módulos</div></div>
-          <div class="stat"><div class="v">3</div><div class="k" data-en="Labs">Labs</div></div>
-          <div class="stat"><div class="v">13</div><div class="k">Sherlocks</div></div>
-          <div class="stat"><div class="v">16</div><div class="k">Challenges</div></div>
-          <div class="stat"><div class="v">1</div><div class="k">Mini Pro Labs</div></div>
-          <div class="stat"><div class="v on" data-en="Active">Ativo</div><div class="k">CTF &amp; Season</div></div>
-        </div>
-      </div>
-    </div>
-    <p class="note" data-en="These are the numbers that do the polishing.">São esses números que lapidam.</p>
-
-    <h2 class="sub-h" data-en="Current role">Cargo atual</h2>
-    <div class="tl">
-      <article class="job">
-        <div class="when">2025 — <span data-en="present">atualmente</span></div>
-        <div>
-          <h3 data-en="Information Security Analyst">Analista de Segurança da Informação</h3>
-          <p class="org">Farmácias São João</p>
-          <ul>
-            <li data-en="Internal pentest on web applications and sites">Pentest interno em aplicações e sites</li>
-            <li data-en="Log analysis and endpoint forensics with CrowdStrike">Análise de logs e forense em endpoints com CrowdStrike</li>
-            <li data-en="Fortinet firewalls and Active Directory administration">Firewall Fortinet e administração de Active Directory</li>
-          </ul>
-        </div>
-      </article>
-    </div>
-
-    <h2 class="sub-h" data-en="Contact">Contato</h2>
-    <div class="contact">
-      <span class="mail" data-mail>arturborges.contato@gmail.com</span>
-      <button class="copy" type="button" data-copy data-en="Copy">Copiar</button>
-    </div>
-    <div class="meta">
-      <a class="chip" href="https://www.linkedin.com/in/arturborgges/">LinkedIn ↗</a>
-      <a class="chip" href="https://github.com/hacktheborges">GitHub ↗</a>
-      <a class="chip" href="https://profile.hackthebox.com/profile/019e2c5e-b1eb-7093-b9fa-ec20945bbefb">Hack The Box ↗</a>
-      <a class="chip" href="https://portal.offsec.com/public-profile/de8b0b16-ad26-3aa0-ad2f-3c49183ca217">OffSec ↗</a>
+  <!-- 1 WHO -->
+  <section class="panel" data-panel="who">
+    <p class="eyebrow" data-en="Who I am">Quem eu sou</p>
+    <h1 data-en="From the help desk to the shell">Do balcão de suporte ao shell</h1>
+    <p class="lede" data-en="Information security analyst with corporate experience in application, endpoint, network and identity security. CompTIA Security+ and CRTA certified, with a career focus on penetration testing and offensive security. Currently preparing for OSCP.">Analista de segurança da informação com experiência corporativa em segurança de aplicações, endpoints, redes e identidade. Certificado CompTIA Security+ e CRTA, com foco de carreira em pentest e segurança ofensiva. Em preparação para a OSCP.</p>
+    <div class="grid g3" style="margin-top:16px">
+      <div class="card"><h3 data-en="Focus">Foco</h3><p class="mut" style="margin:0" data-en="Pentest · red team · Active Directory">Pentest · red team · Active Directory</p></div>
+      <div class="card"><h3 data-en="By day">De dia</h3><p class="mut" style="margin:0">Analista Jr. @ Farmácias São João</p></div>
+      <div class="card"><h3 data-en="By night">De noite</h3><p class="mut" style="margin:0" data-en="OffSec labs, HTB, writeups">Labs OffSec, HTB, writeups</p></div>
     </div>
   </section>
 
-  <!-- ══════════ SECURITY+ ══════════ -->
-  <section class="screen content-screen" id="v-security-plus" data-title-pt="CompTIA Security+" data-title-en="CompTIA Security+" hidden>
+  <!-- 2 OSCP countdown -->
+  <section class="panel" data-panel="oscp">
+    <p class="eyebrow" data-en="The headline">A manchete</p>
+    <h1>OSCP</h1>
+    <p class="lede" data-en="The most recognised credential in offensive security: a 24-hour hands-on exam on an isolated network, plus a graded technical report. The clock is already running.">A credencial mais reconhecida em segurança ofensiva: exame prático de 24h em rede isolada, mais um relatório técnico que também é avaliado. O relógio já está correndo.</p>
+    <div class="count">
+      <div>
+        <div class="big" data-days>—</div>
+        <div class="k" data-en="days to the exam · 23 Oct 2026">dias para o exame · 23 out 2026</div>
+      </div>
+      <div class="rk">
+        <b>#3 <span data-en="Brazil">Brasil</span></b>
+        <span>OffSec Rank Leaderboard</span>
+        <b>Under 300 <span data-en="World">Mundo</span></b>
+        <span>OffSec Rank Leaderboard</span>
+      </div>
+    </div>
+    <a class="chip" href="https://portal.offsec.com/public-profile/de8b0b16-ad26-3aa0-ad2f-3c49183ca217" target="_blank" rel="noopener"><span data-en="OffSec public profile">Perfil público OffSec</span> ↗</a>
+  </section>
+
+  <!-- 3 CERTS list -->
+  <section class="panel" data-panel="certs">
+    <p class="eyebrow" data-en="Certifications">Certificações</p>
+    <h1 data-en="Proof on paper">Prova no papel</h1>
+    <p class="lede" data-en="Click any card — the story behind each one is worth more than the badge.">Clica em qualquer card — a história por trás de cada uma vale mais que o selo.</p>
+    <div class="grid g3" style="margin-top:16px">
+      <a class="cert" data-go="oscp"><span class="st prog" data-en="exam 23 Oct 2026">exame 23 out 2026</span><h3>OSCP</h3><span class="sub">OffSec · PEN-200</span><span class="go">→</span></a>
+      <a class="cert" data-go="crta"><span class="st ok" data-en="certified">obtida</span><h3>CRTA</h3><span class="sub">CyberWarFare Labs · <span data-en="Aug 2026">ago 2026</span></span><span class="go">→</span></a>
+      <a class="cert" data-go="secplus"><span class="st ok" data-en="certified">obtida</span><h3>CompTIA Security+</h3><span class="sub">SY0-701 · <span data-en="Aug 2025">ago 2025</span></span><span class="go">→</span></a>
+    </div>
+  </section>
+
+  <!-- detail: secplus -->
+  <section class="panel" data-panel="secplus">
+    <button class="back" data-go="certs">← <span data-en="Certifications">Certificações</span></button>
     <p class="eyebrow" data-en="Certification">Certificação</p>
     <h1>CompTIA Security+</h1>
-    <p class="lede" data-en="The market's baseline certification in information security fundamentals. Vendor-neutral, it covers everything from controls and cryptography to incident response and risk governance. It is the floor for most analyst roles.">A certificação base do mercado em fundamentos de segurança da informação. Neutra em relação a fabricante, cobre desde controles e criptografia até resposta a incidentes e governança de risco. É o piso exigido em boa parte das vagas de analista.</p>
-    <div class="meta">
-      <span class="chip"><span class="dot"></span><span data-en="certified">obtida</span></span>
-      <span class="chip"><span data-en="02 Aug 2025">02 ago 2025</span></span>
-      <span class="chip">CompTIA</span>
+    <p class="lede" data-en="The market's baseline in information security fundamentals — vendor-neutral, from controls and cryptography to incident response and risk governance.">A certificação base do mercado em fundamentos de segurança da informação — neutra de fabricante, de controles e criptografia a resposta a incidentes e governança de risco.</p>
+    <div class="chips">
+      <span class="chip"><span class="d"></span><span data-en="02 Aug 2025">02 ago 2025</span></span>
       <span class="chip">SY0-701</span>
-      <span class="chip"><span data-en="valid until 02 Aug 2028">válida até 02 ago 2028</span></span>
+      <span class="chip" data-en="valid until 02 Aug 2028">válida até 02 ago 2028</span>
+      <a class="chip" href="https://www.credly.com/badges/8da335bc-2437-4841-8bf9-838ec94d4391" target="_blank" rel="noopener"><span data-en="Verify on Credly">Verificar no Credly</span> ↗</a>
     </div>
-
-    <h2 class="sub-h" data-en="Credential">Credencial</h2>
-    <div class="meta">
-      <a class="chip" href="https://www.credly.com/badges/8da335bc-2437-4841-8bf9-838ec94d4391"><span data-en="Verified badge on Credly">Badge verificado no Credly</span> ↗</a>
-      <span class="chip"><span data-en="code">código</span> <code class="code">6ZRJHC5YWE11Y3T2</code></span>
-    </div>
-
-    <figure class="cert">
-      <a href="/assets/img/security-plus.jpg" data-zoom>
-        <img src="/assets/img/security-plus-thumb.jpg" width="1000" height="773" loading="lazy"
-             alt="Certificado CompTIA Security+ emitido para Artur Borges dos Santos em 02 de agosto de 2025, válido até 02 de agosto de 2028.">
-      </a>
-      <figcaption data-en="Click to enlarge">Clique para ampliar</figcaption>
-    </figure>
-
-    <h2 class="sub-h">Road to Security+</h2>
+    <div class="caprow"><span class="c">Road to Security+</span><span class="ln"></span></div>
     <div class="road">
-      <div class="pose pose-security v-character" role="img" aria-label="V de Vingança em pixel art segurando um escudo com cadeado."></div>
-      <div class="road-body">
-        <p class="road-lede" data-en="Here is where I broke the shell. Hello, universe. Someone was born into cybersecurity today.">Aqui eu quebrei a casca. Olá, universo. Alguém nasceu na cibersegurança hoje.</p>
-
-        <p data-en="When I decided I would study cybersecurity for life, I had no idea where to go — but I knew I should start from first principles. I took every free course I could find: networking fundamentals, cybersecurity fundamentals, LGPD, GDPR, PII, anything that touched the field.">Quando decidi que estudaria cibersegurança para a vida, eu não sabia ao certo para onde ir — mas sabia que deveria começar pelos princípios. Fiz vários cursos gratuitos: fundamentos de redes, fundamentos de cibersegurança, LGPD, GDPR, PII e qualquer coisa que tivesse a ver com a área.</p>
-
-        <p data-en="Things escalated until I discovered the world of certifications. I liked the idea of holding a document that proved my knowledge of a specific subject.">As coisas foram escalando até eu conhecer o mundo das certificações. Gostei da ideia de ter um documento que comprovasse o meu conhecimento em um assunto específico.</p>
-
-        <p data-en-html="I bought the voucher and booked the exam. I have always worked this way: first I set the date, then I start studying. And that is exactly what happened. It took around six months of study until 02 August. I studied on CompTIA's own platform and drilled questions on <a href='https://certpreps.com/'>CertPreps</a> — back when it was still free, haha.">Comprei o voucher e agendei o exame. Sempre trabalhei assim: primeiro marco a data, depois começo a estudar. E foi exatamente o que aconteceu. Foram cerca de seis meses de estudo até o dia 2 de agosto. Estudei pela própria plataforma da CompTIA e resolvia questões no <a href="https://certpreps.com/">CertPreps</a> — na época em que ainda era gratuito, haha.</p>
-
-        <p data-en="I was not sure I was ready, but I kept following the schedule: content plus questions, content plus questions, practising and learning a little every day. The lack of material in my own language made everything slower, and it pushed me to improve my English. There were (and are) some resources in Portuguese, but far too expensive for my budget. So I went down the self-taught road.">Não sabia ao certo se estava pronto, mas fui seguindo o cronograma: conteúdo mais questões, conteúdo mais questões, praticando e aprendendo um pouco a cada dia. A falta de material na minha própria língua deixou tudo mais lento, e me forçou a melhorar o inglês. Existiam (e ainda existem) alguns recursos em português, mas caros demais para o meu orçamento. Segui então por uma trilha mais autodidata.</p>
-
-        <p data-en="In the last two weeks before the exam I took three mock tests on CertPreps. I did very well on some topics and got beaten up on others — and I consoled myself saying the problem was the English, since the automatic translation was not that good. In Portuguese I would do fine.">Nas duas últimas semanas antes do exame, fiz três simulados no CertPreps. Me saía muito bem em alguns assuntos e apanhava em outros — e eu me consolava dizendo que o problema era o inglês, porque a tradução automática não era lá essas coisas. Em português eu iria bem.</p>
-
-        <p data-en="Exam day arrived. I set up the room, turned on the laptop and connected to the exam environment. It was a big challenge — not because of the difficulty, but because it was my first certification, and the idea of failing took over my poor soul. I answered every question, flagging the ones I was unsure about to come back to later. In the final 15 minutes I reviewed 17 answers, and I believe that is where the pass was born. However desperate I was, it was that calm at the end that got me through to read the most beautiful line there is after a cybersecurity exam:">O dia da prova chegou. Preparei o ambiente, liguei o notebook e me conectei ao ambiente do exame. Foi um grande desafio — não pela dificuldade, mas porque era a minha primeira certificação, e a ideia de reprovar tomou conta da minha pobre alma. Respondi todas as questões, anotando as que me deixavam em dúvida para voltar depois. Nos últimos 15 minutos revisei 17 alternativas, e acredito que foi aí que nasceu a aprovação. Por mais desesperado que eu estivesse, foi essa calma no final que me levou a ler a frase mais bonita que existe depois de um exame de cibersegurança:</p>
-
-        <p class="shout">Congratulations! You have passed.</p>
-      </div>
+      <p class="road-lede" style="color:var(--ink)" data-en="Here is where I broke the shell. Hello, universe — someone was born into cybersecurity today.">Aqui eu quebrei a casca. Olá, universo — alguém nasceu na cibersegurança hoje.</p>
+      <p data-en="When I decided I would study cybersecurity for life, I had no idea where to go — but I knew I should start from first principles. Free courses on everything: networking, fundamentals, LGPD, GDPR, PII. Then I discovered certifications and liked the idea of a document proving my knowledge.">Quando decidi que estudaria cibersegurança para a vida, não sabia para onde ir — mas sabia que deveria começar pelos princípios. Cursos gratuitos de tudo: redes, fundamentos, LGPD, GDPR, PII. Aí conheci o mundo das certificações e gostei da ideia de um documento que comprovasse meu conhecimento.</p>
+      <p data-en="I bought the voucher and booked the exam first — I always set the date, then study. Around six months, content plus questions every day, drilling on CertPreps back when it was free. The lack of material in my language made it slower and pushed my English.">Comprei o voucher e agendei o exame primeiro — sempre marco a data, depois estudo. Cerca de seis meses, conteúdo mais questões todo dia, treinando no CertPreps quando ainda era gratuito. A falta de material na minha língua deixou tudo mais lento e empurrou meu inglês.</p>
+      <p data-en="Exam day: my first certification, and the fear of failing took over. I answered everything, flagged the doubts, and in the final 15 minutes reviewed 17 answers. That calm at the end is where the pass was born:">Dia da prova: minha primeira certificação, e o medo de reprovar tomou conta. Respondi tudo, marquei as dúvidas e nos últimos 15 minutos revisei 17 alternativas. Essa calma no fim foi onde nasceu a aprovação:</p>
+      <p class="shout">Congratulations! You have passed.</p>
     </div>
-
-    <h2 class="sub-h" data-en="Domains covered">Domínios cobertos</h2>
+    <div class="caprow"><span class="c" data-en="Domains covered">Domínios cobertos</span><span class="ln"></span></div>
     <div class="phases">
-      <div class="phase">
-        <div class="ph"><b data-en="General concepts">Conceitos gerais</b>1.0</div>
-        <div class="tools"><span class="tool" data-en="Security controls">Controles de segurança</span><span class="tool" data-en="Cryptography">Criptografia</span><span class="tool" data-en="Change management">Gestão de mudança</span></div>
-      </div>
-      <div class="phase">
-        <div class="ph"><b data-en="Threats &amp; vulnerabilities">Ameaças e vulnerabilidades</b>2.0</div>
-        <div class="tools"><span class="tool" data-en="Threat actors">Atores de ameaça</span><span class="tool" data-en="Attack surfaces">Superfícies de ataque</span><span class="tool" data-en="Mitigations">Mitigações</span></div>
-      </div>
-      <div class="phase">
-        <div class="ph"><b data-en="Architecture">Arquitetura</b>3.0</div>
-        <div class="tools"><span class="tool" data-en="Secure design">Design seguro</span><span class="tool" data-en="Resilience">Resiliência</span><span class="tool" data-en="Data protection">Proteção de dados</span></div>
-      </div>
-      <div class="phase">
-        <div class="ph"><b data-en="Operations">Operações</b>4.0</div>
-        <div class="tools"><span class="tool" data-en="Vulnerability management">Gestão de vulnerabilidades</span><span class="tool" data-en="Monitoring">Monitoramento</span><span class="tool" data-en="Incident response">Resposta a incidentes</span><span class="tool" data-en="Identity &amp; access">Identidade e acesso</span></div>
-      </div>
-      <div class="phase">
-        <div class="ph"><b data-en="Governance">Governança</b>5.0</div>
-        <div class="tools"><span class="tool" data-en="Risk">Risco</span><span class="tool" data-en="Third parties">Terceiros</span><span class="tool" data-en="Compliance">Conformidade</span><span class="tool" data-en="Audit">Auditoria</span></div>
-      </div>
+      <div class="phase"><b data-en="General concepts 1.0">Conceitos gerais 1.0</b><div class="tags"><span class="tag" data-en="Security controls">Controles</span><span class="tag" data-en="Cryptography">Criptografia</span><span class="tag" data-en="Change management">Gestão de mudança</span></div></div>
+      <div class="phase"><b data-en="Threats &amp; vulnerabilities 2.0">Ameaças e vulnerabilidades 2.0</b><div class="tags"><span class="tag" data-en="Threat actors">Atores de ameaça</span><span class="tag" data-en="Attack surfaces">Superfícies de ataque</span><span class="tag" data-en="Mitigations">Mitigações</span></div></div>
+      <div class="phase"><b data-en="Architecture 3.0">Arquitetura 3.0</b><div class="tags"><span class="tag" data-en="Secure design">Design seguro</span><span class="tag" data-en="Resilience">Resiliência</span><span class="tag" data-en="Data protection">Proteção de dados</span></div></div>
+      <div class="phase"><b data-en="Operations 4.0">Operações 4.0</b><div class="tags"><span class="tag" data-en="Vuln management">Gestão de vulns</span><span class="tag">Monitoring</span><span class="tag" data-en="Incident response">Resposta a incidentes</span><span class="tag" data-en="Identity &amp; access">Identidade e acesso</span></div></div>
+      <div class="phase"><b data-en="Governance 5.0">Governança 5.0</b><div class="tags"><span class="tag">Risk</span><span class="tag" data-en="Third parties">Terceiros</span><span class="tag">Compliance</span><span class="tag">Audit</span></div></div>
     </div>
-
-    <hr class="rule">
-    <section class="story" aria-label="A história">
-      <h2 class="sub-h" data-en="The story">A história</h2>
-      <p class="story-ph" data-en="— soon: how studying for and passing Security+ went.">— em breve: como foi estudar e passar na Security+.</p>
-    </section>
   </section>
 
-  <!-- ══════════ CRTA ══════════ -->
-  <section class="screen content-screen" id="v-crta" data-title-pt="CRTA" data-title-en="CRTA" hidden>
+  <!-- detail: crta -->
+  <section class="panel" data-panel="crta">
+    <button class="back" data-go="certs">← <span data-en="Certifications">Certificações</span></button>
     <p class="eyebrow" data-en="Certification">Certificação</p>
     <h1>CRTA</h1>
-    <p class="lede" data-en="A hands-on red team certification, examined inside a simulated corporate lab. It covers the full chain in an Active Directory environment: enumeration, lateral movement and domain compromise. It grades execution, not theory.">Certificação prática de red team, com exame executado em laboratório corporativo simulado. Cobre a cadeia completa dentro de um ambiente Active Directory: enumeração, movimentação lateral e comprometimento de domínio. Avalia execução, não teoria.</p>
-    <div class="meta">
-      <span class="chip"><span class="dot"></span><span data-en="certified">obtida</span></span>
-      <span class="chip"><span data-en="08 Aug 2026">08 ago 2026</span></span>
+    <p class="lede" data-en="A hands-on red team certification examined inside a simulated corporate Active Directory lab — enumeration, lateral movement and domain compromise. It grades execution, not theory.">Certificação prática de red team, avaliada dentro de um laboratório corporativo simulado de Active Directory — enumeração, movimentação lateral e comprometimento de domínio. Avalia execução, não teoria.</p>
+    <div class="chips">
+      <span class="chip"><span class="d"></span><span data-en="08 Aug 2026">08 ago 2026</span></span>
       <span class="chip">CyberWarFare Labs</span>
+      <a class="chip" href="https://labs.cyberwarfare.live/credential/achievement/6a775867a8dc97c4c7dddcd0" target="_blank" rel="noopener"><span data-en="Verify">Verificar</span> ↗</a>
     </div>
-
-    <h2 class="sub-h" data-en="Credential">Credencial</h2>
-    <div class="meta">
-      <a class="chip" href="https://labs.cyberwarfare.live/credential/achievement/6a775867a8dc97c4c7dddcd0"><span data-en="Verify at CyberWarFare Labs">Verificar na CyberWarFare Labs</span> ↗</a>
-      <span class="chip"><span data-en="id">id</span> <code class="code">CRTA-6a775867a8dc97c4c7dddcd0</code></span>
-    </div>
-
-    <figure class="cert">
-      <a href="/assets/img/crta.jpg" data-zoom>
-        <img src="/assets/img/crta-thumb.jpg" width="1000" height="713" loading="lazy"
-             alt="Certificado Certified Red Team Analyst (CRTA) emitido pela CyberWarFare Labs para Artur Borges dos Santos em 08 de agosto de 2026.">
-      </a>
-      <figcaption data-en="Click to enlarge">Clique para ampliar</figcaption>
-    </figure>
-
-
-    <h2 class="sub-h">Road to CRTA</h2>
+    <div class="caprow"><span class="c">Road to CRTA</span><span class="ln"></span></div>
     <div class="road">
-      <div class="pose pose-crta v-character" role="img" aria-label="V de Vingança em pixel art usando um terminal."></div>
-      <div class="road-body">
-        <p data-en="The CRTA exam is genuinely fun. You get a scope and you go capturing the flags — I captured every flag the exam asks for. I finished in around four hours because I decided to take it calmly, no rush. I treated it as a learning bridge toward future hands-on certifications.">O exame CRTA é bem divertido. Você recebe um escopo e precisa ir capturando as flags, eu consegui capturar todas as flags que o exame pede. Fechei a prova em torno de 4 horas porque decidi fazer ela com calma, sem pressa. Tratei ela como uma ponte de aprendizado para futuras certificações hands-on.</p>
-
-        <p data-en="Enumeration is the key. Enumerating calmly and, if you find nothing, enumerating again makes all the difference. It was not a certification where I felt lost. My study material for it was through HTB — the Academy content is always predictable for me when it comes to certifications.">A enumeração é a chave. Enumerar com calma e se não encontrar nada, enumerar de novo faz toda a diferença. Não foi uma certificação que me senti perdido. O material de estudo para ela foi através do HTB, o conteúdo do Academy é sempre previsível pra mim em certificações.</p>
-      </div>
+      <p data-en="The CRTA exam is genuinely fun. I completed every objective in about four hours, without rushing. I treated it as a learning bridge toward the next hands-on certifications I want.">O exame CRTA é bem divertido. Concluí todos os objetivos em torno de 4 horas, sem pressa. Tratei como uma ponte de aprendizado para as próximas certificações práticas que quero.</p>
+      <p data-en="I studied through HTB Academy and did not feel lost. The biggest lesson was patience: sometimes stopping, organising my notes and rethinking an idea moves you forward more than pushing the same attempt harder.">Estudei pelo HTB Academy e não me senti perdido. O maior aprendizado foi paciência: às vezes parar, organizar as anotações e repensar uma ideia avança mais do que insistir na mesma tentativa.</p>
+      <p data-en="I prefer to keep the challenge details private to preserve the experience for future candidates. What is worth sharing is the lesson and how good it felt to succeed on my own decisions.">Prefiro guardar os detalhes dos desafios para preservar a experiência de quem ainda vai fazer. O que vale compartilhar é o aprendizado e a satisfação de conseguir com as minhas próprias decisões.</p>
     </div>
-
-    <h2 class="sub-h" data-en="Skills it proves">Habilidades que ela comprova</h2>
+    <div class="caprow"><span class="c" data-en="Put into practice">Coloquei em prática</span><span class="ln"></span></div>
     <div class="phases">
-      <div class="phase">
-        <div class="ph"><b data-en="Web recon">Reconhecimento web</b>TA0043</div>
-        <div class="tools"><span class="tool" data-en="Service &amp; port enumeration">Enumeração de serviços e portas</span><span class="tool" data-en="Directory brute-forcing">Brute-force de diretórios</span><span class="tool" data-en="Source &amp; config review">Revisão de fonte e config</span></div>
-      </div>
-      <div class="phase">
-        <div class="ph"><b data-en="Web exploitation">Exploração web</b>TA0001</div>
-        <div class="tools"><span class="tool" data-en="Server-side file read">Leitura de arquivos server-side</span><span class="tool" data-en="Leaked secrets">Segredos vazados</span><span class="tool" data-en="Foothold">Acesso inicial</span></div>
-      </div>
-      <div class="phase">
-        <div class="ph"><b data-en="Linux privilege escalation">Escalação de privilégios Linux</b>TA0004</div>
-        <div class="tools"><span class="tool">sudo</span><span class="tool">GTFOBins</span><span class="tool" data-en="Service enumeration">Enumeração de serviços</span></div>
-      </div>
-      <div class="phase">
-        <div class="ph"><b data-en="Containers &amp; pivoting">Containers e pivoting</b>TA0008</div>
-        <div class="tools"><span class="tool" data-en="Docker enumeration">Enumeração de Docker</span><span class="tool" data-en="Log analysis">Análise de logs</span><span class="tool" data-en="Internal networks">Redes internas</span></div>
-      </div>
-      <div class="phase">
-        <div class="ph"><b>Active Directory</b>TA0006</div>
-        <div class="tools"><span class="tool" data-en="Domain enumeration">Enumeração de domínio</span><span class="tool">DCSync</span><span class="tool">Pass-the-Hash</span><span class="tool">Evil-WinRM</span></div>
-      </div>
+      <div class="phase"><b data-en="Preparation">Preparação</b><div class="tags"><span class="tag" data-en="HTB Academy">Estudo no HTB Academy</span><span class="tag" data-en="Applying what I learned">Aplicação do aprendizado</span></div></div>
+      <div class="phase"><b data-en="Reasoning &amp; organization">Raciocínio e organização</b><div class="tags"><span class="tag" data-en="Analysis">Análise</span><span class="tag" data-en="Note-taking">Anotações</span><span class="tag" data-en="Revisiting assumptions">Revisão de hipóteses</span></div></div>
+      <div class="phase"><b data-en="Professional approach">Postura profissional</b><div class="tags"><span class="tag" data-en="Decision-making">Decisão</span><span class="tag" data-en="Respecting scope">Respeito ao escopo</span><span class="tag" data-en="Persistence">Persistência</span></div></div>
     </div>
-
-    <hr class="rule">
-    <section class="story" aria-label="A história">
-      <h2 class="sub-h" data-en="The story">A história</h2>
-      <p class="story-ph" data-en="— soon: the road to CRTA.">— em breve: o caminho até a CRTA.</p>
-    </section>
   </section>
 
-  <!-- ══════════ OSCP ══════════ -->
-  <section class="screen content-screen" id="v-oscp" data-title-pt="OSCP" data-title-en="OSCP" hidden>
+  <!-- detail: oscp (full) -->
+  <section class="panel" data-panel="oscp-full">
+    <button class="back" data-go="certs">← <span data-en="Certifications">Certificações</span></button>
     <p class="eyebrow" data-en="In progress">Em andamento</p>
     <h1>OSCP</h1>
-    <p class="lede" data-en="The most recognised credential in offensive security. A 24-hour hands-on exam on an isolated network — exploitation, privilege escalation and an Active Directory set — followed by a technical report that is graded too. It is the certification pentest roles ask for by name.">A credencial mais reconhecida em segurança ofensiva. Exame prático de 24 horas em rede isolada, com exploração, escalação de privilégios e um conjunto de Active Directory, seguido de relatório técnico que também é avaliado. É a certificação que as vagas de pentest pedem pelo nome.</p>
-
-    <div class="exam">
-      <div class="count">
-        <span class="num" data-days>—</span>
-        <span class="lbl" data-en="days to the exam">dias para o exame</span>
-        <span class="date" data-examdate></span>
-      </div>
-      <div class="track">
-        <div class="bar-row">
-          <div class="bar-top"><span data-en="OffSec labs completed">Labs OffSec concluídos</span><b>91</b></div>
-          <div class="prog"><i class="ok w72"></i></div>
-        </div>
-        <div class="rank">
-          <span class="rank-v">#3 <span data-en="Brazil">Brasil</span></span>
-          <span class="rank-k">OffSec Rank Leaderboard</span>
-        </div>
-        <div class="rank">
-          <span class="rank-v">Under 300 <span data-en="World">Mundo</span></span>
-          <span class="rank-k">OffSec Rank Leaderboard</span>
-        </div>
-        <a class="chip" href="https://portal.offsec.com/public-profile/de8b0b16-ad26-3aa0-ad2f-3c49183ca217"><span data-en="OffSec public profile">Perfil público OffSec</span> ↗</a>
-      </div>
-    </div>
-
-
-    <h2 class="sub-h">Road to OSCP</h2>
-    <div class="road">
-      <div class="pose pose-oscp v-character" role="img" aria-label="V de Vingança em pixel art erguendo um pergaminho."></div>
-      <div class="empty">
-        <p data-en="In progress: this is where the exam preparation gets written down, week by week.">Em andamento: é aqui que a preparação para o exame vai sendo registrada, semana a semana.</p>
-      </div>
-    </div>
-
-    <hr class="rule">
-    <section class="story" aria-label="A história">
-      <h2 class="sub-h" data-en="The story">A história</h2>
-      <p class="story-ph" data-en="— soon: preparing for the OSCP, day by day.">— em breve: a preparação para o OSCP, dia a dia.</p>
-    </section>
-  </section>
-
-  <!-- ══════════ PRÁTICA — VISÃO GERAL ══════════ -->
-  <section class="screen content-screen" id="v-pratica" data-title-pt="Prática" data-title-en="Hands-on" hidden>
-    <p class="eyebrow">Hack The Box</p>
-    <h1 data-en="Hands-on record">Prática registrada</h1>
-    <div class="road">
-      <div class="pose pose-flag v-character" role="img" aria-label="V de Vingança em pixel art segurando uma bandeira de captura de flags."></div>
-      <div class="road-body">
-        <p class="road-lede" data-en="Every number here comes from a platform profile that anyone can open and check.">Todo número aqui vem de um perfil de plataforma que qualquer um pode abrir e conferir.</p>
-      </div>
-    </div>
-
-    <div class="statset">
-      <div class="htb">
-        <p class="cap">Hack The Box</p>
-        <div class="stats">
-          <div class="stat"><div class="v">32</div><div class="k" data-en="modules">Módulos</div></div>
-          <div class="stat"><div class="v">3</div><div class="k" data-en="Labs">Labs</div></div>
-          <div class="stat"><div class="v">13</div><div class="k">Sherlocks</div></div>
-          <div class="stat"><div class="v">16</div><div class="k">Challenges</div></div>
-          <div class="stat"><div class="v">1</div><div class="k">Mini Pro Labs</div></div>
-          <div class="stat"><div class="v on" data-en="Active">Ativo</div><div class="k">CTF &amp; Season</div></div>
-        </div>
-      </div>
-    </div>
-
-    <h2 class="sub-h" data-en="Verified profile">Perfil verificado</h2>
-    <div class="grid">
-      <a class="card proof" href="https://profile.hackthebox.com/profile/019e2c5e-b1eb-7093-b9fa-ec20945bbefb" target="_blank" rel="noopener">
-        <span class="sub">Hack The Box</span>
-        <h3 data-en="Machines">Máquinas</h3>
-        <p class="lvl" data-en="Level 54 · Professional">Nível 54 · Professional</p>
-        <span class="go" data-en="Open profile ↗">Abrir perfil ↗</span>
-      </a>
-    </div>
-
-    <h2 class="sub-h">Mini Pro Labs</h2>
-    <p data-en-html="<b>Puppet.</b> A very complete lab, because it mixes Windows and Linux in a realistic attack chain. You start with initial access via Sliver, exploit a local privilege flaw, abuse service accounts for lateral movement, and finish by compromising the Puppet Master and the Domain Controller. The most interesting part is that it forces you to really understand identity, permissions, Active Directory, C2, pivoting and the abuse of automation infrastructure, instead of relying only on isolated exploits."><b>Puppet.</b> É um lab bem completo, porque mistura ambiente Windows e Linux em uma cadeia de ataque realista. Você começa com acesso inicial via Sliver, explora uma falha de privilégio local, abusa de contas de serviço para movimentação lateral e termina comprometendo o Puppet Master e o Domain Controller. O mais interessante é que ele força a entender bem identidade, permissões, Active Directory, C2, pivoting e abuso de infraestrutura de automação, em vez de depender só de exploits isolados.</p>
-    <div class="meta">
-      <span class="chip">07 Out 2026</span>
-      <span class="chip">10 h</span>
-      <span class="chip">10 CPE</span>
-      <span class="chip">HTBCERT-542BD1FDD0</span>
-    </div>
-    <div class="tools">
-      <span class="tool" data-en="Enumeration">Enumeração</span>
-      <span class="tool" data-en="AD: enumeration &amp; attacks">AD: enumeração e ataques</span>
-      <span class="tool" data-en="Exploiting DevOps infrastructure">Exploração de infra DevOps</span>
-      <span class="tool" data-en="Local privilege escalation">Escalação local de privilégios</span>
-      <span class="tool" data-en="Lateral movement">Movimentação lateral</span>
-      <span class="tool" data-en="Situational awareness">Consciência situacional</span>
-      <span class="tool" data-en="C2 operations">Operações C2</span>
-    </div>
-    <figure class="cert">
-      <a href="/assets/img/puppet.jpg" data-zoom>
-        <img src="/assets/img/puppet-thumb.jpg" width="1000" height="707" loading="lazy"
-             alt="Certificado Hack The Box Mini Pro Labs: Puppet emitido para Artur Borges dos Santos em 07 de outubro de 2026, ID HTBCERT-542BD1FDD0.">
-      </a>
-      <figcaption data-en="Click to enlarge">Clique para ampliar</figcaption>
-    </figure>
-  </section>
-
-  <!-- ══════════ PG PRACTICE ══════════ -->
-  <section class="screen content-screen" id="v-pg-practice" data-title-pt="Laboratórios" data-title-en="Labs" hidden>
-    <p class="eyebrow">OffSec</p>
-    <h1>Laboratórios</h1>
-    <p class="lede" data-en="OffSec labs and Proving Grounds.">Laboratórios OffSec e Proving Grounds.</p>
-
-    <p class="construcao" data-en="(Under construction)">(Em construção)</p>
-
-    <div class="statset">
-      <div class="offsec">
-        <p class="cap">OffSec</p>
-        <div class="stats">
-          <div class="stat"><div class="v">91</div><div class="k" data-en="Labs">Labs</div></div>
-          <div class="stat"><div class="v">215</div><div class="k" data-en="flags captured">Flags capturadas</div></div>
-          <div class="stat"><div class="v">569<span class="unit">h</span></div><div class="k" data-en="in labs">Em laboratório</div></div>
-          <div class="stat"><div class="v">25</div><div class="k" data-en="Pins &amp; badges">Pin &amp; Badges</div></div>
-          <div class="stat"><div class="v">2</div><div class="k">Assessments</div></div>
-        </div>
-      </div>
-    </div>
-
-    <h2 class="sub-h" data-en="Verified profile">Perfil verificado</h2>
-    <div class="grid">
-      <a class="card proof" href="https://portal.offsec.com/public-profile/de8b0b16-ad26-3aa0-ad2f-3c49183ca217" target="_blank" rel="noopener">
-        <span class="sub">OffSec</span>
-        <h3>Proving Grounds</h3>
-        <p class="lvl" data-en="Level 31 · 25 badges">Nível 31 · 25 badges</p>
-        <span class="go" data-en="Open profile ↗">Abrir perfil ↗</span>
-      </a>
-    </div>
-
-    <h2 class="sub-h" data-en="Machines &amp; writeups">Máquinas e writeups</h2>
-    <ul class="rows">
-      <li><span class="sev sev-m">MED</span><a class="name link" href="writeups/clamav.html">ClamAV</a><span class="tags">Linux · Sendmail/clamav-milter · RCE</span></li>
-      <li><span class="sev sev-m">MED</span><a class="name link" href="writeups/pelican.html">Pelican</a><span class="tags">Linux · Exhibitor/ZooKeeper · RCE → sudo gcore</span></li>
-    </ul>
-  </section>
-
-  <!-- ══════════ HTB ACADEMY ══════════ -->
-  <section class="screen content-screen" id="v-htb-academy" data-title-pt="HTB Academy" data-title-en="HTB Academy" hidden>
-    <p class="eyebrow">Hack The Box</p>
-    <h1>Academy</h1>
-    <p class="lede" data-en="32 modules completed, grouped by attack phase rather than listed by name — a coverage map reads in five seconds; a list of 32 titles reads in none.">32 módulos concluídos, agrupados por fase do ataque em vez de listados por nome — um mapa de cobertura se lê em cinco segundos; uma lista de 32 títulos não se lê.</p>
-
-    <div class="phases">
-      <div class="phase">
-        <div class="ph"><b data-en="Foundations">Fundamentos</b>11</div>
-        <div class="tools">
-          <span class="badge" tabindex="0"><b>Your first battle</b><em>Getting Started</em><span class="tip" data-en="First contact with the platform and with the flow of a simple attack, from scan to shell.">Primeiro contato com a plataforma e com o fluxo de um ataque simples, do scan à shell.</span></span>
-          <span class="badge" tabindex="0"><b>Start building your arsenal</b><em>Setting Up</em><span class="tip" data-en="Building the pentester's working environment: distro, tooling and organisation.">Montagem do ambiente de trabalho do pentester: distribuição, ferramentas e organização.</span></span>
-          <span class="badge" tabindex="0"><b>Philomath</b><em>Learning Process</em><span class="tip" data-en="How to study security sustainably: method, pace and dealing with frustration.">Como estudar segurança de forma sustentável: método, ritmo e gestão da frustração.</span></span>
-          <span class="badge" tabindex="0"><b>Academician</b><em>Introduction to Academy</em><span class="tip" data-en="How the platform works: paths, modules and hands-on exercises.">Como a plataforma funciona: trilhas, módulos e exercícios práticos.</span></span>
-          <span class="badge" tabindex="0"><b>Cyber starter</b><em>Introduction to Information Security</em><span class="tip" data-en="Base concepts: confidentiality, integrity, availability, risk and controls.">Conceitos de base: confidencialidade, integridade, disponibilidade, risco e controles.</span></span>
-          <span class="badge" tabindex="0"><b>Our favorite seabird</b><em>Linux Fundamentals</em><span class="tip" data-en="Command line, permissions, processes, services and file structure on Linux.">Linha de comando, permissões, processos, serviços e estrutura de arquivos no Linux.</span></span>
-          <span class="badge" tabindex="0"><b>Crawl, walk, run</b><em>Windows Fundamentals</em><span class="tip" data-en="Windows internals: registry, services, NTFS permissions and accounts.">Estrutura do Windows: registro, serviços, permissões NTFS e contas.</span></span>
-          <span class="badge" tabindex="0"><b>Look ma, no mouse!</b><em>Introduction to Windows Command Line</em><span class="tip" data-en="CMD and PowerShell for navigation, querying and automation on Windows.">CMD e PowerShell para navegação, consulta e automação no Windows.</span></span>
-          <span class="badge" tabindex="0"><b>Do things the traditional way</b><em>Introduction to Bash Scripting</em><span class="tip" data-en="Automation in Bash: variables, loops, conditionals and output handling.">Automação em Bash: variáveis, laços, condicionais e tratamento de saída.</span></span>
-          <span class="badge" tabindex="0"><b>Everything is connected</b><em>Introduction to Networking</em><span class="tip" data-en="OSI model, TCP/IP, addressing, routing and common protocols.">Modelo OSI, TCP/IP, endereçamento, roteamento e protocolos comuns.</span></span>
-          <span class="badge" tabindex="0"><b>Solid basis</b><em>Network Foundations</em><span class="tip" data-en="Practical networking applied to reconnaissance and reading a topology.">Base prática de redes aplicada ao reconhecimento e ao entendimento de topologia.</span></span>
-        </div>
-      </div>
-      <div class="phase">
-        <div class="ph"><b data-en="Methodology">Metodologia</b>4</div>
-        <div class="tools">
-          <span class="badge" tabindex="0"><b>Tactical</b><em>Penetration Testing Process</em><span class="tip" data-en="The phases of a penetration test, from scoping to the final report.">As fases de um teste de intrusão, do escopo ao relatório final.</span></span>
-          <span class="badge" tabindex="0"><b>Infiltration Learner</b><em>Introduction to Penetration Testing</em><span class="tip" data-en="Overview of test types and the role each plays in a security programme.">Panorama das modalidades de teste e do papel de cada uma num programa de segurança.</span></span>
-          <span class="badge" tabindex="0"><b>Offensive explorer</b><em>Pentest in a Nutshell</em><span class="tip" data-en="A condensed view of a full engagement, end to end.">Visão condensada de um engajamento completo, ponta a ponta.</span></span>
-          <span class="badge" tabindex="0"><b>Light in the dark</b><em>Vulnerability Assessment</em><span class="tip" data-en="Assessment versus test, scanner usage and triage of findings.">Diferença entre avaliação e teste, uso de scanners e triagem de achados.</span></span>
-        </div>
-      </div>
-      <div class="phase">
-        <div class="ph"><b data-en="Reconnaissance">Reconhecimento</b>TA0043 · 3</div>
-        <div class="tools">
-          <span class="badge" tabindex="0"><b>You need to trace before you can hunt</b><em>Footprinting</em><span class="tip" data-en="Service enumeration: DNS, SMB, SMTP, SNMP, databases and more.">Enumeração de serviços: DNS, SMB, SMTP, SNMP, bancos de dados e mais.</span></span>
-          <span class="badge" tabindex="0"><b>The eye that sees all</b><em>Network Enumeration with Nmap</em><span class="tip" data-en="Scanning, version detection, evasion techniques and NSE scripts.">Varredura, detecção de versão, técnicas de evasão e scripts NSE.</span></span>
-          <span class="badge" tabindex="0"><b>Information is not knowledge, or is it?</b><em>Information Gathering — Web Edition</em><span class="tip" data-en="Web application recon: DNS, subdomains, fingerprinting and crawling.">Reconhecimento de aplicações web: DNS, subdomínios, fingerprinting e crawling.</span></span>
-        </div>
-      </div>
-      <div class="phase">
-        <div class="ph"><b data-en="Web">Web</b>3</div>
-        <div class="tools">
-          <span class="badge" tabindex="0"><b>Developer</b><em>Introduction to Web Applications</em><span class="tip" data-en="How web applications work under the hood and where they tend to fail.">Como aplicações web funcionam por dentro e onde costumam falhar.</span></span>
-          <span class="badge" tabindex="0"><b>Your request is my demand</b><em>Web Requests</em><span class="tip" data-en="HTTP in depth: methods, headers, response codes, cookies and APIs.">HTTP a fundo: métodos, cabeçalhos, códigos de resposta, cookies e APIs.</span></span>
-          <span class="badge" tabindex="0"><b>Playing with the mess</b><em>JavaScript Deobfuscation</em><span class="tip" data-en="Reading and deobfuscating JavaScript to find logic hidden on the client.">Leitura e desofuscação de JavaScript para encontrar lógica escondida no cliente.</span></span>
-        </div>
-      </div>
-      <div class="phase">
-        <div class="ph"><b data-en="Initial access">Acesso inicial</b>TA0001 · 4</div>
-        <div class="tools">
-          <span class="badge" tabindex="0"><b>Ghost in the shell</b><em>Shells &amp; Payloads</em><span class="tip" data-en="Shell types, payload generation, and how to gain and stabilise access.">Tipos de shell, geração de payloads, e como obter e estabilizar o acesso.</span></span>
-          <span class="badge" tabindex="0"><b>Scan and execute</b><em>Attacking Common Services</em><span class="tip" data-en="Attacking FTP, SMB, SQL, RDP, DNS and other exposed services.">Exploração de FTP, SMB, SQL, RDP, DNS e outros serviços expostos.</span></span>
-          <span class="badge" tabindex="0"><b>Combine the modules</b><em>Using the Metasploit Framework</em><span class="tip" data-en="Modules, payloads, handlers and post-exploitation with Meterpreter.">Módulos, payloads, handlers e pós-exploração com Meterpreter.</span></span>
-          <span class="badge" tabindex="0"><b>Airborne delivery</b><em>File Transfers</em><span class="tip" data-en="Moving files between attacker and target, on Linux and on Windows.">Movimentação de arquivos entre atacante e alvo, em Linux e em Windows.</span></span>
-        </div>
-      </div>
-      <div class="phase">
-        <div class="ph"><b data-en="Credentials &amp; Active Directory">Credenciais e Active Directory</b>TA0006 · 3</div>
-        <div class="tools">
-          <span class="badge" tabindex="0"><b>Grab the keys and move laterally</b><em>Password Attacks</em><span class="tip" data-en="Credential attacks: brute force, password spraying and secret extraction.">Ataques a credenciais: força bruta, password spraying e extração de segredos.</span></span>
-          <span class="badge" tabindex="0"><b>Good things take time</b><em>Cracking Passwords with Hashcat</em><span class="tip" data-en="Attack modes, rules, masks and optimisation when cracking hashes.">Modos de ataque, regras, máscaras e otimização na quebra de hashes.</span></span>
-          <span class="badge" tabindex="0"><b>Your white belt training begins</b><em>Introduction to Active Directory</em><span class="tip" data-en="AD structure: domains, objects, GPO, Kerberos and attack surface.">Estrutura do AD: domínios, objetos, GPO, Kerberos e superfície de ataque.</span></span>
-        </div>
-      </div>
-      <div class="phase">
-        <div class="ph"><b data-en="Lateral movement">Movimentação lateral</b>TA0008 · 1</div>
-        <div class="tools">
-          <span class="badge" tabindex="0"><b>Explore deep space</b><em>Pivoting, Tunneling &amp; Port Forwarding</em><span class="tip" data-en="SSH tunnels, proxychains, port forwarding and reaching internal networks.">Túneis SSH, proxychains, encaminhamento de portas e acesso a redes internas.</span></span>
-        </div>
-      </div>
-      <div class="phase">
-        <div class="ph"><b data-en="Defensive side">Lado defensivo</b>2</div>
-        <div class="tools">
-          <span class="badge" tabindex="0"><b>Panoptic</b><em>Incident Handling Process</em><span class="tip" data-en="The incident response cycle, from preparation to lessons learned.">Ciclo de resposta a incidentes, da preparação à lição aprendida.</span></span>
-          <span class="badge" tabindex="0"><b>Anticipate the next attack</b><em>Security Monitoring &amp; SIEM Fundamentals</em><span class="tip" data-en="Log collection, event correlation and detection in a SIEM.">Coleta de logs, correlação de eventos e detecção em SIEM.</span></span>
-        </div>
-      </div>
-      <div class="phase">
-        <div class="ph"><b data-en="Reporting">Relatório</b>1</div>
-        <div class="tools">
-          <span class="badge" tabindex="0"><b>Time-consuming but important</b><em>Documentation &amp; Reporting</em><span class="tip" data-en="Note-taking during the test and writing the report with findings and recommendations.">Anotação durante o teste e escrita de relatório com achados e recomendações.</span></span>
-        </div>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- ══════════ SOBRE ══════════ -->
-  <section class="screen door-screen sub-hub" id="v-sobre" data-title-pt="Sobre" data-title-en="About" hidden>
-    <div class="hub-inner sub-inner">
-      <p class="hub-kicker" data-en="whoami">whoami</p>
-      <h1 class="hub-title sub-title" data-depth="10" data-en="About">Sobre</h1>
-      <p class="hub-sub" data-en="Pick a topic.">Escolha um assunto.</p>
-      <nav class="hub-grid" data-depth="5" aria-label="Sobre">
-      <a class="hub-box b-sobre" href="#sobre-perfil">
-        <span class="hb-num">01</span>
-        <span class="hb-name" data-en="Profile">Perfil</span>
-        <span class="hb-desc" data-en="Who I am and my focus.">Quem sou e meu foco.</span>
-        <span class="hb-go" aria-hidden="true">→</span>
-      </a>
-      <a class="hub-box b-sobre" href="#curriculo">
-        <span class="hb-num">02</span>
-        <span class="hb-name" data-en="CV">Currículo</span>
-        <span class="hb-desc" data-en="Role, numbers and track record.">Cargo, números e trajetória.</span>
-        <span class="hb-go" aria-hidden="true">→</span>
-      </a>
-      <a class="hub-box b-sobre" href="#contato">
-        <span class="hb-num">03</span>
-        <span class="hb-name" data-en="Contact">Contato</span>
-        <span class="hb-desc" data-en="Let's talk.">Vamos conversar.</span>
-        <span class="hb-go" aria-hidden="true">→</span>
-      </a>
-      </nav>
+    <p class="lede" data-en="24 hours on an isolated network: exploitation, privilege escalation and an Active Directory set, followed by a graded technical report. The certification pentest roles ask for by name.">24 horas em rede isolada: exploração, escalação de privilégios e um conjunto de Active Directory, seguido de relatório técnico avaliado. A certificação que as vagas de pentest pedem pelo nome.</p>
+    <div class="count">
+      <div><div class="big" data-days>—</div><div class="k" data-en="days to the exam · 23 Oct 2026">dias para o exame · 23 out 2026</div></div>
+      <div class="rk"><b>91 <span data-en="OffSec labs">Labs OffSec</span></b><span data-en="completed">concluídos</span><b>#3 <span data-en="Brazil">Brasil</span></b><span>Rank Leaderboard</span></div>
     </div>
   </section>
 
-  <!-- ══════════ VERIFIQUE ══════════ -->
-  <!-- ══════════ PINS & BADGES ══════════ -->
-  <section class="screen content-screen" id="v-offsec-pins" data-title-pt="Pins & Badges" data-title-en="Pins & Badges" hidden>
-    <p class="eyebrow">OffSec</p>
-    <h1 data-en="Pins &amp; Badges">Pins &amp; Badges</h1>
-    <p class="lede" data-en="Verifiable OffSec pins, badges and assessments. Pick a category; hover or tap to see the details.">Pins, badges e assessments verificáveis da OffSec. Escolha uma categoria; passe o mouse ou toque para ver os detalhes.</p>
-
-    <div class="pick tri" role="tablist">
-      <button type="button" class="pick-btn" data-group="pins" aria-pressed="true">
-        <span class="pick-name">Pins</span>
-        <span class="pick-sub" data-en="15 Skill Pins">15 Skill Pins</span>
-      </button>
-      <button type="button" class="pick-btn" data-group="badges" aria-pressed="false">
-        <span class="pick-name">Badges</span>
-        <span class="pick-sub">2</span>
-      </button>
-      <button type="button" class="pick-btn" data-group="assess" aria-pressed="false">
-        <span class="pick-name">Assessments</span>
-        <span class="pick-sub" data-en="soon">em breve</span>
-      </button>
+  <!-- 4 PRACTICE -->
+  <section class="panel" data-panel="practice">
+    <p class="eyebrow" data-en="Hands-on record">Prática registrada</p>
+    <h1 data-en="The numbers that do the polishing">Os números que lapidam</h1>
+    <p class="lede" data-en="Every figure comes from a public platform profile anyone can open and check.">Todo número vem de um perfil público de plataforma que qualquer um pode abrir e conferir.</p>
+    <div class="caprow"><span class="c">OffSec</span><span class="ln"></span></div>
+    <div class="statgrid">
+      <div class="stat"><div class="v">91</div><div class="k">Labs</div></div>
+      <div class="stat"><div class="v">215</div><div class="k" data-en="flags captured">Flags capturadas</div></div>
+      <div class="stat"><div class="v">569<span class="u">h</span></div><div class="k" data-en="in labs">Em laboratório</div></div>
+      <div class="stat"><div class="v">25</div><div class="k" data-en="pins &amp; badges">Pins &amp; badges</div></div>
+      <div class="stat"><div class="v">2</div><div class="k">Assessments</div></div>
     </div>
+    <div class="caprow"><span class="c">Hack The Box</span><span class="ln"></span></div>
+    <div class="statgrid">
+      <div class="stat"><div class="v">32</div><div class="k" data-en="modules">Módulos</div></div>
+      <div class="stat"><div class="v">3</div><div class="k">Labs</div></div>
+      <div class="stat"><div class="v">13</div><div class="k">Sherlocks</div></div>
+      <div class="stat"><div class="v">16</div><div class="k">Challenges</div></div>
+      <div class="stat"><div class="v">1</div><div class="k">Mini Pro Lab</div></div>
+    </div>
+    <div class="chips" style="margin-top:16px">
+      <a class="chip" href="https://profile.hackthebox.com/profile/019e2c5e-b1eb-7093-b9fa-ec20945bbefb" target="_blank" rel="noopener">Hack The Box ↗</a>
+      <a class="chip" href="https://portal.offsec.com/public-profile/de8b0b16-ad26-3aa0-ad2f-3c49183ca217" target="_blank" rel="noopener">OffSec ↗</a>
+    </div>
+  </section>
 
-    <div class="pb-group" data-group="pins">
-      <div class="pin-stage">
-        <div class="gal-grid">
-        <a class="badge-card" href="https://credentials.offsec.com/ddcd3375-d4bc-44b4-a5af-2edc69ca19d8#acc.5pdxU6Xc" target="_blank" rel="noopener" title="Web Attack Methodology Skill Path — verificar credencial na OffSec" aria-label="Pin OffSec Web Attack Methodology Skill Path — verificar credencial" data-name="Web Attack Methodology Skill Path" data-meta="OffSec · Skill Pin · Mar 2026">
-          <img src="/assets/img/badges/offsec/web-attack-methodology.png" alt="Pin OffSec Web Attack Methodology Skill Path" loading="lazy">
-        </a>
-        <a class="badge-card" href="https://credentials.offsec.com/69cc8387-ecc7-47de-a40d-91c16d22184a#acc.H0tXPlfZ" target="_blank" rel="noopener" title="Web Application Tester Common Tools Skill Path — verificar credencial na OffSec" aria-label="Pin OffSec Web Application Tester Common Tools Skill Path — verificar credencial" data-name="Web Application Tester Common Tools Skill Path" data-meta="OffSec · Skill Pin · Mar 2026">
-          <img src="/assets/img/badges/offsec/web-app-tester-tools.png" alt="Pin OffSec Web Application Tester Common Tools Skill Path" loading="lazy">
-        </a>
-        <a class="badge-card" href="https://credentials.offsec.com/4ee427f5-bfb6-4485-9bed-c24fd0ddc338#acc.yek4LK2A" target="_blank" rel="noopener" title="Vulnerability Detection Skill Path — verificar credencial na OffSec" aria-label="Pin OffSec Vulnerability Detection Skill Path — verificar credencial" data-name="Vulnerability Detection Skill Path" data-meta="OffSec · Skill Pin · Nov 2025">
-          <img src="/assets/img/badges/offsec/vulnerability-detection.png" alt="Pin OffSec Vulnerability Detection Skill Path" loading="lazy">
-        </a>
-        <a class="badge-card" href="https://credentials.offsec.com/b169603e-a5b0-4160-8a57-139b3cd83719#acc.kxqFUd73" target="_blank" rel="noopener" title="Enumeration Skill Path — verificar credencial na OffSec" aria-label="Pin OffSec Enumeration Skill Path — verificar credencial" data-name="Enumeration Skill Path" data-meta="OffSec · Skill Pin · Nov 2025">
-          <img src="/assets/img/badges/offsec/enumeration.png" alt="Pin OffSec Enumeration Skill Path" loading="lazy">
-        </a>
-        <a class="badge-card" href="https://credentials.offsec.com/f3567d25-afb0-4ce5-a7c1-566af1184451#acc.1x2OraYF" target="_blank" rel="noopener" title="Secure Software Development Essentials — verificar credencial na OffSec" aria-label="Pin OffSec Secure Software Development Essentials — verificar credencial" data-name="Secure Software Development Essentials" data-meta="OffSec · Skill Pin">
-          <img src="/assets/img/badges/offsec/secure-software-development-essentials.png" alt="Pin OffSec Secure Software Development Essentials" loading="lazy">
-        </a>
-        <a class="badge-card" href="https://credentials.offsec.com/48959c45-9e1e-4e5a-b0f9-1f1f2bf1e3fd#acc.5RaSUKek" target="_blank" rel="noopener" title="Handling User Input Essentials — verificar credencial na OffSec" aria-label="Pin OffSec Handling User Input Essentials — verificar credencial" data-name="Handling User Input Essentials" data-meta="OffSec · Skill Pin">
-          <img src="/assets/img/badges/offsec/handling-user-input-essentials.png" alt="Pin OffSec Handling User Input Essentials" loading="lazy">
-        </a>
-        <a class="badge-card" href="https://credentials.offsec.com/cb51b463-540a-4c02-90d3-a07e80519af1#acc.Vnj9bGaU" target="_blank" rel="noopener" title="Linux System Administration — verificar credencial na OffSec" aria-label="Pin OffSec Linux System Administration — verificar credencial" data-name="Linux System Administration" data-meta="OffSec · Skill Pin">
-          <img src="/assets/img/badges/offsec/linux-system-administration.png" alt="Pin OffSec Linux System Administration" loading="lazy">
-        </a>
-        <a class="badge-card" href="https://credentials.offsec.com/6b989a33-82fa-4faf-8a53-b3e17ecb6103#acc.5sCj6uAq" target="_blank" rel="noopener" title="Scripting for System Administrators — verificar credencial na OffSec" aria-label="Pin OffSec Scripting for System Administrators — verificar credencial" data-name="Scripting for System Administrators" data-meta="OffSec · Skill Pin">
-          <img src="/assets/img/badges/offsec/scripting-for-system-administrators.png" alt="Pin OffSec Scripting for System Administrators" loading="lazy">
-        </a>
-        <a class="badge-card" href="https://credentials.offsec.com/d32a84d1-a1a3-4f9f-baf5-3aa9df9b0d6d#acc.x27pZ3sK" target="_blank" rel="noopener" title="Troubleshooting — verificar credencial na OffSec" aria-label="Pin OffSec Troubleshooting — verificar credencial" data-name="Troubleshooting" data-meta="OffSec · Skill Pin">
-          <img src="/assets/img/badges/offsec/troubleshooting.png" alt="Pin OffSec Troubleshooting" loading="lazy">
-        </a>
-        <a class="badge-card" href="https://credentials.offsec.com/f20a8d2d-7c8c-4cb6-86a6-462f8a6e224f#acc.1iba7hfr" target="_blank" rel="noopener" title="User Account Management — verificar credencial na OffSec" aria-label="Pin OffSec User Account Management — verificar credencial" data-name="User Account Management" data-meta="OffSec · Skill Pin">
-          <img src="/assets/img/badges/offsec/user-account-management.png" alt="Pin OffSec User Account Management" loading="lazy">
-        </a>
-        <a class="badge-card" href="https://credentials.offsec.com/a102ed85-6f9d-4acb-a36b-0367cb89b1d9#acc.8un2eCpj" target="_blank" rel="noopener" title="Encryption and Cryptography — verificar credencial na OffSec" aria-label="Pin OffSec Encryption and Cryptography — verificar credencial" data-name="Encryption and Cryptography" data-meta="OffSec · Skill Pin">
-          <img src="/assets/img/badges/offsec/encryption-and-cryptography.png" alt="Pin OffSec Encryption and Cryptography" loading="lazy">
-        </a>
-        <a class="badge-card" href="https://credentials.offsec.com/dc13e12d-4c47-4a57-a49f-c85519e437cb#acc.ufPDpU1a" target="_blank" rel="noopener" title="Troubleshooting for System Administrators — verificar credencial na OffSec" aria-label="Pin OffSec Troubleshooting for System Administrators — verificar credencial" data-name="Troubleshooting for System Administrators" data-meta="OffSec · Skill Pin">
-          <img src="/assets/img/badges/offsec/troubleshooting-for-system-administrators.png" alt="Pin OffSec Troubleshooting for System Administrators" loading="lazy">
-        </a>
-        <a class="badge-card" href="https://credentials.offsec.com/622bf293-0fd9-4f8d-947c-b2119218c50e#acc.tHTV8uvi" target="_blank" rel="noopener" title="Scripting and Automation — verificar credencial na OffSec" aria-label="Pin OffSec Scripting and Automation — verificar credencial" data-name="Scripting and Automation" data-meta="OffSec · Skill Pin">
-          <img src="/assets/img/badges/offsec/scripting-and-automation.png" alt="Pin OffSec Scripting and Automation" loading="lazy">
-        </a>
-        <a class="badge-card" href="https://credentials.offsec.com/c276335e-e108-4b3d-8aa9-74d349b0b88c#acc.WMh5eiED" target="_blank" rel="noopener" title="Security as a Product Features — verificar credencial na OffSec" aria-label="Pin OffSec Security as a Product Features — verificar credencial" data-name="Security as a Product Features" data-meta="OffSec · Skill Pin">
-          <img src="/assets/img/badges/offsec/security-as-a-product-features.png" alt="Pin OffSec Security as a Product Features" loading="lazy">
-        </a>
-        <a class="badge-card" href="https://credentials.offsec.com/00b71f20-7f81-4e22-916d-15a7ff676ef9#acc.jVAG8fnZ" target="_blank" rel="noopener" title="Automation and Scripting — verificar credencial na OffSec" aria-label="Pin OffSec Automation and Scripting — verificar credencial" data-name="Automation and Scripting" data-meta="OffSec · Skill Pin">
-          <img src="/assets/img/badges/offsec/automation-and-scripting.png" alt="Pin OffSec Automation and Scripting" loading="lazy">
-        </a>
+  <!-- 5 JOURNEY -->
+  <section class="panel" data-panel="journey">
+    <p class="eyebrow" data-en="Trajectory">Trajetória</p>
+    <h1 data-en="Not a straight line">Não foi em linha reta</h1>
+    <div class="tl">
+      <article class="job red"><div class="when">2025 — <span data-en="present">atualmente</span></div><h3 data-en="Junior Information Security Analyst">Analista de Segurança da Informação Jr.</h3><div class="org">Farmácias São João</div>
+        <ul>
+          <li data-en="Penetration testing of internal and external applications and sites: recon, enumeration, vulnerability validation, evidence and technical recommendations.">Pentests em aplicações e sites internos e externos: reconhecimento, enumeração, validação de vulnerabilidades, evidências e recomendações técnicas.</li>
+          <li data-en="Log analysis, security event investigation and endpoint forensics with CrowdStrike.">Análise de logs, investigação de eventos e forense em endpoints com CrowdStrike.</li>
+          <li data-en="Rules, services and traffic controls on Fortinet firewalls; Active Directory administration.">Regras, serviços e controles de tráfego em firewalls Fortinet; administração de Active Directory.</li>
+        </ul>
+      </article>
+      <article class="job"><div class="when">2024 — 2025</div><h3 data-en="IT Equipment Maintenance Technician">Técnico em Manutenção de Equipamentos de Informática</h3><div class="org">Farmácias São João</div>
+        <ul><li data-en="Deployment and maintenance of computers, servers, switches and printers across stores.">Implantação e manutenção de computadores, servidores, switches e impressoras nas lojas.</li></ul>
+      </article>
+      <article class="job"><div class="when">2012 — 2014</div><h3 data-en="IT Technical Assistant">Auxiliar Técnico em Informática</h3><div class="org">InfoWeb</div></article>
+      <article class="job"><div class="when">2016 — 2018</div><h3 data-en="Full-time Missionary (volunteer)">Missionário de Tempo Integral (voluntário)</h3><div class="org" data-en="The Church of Jesus Christ of Latter-day Saints">A Igreja de Jesus Cristo dos Santos dos Últimos Dias</div></article>
+      <article class="job"><div class="when">2014 — 2015</div><h3 data-en="Compulsory Military Service">Serviço Militar Obrigatório</h3><div class="org" data-en="Brazilian Army">Exército Brasileiro</div></article>
+    </div>
+    <div class="caprow"><span class="c" data-en="Education">Formação</span><span class="ln"></span></div>
+    <div class="tl">
+      <article class="job"><div class="when">2024 — 2026 · <span data-en="in progress">cursando</span></div><h3 data-en="Technology Degree in Cybersecurity">Tecnologia em Cibersegurança</h3><div class="org">Universidade Cruzeiro do Sul</div></article>
+    </div>
+  </section>
+
+  <!-- 6 TERMINAL GAME -->
+  <section class="panel" data-panel="play">
+    <p class="eyebrow" data-en="Nyx's challenge">O desafio da Nyx</p>
+    <h1>savetheborges</h1>
+    <p class="lede" data-en="A training terminal. One machine, one flag. Use real commands — Byte will hint, Nyx will mock. Choose your shell.">Um terminal de treino. Uma máquina, uma flag. Use comandos reais — o Byte dá dica, a Nyx zoa. Escolha seu shell.</p>
+    <div class="term-shell">
+      <div class="term-bar">
+        <span class="b b1"></span><span class="b b2"></span><span class="b b3"></span>
+        <span class="t" id="term-title">hacktheborges@arcade</span>
+        <span class="os" id="os-pick" hidden>
+          <button data-os="linux" aria-pressed="true">bash</button>
+          <button data-os="win" aria-pressed="false">cmd</button>
+        </span>
+      </div>
+      <div id="term-start" class="term-start">
+        <p class="mut" style="margin:0" data-en="Pick a terminal to boot the challenge.">Escolha um terminal pra iniciar o desafio.</p>
+        <div class="os-pick">
+          <button class="pick" data-boot="linux">▸ Linux · bash</button>
+          <button class="pick" data-boot="win">▸ Windows · cmd</button>
         </div>
-        <aside class="pin-detail" aria-live="polite">
-          <span class="pd-imgwrap"><img class="pd-img" src="" alt="" loading="lazy"></span>
-          <h3 class="pd-name"></h3>
-          <p class="pd-meta"></p>
-          <p class="pd-desc"></p>
-          <a class="pd-link" href="#" target="_blank" rel="noopener" data-en="Verify credential ↗">Verificar credencial ↗</a>
-          <p class="pd-hint" data-en="Hover a pin to see its details.">Passe o mouse para ver os detalhes.</p>
-        </aside>
+      </div>
+      <div id="term-live" hidden>
+        <div class="term-mission">
+          <span class="pz">▸</span><span class="ms" id="term-mission" data-en="Find out where you are.">Descubra onde você está.</span>
+          <span class="pr" id="term-prog">0 / 4</span>
+        </div>
+        <div class="term-out" id="term-out" aria-live="polite"></div>
+        <form class="term-in" id="term-form" autocomplete="off">
+          <span class="p" id="term-prompt">$</span>
+          <input id="term-cmd" aria-label="comando" spellcheck="false" autocapitalize="off">
+          <button type="button" id="term-hint" data-en="hint">dica</button>
+          <button type="button" id="term-exit" data-en="exit">sair</button>
+        </form>
       </div>
     </div>
-
-    <div class="pb-group" data-group="badges" hidden>
-      <div class="pin-stage">
-        <div class="gal-grid">
-          <a class="badge-card" href="https://credentials.offsec.com/1b13f50c-392b-41c4-94aa-3c1efb9b98cf#acc.4HbQBR2I" target="_blank" rel="noopener" title="Web Application Assessment Essentials — verificar na OffSec" aria-label="Badge OffSec Web Application Assessment Essentials" data-name="Web Application Assessment Essentials" data-meta="OffSec · Badge" data-desc="A base da ofensiva web: mapear a superfície de ataque de uma aplicação, entender autenticação e sessão, e reconhecer onde a entrada vira injeção. O primeiro passo para transformar um alvo HTTP numa cadeia de exploração." data-desc-en="The groundwork of web offense: mapping an application’s attack surface, understanding authentication and sessions, and spotting where input becomes injection. The first step in turning an HTTP target into an exploitation chain.">
-            <img src="/assets/img/badges/offsec/webapp-assessment-essentials.png" alt="Badge OffSec Web Application Assessment Essentials" loading="lazy">
-          </a>
-          <a class="badge-card" href="https://credentials.offsec.com/acd382b5-0413-41dd-b55e-447d4c1e1684#acc.Lpbt3r9v" target="_blank" rel="noopener" title="Network Penetration Testing Essentials — verificar na OffSec" aria-label="Badge OffSec Network Penetration Testing Essentials" data-name="Network Penetration Testing Essentials" data-meta="OffSec · Badge" data-desc="O alicerce do pentest de rede: enumerar serviços, ler a topologia e identificar o vetor que abre a porta. A disciplina de transformar portas abertas em ponto de entrada — e um ponto de entrada em movimento." data-desc-en="The foundation of network pentesting: enumerating services, reading the topology and finding the vector that opens the door. The discipline of turning open ports into a foothold — and a foothold into movement.">
-            <img src="/assets/img/badges/offsec/network-pentest-essentials.png" alt="Badge OffSec Network Penetration Testing Essentials" loading="lazy">
-          </a>
-        </div>
-        <aside class="pin-detail" aria-live="polite">
-          <span class="pd-imgwrap"><img class="pd-img" src="" alt="" loading="lazy"></span>
-          <h3 class="pd-name"></h3>
-          <p class="pd-meta"></p>
-          <p class="pd-desc"></p>
-          <a class="pd-link" href="#" target="_blank" rel="noopener" data-en="Verify credential ↗">Verificar credencial ↗</a>
-          <p class="pd-hint" data-en="Hover a pin to see its details.">Passe o mouse para ver os detalhes.</p>
-        </aside>
-      </div>
-    </div>
-
-    <div class="pb-group" data-group="assess" hidden>
-      <div class="empty"><p data-en="Soon: OffSec assessments.">Em breve: assessments da OffSec.</p></div>
-    </div>
   </section>
 
-  <section class="screen content-screen" id="v-htb-pins" data-title-pt="Pins & Badges" data-title-en="Pins & Badges" hidden>
-    <p class="eyebrow">Hack The Box · Pins & Badges</p>
-    <h1>Pins & Badges</h1>
-    <div class="empty"><p data-en="Soon: Hack The Box pins and badges.">Em breve: pins e badges do Hack The Box.</p></div>
+  <!-- 7 CONTACT -->
+  <section class="panel" data-panel="contact">
+    <p class="eyebrow" data-en="Let's talk">Vamos conversar</p>
+    <h1 data-en="The door is open">A porta está aberta</h1>
+    <p class="lede" data-en="Red team roles, collaborations, or a good CTF — reach out.">Vagas de red team, colaborações ou um bom CTF — chama.</p>
+    <div class="mailbox">
+      <span class="m" data-mail>arturborges.contato@gmail.com</span>
+      <button class="copy" data-copy data-en="Copy">Copiar</button>
+    </div>
+    <div class="chips">
+      <a class="chip" href="https://www.linkedin.com/in/arturborgges/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="chip" href="https://github.com/hacktheborges" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="chip" href="https://profile.hackthebox.com/profile/019e2c5e-b1eb-7093-b9fa-ec20945bbefb" target="_blank" rel="noopener">Hack The Box ↗</a>
+      <a class="chip" href="https://portal.offsec.com/public-profile/de8b0b16-ad26-3aa0-ad2f-3c49183ca217" target="_blank" rel="noopener">OffSec ↗</a>
+    </div>
+    <p class="disclaim" data-en="All tooling and techniques shown here come from authorised labs, certifications and CTF platforms.">Todas as ferramentas e técnicas aqui vêm de laboratórios autorizados, certificações e plataformas de CTF.</p>
   </section>
 
-  <section class="screen content-screen" id="v-htb-flags" data-title-pt="Flags" data-title-en="Flags" hidden>
-    <p class="eyebrow">Hack The Box · Flags</p>
-    <h1>Flags</h1>
-    <div class="empty"><p data-en="Under construction: proof-of-compromise from retired machines.">Em construção: provas de comprometimento de máquinas aposentadas.</p></div>
-  </section>
+  <div class="foot">© <span id="yr"></span> Artur Borges · hacktheborges · <span data-en="guided by Nyx &amp; Byte">guiado por Nyx &amp; Byte</span></div>
+</main>
 
-  <section class="screen content-screen" id="v-sobre-perfil" data-title-pt="Perfil" data-title-en="Profile" hidden>
-    <p class="eyebrow">whoami</p>
-    <h1 data-en="Profile">Perfil</h1>
-    <p class="lede" data-en="Artur Borges — hacktheborges. Information security analyst in Passo Fundo, RS, heading for offensive security.">Artur Borges — hacktheborges. Analista de segurança da informação em Passo Fundo, RS, com destino à segurança ofensiva.</p>
-
-    <p data-en="The classic IT technician who realised that setting up and maintaining computers no longer satisfied the urge to find out what was going on in the layers you can't see.">O clássico técnico em informática que percebeu que configuração e manutenção em computadores já não supria a necessidade de descobrir o que estava acontecendo em camadas não visíveis.</p>
-
-    <h2 class="sub-h" data-en="Focus">Foco</h2>
-    <div class="tools">
-      <span class="tool">Active Directory</span>
-      <span class="tool">Pentest</span>
-      <span class="tool">Web Security</span>
-      <span class="tool" data-en="Vulnerability exploitation">Exploração de vulnerabilidades</span>
-      <span class="tool" data-en="Reporting">Relatório</span>
+<!-- ===== VN dock ===== -->
+<div class="vn" id="vn">
+  <div class="vn-inner">
+        <div class="cast">
+      <div class="ava nyx on" id="ava-nyx" title="Nyx"><svg viewBox="0 0 120 150" aria-hidden="true"><use href="#char-nyx"/></svg></div>
+      <div class="ava byte" id="ava-byte" title="Byte"><svg viewBox="0 0 120 150" aria-hidden="true"><use href="#char-byte"/></svg></div>
     </div>
-
-    <h2 class="sub-h" data-en="Certifications">Certificações</h2>
-    <div class="tools">
-      <span class="tool">CompTIA Security+</span>
-      <span class="tool">Certified Red Team Analyst (CRTA)</span>
-      <span class="tool">Offensive Security Certified Professional (OSCP) <span class="load">(loading)</span></span>
+    <div class="vn-name" id="vn-name"></div>
+    <div class="vn-text" id="vn-text"></div>
+    <div class="vn-ctl">
+      <span class="pg" id="vn-pg"></span>
+      <span class="sp"></span>
+      <button id="vn-skip" data-en="skip intro">pular intro</button>
+      <button class="go" id="vn-next" data-en="continue ▸">continuar ▸</button>
     </div>
-
-    <h2 class="sub-h" data-en="Education">Formação</h2>
-    <p data-en="Technologist in Cybersecurity — Universidade Cruzeiro do Sul (2024–2026).">Tecnologia em Cibersegurança — Universidade Cruzeiro do Sul (2024–2026).</p>
-
-    <h2 class="sub-h" data-en="Languages">Idiomas</h2>
-    <div class="tools">
-      <span class="tool" data-en="Portuguese — native">Português — nativo</span>
-      <span class="tool" data-en="English — advanced">Inglês — avançado</span>
-    </div>
-
-    <h2 class="sub-h" data-en="Disclaimer">Aviso</h2>
-    <p data-en="I'm a really nice guy.">Sou um cara muito legal.</p>
-  </section>
-
-  <section class="screen content-screen" id="v-contato" data-title-pt="Contato" data-title-en="Contact" hidden>
-    <p class="eyebrow" data-en="Contact">Contato</p>
-    <h1 data-en="Let's talk">Vamos conversar</h1>
-    <p class="lede" data-en="Open to conversations about red team, pentest and offensive security roles.">Aberto a conversas sobre vagas de red team, pentest e segurança ofensiva.</p>
-
-    <div class="chat-anim" role="img" aria-label="V de Vingança em pixel art conversando com uma recrutadora à mesa."></div>
-
-    <div class="contact">
-      <span class="mail" data-mail>arturborges.contato@gmail.com</span>
-      <button class="copy" type="button" data-copy data-en="Copy">Copiar</button>
-    </div>
-
-    <div class="meta">
-      <a class="chip" href="https://www.linkedin.com/in/arturborgges/">LinkedIn ↗</a>
-      <a class="chip" href="https://github.com/hacktheborges">GitHub ↗</a>
-      <a class="chip" href="https://profile.hackthebox.com/profile/019e2c5e-b1eb-7093-b9fa-ec20945bbefb">Hack The Box ↗</a>
-      <a class="chip" href="https://portal.offsec.com/public-profile/de8b0b16-ad26-3aa0-ad2f-3c49183ca217">OffSec ↗</a>
-    </div>
-
-    <p class="fine">
-      <span data-en="Last updated">Última atualização</span> <span data-updated></span> ·
-      <span data-en="Static page, no trackers, no cookies">Página estática, sem rastreadores, sem cookies</span>
-    </p>
-  </section>
-
-  <section class="screen door-screen sub-hub" id="v-offsec" data-title-pt="OffSec" data-title-en="OffSec" hidden>
-    <div class="hub-inner sub-inner">
-      <p class="hub-kicker" data-en="Offensive Security">Offensive Security</p>
-      <h1 class="hub-title sub-title big" data-depth="10" data-en="OffSec">OffSec</h1>
-      <p class="hub-sub" data-en="Pick a topic.">Escolha um assunto.</p>
-      <nav class="hub-grid" data-depth="5" aria-label="OffSec">
-      <a class="hub-box b-offsec" href="#offsec-certs">
-        <span class="hb-num">01</span>
-        <span class="hb-name" data-en="Certifications">Certificações</span>
-        <span class="hb-desc" data-en="OSCP and beyond.">OSCP e o que vier.</span>
-        <span class="hb-go" aria-hidden="true">→</span>
-      </a>
-      <a class="hub-box b-offsec" href="#offsec-pins">
-        <span class="hb-num">02</span>
-        <span class="hb-name" data-en="Pins &amp; Badges">Pins &amp; Badges</span>
-        <span class="hb-desc" data-en="15 pins · 2 badges · assessments">15 pins · 2 badges · assessments</span>
-        <span class="hb-go" aria-hidden="true">→</span>
-      </a>
-      <a class="hub-box b-offsec" href="#pg-practice">
-        <span class="hb-num">03</span>
-        <span class="hb-name" data-en="Labs">Labs</span>
-        <span class="hb-desc" data-en="Proving Grounds and mini-labs.">Proving Grounds e mini-labs.</span>
-        <span class="hb-go" aria-hidden="true">→</span>
-      </a>
-      </nav>
-    </div>
-  </section>
-
-  <section class="screen door-screen sub-hub" id="v-offsec-certs" data-title-pt="Certificações" data-title-en="Certifications" hidden>
-    <div class="hub-inner sub-inner">
-      <p class="hub-kicker" data-en="OffSec certifications">Certificações OffSec</p>
-      <h1 class="hub-title sub-title" data-depth="10" data-en="OffSec certifications">Certificações OffSec</h1>
-      <p class="hub-sub" data-en="Pick a certification.">Escolha uma certificação.</p>
-      <nav class="hub-grid" data-depth="5" aria-label="Certificações OffSec">
-      <a class="hub-box b-offsec has-art art-oscp" href="#oscp">
-        <span class="hb-num">01</span>
-        <span class="hb-name" data-en="OSCP">OSCP</span>
-        <span class="hb-desc" data-en="In prep — Oct 23.">Em preparação — 23 out.</span>
-        <span class="hb-go" aria-hidden="true">→</span>
-      </a>
-      </nav>
-    </div>
-  </section>
-
-  <section class="screen door-screen sub-hub" id="v-htb" data-title-pt="Hack The Box" data-title-en="Hack The Box" hidden>
-    <div class="hub-inner sub-inner">
-      <p class="hub-kicker" data-en="Hack The Box">Hack The Box</p>
-      <h1 class="hub-title sub-title" data-depth="10" data-en="Hack The Box">Hack The Box</h1>
-      <p class="hub-sub" data-en="Pick a topic.">Escolha um assunto.</p>
-      <nav class="hub-grid" data-depth="5" aria-label="Hack The Box">
-      <a class="hub-box b-htb" href="#htb-academy">
-        <span class="hb-num">01</span>
-        <span class="hb-name" data-en="Academy">Academy</span>
-        <span class="hb-desc" data-en="Modules and paths.">Módulos e trilhas.</span>
-        <span class="hb-go" aria-hidden="true">→</span>
-      </a>
-      <a class="hub-box b-htb" href="#pratica">
-        <span class="hb-num">02</span>
-        <span class="hb-name" data-en="Machines">Máquinas</span>
-        <span class="hb-desc" data-en="Labs, Sherlocks and challenges.">Labs, Sherlocks e desafios.</span>
-        <span class="hb-go" aria-hidden="true">→</span>
-      </a>
-      <a class="hub-box b-htb" href="#htb-pins">
-        <span class="hb-num">03</span>
-        <span class="hb-name" data-en="Pins & Badges">Pins & Badges</span>
-        <span class="hb-desc" data-en="Verifiable achievements.">Conquistas verificáveis.</span>
-        <span class="hb-go" aria-hidden="true">→</span>
-      </a>
-      <a class="hub-box b-htb" href="#htb-flags">
-        <span class="hb-num">04</span>
-        <span class="hb-name" data-en="Flags">Flags</span>
-        <span class="hb-desc" data-en="Proof-of-compromise flags.">Provas de comprometimento.</span>
-        <span class="hb-go" aria-hidden="true">→</span>
-      </a>
-      </nav>
-    </div>
-  </section>
-
-  <section class="screen door-screen sub-hub" id="v-certificacoes" data-title-pt="Certificações" data-title-en="Certifications" hidden>
-    <div class="hub-inner sub-inner">
-      <p class="hub-kicker" data-en="Certifications">Certificações</p>
-      <h1 class="hub-title sub-title" data-depth="10" data-en="Certifications">Certificações</h1>
-      <p class="hub-sub" data-en="Pick a certification.">Escolha uma certificação.</p>
-      <nav class="hub-grid" data-depth="5" aria-label="Certificações">
-      <a class="hub-box b-cert has-art art-secplus" href="#security-plus">
-        <span class="hb-num">01</span>
-        <span class="hb-name" data-en="CompTIA Security+">CompTIA Security+</span>
-        <span class="hb-desc" data-en="Security fundamentals.">Fundamentos de segurança.</span>
-        <span class="hb-go" aria-hidden="true">→</span>
-      </a>
-      <a class="hub-box b-cert has-art art-crta" href="#crta">
-        <span class="hb-num">02</span>
-        <span class="hb-name" data-en="CRTA">CRTA</span>
-        <span class="hb-desc" data-en="Certified Red Team Analyst.">Certified Red Team Analyst.</span>
-        <span class="hb-go" aria-hidden="true">→</span>
-      </a>
-      <a class="hub-box b-cert has-art art-oscp" href="#oscp">
-        <span class="hb-num">03</span>
-        <span class="hb-name" data-en="OSCP">OSCP</span>
-        <span class="hb-desc" data-en="In prep — Oct 23.">Em preparação — 23 out.</span>
-        <span class="hb-go" aria-hidden="true">→</span>
-      </a>
-      </nav>
-    </div>
-  </section>
-
-  <section class="screen content-screen" id="v-play" data-title-pt="Do you wanna play?" data-title-en="Do you wanna play?" hidden>
-    <p class="eyebrow">Do you wanna play?</p>
-    <h1>Do you wanna play?</h1>
-    <p class="lede" data-en="A small game is being built here. Come back soon.">Um pequeno jogo está sendo construído aqui. Volte em breve.</p>
-    <div class="empty">
-      <p data-en="Idea in the works — a terminal-style mini-game starring 0xB. Stay tuned.">Ideia em andamento — um mini jogo em estilo terminal estrelando o 0xB. Em breve.</p>
-    </div>
-  </section>
-<div class="lb" id="lb" hidden>
-  <button class="lb-x" id="lb-x" type="button" aria-label="Fechar">✕</button>
-  <img id="lb-img" alt="">
+    <div class="hintline" id="vn-hint" data-en="click the text to reveal it all · Enter / Space to continue">clique no texto pra revelar tudo · Enter / Espaço pra continuar</div>
+  </div>
 </div>
 
-<script src="/assets/js/cv.js?v=10"></script>
+<script>
+(function(){
+  "use strict";
+  var lang = "pt";
+  var $ = function(s,r){return (r||document).querySelector(s);};
+  var $$ = function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+
+  /* ---------- i18n for static nodes ---------- */
+  var i18n = $$("[data-en]");
+  i18n.forEach(function(el){ el.setAttribute("data-pt", el.innerHTML); });
+  function applyLang(){
+    i18n.forEach(function(el){ el.innerHTML = el.getAttribute("data-"+lang) || el.getAttribute("data-pt"); });
+    document.documentElement.lang = lang==="pt"?"pt-BR":"en";
+    $$("[data-lang]").forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-lang")===lang)); });
+    $$("[data-copy]").forEach(function(b){ b.textContent = T.copy[lang]; });
+    renderDays(); buildMenu(); if(vnActive){ drawVN(true); }
+  }
+  function setLang(n){ lang=n; try{localStorage.setItem("htb-lang",n);}catch(e){} applyLang(); }
+
+  var T = {
+    copy:{pt:"Copiar",en:"Copy"}, copied:{pt:"Copiado!",en:"Copied!"},
+  };
+
+  /* ---------- days to OSCP ---------- */
+  function renderDays(){
+    var exam = new Date(2026,9,23); // 23 Oct 2026
+    var now = new Date(); now.setHours(0,0,0,0);
+    var d = Math.round((exam-now)/86400000);
+    $$("[data-days]").forEach(function(el){
+      if(d>0){ el.textContent=String(d); el.classList.remove("done"); }
+      else if(d===0){ el.textContent = lang==="pt"?"HOJE":"TODAY"; el.classList.add("done"); }
+      else { el.textContent="✓"; el.classList.add("done"); }
+    });
+  }
+  $("#yr").textContent = new Date().getFullYear();
+
+  /* ---------- panels / routing ---------- */
+  var ORDER = ["intro","who","oscp","certs","practice","journey","play","contact"];
+  var MENU = {
+    intro:{pt:"Início",en:"Start"}, who:{pt:"Quem sou",en:"Who I am"},
+    oscp:{pt:"OSCP",en:"OSCP"}, certs:{pt:"Certificações",en:"Certifications"},
+    practice:{pt:"Prática",en:"Hands-on"}, journey:{pt:"Trajetória",en:"Journey"},
+    play:{pt:"Terminal",en:"Terminal"}, contact:{pt:"Contato",en:"Contact"}
+  };
+  var panels = {}; $$(".panel").forEach(function(p){ panels[p.getAttribute("data-panel")] = p; });
+  var current = null;
+  function show(name){
+    if(!panels[name]) name="intro";
+    if(current) current.classList.remove("active");
+    current = panels[name]; current.classList.add("active");
+    window.scrollTo({top:0,behavior:"smooth"});
+    if(name==="play") setTimeout(function(){ if(!gameOn) $("#term-start").scrollIntoView({block:"nearest"}); },60);
+  }
+  function buildMenu(){
+    var pop=$("#menu-pop"); pop.innerHTML="";
+    ORDER.forEach(function(name,i){
+      var b=document.createElement("button");
+      b.innerHTML='<span class="ix">'+String(i).padStart(2,"0")+'</span>'+(MENU[name][lang]||name);
+      b.onclick=function(){ pop.classList.remove("open"); $("#menu-btn").setAttribute("aria-expanded","false"); goChapter(name); };
+      pop.appendChild(b);
+    });
+  }
+  $("#menu-btn").onclick=function(e){ e.stopPropagation(); var p=$("#menu-pop"); var o=p.classList.toggle("open"); this.setAttribute("aria-expanded",String(o)); };
+  document.addEventListener("click",function(){ $("#menu-pop").classList.remove("open"); $("#menu-btn").setAttribute("aria-expanded","false"); });
+
+  // cert card navigation
+  $$("[data-go]").forEach(function(el){
+    el.addEventListener("click",function(e){ e.preventDefault(); var dst=el.getAttribute("data-go"); show(dst==="oscp"&&current&&current.getAttribute("data-panel")==="certs"?"oscp-full":dst); if(dst==="oscp"&&!(current&&current.getAttribute("data-panel")==="oscp-full")){} });
+  });
+  // fix: cert "oscp" card should open oscp-full
+  $$(".cert[data-go='oscp']").forEach(function(el){ el.addEventListener("click",function(){ show("oscp-full"); }); });
+
+  /* ---------- VN engine ---------- */
+  var SCRIPT = {
+    intro:[
+      {w:"nyx",pt:"Ei. Você entrou. Bem-vindo ao arcade do Artur.",en:"Hey. You're in. Welcome to Artur's arcade."},
+      {w:"byte",pt:"Oi! Eu sou o Byte — organizo as informações. Essa aí é a Nyx, ela gosta de quebrar coisas.",en:"Hi! I'm Byte — I keep things in order. That's Nyx, she likes to break things."},
+      {w:"nyx",pt:"Quebrar com propósito, querido. A gente vai te mostrar quem é o Artur e o que ele já conquistou.",en:"Break with purpose, dear. We'll show you who Artur is and what he's earned."},
+      {w:"byte",pt:"Aperta continuar e a gente conduz. Ou usa o menu ali em cima pra ir direto onde quiser.",en:"Press continue and we'll guide you — or use the top menu to jump anywhere."}
+    ],
+    who:[
+      {w:"byte",pt:"Artur é analista de segurança da informação. Começou no suporte e foi subindo até o pentest.",en:"Artur is an information security analyst. Started in support and climbed to pentesting."},
+      {w:"nyx",pt:"Tradução: ele aprendeu a consertar as máquinas antes de aprender a invadir. Respeito.",en:"Translation: he learned to fix the machines before learning to break in. Respect."}
+    ],
+    oscp:[
+      {w:"nyx",pt:"Essa é a manchete. OSCP. O relógio tá correndo e ele não piscou.",en:"This is the headline. OSCP. The clock is ticking and he hasn't blinked."},
+      {w:"byte",pt:"91 labs concluídos, #3 do Brasil no ranking da OffSec. Os números falam.",en:"91 labs done, #3 in Brazil on the OffSec leaderboard. The numbers talk."}
+    ],
+    certs:[
+      {w:"byte",pt:"Três certificações. Cada card abre a história real por trás — clica à vontade.",en:"Three certifications. Each card opens the real story behind it — click away."},
+      {w:"nyx",pt:"Selo é fácil. O que vale é a trilha. Dá uma olhada na 'Road to' de cada uma.",en:"Badges are easy. The trail is what counts. Check the 'Road to' on each."}
+    ],
+    practice:[
+      {w:"nyx",pt:"569 horas em laboratório. 215 flags. Isso não é sorte, é teimosia.",en:"569 hours in labs. 215 flags. That's not luck, that's stubbornness."},
+      {w:"byte",pt:"E tudo verificável em perfil público. Transparência é parte do trabalho.",en:"And all verifiable on public profiles. Transparency is part of the job."}
+    ],
+    journey:[
+      {w:"byte",pt:"Vigilante, militar, missionário, técnico... a trajetória não foi reta.",en:"Security guard, military, missionary, technician... the path wasn't straight."},
+      {w:"nyx",pt:"Cada parada ensinou disciplina. Dá pra sentir isso em como ele caça uma flag.",en:"Every stop taught discipline. You can feel it in how he hunts a flag."}
+    ],
+    play:[
+      {w:"nyx",pt:"Chega de papo. Quer sentir como é? Abre um terminal e acha a flag.",en:"Enough talk. Want to feel it? Open a terminal and find the flag."},
+      {w:"byte",pt:"Relaxa, eu te dou dicas. Comandos de verdade: pwd, ls, cd, cat, grep. Digita 'help'.",en:"Relax, I'll hint. Real commands: pwd, ls, cd, cat, grep. Type 'help'."}
+    ],
+    contact:[
+      {w:"byte",pt:"Chegamos ao fim do tour. Se curtiu, os links de contato estão aí.",en:"That's the end of the tour. If you liked it, the contact links are right here."},
+      {w:"nyx",pt:"E se tiver uma vaga de red team... ele tá disponível. 😏 Valeu por vir.",en:"And if you've got a red team seat open... he's available. 😏 Thanks for stopping by."}
+    ]
+  };
+
+  var vnActive=true, vnChapter="intro", vnLine=0, typing=false, typeTimer=null, fullText="";
+  function chapterOf(name){ return SCRIPT[name]?name:null; }
+  function drawVN(justLang){
+    var arr=SCRIPT[vnChapter]; if(!arr) return;
+    if(vnLine>=arr.length) vnLine=arr.length-1;
+    var line=arr[vnLine];
+    var who=line.w;
+    $("#ava-nyx").classList.toggle("on",who==="nyx");
+    $("#ava-byte").classList.toggle("on",who==="byte");
+    var nm=$("#vn-name"); nm.className="vn-name "+who; nm.textContent=who==="nyx"?"Nyx":"Byte";
+    var txt=$("#vn-text"); txt.className="vn-text "+who;
+    fullText=line[lang]||line.pt;
+    $("#vn-pg").textContent=(MENU[vnChapter]?MENU[vnChapter][lang]:vnChapter)+" · "+(vnLine+1)+"/"+arr.length;
+    typeText(txt, fullText);
+    var last = vnLine===arr.length-1;
+    var atEnd = last && ORDER.indexOf(vnChapter)===ORDER.length-1;
+    $("#vn-next").innerHTML = atEnd ? (lang==="pt"?"recomeçar ↻":"restart ↻") : (lang==="pt"?"continuar ▸":"continue ▸");
+  }
+  function typeText(node,text){
+    clearTimeout(typeTimer); typing=true;
+    node.innerHTML=""; var i=0;
+    var caret=document.createElement("span"); caret.className="caret";
+    function step(){
+      if(i<=text.length){
+        node.textContent=text.slice(0,i);
+        node.appendChild(caret);
+        i++; typeTimer=setTimeout(step, 16);
+      } else { typing=false; }
+    }
+    step();
+  }
+  function revealNow(){ if(typing){ clearTimeout(typeTimer); typing=false; var t=$("#vn-text"); t.textContent=fullText; var c=document.createElement("span"); c.className="caret"; t.appendChild(c); return true; } return false; }
+
+  function vnNext(){
+    if(revealNow()) return;
+    var arr=SCRIPT[vnChapter];
+    if(vnLine < arr.length-1){ vnLine++; drawVN(); return; }
+    // advance chapter
+    var idx=ORDER.indexOf(vnChapter);
+    if(idx < ORDER.length-1){ goChapter(ORDER[idx+1]); }
+    else { goChapter("intro"); } // restart
+  }
+  function goChapter(name){
+    vnChapter = chapterOf(name) || "intro";
+    vnLine=0; show(name); if(vnActive) drawVN(); else show(name);
+  }
+  $("#vn-next").onclick=vnNext;
+  $("#vn-text").onclick=function(){ if(!revealNow()) vnNext(); };
+  $("#vn-skip").onclick=function(){
+    vnActive=false;
+    $("#vn").style.display="none";
+    document.querySelector(".stage-wrap").style.paddingBottom="60px";
+  };
+  document.addEventListener("keydown",function(e){
+    if(!introDone){ if(e.key==="Enter"||e.key===" "||e.key==="Escape"){ e.preventDefault(); endIntro(); } return; }
+    if(e.target && (e.target.id==="term-cmd")) return;
+    if(e.key==="Enter"||e.key===" "){ if(vnActive){ e.preventDefault(); vnNext(); } }
+  });
+
+  /* ---------- opening cinematic ---------- */
+  var introDone=false, introTimer=null;
+  function endIntro(){ if(introDone) return; introDone=true; clearTimeout(introTimer); var i=$("#intro"); if(!i) return; i.classList.add("done"); setTimeout(function(){ i.style.display="none"; },650); }
+  function runIntro(){
+    var i=$("#intro"); if(!i){ introDone=true; return; }
+    var sk=$("#intro-skip"); if(sk) sk.addEventListener("click", endIntro);
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(reduce){ introTimer=setTimeout(endIntro, 600); return; }
+    setTimeout(function(){ var s=$("#intro-scene"); if(s) s.classList.add("lock"); }, 1650);
+    introTimer=setTimeout(endIntro, 3400);
+  }
+
+  /* ---------- copy email ---------- */
+  $$("[data-copy]").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var mail=btn.parentNode.querySelector("[data-mail]").textContent.trim();
+      var done=function(){ btn.textContent=T.copied[lang]; setTimeout(function(){ btn.textContent=T.copy[lang]; },1500); };
+      if(navigator.clipboard){ navigator.clipboard.writeText(mail).then(done,done); } else { done(); }
+    });
+  });
+
+  /* ---------- theme ---------- */
+  $("#theme").onclick=function(){
+    var cur=document.documentElement.getAttribute("data-theme");
+    var n=cur==="light"?"dark":"light";
+    document.documentElement.setAttribute("data-theme",n);
+    try{localStorage.setItem("htb-theme",n);}catch(e){}
+  };
+  try{ var st=localStorage.getItem("htb-theme"); if(st) document.documentElement.setAttribute("data-theme",st); }catch(e){}
+
+  /* ===================================================================
+     TERMINAL MINI-GAME — "savetheborges"
+     One machine, four steps: pwd -> ls -> cd arcade -> read flag.
+     =================================================================== */
+  var gameOn=false, os="linux", hintLevel=0;
+  var G=null;
+  function L(pt,en){ return lang==="pt"?pt:en; }
+
+  function buildFS(){
+    return {
+      cwd:"/home/borges",
+      home:"/home/borges",
+      step:0,           // 0 pwd, 1 ls(home), 2 cd arcade, 3 read flag
+      found:false,
+      fs:{
+        "/home/borges":{dirs:["arcade","notas"],files:{
+          "leia-me.txt":L("Bem-vindo ao treino. Liste os arquivos e entre na pasta 'arcade'.","Welcome to the training. List the files and enter the 'arcade' folder.")
+        }},
+        "/home/borges/notas":{dirs:[],files:{
+          "todo.txt":L("estudar AD, revisar nmap, dormir (opcional).","study AD, review nmap, sleep (optional).")
+        }},
+        "/home/borges/arcade":{dirs:[],files:{
+          ".flag.txt":"flag{b0rges_n4_tr1lha_d0_0scp}",
+          "dica.txt":L("Nem tudo aparece num 'ls' comum. Alguns arquivos se escondem.","Not everything shows in a plain 'ls'. Some files hide.")
+        }}
+      }
+    };
+  }
+
+  function prompt(){
+    if(os==="win"){ return G.cwd.replace("/home/borges","C:\\Users\\borges").replace(/\//g,"\\")+">"; }
+    return "borges@arcade:"+G.cwd.replace("/home/borges","~")+"$";
+  }
+  function mission(){
+    switch(G.step){
+      case 0: return L("Descubra onde você está no sistema.","Find out where you are in the system.");
+      case 1: return L("Liste os arquivos e pastas daqui.","List the files and folders here.");
+      case 2: return L("Entre na pasta 'arcade'.","Enter the 'arcade' folder.");
+      case 3: return L("Há um arquivo oculto. Revele e leia a flag.","There's a hidden file. Reveal and read the flag.");
+      default:return L("Missão cumprida. 🏁","Mission complete. 🏁");
+    }
+  }
+  function out(text,kind){
+    if(text==null) return;
+    var o=$("#term-out");
+    String(text).split("\n").forEach(function(l){
+      var d=document.createElement("div"); d.className="ln "+(kind||""); d.textContent=l; o.appendChild(d);
+    });
+    o.scrollTop=o.scrollHeight;
+  }
+  function cmdline(raw){
+    var o=$("#term-out"); var d=document.createElement("div"); d.className="ln cmd";
+    var p=document.createElement("span"); p.className="p"; p.textContent=prompt()+" ";
+    d.appendChild(p); d.appendChild(document.createTextNode(raw)); o.appendChild(d); o.scrollTop=o.scrollHeight;
+  }
+  function updateHud(){
+    $("#term-mission").textContent=mission();
+    $("#term-prog").textContent=Math.min(G.step,4)+" / 4";
+    $("#term-prompt").textContent = os==="win" ? prompt() : "$";
+    $("#term-title").textContent = os==="win" ? "C:\\Windows\\System32\\cmd.exe" : "borges@arcade — bash";
+  }
+  function listDir(path,all){
+    var node=G.fs[path]; if(!node) return "";
+    var items=[].concat(node.dirs.map(function(d){return d+"/";}));
+    Object.keys(node.files).forEach(function(f){ if(all || f[0]!==".") items.push(f); });
+    if(!all) items=items.filter(function(x){ return x[0]!=="."; });
+    return items.join("   ");
+  }
+  function resolve(arg){
+    if(!arg) return G.home;
+    if(arg==="~") return G.home;
+    if(arg==="..") { var p=G.cwd.split("/"); p.pop(); var up=p.join("/")||"/"; return up; }
+    if(arg[0]==="/") return arg;
+    return (G.cwd==="/"?"":G.cwd)+"/"+arg;
+  }
+
+  function run(raw){
+    var parts=raw.trim().split(/\s+/); var c=parts[0].toLowerCase(); var arg=parts.slice(1).join(" ");
+    var winName = os==="win";
+    // normalize some windows commands to same behaviour
+    if(c==="help"){ return out(L(
+      "Comandos: pwd, ls, ls -a, cd <pasta>, cat <arquivo>, grep <texto> <arquivo>, clear, whoami.",
+      "Commands: pwd, ls, ls -a, cd <folder>, cat <file>, grep <text> <file>, clear, whoami."),"sys"); }
+    if(c==="whoami"){ return out("borges","ok"); }
+    if(c==="clear"||c==="cls"){ $("#term-out").innerHTML=""; return; }
+
+    if(c==="pwd"||(winName&&c==="cd"&&!arg)){
+      out(G.cwd, "");
+      if(G.step===0){ G.step=1; byte(L("Boa. Agora liste o que tem aqui.","Good. Now list what's here.")); flash(); }
+      return updateHud();
+    }
+    if(c==="ls"||c==="dir"){
+      var all = /(-a|-la|-al|\/a)/.test(raw);
+      var node=G.fs[G.cwd];
+      if(!node) return out("—");
+      out(listDir(G.cwd, all), "");
+      if(G.step===1 && G.cwd===G.home){ G.step=2; byte(L("Viu a pasta 'arcade'? Entra nela com cd.","See the 'arcade' folder? Go in with cd.")); flash(); }
+      else if(G.step===3 && G.cwd==="/home/borges/arcade" && all){ G.found=true; byte(L("Achou o .flag.txt. Lê com cat.","Found .flag.txt. Read it with cat.")); }
+      else if(G.step===3 && G.cwd==="/home/borges/arcade" && !all){ nyx(L("Um 'ls' sequinho? Tem coisa escondida aí, detetive. 🙄","A plain 'ls'? Something's hidden there, detective. 🙄")); }
+      return updateHud();
+    }
+    if(c==="cd"){
+      var dst=resolve(arg);
+      if(!G.fs[dst]) return out(L("cd: pasta não encontrada: ","cd: no such folder: ")+arg,"err");
+      G.cwd=dst;
+      if(G.step===2 && dst==="/home/borges/arcade"){ G.step=3; byte(L("Dentro do arcade. A flag se esconde — tenta um ls que mostra ocultos.","Inside the arcade. The flag hides — try an ls that shows hidden files.")); flash(); }
+      return updateHud();
+    }
+    if(c==="cat"||c==="type"){
+      if(!arg) return out(L("cat: informe um arquivo.","cat: give a file name."),"err");
+      var node=G.fs[G.cwd]; var key=arg.replace("./","");
+      if(node && node.files[key]!=null){
+        var val=node.files[key];
+        if(key===".flag.txt"){
+          out(val,"ok");
+          if(G.step===3){ G.step=4; win(); }
+          return updateHud();
+        }
+        return out(val,"");
+      }
+      return out(L("cat: arquivo não encontrado: ","cat: no such file: ")+arg,"err");
+    }
+    if(c==="grep"||c==="findstr"){
+      var m=raw.split(/\s+/); var term=m[1]; var file=m[2];
+      if(!term||!file) return out(L("uso: grep <texto> <arquivo>","usage: grep <text> <file>"),"err");
+      var nd=G.fs[G.cwd]; var fk=file.replace("./","");
+      if(nd && nd.files[fk]!=null){
+        var lines=String(nd.files[fk]).split("\n").filter(function(l){return l.toLowerCase().indexOf(term.toLowerCase())>=0;});
+        return out(lines.length?lines.join("\n"):"—","");
+      }
+      return out(L("grep: arquivo não encontrado.","grep: no such file."),"err");
+    }
+    nyx(L("'"+c+"'? Esse comando não cola aqui. Digita help, gênio.","'"+c+"'? That won't work here. Type help, genius."));
+  }
+
+  function byte(t){ out("Byte » "+t,"byte"); }
+  function nyx(t){ out("Nyx » "+t,"nyx"); }
+  function flash(){ var m=$("#term-mission").parentElement; m.style.transition="none"; m.style.background="#13202b"; setTimeout(function(){ m.style.transition=".8s"; m.style.background=""; },40); }
+  function win(){
+    out("","");
+    out("┌──────────────────────────────┐","ok");
+    out(L("│  FLAG CAPTURADA · máquina 1   │","│  FLAG CAPTURED · machine 1    │"),"ok");
+    out("└──────────────────────────────┘","ok");
+    nyx(L("Ok, ok. Nada mal pra um visitante. 😏","Okay, okay. Not bad for a visitor. 😏"));
+    byte(L("É exatamente assim que o Artur começa cada máquina: situar, enumerar, ler tudo. Valeu por jogar!","That's exactly how Artur starts every box: orient, enumerate, read everything. Thanks for playing!"));
+    var card=document.createElement("div"); card.className="win-badge";
+    card.textContent=L("🏁 Você terminou o savetheborges. Explore o resto pelo menu.","🏁 You cleared savetheborges. Explore the rest from the menu.");
+    $("#term-out").appendChild(card); $("#term-out").scrollTop=$("#term-out").scrollHeight;
+  }
+
+  function boot(which){
+    os=which; gameOn=true; G=buildFS(); hintLevel=0;
+    $("#term-start").hidden=true; $("#term-live").hidden=false; $("#os-pick").hidden=false;
+    $$("#os-pick button").forEach(function(b){ b.setAttribute("aria-pressed",String(b.getAttribute("data-os")===os)); });
+    $("#term-out").innerHTML="";
+    out(os==="win"?"Microsoft Windows [savetheborges]":"GNU/Linux · savetheborges · bash","sys");
+    nyx(L("Terminal aberto. Primeira pergunta: você sabe onde pisou? 😼","Terminal open. First question: do you even know where you're standing? 😼"));
+    byte(L("Dica: 'pwd' mostra o diretório atual. Digita 'help' quando quiser a lista.","Hint: 'pwd' shows the current directory. Type 'help' anytime for the list."));
+    updateHud(); $("#term-cmd").focus();
+  }
+  $$("[data-boot]").forEach(function(b){ b.onclick=function(){ boot(b.getAttribute("data-boot")); }; });
+  $$("#os-pick button").forEach(function(b){ b.onclick=function(){ boot(b.getAttribute("data-os")); }; });
+  $("#term-form").addEventListener("submit",function(e){
+    e.preventDefault(); var v=$("#term-cmd").value.trim(); if(!v||!G) return;
+    cmdline(v); run(v); $("#term-cmd").value=""; $("#term-cmd").focus();
+  });
+  $("#term-hint").onclick=function(){
+    if(!G) return;
+    var hints={
+      0:["pwd"],
+      1:["ls"],
+      2:["cd arcade"],
+      3:["ls -a","cat .flag.txt"]
+    };
+    var arr=hints[G.step]||[L("Explore à vontade.","Explore freely.")];
+    hintLevel=Math.min(arr.length-1,hintLevel);
+    byte(L("Tenta: ","Try: ")+arr[Math.min(hintLevel,arr.length-1)]);
+    hintLevel++;
+    $("#term-cmd").focus();
+  };
+  $("#term-exit").onclick=function(){
+    gameOn=false; G=null; $("#term-live").hidden=true; $("#term-start").hidden=false; $("#os-pick").hidden=true;
+  };
+
+  /* ---------- boot ---------- */
+  try{ var sl=localStorage.getItem("htb-lang"); if(sl==="en") lang="en"; }catch(e){}
+  applyLang(); buildMenu(); goChapter("intro"); runIntro();
+})();
+</script>
 </body>
 </html>

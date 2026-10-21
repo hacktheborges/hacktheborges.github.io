@@ -1,0 +1,93 @@
+/* ═══════════════════════════════════════════════════════════════
+   Tour guiado — boot de terminal + V como guia (holofote nas portas)
+   Arquivo próprio (script-src/style-src 'self'); não toca nos blocos inline.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* botão de disparo no hub */
+.tour-launch{
+  margin:18px auto 0;display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--font-mono,ui-monospace,monospace);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:#ffd9d9;background:linear-gradient(180deg,rgba(226,59,59,.16),rgba(226,59,59,.06));
+  border:1px solid rgba(226,59,59,.5);border-radius:999px;padding:11px 20px;cursor:pointer;
+  text-decoration:none;transition:transform .18s cubic-bezier(.22,1,.36,1),box-shadow .2s,border-color .2s,background .2s;
+  box-shadow:0 0 0 rgba(226,59,59,0)}
+.tour-launch::before{content:"▶";font-size:10px;color:#ff6b6b;filter:drop-shadow(0 0 6px rgba(255,80,80,.7))}
+.tour-launch:hover,.tour-launch:focus-visible{outline:none;transform:translateY(-2px);
+  border-color:rgba(255,90,90,.85);background:linear-gradient(180deg,rgba(226,59,59,.26),rgba(226,59,59,.08));
+  box-shadow:0 0 22px -4px rgba(255,60,60,.6),0 10px 24px -16px #000;color:#fff}
+.tour-launch .k{color:#ff8a8a}
+
+/* overlay raiz */
+.tour-overlay{position:fixed;inset:0;z-index:120;display:none;
+  font-family:var(--font-mono,ui-monospace,monospace);color:#eceef1;
+  -webkit-tap-highlight-color:transparent}
+.tour-overlay.on{display:block;animation:tourFade .25s ease both}
+@keyframes tourFade{from{opacity:0}to{opacity:1}}
+
+/* cortina escura (fase boot cobre tudo; fase guia usa o anel pra recortar) */
+.tour-dim{position:absolute;inset:0;background:rgba(6,6,8,.82);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+
+/* anel de holofote (box-shadow gigante escurece o resto) */
+.tour-ring{position:absolute;border-radius:16px;pointer-events:none;
+  border:1.5px solid rgba(255,80,80,.9);
+  box-shadow:0 0 0 9999px rgba(6,6,8,.82),0 0 28px -2px rgba(255,60,60,.55),inset 0 0 22px -6px rgba(255,80,80,.45);
+  transition:top .34s cubic-bezier(.22,1,.36,1),left .34s cubic-bezier(.22,1,.36,1),width .34s cubic-bezier(.22,1,.36,1),height .34s cubic-bezier(.22,1,.36,1);
+  display:none}
+.tour-ring.on{display:block}
+
+/* ── terminal de boot ── */
+.tour-term{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(620px,92vw);background:rgba(13,14,17,.96);border:1px solid #2a2d33;border-radius:12px;
+  box-shadow:0 30px 80px -30px #000,0 0 40px -12px rgba(255,50,50,.3);overflow:hidden}
+.tour-term-bar{display:flex;align-items:center;gap:8px;padding:11px 14px;background:#121317;border-bottom:1px solid #22252b}
+.tour-term-bar i{width:11px;height:11px;border-radius:50%;background:#3a3d44;display:inline-block}
+.tour-term-bar i:nth-child(1){background:#ff5f56}.tour-term-bar i:nth-child(2){background:#ffbd2e}.tour-term-bar i:nth-child(3){background:#27c93f}
+.tour-term-bar span{margin-left:8px;font-size:11.5px;color:#8b9099;letter-spacing:.08em}
+.tour-term-body{padding:18px 18px 20px;font-size:13.5px;line-height:1.75;min-height:168px;white-space:pre-wrap;word-break:break-word}
+.tour-term-body .pr{color:#ff6b6b}
+.tour-term-body .ok{color:#3fbf8f}
+.tour-term-body .vline{color:#ffd9d9}
+.tour-caret-blink{display:inline-block;width:.6ch;height:1.05em;background:#ff6b6b;vertical-align:-2px;margin-left:1px;
+  box-shadow:0 0 8px rgba(255,80,80,.8);animation:tourBlink 1.05s steps(1) infinite}
+@keyframes tourBlink{50%{opacity:0}}
+.tour-term-skip{display:block;margin:16px auto 0;font-family:inherit;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:#9aa1a9;background:none;border:1px solid #2a2d33;border-radius:7px;padding:7px 13px;cursor:pointer;transition:color .18s,border-color .18s}
+.tour-term-skip:hover,.tour-term-skip:focus-visible{outline:none;color:#fff;border-color:#4a4d55}
+
+/* ── cartão do guia V ── */
+.tour-guide{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);
+  width:min(680px,94vw);display:flex;gap:16px;align-items:flex-end;
+  background:linear-gradient(160deg,rgba(23,24,28,.97),rgba(15,16,19,.97));
+  border:1px solid #2b2d33;border-radius:16px;padding:16px 18px 16px 14px;
+  box-shadow:0 30px 70px -28px #000,0 0 36px -14px rgba(255,50,50,.3);
+  display:none}
+.tour-guide.on{display:flex;animation:tourUp .3s cubic-bezier(.22,1,.36,1) both}
+@keyframes tourUp{from{opacity:0;transform:translateX(-50%) translateY(14px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+.tour-guide-fig{flex:0 0 auto;width:92px;align-self:flex-end;line-height:0}
+.tour-guide-fig img{width:92px;height:auto;filter:drop-shadow(0 8px 18px rgba(0,0,0,.6)) drop-shadow(0 0 12px rgba(255,60,60,.3))}
+.tour-guide-main{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:10px}
+.tour-guide-who{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#ff8a8a}
+.tour-guide-say{font-family:var(--font-sans,system-ui,sans-serif);font-size:15px;line-height:1.5;color:#eceef1;margin:0;min-height:2.8em}
+.tour-guide-foot{display:flex;align-items:center;gap:10px;margin-top:2px;flex-wrap:wrap}
+.tour-dots{display:flex;gap:6px;margin-right:auto}
+.tour-dots i{width:7px;height:7px;border-radius:50%;background:#3a3d44;transition:background .2s,transform .2s}
+.tour-dots i.on{background:#ff5a5a;transform:scale(1.25);box-shadow:0 0 8px rgba(255,80,80,.7)}
+.tour-btn{font-family:var(--font-mono,ui-monospace,monospace);font-size:12px;letter-spacing:.06em;
+  border-radius:8px;padding:9px 14px;cursor:pointer;border:1px solid #2a2d33;background:#16171b;color:#cfd3da;
+  transition:transform .16s,border-color .18s,background .18s,color .18s}
+.tour-btn:hover,.tour-btn:focus-visible{outline:none;color:#fff;border-color:#4a4d55;transform:translateY(-1px)}
+.tour-btn.ghost{background:none;color:#9aa1a9}
+.tour-btn.go{border-color:rgba(255,90,90,.6);background:linear-gradient(180deg,rgba(226,59,59,.22),rgba(226,59,59,.07));color:#ffe0e0}
+.tour-btn.go:hover,.tour-btn.go:focus-visible{border-color:rgba(255,110,110,.9);box-shadow:0 0 18px -4px rgba(255,60,60,.6);color:#fff}
+
+@media (max-width:620px){
+  .tour-guide{flex-direction:row;gap:12px;padding:13px 14px 13px 10px;bottom:16px}
+  .tour-guide-fig{width:64px}.tour-guide-fig img{width:64px}
+  .tour-guide-say{font-size:14px}
+  .tour-btn{padding:8px 12px}
+}
+@media (prefers-reduced-motion:reduce){
+  .tour-overlay.on,.tour-guide.on{animation:none}
+  .tour-ring{transition:none}
+  .tour-caret-blink{animation:none}
+}

@@ -19,6 +19,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/assets/css/cv.css?v=24">
+<link rel="stylesheet" href="/assets/css/tour.css?v=1">
 <style>
 /* Pins & Badges: duas categorias, preservando o seletor usado pelo JavaScript. */
 #v-offsec-pins .pick.tri{max-width:640px;grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -664,6 +665,7 @@ body[data-page="oscp"] #dust{opacity:1}
     <p class="hub-kicker" data-en="Offensive security portfolio">Portfólio de segurança ofensiva</p>
     <h1 class="hub-title" aria-label="hacktheborges"><span class="hub-hack">hack</span><span class="hub-rest">theborges</span></h1>
     <p class="hub-sub" data-en="Pick a door.">Escolha uma porta.</p>
+    <button type="button" class="tour-launch" id="tour-launch" data-en="Take the tour">Fazer o tour</button>
     <nav class="hub-grid" aria-label="Seções principais">
       <a class="hub-box b-offsec has-art art-offsec" href="#offsec">
         <span class="hb-num">4444</span>
@@ -2191,6 +2193,7 @@ function createSaveGame(os, english) {
 
 
 </script>
+<script src="/assets/js/tour.js?v=1" defer></script>
 </body>
 </html>
 

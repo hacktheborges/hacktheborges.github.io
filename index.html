@@ -578,12 +578,38 @@ function renderCommitDots(){
   });
 }
 function fmtDay(iso){try{return new Date(iso).toLocaleDateString(loc(),{day:'2-digit',month:'short'});}catch(e){return '';}}
+var QUOTES=[
+  {t:"lotr",q:"One does not simply walk into Mordor."},
+  {t:"lotr",q:"You shall not pass!"},
+  {t:"lotr",q:"A wizard is never late, nor is he early."},
+  {t:"lotr",q:"Even the smallest person can change the course of the future."},
+  {t:"lotr",q:"All we have to decide is what to do with the time that is given us."},
+  {t:"lotr",q:"Not all those who wander are lost."},
+  {t:"lotr",q:"Fly, you fools!"},
+  {t:"lotr",q:"My precious."},
+  {t:"the-office",q:"That's what she said."},
+  {t:"the-office",q:"I'm not superstitious, but I am a little stitious."},
+  {t:"the-office",q:"Bears. Beets. Battlestar Galactica."},
+  {t:"the-office",q:"Would I rather be feared or loved? Both."},
+  {t:"the-office",q:"Identity theft is not a joke, Jim!"},
+  {t:"the-office",q:"I DECLARE BANKRUPTCY!"},
+  {t:"the-office",q:"Why are you the way that you are?"},
+  {t:"the-office",q:"I am Beyonce, always."}
+];
 function renderTicker(repos){
   var hex=function(){return Math.floor(Math.random()*0xfffffff).toString(16).padStart(7,'0');};
   var dot=function(){var q=Math.random();return '<i style="background:var(--c'+(q<.3?2:q<.7?3:4)+')"></i>';};
-  var html=(repos&&repos.length)
-   ? repos.slice(0,10).map(function(x){return '<span>'+dot()+'<b>'+fmtDay(x.pushed)+'</b><em>push('+esc(x.name)+'):</em> '+esc(x.desc?x.desc.slice(0,60):x.lang||'update')+'</span>';}).join('')
-   : COMMITS.map(function(c){var i=c.indexOf(':');return '<span>'+dot()+'<b>'+hex()+'</b><em>'+c.slice(0,i+1)+'</em>'+c.slice(i+1)+'</span>';}).join('');
+  var repoItems=(repos&&repos.length)
+   ? repos.slice(0,10).map(function(x){return '<span>'+dot()+'<b>'+fmtDay(x.pushed)+'</b><em>push('+esc(x.name)+'):</em> '+esc(x.desc?x.desc.slice(0,60):x.lang||'update')+'</span>';})
+   : COMMITS.map(function(c){var i=c.indexOf(':');return '<span>'+dot()+'<b>'+hex()+'</b><em>'+c.slice(0,i+1)+'</em>'+c.slice(i+1)+'</span>';});
+  var qs=QUOTES.slice().sort(function(){return Math.random()-0.5;}).slice(0,6);
+  var quoteItems=qs.map(function(x){return '<span>'+dot()+'<b>'+hex()+'</b><em>fortune('+x.t+'):</em> '+esc(x.q)+'</span>';});
+  var all=[],i=0,j=0;
+  while(i<repoItems.length||j<quoteItems.length){
+   if(i<repoItems.length)all.push(repoItems[i++]);
+   if(j<quoteItems.length)all.push(quoteItems[j++]);
+  }
+  var html=all.join('');
   $('#ticker').innerHTML=html+html;
 }
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}

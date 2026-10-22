@@ -96,7 +96,9 @@ main{position:relative;z-index:1}
 .hero-side{display:grid;gap:20px}
 .lead{margin:0;color:var(--muted);font-size:19px;line-height:1.55;max-width:58ch}
 .ctas{display:flex;gap:10px;flex-wrap:wrap}
-.hstats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);padding-top:18px;gap:16px}
+.hstats-group{display:grid;gap:10px;border-top:1px solid var(--line);padding-top:18px}
+.hstats-group .sublabel{margin:4px 0 -2px}
+.hstats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 .hstats div{display:grid;gap:2px}
 .hstats b{font:700 clamp(26px,2.6vw,36px)/1 var(--f-d);letter-spacing:-.03em;color:var(--a1-soft)}
 .hstats span{font-size:14px;color:var(--muted)}
@@ -228,7 +230,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 <header class="top"><div class="wrap top-in">
   <a class="logo" href="#inicio">hack<b class="n">the</b>borges<span class="cur" aria-hidden="true"></span></a>
   <nav class="nav" aria-label="Seções">
-    <a href="#stack" data-t="nav.stack">Stack</a>
+    <a href="#stack" data-t="nav.stack">Atuação</a>
     <a href="#projetos" data-t="nav.proj">Projetos</a>
     <a href="#github">GitHub</a>
     <a href="#trajetoria" data-t="nav.traj">Trajetória</a>
@@ -258,18 +260,28 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
     <div class="hero-bot">
       <p class="role split" id="role" style="--d:480ms"></p>
       <div class="hero-side">
-        <p class="lead rv" style="--d:720ms" data-t="hero.lead">Analista de segurança da informação com experiência corporativa em aplicações, endpoints, redes e identidade. Certificado CRTA e Security+, com foco de carreira em pentest e segurança ofensiva. Em trilha para a OSCP.</p>
+        <p class="lead rv" style="--d:720ms" data-t="hero.lead">Analista de segurança da informação se especializando em segurança ofensiva. Ativo em plataformas como OffSec e Hack The Box. Possuo as certificações CompTIA Security+ e CRTA — Certified Red Team Analyst e estudo atualmente para obter a OSCP.</p>
         <div class="ctas rv" style="--d:820ms">
-          <a class="btn p" href="#projetos" data-t="hero.cta">Ver projetos</a>
-          <a class="btn g" href="https://github.com/hacktheborges" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="btn p" href="https://portal.offsec.com/public-profile/de8b0b16-ad26-3aa0-ad2f-3c49183ca217" target="_blank" rel="noopener" data-t="hero.cta">Ver perfil OffSec ↗</a>
+          <a class="btn g" href="https://profile.hackthebox.com/profile/019e2c5e-b1eb-7093-b9fa-ec20945bbefb" target="_blank" rel="noopener" data-t="hero.cta2">Ver perfil Hack The Box ↗</a>
         </div>
       </div>
     </div>
-    <div class="hstats rv" style="--d:1000ms">
-      <div><b data-count="95">0</b><span data-t="hs.labs">labs OffSec concluídos</span></div>
-      <div><b data-count="223">0</b><span data-t="hs.flags">flags capturadas</span></div>
-      <div><b data-count="583" data-suffix="h">0</b><span data-t="hs.hours">horas em laboratório</span></div>
-      <div><b>#3</b><span data-t="hs.rank">Brasil · entre os 300 do mundo</span></div>
+    <div class="hstats-group rv" style="--d:1000ms">
+      <p class="sublabel">OffSec</p>
+      <div class="hstats">
+        <div><b data-count="95">0</b><span data-t="hs.labs">labs OffSec concluídos</span></div>
+        <div><b data-count="223">0</b><span data-t="hs.flags">flags capturadas</span></div>
+        <div><b data-count="583" data-suffix="h">0</b><span data-t="hs.hours">horas em laboratório</span></div>
+        <div><b>#3</b><span data-t="hs.rank">Brasil · entre os 300 do mundo</span></div>
+      </div>
+      <p class="sublabel">Hack The Box</p>
+      <div class="hstats">
+        <div><b data-count="32">0</b><span data-t="hs.modules">módulos</span></div>
+        <div><b data-count="3">0</b><span data-t="hs.htblabs">labs</span></div>
+        <div><b data-count="1">0</b><span data-t="hs.minilab">mini pro lab</span></div>
+        <div><b data-count="13">0</b><span data-t="hs.sherlocks">sherlocks</span></div>
+      </div>
     </div>
   </div></section>
 
@@ -279,13 +291,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   <section class="sec" id="stack"><div class="wrap sec-in">
     <div><div class="slot-wrap rv">
       <div class="slot" data-shape="shield"></div>
-      <div class="commit-card"><div class="ch"><b>a3f9c21</b><span>01 / 05</span></div><div class="cm"><em>feat(stack):</em> <span data-t="cm.stack">recon, exploração e defesa</span></div></div>
+      <div class="commit-card"><div class="ch"><b>a3f9c21</b><span>01 / 05</span></div><div class="cm"><em>feat(atuacao):</em> <span data-t="cm.stack">EDR, firewall, AD e pentest interno</span></div></div>
     </div></div>
     <div class="content">
       <div class="sec-head">
-        <p class="kicker">01 / stack <span class="commits"></span></p>
-        <h2 class="split" data-t="stack.title">Com o que eu trabalho</h2>
-        <p class="lead rv" style="--d:180ms" data-t="stack.lead">Da ofensiva à defesa: reconhecimento, enumeração, exploração, Active Directory e escalação de privilégios — mais a experiência corporativa de blue team que me deu a base.</p>
+        <p class="kicker">01 / <span data-t="nav.stackl">atuação</span> <span class="commits"></span></p>
+        <h2 class="split" data-t="stack.title">Minha atuação</h2>
+        <p class="lead rv" style="--d:180ms" data-t="stack.lead">No dia a dia atuo entre defesa e ataque: EDR, firewall, Active Directory, privacidade (LGPD), pentest interno em aplicações web e revisão de código.</p>
       </div>
       <div class="stack-grid" id="stack-grid"></div>
     </div>
@@ -400,13 +412,13 @@ try{var sl=localStorage.getItem('htb-pf-lang'); if(sl)lang=sl;}catch(e){}
 /* ---------- i18n ---------- */
 var T={
  pt:{
-  'nav.stack':'Stack','nav.proj':'Projetos','nav.projl':'projetos','nav.traj':'Trajetória','nav.trajl':'trajetória','nav.contact':'Contato','nav.contactl':'contato',
+  'nav.stack':'Atuação','nav.stackl':'atuação','nav.proj':'Projetos','nav.projl':'projetos','nav.traj':'Trajetória','nav.trajl':'trajetória','nav.contact':'Contato','nav.contactl':'contato',
   'graph.head':'contribuições no último ano','graph.less':'Menos','graph.more':'Mais','graph.hint':'passe o mouse para iluminar · clique para um pulso','graph.scroll':'role para explorar ↓',
-  'hero.lead':'Analista de segurança da informação com experiência corporativa em aplicações, endpoints, redes e identidade. Certificado CRTA e Security+, com foco de carreira em pentest e segurança ofensiva. Em trilha para a OSCP.',
-  'hero.cta':'Ver projetos',
-  'hs.labs':'labs OffSec concluídos','hs.flags':'flags capturadas','hs.hours':'horas em laboratório','hs.rank':'Brasil · entre os 300 do mundo',
-  'cm.stack':'recon, exploração e defesa','cm.proj':'writeups e o arsenal','cm.traj':'experiência + certificações','cm.contact':'disponível para red team',
-  'stack.title':'Com o que eu trabalho','stack.lead':'Da ofensiva à defesa: reconhecimento, enumeração, exploração, Active Directory e escalação de privilégios — mais a experiência corporativa de blue team que me deu a base.',
+  'hero.lead':'Analista de segurança da informação se especializando em segurança ofensiva. Ativo em plataformas como OffSec e Hack The Box. Possuo as certificações CompTIA Security+ e CRTA — Certified Red Team Analyst e estudo atualmente para obter a OSCP.',
+  'hero.cta':'Ver perfil OffSec ↗','hero.cta2':'Ver perfil Hack The Box ↗',
+  'hs.labs':'labs OffSec concluídos','hs.flags':'flags capturadas','hs.hours':'horas em laboratório','hs.rank':'Brasil · entre os 300 do mundo','hs.modules':'módulos','hs.htblabs':'labs','hs.minilab':'mini pro lab','hs.sherlocks':'sherlocks',
+  'cm.stack':'EDR, firewall, AD e pentest interno','cm.proj':'writeups e o arsenal','cm.traj':'experiência + certificações','cm.contact':'disponível para red team',
+  'stack.title':'Minha atuação','stack.lead':'No dia a dia atuo entre defesa e ataque: EDR, firewall, Active Directory, privacidade (LGPD), pentest interno em aplicações web e revisão de código.',
   'proj.title':'Coisas que eu construí','proj.updated':function(d){return 'atualizado '+d;},
   'gh.title':'Atividade no GitHub','gh.total':'contribuições no último ano','gh.days':'dias ativos','gh.streak':'sequência atual','gh.best':'maior sequência','gh.top':'melhor dia','gh.today':'hoje ▢','gh.repos':'repositórios atualizados recentemente','gh.all':'Ver todos ↗','gh.cell':function(n){return n+(n===1?' contribuição':' contribuições');},'gh.live':'ao vivo do GitHub','gh.off':'números locais (GitHub indisponível)',
   'traj.title':'Experiência, certificações e formação',
@@ -414,13 +426,13 @@ var T={
   'footer':'Feito com muitos commits e café.'
  },
  en:{
-  'nav.stack':'Stack','nav.proj':'Projects','nav.projl':'projects','nav.traj':'Journey','nav.trajl':'journey','nav.contact':'Contact','nav.contactl':'contact',
+  'nav.stack':'Work','nav.stackl':'work','nav.proj':'Projects','nav.projl':'projects','nav.traj':'Journey','nav.trajl':'journey','nav.contact':'Contact','nav.contactl':'contact',
   'graph.head':'contributions in the last year','graph.less':'Less','graph.more':'More','graph.hint':'hover to light up · click for a pulse','graph.scroll':'scroll to explore ↓',
-  'hero.lead':'Information security analyst with corporate experience across applications, endpoints, networks and identity. CRTA and Security+ certified, with a career focus on penetration testing and offensive security. On the road to OSCP.',
-  'hero.cta':'See projects',
-  'hs.labs':'OffSec labs completed','hs.flags':'flags captured','hs.hours':'hours in labs','hs.rank':'#3 Brazil · top 300 worldwide',
-  'cm.stack':'recon, exploitation and defense','cm.proj':'writeups and the arsenal','cm.traj':'experience + certifications','cm.contact':'available for red team',
-  'stack.title':'What I work with','stack.lead':'From offense to defense: recon, enumeration, exploitation, Active Directory and privilege escalation — plus the corporate blue-team experience that built my base.',
+  'hero.lead':'Information security analyst specializing in offensive security. Active on platforms like OffSec and Hack The Box. I hold the CompTIA Security+ and CRTA — Certified Red Team Analyst certifications, and I am currently studying for the OSCP.',
+  'hero.cta':'OffSec profile ↗','hero.cta2':'Hack The Box profile ↗',
+  'hs.labs':'OffSec labs completed','hs.flags':'flags captured','hs.hours':'hours in labs','hs.rank':'#3 Brazil · top 300 worldwide','hs.modules':'modules','hs.htblabs':'labs','hs.minilab':'mini pro lab','hs.sherlocks':'sherlocks',
+  'cm.stack':'EDR, firewall, AD and internal pentest','cm.proj':'writeups and the arsenal','cm.traj':'experience + certifications','cm.contact':'available for red team',
+  'stack.title':'What I do','stack.lead':'Day to day I work between defense and offense: EDR, firewall, Active Directory, privacy (LGPD), internal web-app pentesting and code review.',
   'proj.title':'Things I have built','proj.updated':function(d){return 'updated '+d;},
   'gh.title':'GitHub activity','gh.total':'contributions in the last year','gh.days':'active days','gh.streak':'current streak','gh.best':'longest streak','gh.top':'best day','gh.today':'today ▢','gh.repos':'recently updated repositories','gh.all':'See all ↗','gh.cell':function(n){return n+(n===1?' contribution':' contributions');},'gh.live':'live from GitHub','gh.off':'local numbers (GitHub unavailable)',
   'traj.title':'Experience, certifications and education',
@@ -434,12 +446,12 @@ function loc(){return lang==='pt'?'pt-BR':'en-US';}
 /* ---------- content ---------- */
 var ROLE={pt:'Segurança Ofensiva',en:'Offensive Security'};
 var STACK=[
- {n:'Recon & Enumeração',i:'01',d:{pt:'Mapear a superfície antes de tocar em nada.',en:'Map the surface before touching anything.'},items:['nmap','feroxbuster','gobuster','enum4linux-ng','smbmap','nikto']},
- {n:'Exploração',i:'02',d:{pt:'Do searchsploit ao exploit lido linha a linha.',en:'From searchsploit to reading the exploit line by line.'},items:['searchsploit','SQLi','LFI/RFI','reverse shells','msfvenom','PHP wrappers']},
- {n:'Active Directory',i:'03',d:{pt:'Enumerar, mover lateral, comprometer o domínio.',en:'Enumerate, move laterally, own the domain.'},items:['BloodHound','impacket','Kerberoast','pass-the-hash','Ligolo-ng']},
- {n:'Privilege Escalation',i:'04',d:{pt:'Linux e Windows, do SUID ao Potato.',en:'Linux and Windows, from SUID to Potato.'},items:['SUID/sudo','etc/passwd','Potato','GTFOBins','winPEAS']},
- {n:'Cracking',i:'05',d:{pt:'Quando a credencial é o caminho.',en:'When the credential is the way in.'},items:['hashcat','john','hydra','medusa']},
- {n:'Defesa / Blue',i:'06',d:{pt:'A base corporativa: logs, EDR e firewall.',en:'The corporate base: logs, EDR and firewall.'},items:['CrowdStrike','Fortinet','Active Directory','log analysis']}
+ {n:'CrowdStrike',i:'01',d:{pt:'EDR e forense em endpoints: processos, comportamento e artefatos maliciosos.',en:'EDR and endpoint forensics: processes, behavior and malicious artifacts.'},items:['EDR','forense','investigação de eventos']},
+ {n:'Firewall',i:'02',d:{pt:'Regras, serviços e segmentação da rede corporativa em Fortinet.',en:'Rules, services and corporate network segmentation on Fortinet.'},items:['Fortinet','regras','segmentação']},
+ {n:'Active Directory',i:'03',d:{pt:'Administração de usuários, grupos, permissões e controles de acesso.',en:'Administration of users, groups, permissions and access controls.'},items:['usuários','GPOs','permissões']},
+ {n:'LGPD & Privacidade',i:'04',d:{pt:'Gestão de consentimentos e apoio às iniciativas de proteção de dados.',en:'Consent management and support for data-protection initiatives.'},items:['consentimentos','proteção de dados','Privacy Tools']},
+ {n:'Pentest Interno',i:'05',d:{pt:'Testes em aplicações web internas: recon, validação e evidências.',en:'Testing internal web apps: recon, validation and evidence.'},items:['aplicações web','OWASP','relatórios']},
+ {n:'Revisão de Código',i:'06',d:{pt:'Code review com foco em segurança, apontando riscos no código.',en:'Security-focused code review, flagging risks in the code.'},items:['code review','AppSec','boas práticas']}
 ];
 var PROJECTS=[
  {name:'hacktheborges.github.io',kind:{pt:'portfólio · site',en:'portfolio · site'},status:{pt:'no ar',en:'live'},

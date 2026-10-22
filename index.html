@@ -81,7 +81,7 @@ main{position:relative;z-index:1}
 .pulse{width:8px;height:8px;border-radius:50%;background:var(--a1);box-shadow:0 0 0 0 var(--a1);animation:ping 2s infinite}
 @keyframes ping{70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
 .handle{margin:0;font:13.5px var(--f-m);color:var(--muted);text-decoration:none}
-.graph-card{border:1px solid var(--line);border-radius:14px;padding:16px 18px 12px;display:grid;gap:10px;background:linear-gradient(color-mix(in srgb,var(--surface) 30%,transparent),transparent)}
+.graph-card{border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:10px;background:linear-gradient(color-mix(in srgb,var(--surface) 30%,transparent),transparent)}
 .hero-visual{display:grid;grid-template-columns:minmax(0,1fr) clamp(180px,20vw,250px);gap:14px;align-items:stretch}
 .scene-panel{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#0d0809;position:relative;min-height:220px}
 .scene-panel img{width:100%;height:100%;object-fit:cover;image-rendering:pixelated;display:block}
@@ -224,8 +224,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   .slot-wrap{position:static}.slot{aspect-ratio:auto;height:220px}
   .ghtop{grid-template-columns:minmax(0,1fr)}
   .cgrid,.repos{grid-template-columns:minmax(0,1fr)}
+  #namecanvas{height:220px}
 }
-@media(max-width:560px){.stack-grid{grid-template-columns:1fr}.ptabs{grid-template-columns:1fr}.handle{display:none}.heat{grid-template-columns:repeat(53,9px);width:max-content}}
+@media(max-width:560px){.stack-grid{grid-template-columns:1fr}.ptabs{grid-template-columns:1fr}.handle{display:none}.heat{grid-template-columns:repeat(53,9px);width:max-content}
+  #namecanvas{height:170px}
+  .hstats{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .hstats b{font-size:26px}
+  .slot{height:180px}
+  .graph-card{padding:12px 13px 10px}
+  .ctas{flex-direction:column}.ctas .btn{width:100%;justify-content:center}
+}
 .graph-card{position:relative}
 .plus{position:absolute;transform:translate(-50%,-50%);font:700 11px var(--f-m);color:var(--c4);background:var(--bg);border:1px solid var(--c3);border-radius:99px;padding:1px 8px;pointer-events:none;z-index:6;animation:plus 1.15s var(--ease) forwards}
 @keyframes plus{0%{opacity:0;transform:translate(-50%,-50%) scale(.9)}22%{opacity:1}100%{opacity:0;transform:translate(-50%,-180%)}}
@@ -257,12 +265,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
       <a class="handle" href="https://github.com/hacktheborges" target="_blank" rel="noopener">github.com/hacktheborges</a>
     </div>
     <div class="graph-card rv" style="--d:80ms">
-      <div class="graph-head">
-        <span id="ghead"><b id="ghead-n">—</b> <span data-t="graph.head">contribuições no último ano</span></span>
-        <span class="legend"><span data-t="graph.less">Menos</span><i style="background:var(--c0)"></i><i style="background:var(--c1)"></i><i style="background:var(--c2)"></i><i style="background:var(--c3)"></i><i style="background:var(--c4)"></i><span data-t="graph.more">Mais</span></span>
-      </div>
       <canvas id="namecanvas" role="img" aria-label="hacktheborges escrito com as células do gráfico de contribuições"></canvas>
-      <div class="graph-foot"><span data-t="graph.hint">passe o mouse para iluminar · clique para um pulso</span><span data-t="graph.scroll">role para explorar ↓</span></div>
     </div>
     <h1 class="sr">Artur Borges — hacktheborges</h1>
     <div class="hero-bot">
@@ -634,8 +637,8 @@ $$('[data-copy]').forEach(function(b){b.addEventListener('click',function(){var 
     cells=[];
     for(var c=0;c<cols;c++)for(var r=0;r<rows;r++){
      var fx=c-offC,fy=r-offR,lit=(fx>=0&&fx<b.w&&fy>=0&&fy<b.h)?b.at(fx,fy):0,q=Math.random();
-     var base=lit>0?(opts.litRandom?(q<.18?2:q<.55?3:4):lit):(opts.scatter?(q<.05?1:q<.065?2:0):0);
-     var tw=(base>0&&Math.random()<0.3)?(0.35+Math.random()*0.55):0;
+     var base=lit>0?(opts.litRandom?(q<.45?3:4):lit):(opts.scatter?(q<.022?1:0):0);
+     var tw=(base>0&&lit===0&&Math.random()<0.3)?(0.35+Math.random()*0.55):0;
      cells.push({x:ox+c*pitch+pitch/2,y:oy+r*pitch+pitch/2,base:base,heat:0,seen:reduce?1:0,t:(c/cols)*.7+Math.random()*.1,tw:tw,tp:Math.random()*6.283,ts:0.5+Math.random()*1.3});
     }
    }
@@ -665,7 +668,7 @@ $$('[data-copy]').forEach(function(b){b.addEventListener('click',function(){var 
    function pos(e){var r=canvas.getBoundingClientRect();var cx=e.touches?e.touches[0].clientX:e.clientX,cy=e.touches?e.touches[0].clientY:e.clientY;mx=cx-r.left;my=cy-r.top;}
    canvas.addEventListener('pointermove',pos);
    canvas.addEventListener('pointerleave',function(){mx=my=-1e4;});
-   canvas.addEventListener('pointerdown',function(e){pos(e);ripples.push({x:mx,y:my,r:0,life:1});spawnPlus(canvas,e);});
+   canvas.addEventListener('pointerdown',function(e){pos(e);ripples.push({x:mx,y:my,r:0,life:1});});
    new ResizeObserver(rebuild).observe(canvas); rebuild(); raf=requestAnimationFrame(frame);
   }
   (function(){var cv=document.getElementById('namecanvas'); if(cv)cellPanel(cv,nameBmp,{litRandom:true,scatter:true,sweep:true,minPitch:4,maxPitch:13,margin:2});})();
@@ -700,7 +703,7 @@ function paintGH(gh){
   var cal=gh.calendar;
   $('#gh-src').textContent = cal?('● '+t('gh.live')):('○ '+t('gh.off'));
   if(cal){
-    $('#ghead-n').textContent=cal.total.toLocaleString(loc());
+    var _gn=$('#ghead-n'); if(_gn)_gn.textContent=cal.total.toLocaleString(loc());
     $('#gh-total').textContent=cal.total.toLocaleString(loc());
     $('#gh-days').textContent=cal.active;
     $('#gh-streak').textContent=cal.current+(lang==='pt'?' d':'d');

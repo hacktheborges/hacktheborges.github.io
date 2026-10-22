@@ -97,6 +97,12 @@ main{position:relative;z-index:1}
 .legend i{width:11px;height:11px;border-radius:2px}
 .legend span{margin:0 5px}
 #namecanvas{width:100%;height:300px;display:block;cursor:crosshair;touch-action:pan-y;filter:drop-shadow(0 0 5px rgba(255,40,60,.22))}
+.graph-card.term-card{padding:0;overflow:hidden;gap:0}
+.hero-term{height:clamp(280px,33vh,330px);display:flex;flex-direction:column}
+.hero-term .term-body{font-size:14px;line-height:1.72;overflow-y:auto;scrollbar-width:none}
+.hero-term .term-body::-webkit-scrollbar{display:none}
+.term-body .fl{color:var(--a2-soft);font-weight:600}
+.term-body .rootp{color:var(--a2)}
 .graph-card{box-shadow:inset 0 0 90px rgba(0,0,0,.45)}
 .hero-bot{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px 56px;align-items:end}
 .role{margin:0;font:700 clamp(36px,5.2vw,74px)/.98 var(--f-d);letter-spacing:-.04em}
@@ -138,6 +144,17 @@ p.certs-label::before{content:"";width:26px;height:2px;border-radius:2px;backgro
 .slot-wrap{position:sticky;top:max(90px,13vh);display:grid;gap:14px;height:fit-content}
 .slot{position:relative;aspect-ratio:1/1;max-height:60vh;border:1px solid var(--line);border-radius:14px;background:linear-gradient(color-mix(in srgb,var(--surface) 40%,transparent),transparent);display:grid;place-items:center;overflow:hidden}
 .slot canvas{width:100%;height:100%;display:block}
+.slot.term{place-items:stretch;background:linear-gradient(color-mix(in srgb,var(--surface) 60%,transparent),color-mix(in srgb,var(--bg) 55%,transparent))}
+.term{display:flex;flex-direction:column}
+.term-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--line);flex:0 0 auto}
+.term-bar i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.term-bar i:nth-child(1){background:#ff5f57}.term-bar i:nth-child(2){background:#febc2e}.term-bar i:nth-child(3){background:#28c840}
+.term-bar span{margin-left:8px;font:12px var(--f-m);color:var(--muted)}
+.term-body{flex:1 1 auto;min-height:0;overflow:hidden;padding:14px 16px;font:13px/1.7 var(--f-m);color:var(--fg)}
+.term-body .ln{white-space:pre-wrap;word-break:break-word}
+.term-body .pr{color:var(--a1-soft)}.term-body .ho{color:var(--a2)}.term-body .at{color:var(--muted)}
+.term-body .cm{color:var(--fg)}.term-body .ou{color:var(--muted)}
+.term-cur{display:inline-block;width:8px;height:15px;background:var(--a1-soft);vertical-align:-2px;margin-left:1px;animation:curblink 1.1s steps(1) infinite}
 .commit-card{font:13px var(--f-m);border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--bg);display:grid;gap:6px}
 .commit-card .ch{display:flex;justify-content:space-between;gap:10px;color:var(--muted)}
 .commit-card .ch b{color:var(--a2);font-weight:500}
@@ -245,7 +262,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   .cert{height:54px}.certs{gap:14px;margin-bottom:22px}
   .hstats{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .hstats b{font-size:26px}
-  .slot{height:180px}
+  .slot{height:180px}.slot.term{height:230px}.term-body{font-size:12px;line-height:1.6;padding:12px 14px}
   .graph-card{padding:12px 13px 10px}
   .ctas{flex-direction:column}.ctas .btn{width:100%;justify-content:center}.ctas .btn.icon{width:52px;align-self:flex-start}
 }
@@ -262,8 +279,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   <a class="logo" href="#inicio">hack<b class="n">the</b>borges<span class="cur" aria-hidden="true"></span></a>
   <nav class="nav" aria-label="Seções">
     <a href="#stack" data-t="nav.stack">Atuação</a>
-    <a href="#projetos" data-t="nav.proj">Projetos</a>
-    <a href="#github">GitHub</a>
     <a href="#trajetoria" data-t="nav.traj">Trajetória</a>
     <a href="#contato" data-t="nav.contact">Contato</a>
   </nav>
@@ -279,8 +294,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
       <p class="status"><span class="pulse"></span><span>Passo Fundo, RS</span><em>· <span id="clock">--:--</span></em></p>
       <a class="handle" href="https://github.com/hacktheborges" target="_blank" rel="noopener">github.com/hacktheborges</a>
     </div>
-    <div class="graph-card rv" style="--d:80ms">
-      <canvas id="namecanvas" role="img" aria-label="hacktheborges escrito com as células do gráfico de contribuições"></canvas>
+    <div class="graph-card term-card rv" style="--d:80ms">
+      <div class="term hero-term" id="heroterm">
+        <div class="term-bar"><i></i><i></i><i></i><span>hacktheborges@offensive-security: ~</span></div>
+        <div class="term-body" id="hero-term-body" role="img" aria-label="Terminal: whoami retorna hacktheborges"></div>
+      </div>
     </div>
     <h1 class="sr">Artur Borges — hacktheborges</h1>
     <div class="hero-bot">
@@ -325,8 +343,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   <!-- STACK -->
   <section class="sec" id="stack"><div class="wrap sec-in">
     <div><div class="slot-wrap rv">
-      <div class="slot" data-shape="shield"></div>
-      <div class="commit-card"><div class="ch"><b>a3f9c21</b><span>01 / 05</span></div><div class="cm"><em>feat(atuacao):</em> <span data-t="cm.stack">EDR, firewall, AD e pentest interno</span></div></div>
+      <div class="slot" data-shape="terminal"></div>
+      <div class="commit-card"><div class="ch"><b>a3f9c21</b><span>01 / 03</span></div><div class="cm"><em>feat(atuacao):</em> <span data-t="cm.stack">EDR, firewall, AD e pentest interno</span></div></div>
     </div></div>
     <div class="content">
       <div class="sec-head">
@@ -339,67 +357,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   </div></section>
 
   <!-- PROJETOS -->
-  <section class="sec" id="projetos"><div class="wrap sec-in">
-    <div><div class="slot-wrap rv">
-      <div class="slot" data-shape="terminal"></div>
-      <div class="commit-card"><div class="ch"><b>7c02e8d</b><span>02 / 05</span></div><div class="cm"><em>feat(projects):</em> <span data-t="cm.proj">writeups e o arsenal</span></div></div>
-    </div></div>
-    <div class="content">
-      <div class="sec-head">
-        <p class="kicker">02 / <span data-t="nav.projl">projetos</span> <span class="commits"></span></p>
-        <h2 class="split" data-t="proj.title">Coisas que eu construí</h2>
-      </div>
-      <div class="proj rv" style="--d:140ms">
-        <div class="ptabs" role="tablist" aria-label="Projetos" id="ptabs"></div>
-        <div class="card pdetail" role="tabpanel" id="pdetail" tabindex="0"></div>
-      </div>
-    </div>
-  </div></section>
-
-  <!-- GITHUB -->
-  <section class="sec" id="github"><div class="wrap sec-in">
-    <div><div class="slot-wrap rv">
-      <div class="slot" data-shape="bars"></div>
-      <div class="commit-card"><div class="ch"><b>e41b9aa</b><span>03 / 05</span></div><div class="cm"><em>chore(github):</em> <span id="cm-gh">sincronizando…</span></div></div>
-    </div></div>
-    <div class="content">
-      <div class="sec-head">
-        <p class="kicker">03 / github <span class="commits"></span></p>
-        <h2 class="split" data-t="gh.title">Atividade no GitHub</h2>
-        <span class="tag rv" id="gh-src" aria-live="polite">carregando dados do GitHub…</span>
-      </div>
-      <div class="ghtop rv" style="--d:120ms">
-        <div class="ghtotal"><b id="gh-total">—</b><span data-t="gh.total">contribuições no último ano</span></div>
-        <div class="ghstats">
-          <div><b id="gh-days">—</b><span data-t="gh.days">dias ativos</span></div>
-          <div><b id="gh-streak">—</b><span data-t="gh.streak">sequência atual</span></div>
-          <div><b id="gh-best">—</b><span data-t="gh.best">maior sequência</span></div>
-          <div><b id="gh-top">—</b><span data-t="gh.top">melhor dia</span></div>
-        </div>
-      </div>
-      <div class="card heat-wrap rv" style="--d:220ms">
-        <div class="heat-scroll"><div class="heat" id="heat" role="img" aria-label="Mapa de contribuições do último ano"></div></div>
-        <div class="heat-foot"><span id="gh-year"></span><span data-t="gh.today">hoje ▢</span></div>
-      </div>
-      <div id="repos-wrap" hidden>
-        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:6px">
-          <p class="sublabel" data-t="gh.repos">repositórios atualizados recentemente</p>
-          <a href="https://github.com/hacktheborges?tab=repositories" target="_blank" rel="noopener" style="font:500 12.5px var(--f-m);color:var(--a2);text-decoration:none" data-t="gh.all">Ver todos ↗</a>
-        </div>
-        <div class="repos" id="repos"></div>
-      </div>
-    </div>
-  </div></section>
 
   <!-- TRAJETÓRIA -->
   <section class="sec" id="trajetoria"><div class="wrap sec-in">
     <div><div class="slot-wrap rv">
       <div class="slot" data-shape="branch"></div>
-      <div class="commit-card"><div class="ch"><b>HEAD</b><span>04 / 05</span></div><div class="cm"><em>merge:</em> <span data-t="cm.traj">experiência + certificações</span></div></div>
+      <div class="commit-card"><div class="ch"><b>HEAD</b><span>02 / 03</span></div><div class="cm"><em>merge:</em> <span data-t="cm.traj">experiência + certificações</span></div></div>
     </div></div>
     <div class="content">
       <div class="sec-head">
-        <p class="kicker">04 / <span data-t="nav.trajl">trajetória</span> <span class="commits"></span></p>
+        <p class="kicker">02 / <span data-t="nav.trajl">trajetória</span> <span class="commits"></span></p>
         <h2 class="split" data-t="traj.title">Experiência, certificações e formação</h2>
       </div>
       <div class="card rv" style="--d:150ms"><div class="tl" id="tl"></div></div>
@@ -410,11 +377,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   <section class="sec" id="contato"><div class="wrap sec-in">
     <div><div class="slot-wrap rv">
       <div class="slot" data-shape="mail"></div>
-      <div class="commit-card"><div class="ch"><b>f00d42e</b><span>05 / 05</span></div><div class="cm"><em>feat(contact):</em> <span data-t="cm.contact">disponível para red team</span></div></div>
+      <div class="commit-card"><div class="ch"><b>f00d42e</b><span>03 / 03</span></div><div class="cm"><em>feat(contact):</em> <span data-t="cm.contact">disponível para red team</span></div></div>
     </div></div>
     <div class="content">
       <div class="sec-head">
-        <p class="kicker">05 / <span data-t="nav.contactl">contato</span> <span class="commits"></span></p>
+        <p class="kicker">03 / <span data-t="nav.contactl">contato</span> <span class="commits"></span></p>
         <h2 class="split" data-t="contact.title">Vamos conversar?</h2>
         <p class="lead rv" style="--d:180ms" data-t="contact.lead">Vagas de red team, pentest ou um bom CTF — chama. Inglês avançado.</p>
       </div>
@@ -511,7 +478,7 @@ var PROJECTS=[
   tech:['methodology','AD','privesc'],links:[['OffSec','https://portal.offsec.com/public-profile/de8b0b16-ad26-3aa0-ad2f-3c49183ca217']]}
 ];
 var TIMELINE=[
- {now:true,work:true,role:{pt:'Analista de Segurança da Informação Jr.',en:'Junior Information Security Analyst'},org:'Farmácias São João',when:'2025 — '+(lang==='pt'?'atual':'now'),
+ {now:true,work:true,role:{pt:'Analista de Segurança da Informação',en:'Information Security Analyst'},org:'Farmácias São João',when:'2025 — '+(lang==='pt'?'atual':'now'),
   items:{pt:['Pentests em aplicações e sites internos e externos','Forense em endpoints com CrowdStrike; regras em Fortinet','Administração de Active Directory'],en:['Pentesting of internal and external apps and sites','Endpoint forensics with CrowdStrike; Fortinet rules','Active Directory administration']}},
  {work:true,role:{pt:'Técnico em Manutenção de Informática',en:'IT Maintenance Technician'},org:'Farmácias São João',when:'2024 — 2025',
   items:{pt:['Implantação e manutenção de servidores, switches e estações'],en:['Deployment and maintenance of servers, switches and workstations']}},
@@ -620,7 +587,7 @@ function applyLang(){
   $$('[data-t]').forEach(function(el){var s=t(el.dataset.t); if(typeof s==='string') el.textContent=s;});
   $$('.lang button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.lang===lang));});
   $('#role').textContent=''; var r=$('#role'); r.setAttribute('data-raw',ROLE[lang]); split(r);
-  renderStack(); renderProjects(false); renderTimeline();
+  renderStack(); renderTimeline();
   $$('[data-copy]').forEach(function(b){b.textContent=t('contact.copy');});
   $$('h2.split').forEach(function(h){h.removeAttribute('data-raw');h.setAttribute('data-raw',t(h.dataset.t)||h.textContent);split(h);});
 }
@@ -735,6 +702,39 @@ $$('[data-copy]').forEach(function(b){b.addEventListener('click',function(){var 
    cellPanel(cv,function(){return iconBmp(key);},{litRandom:false,scatter:false,minPitch:5,maxPitch:20,margin:3});
   });
 
+  /* ===== hero terminal (user -> root) ===== */
+  (function(){
+   var host=document.getElementById('heroterm'),body=document.getElementById('hero-term-body'); if(!host||!body)return;
+   var STEPS=[
+    {c:'whoami', o:'hacktheborges'},
+    {c:'hostname', o:'offensive-security'},
+    {c:'ip a', o:'tun0: inet 10.10.14.37/23  ·  eth0: inet 192.168.56.13/24'},
+    {c:'cat /home/hacktheborges/local.txt', o:'htb{wh4t_4r3_y0u_l00k1nG_f0r?}', flag:true},
+    {c:'id', o:'uid=0(root) gid=0(root) groups=0(root)', root:true},
+    {c:'cat /root/proof.txt', o:'htb{y3s_IAM_r00t_h3r3}', flag:true, root:true}
+   ];
+   function prompt(root){return root
+     ? '<span class="pr rootp">root</span><span class="at">@</span><span class="ho">offensive-security</span><span class="at">:~#</span> '
+     : '<span class="pr">hacktheborges</span><span class="at">@</span><span class="ho">offensive-security</span><span class="at">:~$</span> ';}
+   function out(s){return '<span class="'+(s.flag?'fl':'ou')+'">'+s.o+'</span>';}
+   function addLine(h){var d=document.createElement('div');d.className='ln';d.innerHTML=h;body.appendChild(d);body.scrollTop=body.scrollHeight;return d;}
+   if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches){
+    STEPS.forEach(function(s){addLine(prompt(s.root)+'<span class="cm">'+s.c+'</span>');addLine(out(s));});return;
+   }
+   var si=0;
+   function typeCmd(s,done){
+    var line=addLine(prompt(s.root)+'<span class="cm"></span><span class="term-cur"></span>');
+    var span=line.querySelector('.cm'),cur=line.querySelector('.term-cur'),txt=s.c,i=0;
+    (function tick(){ if(i<=txt.length){span.textContent=txt.slice(0,i++);body.scrollTop=body.scrollHeight;setTimeout(tick,46+Math.random()*72);} else {if(cur)cur.remove();setTimeout(done,420);} })();
+   }
+   function step(){
+    if(si>=STEPS.length){ setTimeout(function(){ body.innerHTML=''; si=0; step(); }, 2800); return; }
+    var s=STEPS[si++];
+    typeCmd(s,function(){ addLine(out(s)); setTimeout(step, s.flag?950:720); });
+   }
+   setTimeout(step,600);
+  })();
+
   /* ================= LIVE GITHUB ================= */
 var TTL=30*60*1000;
 function rc(k){try{var raw=localStorage.getItem(k);if(!raw)return null;var o=JSON.parse(raw);return Date.now()-o.t<TTL?o.d:null;}catch(e){return null;}}
@@ -756,36 +756,7 @@ function summarize(days){
 function lvl(c){return c<=0?0:c<2?1:c<4?2:c<7?3:4;}
 function paintGH(gh){
   window.__gh=gh;
-  var cal=gh.calendar;
-  $('#gh-src').textContent = cal?('● '+t('gh.live')):('○ '+t('gh.off'));
-  if(cal){
-    var _gn=$('#ghead-n'); if(_gn)_gn.textContent=cal.total.toLocaleString(loc());
-    $('#gh-total').textContent=cal.total.toLocaleString(loc());
-    $('#gh-days').textContent=cal.active;
-    $('#gh-streak').textContent=cal.current+(lang==='pt'?' d':'d');
-    $('#gh-best').textContent=cal.longest+(lang==='pt'?' d':'d');
-    $('#gh-top').textContent=cal.best;
-    $('#cm-gh').textContent=(cal.current>0?(cal.current+(lang==='pt'?' dias de sequência':'-day streak')):'sincronizado');
-    if(cal.from)$('#gh-year').textContent=cal.from+' → '+cal.to;
-    var tk=ymd(new Date());
-    var heat=$('#heat'); heat.innerHTML=cal.cells.map(function(d,i){
-      if(d===null)return '<i class="pad"></i>';
-      if(d===undefined)return '<i class="pad"></i>';
-      var cl=d.count>0?('l'+lvl(d.count)):'l0';
-      return '<i class="'+cl+(d.date===tk?' today':'')+'" style="--c:'+i+'" title="'+esc(t('gh.cell')(d.count))+' · '+d.date+'"></i>';
-    }).join('');
-    watch(heat);
-  } else {
-    var h2=$('#heat'); if(h2 && !h2.children.length){ h2.innerHTML=Array.from({length:53*7}).map(function(_,i){return '<i class="l0" style="--c:'+i+'"></i>';}).join(''); watch(h2);}
-  }
-  if(gh.repos&&gh.repos.length){
-    var list=gh.repos.filter(function(r){return !r.fork&&!r.archived;}).slice(0,4);
-    if(list.length){
-      $('#repos').innerHTML=list.map(function(r){return '<a class="repo" href="'+(r.url||'#')+'" target="_blank" rel="noopener"><b>'+esc(r.name)+'</b>'+(r.desc?'<p>'+esc(r.desc)+'</p>':'')+'<span class="rmeta">'+(r.lang?esc(r.lang)+' · ':'')+'★ '+r.stars+' · '+t('proj.updated')(fmtDay(r.pushed))+'</span></a>';}).join('');
-      $('#repos-wrap').hidden=false;
-      renderTicker(gh.repos);
-    }
-  }
+  if(gh&&gh.repos&&gh.repos.length) renderTicker(gh.repos);
 }
 function loadGitHub(){
   Promise.allSettled([

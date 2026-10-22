@@ -5,6 +5,26 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>hacktheborges — Artur Borges</title>
 <meta name="description" content="Artur Borges (hacktheborges) — analista de segurança da informação em trilha para a segurança ofensiva. OSCP, CRTA, Security+, laboratórios, writeups e atividade ao vivo no GitHub.">
+<link rel="canonical" href="https://hacktheborges.github.io/">
+<meta name="author" content="Artur Borges">
+<meta name="keywords" content="segurança ofensiva, offensive security, pentest, red team, OSCP, CRTA, CompTIA Security+, Hack The Box, OffSec, Active Directory, BloodHound, análise de segurança, Artur Borges, hacktheborges">
+<meta name="theme-color" content="#0d0c1c">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMwZDBjMWMiLz48cGF0aCBkPSJNMTYgMjIgTDI4IDMyIEwxNiA0MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGI1Y2ZmIiBzdHJva2Utd2lkdGg9IjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxyZWN0IHg9IjMyIiB5PSIzOCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSIjMmFkNmZmIi8+PC9zdmc+">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMwZDBjMWMiLz48cGF0aCBkPSJNMTYgMjIgTDI4IDMyIEwxNiA0MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGI1Y2ZmIiBzdHJva2Utd2lkdGg9IjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxyZWN0IHg9IjMyIiB5PSIzOCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSIjMmFkNmZmIi8+PC9zdmc+">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="hacktheborges">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://hacktheborges.github.io/">
+<meta property="og:title" content="hacktheborges — Artur Borges">
+<meta property="og:description" content="Analista de Segurança da Informação com foco em segurança ofensiva. OSCP (em progresso), CRTA, CompTIA Security+ e Hack The Box Professional.">
+<meta property="og:image" content="https://hacktheborges.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="hacktheborges — Analista de Segurança da Informação · Segurança Ofensiva">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="hacktheborges — Artur Borges">
+<meta name="twitter:description" content="Analista de Segurança da Informação com foco em segurança ofensiva. OSCP, CRTA, Security+, HTB Professional.">
+<meta name="twitter:image" content="https://hacktheborges.github.io/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -270,6 +290,29 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 .plus{position:absolute;transform:translate(-50%,-50%);font:700 11px var(--f-m);color:var(--c4);background:var(--bg);border:1px solid var(--c3);border-radius:99px;padding:1px 8px;pointer-events:none;z-index:6;animation:plus 1.15s var(--ease) forwards}
 @keyframes plus{0%{opacity:0;transform:translate(-50%,-50%) scale(.9)}22%{opacity:1}100%{opacity:0;transform:translate(-50%,-180%)}}
 ::selection{background:var(--a1);color:#fff}
+/* conquistas / trophy case */
+.trophy-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.trophy{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:15px 18px;text-decoration:none;color:var(--fg);transition:border-color .25s,transform .3s var(--ease)}
+.trophy:hover{border-color:var(--a1);transform:translateY(-3px)}
+.tr-ic{flex:0 0 auto;width:46px;height:46px;display:grid;place-items:center;font-size:23px;border-radius:12px;background:color-mix(in srgb,var(--a1) 14%,transparent);border:1px solid color-mix(in srgb,var(--a1) 32%,transparent)}
+.trophy b{display:block;font:700 17px var(--f-d);letter-spacing:-.01em}
+.trophy>div>span{font:500 13px var(--f-m);color:var(--muted)}
+/* writeups */
+.writeups{display:grid;gap:12px}
+.writeup{display:grid;gap:9px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;text-decoration:none;color:var(--fg);transition:border-color .25s,transform .3s var(--ease)}
+.writeup:hover{border-color:var(--a1);transform:translateX(4px)}
+.wu-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px 16px;flex-wrap:wrap}
+.wu-top b{font:700 17px var(--f-d);letter-spacing:-.01em}
+.wu-plat{font:600 11px var(--f-m);letter-spacing:.06em;text-transform:uppercase;color:var(--a2);white-space:nowrap}
+.wu-tags{display:flex;gap:6px;flex-wrap:wrap}
+.wu-tags i{font:500 11.5px var(--f-m);font-style:normal;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:2px 9px}
+.wu-date{font:12px var(--f-m);color:var(--muted)}
+.wu-all{display:inline-block;margin-top:14px;font:500 13px var(--f-m);color:var(--a2);text-decoration:none}
+.wu-all:hover{text-decoration:underline}
+/* interactive terminal input */
+.term-input{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;border:0;padding:0}
+.hero-term{cursor:text}
+@media(max-width:560px){.trophy-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -279,6 +322,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   <a class="logo" href="#inicio">hack<b class="n">the</b>borges<span class="cur" aria-hidden="true"></span></a>
   <nav class="nav" aria-label="Seções">
     <a href="#stack" data-t="nav.stack">Atuação</a>
+    <a href="#conquistas" data-t="nav.conq">Conquistas</a>
+    <a href="#writeups" data-t="nav.writeups">Writeups</a>
     <a href="#trajetoria" data-t="nav.traj">Trajetória</a>
     <a href="#contato" data-t="nav.contact">Contato</a>
   </nav>
@@ -344,7 +389,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   <section class="sec" id="stack"><div class="wrap sec-in">
     <div><div class="slot-wrap rv">
       <div class="slot" data-shape="terminal"></div>
-      <div class="commit-card"><div class="ch"><b>a3f9c21</b><span>01 / 03</span></div><div class="cm"><em>feat(atuacao):</em> <span data-t="cm.stack">EDR, firewall, AD e pentest interno</span></div></div>
+      <div class="commit-card"><div class="ch"><b>a3f9c21</b><span>01 / 05</span></div><div class="cm"><em>feat(atuacao):</em> <span data-t="cm.stack">EDR, firewall, AD e pentest interno</span></div></div>
     </div></div>
     <div class="content">
       <div class="sec-head">
@@ -359,14 +404,50 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   <!-- PROJETOS -->
 
   <!-- TRAJETÓRIA -->
-  <section class="sec" id="trajetoria"><div class="wrap sec-in">
+  <section class="sec" id="conquistas"><div class="wrap sec-in">
     <div><div class="slot-wrap rv">
-      <div class="slot" data-shape="branch"></div>
-      <div class="commit-card"><div class="ch"><b>HEAD</b><span>02 / 03</span></div><div class="cm"><em>merge:</em> <span data-t="cm.traj">experiência + certificações</span></div></div>
+      <div class="slot" data-shape="bars"></div>
+      <div class="commit-card"><div class="ch"><b>b4dc0de</b><span>02 / 05</span></div><div class="cm"><em>feat(conquistas):</em> <span data-t="cm.conq">labs, flags e certificações</span></div></div>
     </div></div>
     <div class="content">
       <div class="sec-head">
-        <p class="kicker">02 / <span data-t="nav.trajl">trajetória</span> <span class="commits"></span></p>
+        <p class="kicker">02 / <span data-t="nav.conql">conquistas</span> <span class="commits"></span></p>
+        <h2 class="split" data-t="conq.title">Conquistas</h2>
+      </div>
+      <div class="trophy-grid rv" style="--d:140ms">
+        <a class="trophy" href="https://profile.hackthebox.com/profile/019e2c5e-b1eb-7093-b9fa-ec20945bbefb" target="_blank" rel="noopener"><span class="tr-ic">🏆</span><div><b>Rank Professional</b><span>Hack The Box · Lvl 54</span></div></a>
+        <a class="trophy" href="https://portal.offsec.com/public-profile/de8b0b16-ad26-3aa0-ad2f-3c49183ca217" target="_blank" rel="noopener"><span class="tr-ic">🥉</span><div><b>Top 3 no Brasil</b><span>OffSec · top 300 global</span></div></a>
+        <a class="trophy" href="https://portal.offsec.com/public-profile/de8b0b16-ad26-3aa0-ad2f-3c49183ca217" target="_blank" rel="noopener"><span class="tr-ic">🎯</span><div><b>223 flags · 95 labs</b><span>OffSec · 583h de laboratório</span></div></a>
+        <a class="trophy" href="https://labs.cyberwarfare.live/credential/achievement/6a775867a8dc97c4c7dddcd0" target="_blank" rel="noopener"><span class="tr-ic">🛡️</span><div><b>CRTA</b><span>Certified Red Team Analyst</span></div></a>
+        <a class="trophy" href="https://www.credly.com/earner/earned/badge/8da335bc-2437-4841-8bf9-838ec94d4391" target="_blank" rel="noopener"><span class="tr-ic">📜</span><div><b>CompTIA Security+</b><span>Credly · verificado</span></div></a>
+        <a class="trophy" href="https://portal.offsec.com/public-profile/de8b0b16-ad26-3aa0-ad2f-3c49183ca217" target="_blank" rel="noopener"><span class="tr-ic">🎓</span><div><b>OSCP</b><span data-t="certs.soon">em progresso</span></div></a>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="sec" id="writeups"><div class="wrap sec-in">
+    <div><div class="slot-wrap rv">
+      <div class="slot" data-shape="shield"></div>
+      <div class="commit-card"><div class="ch"><b>7c0ffee</b><span>03 / 05</span></div><div class="cm"><em>feat(writeups):</em> <span data-t="cm.writeups">notas e metodologia</span></div></div>
+    </div></div>
+    <div class="content">
+      <div class="sec-head">
+        <p class="kicker">03 / <span data-t="nav.writeupsl">writeups</span> <span class="commits"></span></p>
+        <h2 class="split" data-t="writeups.title">Writeups & notas</h2>
+      </div>
+      <div class="writeups rv" id="writeups-list" style="--d:140ms"></div>
+      <a class="wu-all" href="https://github.com/hacktheborges" target="_blank" rel="noopener" data-t="writeups.all">Ver todos no GitHub ↗</a>
+    </div>
+  </div></section>
+
+  <section class="sec" id="trajetoria"><div class="wrap sec-in">
+    <div><div class="slot-wrap rv">
+      <div class="slot" data-shape="branch"></div>
+      <div class="commit-card"><div class="ch"><b>HEAD</b><span>04 / 05</span></div><div class="cm"><em>merge:</em> <span data-t="cm.traj">experiência + certificações</span></div></div>
+    </div></div>
+    <div class="content">
+      <div class="sec-head">
+        <p class="kicker">04 / <span data-t="nav.trajl">trajetória</span> <span class="commits"></span></p>
         <h2 class="split" data-t="traj.title">Experiência, certificações e formação</h2>
       </div>
       <div class="card rv" style="--d:150ms"><div class="tl" id="tl"></div></div>
@@ -377,11 +458,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   <section class="sec" id="contato"><div class="wrap sec-in">
     <div><div class="slot-wrap rv">
       <div class="slot" data-shape="mail"></div>
-      <div class="commit-card"><div class="ch"><b>f00d42e</b><span>03 / 03</span></div><div class="cm"><em>feat(contact):</em> <span data-t="cm.contact">disponível para red team</span></div></div>
+      <div class="commit-card"><div class="ch"><b>f00d42e</b><span>05 / 05</span></div><div class="cm"><em>feat(contact):</em> <span data-t="cm.contact">disponível para red team</span></div></div>
     </div></div>
     <div class="content">
       <div class="sec-head">
-        <p class="kicker">03 / <span data-t="nav.contactl">contato</span> <span class="commits"></span></p>
+        <p class="kicker">05 / <span data-t="nav.contactl">contato</span> <span class="commits"></span></p>
         <h2 class="split" data-t="contact.title">Vamos conversar?</h2>
         <p class="lead rv" style="--d:180ms" data-t="contact.lead">Vagas de red team, pentest ou um bom CTF — chama. Inglês avançado.</p>
       </div>
@@ -414,6 +495,9 @@ try{var sl=localStorage.getItem('htb-pf-lang'); if(sl)lang=sl;}catch(e){}
 /* ---------- i18n ---------- */
 var T={
  pt:{
+  'nav.conq':'Conquistas','nav.conql':'conquistas','nav.writeups':'Writeups','nav.writeupsl':'writeups',
+  'cm.conq':'labs, flags e certificações','cm.writeups':'notas e metodologia',
+  'conq.title':'Conquistas','writeups.title':'Writeups & notas','writeups.all':'Ver todos no GitHub ↗',
   'nav.stack':'Atuação','nav.stackl':'atuação','nav.proj':'Projetos','nav.projl':'projetos','nav.traj':'Trajetória','nav.trajl':'trajetória','nav.contact':'Contato','nav.contactl':'contato',
   'graph.head':'contribuições no último ano','graph.less':'Menos','graph.more':'Mais','graph.hint':'passe o mouse para iluminar · clique para um pulso','graph.scroll':'role para explorar ↓',
   'hero.lead':'Analista de segurança da informação se especializando em segurança ofensiva. Ativo em plataformas como OffSec e Hack The Box. Possuo as certificações CompTIA Security+ e CRTA — Certified Red Team Analyst e estudo atualmente para obter a OSCP.',
@@ -430,6 +514,9 @@ var T={
   'footer':'Odeio café.'
  },
  en:{
+  'nav.conq':'Achievements','nav.conql':'achievements','nav.writeups':'Writeups','nav.writeupsl':'writeups',
+  'cm.conq':'labs, flags and certifications','cm.writeups':'notes and methodology',
+  'conq.title':'Achievements','writeups.title':'Writeups & notes','writeups.all':'See all on GitHub ↗',
   'nav.stack':'Work','nav.stackl':'work','nav.proj':'Projects','nav.projl':'projects','nav.traj':'Journey','nav.trajl':'journey','nav.contact':'Contact','nav.contactl':'contact',
   'graph.head':'contributions in the last year','graph.less':'Less','graph.more':'More','graph.hint':'hover to light up · click for a pulse','graph.scroll':'scroll to explore ↓',
   'hero.lead':'Information security analyst specializing in offensive security. Active on platforms like OffSec and Hack The Box. I hold the CompTIA Security+ and CRTA — Certified Red Team Analyst certifications, and I am currently studying for the OSCP.',
@@ -504,6 +591,17 @@ function countUp(b){
 }
 
 /* ---------- renderers ---------- */
+var WRITEUPS=[
+ {t:'Active Directory — do usuário ao Domain Admin', p:'Hack The Box', d:'2026', tags:['AD','BloodHound','privesc'], u:'https://github.com/hacktheborges'},
+ {t:'LFI → RCE via log poisoning', p:'Proving Grounds', d:'2026', tags:['web','LFI','RCE'], u:'https://github.com/hacktheborges'},
+ {t:'Enumeração e foothold em aplicação interna', p:'Writeup', d:'2026', tags:['recon','web'], u:'https://github.com/hacktheborges'}
+];
+function renderWriteups(){
+  var el=$('#writeups-list'); if(!el)return;
+  el.innerHTML=WRITEUPS.map(function(w){
+    return '<a class="writeup" href="'+(w.u||'#')+'" target="_blank" rel="noopener"><div class="wu-top"><b>'+esc(w.t)+'</b><span class="wu-plat">'+esc(w.p)+'</span></div><div class="wu-tags">'+w.tags.map(function(g){return '<i>'+esc(g)+'</i>';}).join('')+'</div><span class="wu-date">'+esc(w.d)+'</span></a>';
+  }).join('');
+}
 function renderStack(){
   $('#stack-grid').innerHTML=STACK.map(function(s,i){return (
    '<div class="card hov rv" style="--d:'+(i*60)+'ms">'
@@ -587,7 +685,7 @@ function applyLang(){
   $$('[data-t]').forEach(function(el){var s=t(el.dataset.t); if(typeof s==='string') el.textContent=s;});
   $$('.lang button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.lang===lang));});
   $('#role').textContent=''; var r=$('#role'); r.setAttribute('data-raw',ROLE[lang]); split(r);
-  renderStack(); renderTimeline();
+  renderStack(); renderWriteups(); renderTimeline();
   $$('[data-copy]').forEach(function(b){b.textContent=t('contact.copy');});
   $$('h2.split').forEach(function(h){h.removeAttribute('data-raw');h.setAttribute('data-raw',t(h.dataset.t)||h.textContent);split(h);});
 }
@@ -702,10 +800,16 @@ $$('[data-copy]').forEach(function(b){b.addEventListener('click',function(){var 
    cellPanel(cv,function(){return iconBmp(key);},{litRandom:false,scatter:false,minPitch:5,maxPitch:20,margin:3});
   });
 
-  /* ===== hero terminal (user -> root) ===== */
+  /* ===== interactive hero terminal (intro user->root, then live shell) ===== */
   (function(){
    var host=document.getElementById('heroterm'),body=document.getElementById('hero-term-body'); if(!host||!body)return;
-   var STEPS=[
+   var HOST='offensive-security';
+   function escT(x){return String(x).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+   function addLine(h,cls){var d=document.createElement('div');d.className='ln'+(cls?' '+cls:'');d.innerHTML=h;body.appendChild(d);body.scrollTop=body.scrollHeight;return d;}
+   function prompt(root){return root
+     ? '<span class="pr rootp">root</span><span class="at">@</span><span class="ho">'+HOST+'</span><span class="at">:~#</span> '
+     : '<span class="pr">hacktheborges</span><span class="at">@</span><span class="ho">'+HOST+'</span><span class="at">:~$</span> ';}
+   var INTRO=[
     {c:'whoami', o:'hacktheborges'},
     {c:'hostname', o:'offensive-security'},
     {c:'ip a', o:'tun0: inet 10.10.14.37/23  ·  eth0: inet 192.168.56.13/24'},
@@ -713,25 +817,52 @@ $$('[data-copy]').forEach(function(b){b.addEventListener('click',function(){var 
     {c:'id', o:'uid=0(root) gid=0(root) groups=0(root)', root:true},
     {c:'cat /root/proof.txt', o:'htb{y3s_IAM_r00t_h3r3}', flag:true, root:true}
    ];
-   function prompt(root){return root
-     ? '<span class="pr rootp">root</span><span class="at">@</span><span class="ho">offensive-security</span><span class="at">:~#</span> '
-     : '<span class="pr">hacktheborges</span><span class="at">@</span><span class="ho">offensive-security</span><span class="at">:~$</span> ';}
    function out(s){return '<span class="'+(s.flag?'fl':'ou')+'">'+s.o+'</span>';}
-   function addLine(h){var d=document.createElement('div');d.className='ln';d.innerHTML=h;body.appendChild(d);body.scrollTop=body.scrollHeight;return d;}
-   if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches){
-    STEPS.forEach(function(s){addLine(prompt(s.root)+'<span class="cm">'+s.c+'</span>');addLine(out(s));});return;
+   var CMDS={
+    help:function(){return ['<span class="ou">comandos:</span> help about skills certs conquistas writeups social contact clear','<span class="ou">dica: experimente</span> sudo hire-me'];},
+    about:function(){return ['Analista de Seguranca da Informacao — foco em seguranca ofensiva.','OSCP (em progresso) · CRTA · CompTIA Security+ · HTB Professional.'];},
+    whoami:function(){return ['hacktheborges'];},
+    skills:function(){return ['EDR/CrowdStrike · Fortinet · Active Directory · LGPD','pentest interno (web) · revisao de codigo · BloodHound · nmap · Burp'];},
+    certs:function(){return ['CRTA — Certified Red Team Analyst  [ok]','CompTIA Security+  [ok]','OSCP — em progresso ...'];},
+    conquistas:function(){return ['HTB Rank Professional (Lvl 54)','OffSec Top 3 no Brasil · 95 labs · 223 flags · 583h'];},
+    social:function(){return ['github.com/hacktheborges','linkedin.com/in/arturborgges'];},
+    contact:function(){return ['aberto a oportunidades de red team / seguranca ofensiva','role ate a secao Contato para falar comigo'];},
+    banner:function(){return ['<span class="fl">hacktheborges</span> :: offensive security'];},
+    'sudo hire-me':function(){return ['<span class="fl">[sudo] senha para hacktheborges:</span>','acesso concedido — vamos conversar: linkedin.com/in/arturborgges'];}
+   };
+   function writeupsCmd(){ var a=['writeups (secao #writeups):']; if(typeof WRITEUPS!=='undefined'){WRITEUPS.forEach(function(w){a.push('- '+w.t+'  ('+w.p+')');});} return a; }
+   function run(raw){
+    var cmd=raw.trim(), low=cmd.toLowerCase();
+    if(!cmd)return [];
+    if(low==='clear'){body.innerHTML='';return null;}
+    if(low==='ls')return ['about  skills  certs  conquistas  writeups  social  contact'];
+    if(low==='writeups')return writeupsCmd();
+    var fn=CMDS[cmd]||CMDS[low];
+    if(fn)return fn();
+    return ['<span class="ou">comando nao encontrado: </span>'+escT(cmd)+'<span class="ou"> — digite </span>help'];
    }
+   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+   function startShell(){
+    addLine('<span class="ou">// sessao interativa — clique e digite </span>help');
+    var inp=document.createElement('input'); inp.className='term-input'; inp.autocapitalize='off'; inp.autocomplete='off'; inp.spellcheck=false; inp.setAttribute('aria-label','terminal interativo'); host.appendChild(inp);
+    var lineEl, disp, curEl;
+    function newPrompt(){ lineEl=addLine(prompt(false)+'<span class="cm inp"></span><span class="term-cur"></span>'); disp=lineEl.querySelector('.inp'); curEl=lineEl.querySelector('.term-cur'); }
+    newPrompt();
+    host.addEventListener('mousedown',function(e){ if(!e.target||e.target.tagName!=='A'){ setTimeout(function(){try{inp.focus({preventScroll:true});}catch(_){inp.focus();}},0);} });
+    inp.addEventListener('input',function(){ disp.textContent=inp.value; body.scrollTop=body.scrollHeight; });
+    inp.addEventListener('keydown',function(e){
+     if(e.key==='Enter'){ e.preventDefault(); var val=inp.value; inp.value=''; disp.textContent=val; if(curEl)curEl.remove();
+      var res=run(val); if(res){res.forEach(function(l){addLine(l);});} newPrompt(); body.scrollTop=body.scrollHeight; }
+    });
+   }
+   if(reduce){ INTRO.forEach(function(s){addLine(prompt(s.root)+'<span class="cm">'+s.c+'</span>');addLine(out(s));}); startShell(); return; }
    var si=0;
    function typeCmd(s,done){
     var line=addLine(prompt(s.root)+'<span class="cm"></span><span class="term-cur"></span>');
     var span=line.querySelector('.cm'),cur=line.querySelector('.term-cur'),txt=s.c,i=0;
-    (function tick(){ if(i<=txt.length){span.textContent=txt.slice(0,i++);body.scrollTop=body.scrollHeight;setTimeout(tick,46+Math.random()*72);} else {if(cur)cur.remove();setTimeout(done,420);} })();
+    (function tick(){ if(i<=txt.length){span.textContent=txt.slice(0,i++);body.scrollTop=body.scrollHeight;setTimeout(tick,44+Math.random()*64);} else {if(cur)cur.remove();setTimeout(done,360);} })();
    }
-   function step(){
-    if(si>=STEPS.length){ setTimeout(function(){ body.innerHTML=''; si=0; step(); }, 2800); return; }
-    var s=STEPS[si++];
-    typeCmd(s,function(){ addLine(out(s)); setTimeout(step, s.flag?950:720); });
-   }
+   function step(){ if(si>=INTRO.length){ setTimeout(startShell,650); return; } var s=INTRO[si++]; typeCmd(s,function(){ addLine(out(s)); setTimeout(step, s.flag?720:520); }); }
    setTimeout(step,600);
   })();
 

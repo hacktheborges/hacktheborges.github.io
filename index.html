@@ -309,6 +309,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 .wu-date{font:12px var(--f-m);color:var(--muted)}
 .wu-all{display:inline-block;margin-top:14px;font:500 13px var(--f-m);color:var(--a2);text-decoration:none}
 .wu-all:hover{text-decoration:underline}
+.wu-group{margin-bottom:22px}.wu-group:last-child{margin-bottom:0}
+.wu-os{margin:0 0 12px}
+.wu-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.writeup.wip{opacity:.85;cursor:default}
+.writeup.wip:hover{transform:none;border-color:var(--line)}
+.wu-wip{display:inline-flex;align-items:center;gap:7px;font:600 11px var(--f-m);letter-spacing:.04em;color:var(--a1-soft);background:color-mix(in srgb,var(--a1) 12%,transparent);border:1px dashed color-mix(in srgb,var(--a1) 45%,transparent);border-radius:99px;padding:3px 10px;width:max-content}
+.wu-wip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--a1-soft);animation:wipblink 1.4s ease-in-out infinite}
+@keyframes wipblink{50%{opacity:.25}}
+@media(max-width:560px){.wu-cols{grid-template-columns:1fr}}
+
 /* interactive terminal input */
 .term-input{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;border:0;padding:0}
 .hero-term{cursor:text}
@@ -411,10 +421,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
     <div class="content">
       <div class="sec-head">
         <p class="kicker">02 / <span data-t="nav.writeupsl">writeups</span> <span class="commits"></span></p>
-        <h2 class="split" data-t="writeups.title">Writeups & notas</h2>
+        <h2 class="split" data-t="writeups.title">Writeups & metodologia</h2>
+        <p class="lead rv" style="--d:140ms" data-t="writeups.intro">Meu raciocínio e metodologia em 8 máquinas da OffSec Proving Grounds (4 Linux · 4 Windows). Writeups em construção — publico cada um conforme exploro a máquina.</p>
       </div>
-      <div class="writeups rv" id="writeups-list" style="--d:140ms"></div>
-      <a class="wu-all" href="https://github.com/hacktheborges" target="_blank" rel="noopener" data-t="writeups.all">Ver todos no GitHub ↗</a>
+      <div class="writeups rv" id="writeups-list" style="--d:220ms"></div>
+      <a class="wu-all" href="https://github.com/hacktheborges" target="_blank" rel="noopener" data-t="writeups.all">Acompanhe no GitHub ↗</a>
     </div>
   </div></section>
 
@@ -475,7 +486,7 @@ var T={
  pt:{
   'nav.conq':'Conquistas','nav.conql':'conquistas','nav.writeups':'Writeups','nav.writeupsl':'writeups',
   'cm.conq':'labs, flags e certificações','cm.writeups':'notas e metodologia',
-  'conq.title':'Conquistas','writeups.title':'Writeups & notas','writeups.all':'Ver todos no GitHub ↗',
+  'conq.title':'Conquistas','writeups.title':'Writeups & metodologia','writeups.intro':'Meu raciocínio e metodologia em 8 máquinas da OffSec Proving Grounds (4 Linux · 4 Windows). Writeups em construção — publico cada um conforme exploro a máquina.','writeups.all':'Acompanhe no GitHub ↗',
   'nav.stack':'Atuação','nav.stackl':'atuação','nav.proj':'Projetos','nav.projl':'projetos','nav.traj':'Trajetória','nav.trajl':'trajetória','nav.contact':'Contato','nav.contactl':'contato',
   'graph.head':'contribuições no último ano','graph.less':'Menos','graph.more':'Mais','graph.hint':'passe o mouse para iluminar · clique para um pulso','graph.scroll':'role para explorar ↓',
   'hero.lead':'Analista de segurança da informação se especializando em segurança ofensiva. Ativo em plataformas como OffSec e Hack The Box. Possuo as certificações CompTIA Security+ e CRTA — Certified Red Team Analyst e estudo atualmente para obter a OSCP.',
@@ -494,7 +505,7 @@ var T={
  en:{
   'nav.conq':'Achievements','nav.conql':'achievements','nav.writeups':'Writeups','nav.writeupsl':'writeups',
   'cm.conq':'labs, flags and certifications','cm.writeups':'notes and methodology',
-  'conq.title':'Achievements','writeups.title':'Writeups & notes','writeups.all':'See all on GitHub ↗',
+  'conq.title':'Achievements','writeups.title':'Writeups & methodology','writeups.intro':'My reasoning and methodology across 8 OffSec Proving Grounds machines (4 Linux · 4 Windows). Writeups under construction — published as I work through each box.','writeups.all':'Follow on GitHub ↗',
   'nav.stack':'Work','nav.stackl':'work','nav.proj':'Projects','nav.projl':'projects','nav.traj':'Journey','nav.trajl':'journey','nav.contact':'Contact','nav.contactl':'contact',
   'graph.head':'contributions in the last year','graph.less':'Less','graph.more':'More','graph.hint':'hover to light up · click for a pulse','graph.scroll':'scroll to explore ↓',
   'hero.lead':'Information security analyst specializing in offensive security. Active on platforms like OffSec and Hack The Box. I hold the CompTIA Security+ and CRTA — Certified Red Team Analyst certifications, and I am currently studying for the OSCP.',
@@ -570,15 +581,32 @@ function countUp(b){
 
 /* ---------- renderers ---------- */
 var WRITEUPS=[
- {t:'Active Directory — do usuário ao Domain Admin', p:'Hack The Box', d:'2026', tags:['AD','BloodHound','privesc'], u:'https://github.com/hacktheborges'},
- {t:'LFI → RCE via log poisoning', p:'Proving Grounds', d:'2026', tags:['web','LFI','RCE'], u:'https://github.com/hacktheborges'},
- {t:'Enumeração e foothold em aplicação interna', p:'Writeup', d:'2026', tags:['recon','web'], u:'https://github.com/hacktheborges'}
+ {t:'filebrowser', os:'Linux', p:'Proving Grounds', status:'building'},
+ {t:'LaVita', os:'Linux', p:'Proving Grounds', status:'building'},
+ {t:'Passport', os:'Linux', p:'Proving Grounds', status:'building'},
+ {t:'flink', os:'Linux', p:'Proving Grounds', status:'building'},
+ {t:'Slort', os:'Windows', p:'Proving Grounds', status:'building'},
+ {t:'AuthBy', os:'Windows', p:'Proving Grounds', status:'building'},
+ {t:'Shenzi', os:'Windows', p:'Proving Grounds', status:'building'},
+ {t:'Monster', os:'Windows', p:'Proving Grounds', status:'building'}
 ];
 function renderWriteups(){
   var el=$('#writeups-list'); if(!el)return;
-  el.innerHTML=WRITEUPS.map(function(w){
-    return '<a class="writeup" href="'+(w.u||'#')+'" target="_blank" rel="noopener"><div class="wu-top"><b>'+esc(w.t)+'</b><span class="wu-plat">'+esc(w.p)+'</span></div><div class="wu-tags">'+w.tags.map(function(g){return '<i>'+esc(g)+'</i>';}).join('')+'</div><span class="wu-date">'+esc(w.d)+'</span></a>';
-  }).join('');
+  var wipTxt=(typeof lang!=='undefined'&&lang==='en')?'under construction':'em construção';
+  function card(w){
+    var building=w.status==='building';
+    var meta='<span class="wu-plat">'+esc(w.p)+' · '+esc(w.os)+'</span>';
+    var foot=building?'<span class="wu-wip">'+wipTxt+'</span>':'<span class="wu-date">'+esc(w.d||'')+'</span>';
+    var inner='<div class="wu-top"><b>'+esc(w.t)+'</b>'+meta+'</div>'+foot;
+    if(!building && w.u) return '<a class="writeup" href="'+w.u+'" target="_blank" rel="noopener">'+inner+'</a>';
+    return '<div class="writeup wip">'+inner+'</div>';
+  }
+  function group(title){
+    var items=WRITEUPS.filter(function(w){return w.os===title;});
+    if(!items.length)return '';
+    return '<div class="wu-group"><p class="sublabel wu-os">'+title+'</p><div class="wu-cols">'+items.map(card).join('')+'</div></div>';
+  }
+  el.innerHTML=group('Linux')+group('Windows');
 }
 function renderStack(){
   $('#stack-grid').innerHTML=STACK.map(function(s,i){return (
@@ -667,7 +695,7 @@ function applyLang(){
   $$('[data-copy]').forEach(function(b){b.textContent=t('contact.copy');});
   $$('h2.split').forEach(function(h){h.removeAttribute('data-raw');h.setAttribute('data-raw',t(h.dataset.t)||h.textContent);split(h);});
 }
-$$('.lang button').forEach(function(b){b.addEventListener('click',function(){ if(lang===b.dataset.lang)return; lang=b.dataset.lang; try{localStorage.setItem('htb-pf-lang',lang);}catch(e){} applyLang(); if(window.__gh)paintGH(window.__gh);});});
+$$('.lang button').forEach(function(b){b.addEventListener('click',function(){ if(lang===b.dataset.lang)return; lang=b.dataset.lang; try{localStorage.setItem('htb-pf-lang',lang);}catch(e){} applyLang(); renderWriteups(); if(window.__gh)paintGH(window.__gh);});});
 
 /* ---------- clock, progress, year ---------- */
 $('#yr').textContent=new Date().getFullYear();
@@ -808,7 +836,7 @@ $$('[data-copy]').forEach(function(b){b.addEventListener('click',function(){var 
     banner:function(){return ['<span class="fl">hacktheborges</span> :: offensive security'];},
     'sudo hire-me':function(){return ['<span class="fl">[sudo] senha para hacktheborges:</span>','acesso concedido — vamos conversar: linkedin.com/in/arturborgges'];}
    };
-   function writeupsCmd(){ var a=['writeups (secao #writeups):']; if(typeof WRITEUPS!=='undefined'){WRITEUPS.forEach(function(w){a.push('- '+w.t+'  ('+w.p+')');});} return a; }
+   function writeupsCmd(){ var a=['writeups \u2014 OffSec Proving Grounds (em construcao):']; if(typeof WRITEUPS!=='undefined'){WRITEUPS.forEach(function(w){a.push('- '+w.t+'  ('+w.os+')');});} return a; }
    function run(raw){
     var cmd=raw.trim(), low=cmd.toLowerCase();
     if(!cmd)return [];

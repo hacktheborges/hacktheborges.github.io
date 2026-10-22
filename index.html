@@ -10,10 +10,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0a0708; --surface:#140f10; --raise:#1a1315; --fg:#f4efed; --muted:#9c9090; --line:#2c2224;
-  --a1:#ff2232; --a1-soft:#ff6b73; --a2:#ff5a68; --a2-soft:#ff9aa2; --on-a:#1b0306;
-  /* contribution cell scale — blood red (V) */
-  --c0:#1a1012; --c1:#3d0d14; --c2:#80131f; --c3:#c21325; --c4:#ff2a3c;
+  --bg:#0d0c1c; --surface:#15132a; --raise:#1b1838; --fg:#eeeaf8; --muted:#948eb6; --line:#2a2548;
+  --a1:#8b5cff; --a1-soft:#b9a6ff; --a2:#38bdf8; --a2-soft:#a6e3ff; --on-a:#0c0620;
+  /* cell scale — OffSec aurora (violet -> cyan) */
+  --c0:#141228; --c1:#1e1a44; --c2:#2f2d80; --c3:#3f5ad1; --c4:#2ad6ff;
   --f-d:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
   --f-b:"Inter",system-ui,-apple-system,sans-serif;
   --f-m:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
@@ -65,7 +65,7 @@ html.anim .commits.in i{transform:none;transition:transform .45s cubic-bezier(.3
 .lang button{font:600 11.5px var(--f-m);border:0;background:none;color:var(--muted);padding:5px 9px;border-radius:6px;cursor:pointer}
 .lang button[aria-pressed="true"]{background:var(--surface);color:var(--fg);box-shadow:inset 0 0 0 1px var(--line)}
 .btn{display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 18px;border-radius:8px;font:600 15px var(--f-b);text-decoration:none;cursor:pointer;border:1px solid transparent;transition:transform .25s var(--ease),box-shadow .25s,border-color .2s;white-space:nowrap}
-.btn.p{background:var(--a1);color:var(--on-a)}
+.btn.p{background:linear-gradient(120deg,#8b5cff,#38bdf8);color:#0b0520;border:none}
 .btn.g{border-color:var(--line);background:var(--surface);color:var(--fg)}
 .btn.p:hover{transform:translateY(-2px);box-shadow:0 12px 28px -12px var(--a1)}
 .btn.g:hover{transform:translateY(-2px);border-color:var(--muted)}
@@ -619,8 +619,10 @@ $$('[data-copy]').forEach(function(b){b.addEventListener('click',function(){var 
    g:['00000','00000','01111','10001','10001','01111','00001','01110'],
    s:['00000','00000','01111','10000','01110','00001','11110','00000']
   };
-  var CELLS=['#1a1012','#3d0d14','#80131f','#c21325','#ff2a3c'];
-  var HOT='255,70,86';
+  var CELLS=['#141228','#1e1a44','#2f2d80','#3f5ad1','#2ad6ff'];
+  var HOT='110,150,255';
+  var NAMEGRAD=[[139,92,255],[80,120,255],[42,214,255]];
+  function gradCol(f,lv){f=f<0?0:f>1?1:f;var g=NAMEGRAD,n=g.length-1,p=f*n,i=Math.floor(p),tt=p-i,A=g[i],B=g[Math.min(n,i+1)],m=lv>=4?1:0.8;return 'rgb('+Math.round((A[0]+(B[0]-A[0])*tt)*m)+','+Math.round((A[1]+(B[1]-A[1])*tt)*m)+','+Math.round((A[2]+(B[2]-A[2])*tt)*m)+')';}
   var ICONS={
    shield:['0001111000','0011111100','0111111110','0111111110','0111221110','0111221110','0011222100','0001222100','0000121000','0000010000'],
    terminal:['1111111111','1000000001','1011000001','1001100001','1011000001','1000111101','1000000001','1000000001','1000000001','1111111111'],
@@ -680,7 +682,7 @@ $$('[data-copy]').forEach(function(b){b.addEventListener('click',function(){var 
      ce.heat+=(target-ce.heat)*Math.min(1,dt*10);
      var lv=ce.base,heat=ce.heat; if(lv===0&&(!opts.scatter||heat<0.04))continue;
      var sc=app*(1+heat*0.55),sz=s*sc,x=ce.x-sz/2,y=ce.y-sz/2;
-     ctx.shadowBlur=0; ctx.globalAlpha=app*(lv>0?1:Math.min(1,heat*2)); ctx.fillStyle=lv>0?CELLS[lv]:CELLS[1]; rr(x,y,sz,sz,rad);
+     ctx.shadowBlur=0; ctx.globalAlpha=app*(lv>0?1:Math.min(1,heat*2)); ctx.fillStyle=(lv>1?gradCol(ce.x/W,lv):(lv>0?CELLS[lv]:CELLS[1])); rr(x,y,sz,sz,rad);
      if(heat>0.05){ctx.shadowColor='rgba('+HOT+',.95)';ctx.shadowBlur=pitch*(0.5+heat*1.8);ctx.globalAlpha=app*Math.min(1,heat*1.15);ctx.fillStyle='rgba('+HOT+','+Math.min(1,heat)+')';rr(x,y,sz,sz,rad);ctx.shadowBlur=0;}
     }
     ctx.globalAlpha=1; raf=requestAnimationFrame(frame);

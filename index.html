@@ -10,10 +10,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0b0d12; --surface:#12151d; --raise:#171b24; --fg:#eef1f7; --muted:#8b94a9; --line:#242a36;
-  --a1:#ff4d8d; --a1-soft:#ff7fb0; --a2:#35b6ff; --a2-soft:#8fd6ff; --on-a:#1a0510;
-  /* contribution cell scale — magenta */
-  --c0:#161b22; --c1:#3a1226; --c2:#7a1f4a; --c3:#c33072; --c4:#ff5e9f;
+  --bg:#0a0708; --surface:#140f10; --raise:#1a1315; --fg:#f4efed; --muted:#9c9090; --line:#2c2224;
+  --a1:#ff2232; --a1-soft:#ff6b73; --a2:#ff5a68; --a2-soft:#ff9aa2; --on-a:#1b0306;
+  /* contribution cell scale — blood red (V) */
+  --c0:#1a1012; --c1:#3d0d14; --c2:#80131f; --c3:#c21325; --c4:#ff2a3c;
   --f-d:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
   --f-b:"Inter",system-ui,-apple-system,sans-serif;
   --f-m:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
@@ -89,7 +89,8 @@ main{position:relative;z-index:1}
 .legend{display:inline-flex;align-items:center;gap:3px;font:13px var(--f-b);color:var(--muted)}
 .legend i{width:11px;height:11px;border-radius:2px}
 .legend span{margin:0 5px}
-#namecanvas{width:100%;height:300px;display:block;cursor:crosshair;touch-action:pan-y}
+#namecanvas{width:100%;height:300px;display:block;cursor:crosshair;touch-action:pan-y;filter:drop-shadow(0 0 5px rgba(255,40,60,.22))}
+.graph-card{box-shadow:inset 0 0 90px rgba(0,0,0,.45)}
 .hero-bot{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px 56px;align-items:end}
 .role{margin:0;font:700 clamp(36px,5.2vw,74px)/.98 var(--f-d);letter-spacing:-.04em}
 .role .acc{color:var(--a1)}
@@ -266,10 +267,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
       </div>
     </div>
     <div class="hstats rv" style="--d:1000ms">
-      <div><b data-count="91">0</b><span data-t="hs.labs">labs OffSec concluídos</span></div>
-      <div><b data-count="215">0</b><span data-t="hs.flags">flags capturadas</span></div>
-      <div><b data-count="569" data-suffix="h">0</b><span data-t="hs.hours">horas em laboratório</span></div>
-      <div><b>#3</b><span data-t="hs.rank">no ranking OffSec · Brasil</span></div>
+      <div><b data-count="95">0</b><span data-t="hs.labs">labs OffSec concluídos</span></div>
+      <div><b data-count="223">0</b><span data-t="hs.flags">flags capturadas</span></div>
+      <div><b data-count="583" data-suffix="h">0</b><span data-t="hs.hours">horas em laboratório</span></div>
+      <div><b>#3</b><span data-t="hs.rank">Brasil · entre os 300 do mundo</span></div>
     </div>
   </div></section>
 
@@ -404,7 +405,7 @@ var T={
   'graph.head':'contribuições no último ano','graph.less':'Menos','graph.more':'Mais','graph.hint':'passe o mouse para iluminar · clique para um pulso','graph.scroll':'role para explorar ↓',
   'hero.lead':'Analista de segurança da informação com experiência corporativa em aplicações, endpoints, redes e identidade. Certificado CRTA e Security+, com foco de carreira em pentest e segurança ofensiva. Em trilha para a OSCP.',
   'hero.cta':'Ver projetos',
-  'hs.labs':'labs OffSec concluídos','hs.flags':'flags capturadas','hs.hours':'horas em laboratório','hs.rank':'no ranking OffSec · Brasil',
+  'hs.labs':'labs OffSec concluídos','hs.flags':'flags capturadas','hs.hours':'horas em laboratório','hs.rank':'Brasil · entre os 300 do mundo',
   'cm.stack':'recon, exploração e defesa','cm.proj':'writeups e o arsenal','cm.traj':'experiência + certificações','cm.contact':'disponível para red team',
   'stack.title':'Com o que eu trabalho','stack.lead':'Da ofensiva à defesa: reconhecimento, enumeração, exploração, Active Directory e escalação de privilégios — mais a experiência corporativa de blue team que me deu a base.',
   'proj.title':'Coisas que eu construí','proj.updated':function(d){return 'atualizado '+d;},
@@ -418,7 +419,7 @@ var T={
   'graph.head':'contributions in the last year','graph.less':'Less','graph.more':'More','graph.hint':'hover to light up · click for a pulse','graph.scroll':'scroll to explore ↓',
   'hero.lead':'Information security analyst with corporate experience across applications, endpoints, networks and identity. CRTA and Security+ certified, with a career focus on penetration testing and offensive security. On the road to OSCP.',
   'hero.cta':'See projects',
-  'hs.labs':'OffSec labs completed','hs.flags':'flags captured','hs.hours':'hours in labs','hs.rank':'OffSec leaderboard · Brazil',
+  'hs.labs':'OffSec labs completed','hs.flags':'flags captured','hs.hours':'hours in labs','hs.rank':'#3 Brazil · top 300 worldwide',
   'cm.stack':'recon, exploitation and defense','cm.proj':'writeups and the arsenal','cm.traj':'experience + certifications','cm.contact':'available for red team',
   'stack.title':'What I work with','stack.lead':'From offense to defense: recon, enumeration, exploitation, Active Directory and privilege escalation — plus the corporate blue-team experience that built my base.',
   'proj.title':'Things I have built','proj.updated':function(d){return 'updated '+d;},
@@ -456,7 +457,7 @@ var PROJECTS=[
   tech:['recon','exploitation','report'],links:[['Ver writeup','https://hacktheborges.github.io/writeups/pelican.html']]},
  {name:'OSCP Arsenal',kind:{pt:'notas · metodologia',en:'notes · methodology'},status:{pt:'vivo',en:'living'},
   desc:{pt:'Meu caderno de guerra: comandos, táticas e checklists de AD, afiados em cada lab.',en:'My war notebook: commands, tactics and AD checklists, sharpened in every lab.'},
-  items:{pt:['91 labs OffSec · 215 flags','Metodologia própria por porta/serviço','Checklists de Active Directory'],en:['91 OffSec labs · 215 flags','My own per-port/service methodology','Active Directory checklists']},
+  items:{pt:['95 labs OffSec · 223 flags','Metodologia própria por porta/serviço','Checklists de Active Directory'],en:['95 OffSec labs · 223 flags','My own per-port/service methodology','Active Directory checklists']},
   tech:['methodology','AD','privesc'],links:[['OffSec','https://portal.offsec.com/public-profile/de8b0b16-ad26-3aa0-ad2f-3c49183ca217']]}
 ];
 var TIMELINE=[
@@ -576,8 +577,8 @@ var FONT={
  G:['01111','10000','10000','10111','10001','10001','01111'],
  S:['01111','10000','10000','01110','00001','00001','11110']
 };
-var CELLS=['#161B22','#3a1226','#7a1f4a','#c33072','#ff5e9f'];
-var HOT='255,150,200';
+var CELLS=['#1a1012','#3d0d14','#80131f','#c21325','#ff2a3c'];
+var HOT='255,70,86';
 function nameBitmap(word){
   var adv=6, w=word.length*adv-1, h=7, bm=new Uint8Array(w*h), x=0;
   for(var ci=0;ci<word.length;ci++){ var g=FONT[word[ci]]; if(g){for(var r=0;r<7;r++)for(var c=0;c<5;c++)if(g[r][c]==='1')bm[r*w+x+c]=1;} x+=adv; }
@@ -608,28 +609,32 @@ function nameBitmap(word){
     var dt=Math.min(.05,(now-(frame.last||now))/1000); frame.last=now;
     ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,cv.clientWidth,cv.clientHeight);
     var elapsed=(now-t0)/1000;
-    // ripples decay
     ripples=ripples.filter(function(rp){rp.r+=dt*520; rp.life-=dt; return rp.life>0;});
-    var s=pitch*0.78, rad=pitch*0.22;
+    // idle scanner sweep (V style) across the name
+    var W=cv.clientWidth, sweepPeriod=5.5, sweepDur=1.7, sp=elapsed%sweepPeriod,
+        sweeping=!reduce && sp<sweepDur, sweepX=sweeping?(sp/sweepDur)*(W+pitch*4)-pitch*2:-1e5;
+    var s=pitch*0.8, rad=pitch*0.24;
     for(var i=0;i<cells.length;i++){
       var ce=cells[i];
-      // entrance
       if(ce.seen<1){ ce.seen=Math.min(1, ce.seen + dt*1.3/(0.15+ce.t)); }
       var app=ce.seen; if(app<=0)continue;
-      // hover heat
       var dx=ce.x-mx, dy=ce.y-my, d2=dx*dx+dy*dy, R=pitch*6;
       var target=d2<R*R?(1-Math.sqrt(d2)/R):0;
-      // ripple heat
       for(var k=0;k<ripples.length;k++){var rp=ripples[k];var dd=Math.abs(Math.sqrt((ce.x-rp.x)*(ce.x-rp.x)+(ce.y-rp.y)*(ce.y-rp.y))-rp.r); if(dd<pitch*2.2)target=Math.max(target,(1-dd/(pitch*2.2))*rp.life*1.3);}
+      if(sweeping && ce.base>0){ var dsx=Math.abs(ce.x-sweepX); if(dsx<pitch*2.6) target=Math.max(target,(1-dsx/(pitch*2.6))*0.9); }
       ce.heat += (target-ce.heat)*Math.min(1,dt*10);
       var lv=ce.base, heat=ce.heat;
       if(lv===0 && heat<0.04)continue;
-      var sc=app*(1+heat*0.5), sz=s*sc;
-      var col = lv>0?CELLS[lv]:CELLS[1];
+      var sc=app*(1+heat*0.55), sz=s*sc, x=ce.x-sz/2, y=ce.y-sz/2;
+      ctx.shadowBlur=0;
       ctx.globalAlpha=app*(lv>0?1:Math.min(1,heat*2));
-      ctx.fillStyle=col;
-      rrect(ctx, ce.x-sz/2, ce.y-sz/2, sz, sz, rad);
-      if(heat>0.05){ ctx.globalAlpha=app*heat; ctx.fillStyle='rgba('+HOT+','+Math.min(1,heat)+')'; rrect(ctx, ce.x-sz/2, ce.y-sz/2, sz, sz, rad); }
+      ctx.fillStyle=lv>0?CELLS[lv]:CELLS[1];
+      rrect(ctx,x,y,sz,sz,rad);
+      if(heat>0.05){
+        ctx.shadowColor='rgba('+HOT+',0.95)'; ctx.shadowBlur=pitch*(0.5+heat*1.8);
+        ctx.globalAlpha=app*Math.min(1,heat*1.15); ctx.fillStyle='rgba('+HOT+','+Math.min(1,heat)+')';
+        rrect(ctx,x,y,sz,sz,rad); ctx.shadowBlur=0;
+      }
     }
     ctx.globalAlpha=1;
     raf=requestAnimationFrame(frame);

@@ -69,6 +69,9 @@ html.anim .commits.in i{transform:none;transition:transform .45s cubic-bezier(.3
 .btn.g{border-color:var(--line);background:var(--surface);color:var(--fg)}
 .btn.p:hover{transform:translateY(-2px);box-shadow:0 12px 28px -12px var(--a1)}
 .btn.g:hover{transform:translateY(-2px);border-color:var(--muted)}
+.btn.icon{width:46px;padding:0;justify-content:center}
+.btn.icon svg{width:19px;height:19px;transition:color .2s}
+.btn.g.icon:hover{border-color:var(--a1)}.btn.g.icon:hover svg{color:var(--a1-soft)}
 
 main{position:relative;z-index:1}
 
@@ -109,7 +112,9 @@ main{position:relative;z-index:1}
 .cert-wrap.soon .cert{opacity:.3;filter:grayscale(.4) drop-shadow(0 4px 10px rgba(0,0,0,.4))}
 .cert-wrap.soon:hover .cert{opacity:.5;transform:translateY(-3px)}
 .cert-wrap figcaption{font:600 9.5px var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:2px 8px}
-.certs-label{margin:0 0 12px}
+p.certs-label{font:700 13.5px var(--f-m);letter-spacing:.18em;text-transform:uppercase;color:var(--fg);margin:0 0 22px;display:inline-flex;align-items:center;gap:11px}
+p.certs-label::before{content:"";width:26px;height:2px;border-radius:2px;background:linear-gradient(90deg,#8b5cff,#38bdf8)}
+.rank-tag{display:inline-block;margin-left:9px;font:600 10.5px var(--f-m);letter-spacing:.03em;text-transform:none;color:var(--a1-soft);background:color-mix(in srgb,var(--a1) 15%,transparent);border:1px solid color-mix(in srgb,var(--a1) 42%,transparent);border-radius:99px;padding:2px 10px;vertical-align:middle}
 .hstats-group{display:grid;gap:10px;border-top:1px solid var(--line);padding-top:18px}
 .hstats-group .sublabel{margin:4px 0 -2px}
 .hstats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
@@ -242,7 +247,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   .hstats b{font-size:26px}
   .slot{height:180px}
   .graph-card{padding:12px 13px 10px}
-  .ctas{flex-direction:column}.ctas .btn{width:100%;justify-content:center}
+  .ctas{flex-direction:column}.ctas .btn{width:100%;justify-content:center}.ctas .btn.icon{width:52px;align-self:flex-start}
 }
 .graph-card{position:relative}
 .plus{position:absolute;transform:translate(-50%,-50%);font:700 11px var(--f-m);color:var(--c4);background:var(--bg);border:1px solid var(--c3);border-radius:99px;padding:1px 8px;pointer-events:none;z-index:6;animation:plus 1.15s var(--ease) forwards}
@@ -293,6 +298,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
         <div class="ctas rv" style="--d:820ms">
           <a class="btn p" href="https://portal.offsec.com/public-profile/de8b0b16-ad26-3aa0-ad2f-3c49183ca217" target="_blank" rel="noopener" data-t="hero.cta">Ver perfil OffSec ↗</a>
           <a class="btn g" href="https://profile.hackthebox.com/profile/019e2c5e-b1eb-7093-b9fa-ec20945bbefb" target="_blank" rel="noopener" data-t="hero.cta2">Ver perfil Hack The Box ↗</a>
+          <a class="btn g icon" href="https://www.linkedin.com/in/arturborgges/" target="_blank" rel="noopener" aria-label="LinkedIn — Artur Borges" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
         </div>
       </div>
     </div>
@@ -304,7 +310,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
         <div><b data-count="583" data-suffix="h">0</b><span data-t="hs.hours">horas em laboratório</span></div>
         <div><b>#3</b><span data-t="hs.rank">Brasil · entre os 300 do mundo</span></div>
       </div>
-      <p class="sublabel">Hack The Box</p>
+      <p class="sublabel">Hack The Box <span class="rank-tag" data-t="hs.htbrank">Rank Professional</span></p>
       <div class="hstats">
         <div><b data-count="32">0</b><span data-t="hs.modules">módulos</span></div>
         <div><b data-count="3">0</b><span data-t="hs.htblabs">labs</span></div>
@@ -446,6 +452,7 @@ var T={
   'hero.lead':'Analista de segurança da informação se especializando em segurança ofensiva. Ativo em plataformas como OffSec e Hack The Box. Possuo as certificações CompTIA Security+ e CRTA — Certified Red Team Analyst e estudo atualmente para obter a OSCP.',
   'hero.cta':'Ver perfil OffSec ↗','hero.cta2':'Ver perfil Hack The Box ↗',
   'certs.label':'Certificações','certs.soon':'em progresso',
+  'hs.htbrank':'Rank Professional',
   'hs.labs':'labs OffSec concluídos','hs.flags':'flags capturadas','hs.hours':'horas em laboratório','hs.rank':'Brasil · entre os 300 do mundo','hs.modules':'módulos','hs.htblabs':'labs','hs.minilab':'mini pro lab','hs.sherlocks':'sherlocks',
   'cm.stack':'EDR, firewall, AD e pentest interno','cm.proj':'writeups e o arsenal','cm.traj':'experiência + certificações','cm.contact':'disponível para red team',
   'stack.title':'Minha atuação','stack.lead':'No dia a dia atuo entre defesa e ataque: EDR, firewall, Active Directory, privacidade (LGPD), pentest interno em aplicações web e revisão de código.',
@@ -461,6 +468,7 @@ var T={
   'hero.lead':'Information security analyst specializing in offensive security. Active on platforms like OffSec and Hack The Box. I hold the CompTIA Security+ and CRTA — Certified Red Team Analyst certifications, and I am currently studying for the OSCP.',
   'hero.cta':'OffSec profile ↗','hero.cta2':'Hack The Box profile ↗',
   'certs.label':'Certifications','certs.soon':'in progress',
+  'hs.htbrank':'Rank Professional',
   'hs.labs':'OffSec labs completed','hs.flags':'flags captured','hs.hours':'hours in labs','hs.rank':'#3 Brazil · top 300 worldwide','hs.modules':'modules','hs.htblabs':'labs','hs.minilab':'mini pro lab','hs.sherlocks':'sherlocks',
   'cm.stack':'EDR, firewall, AD and internal pentest','cm.proj':'writeups and the arsenal','cm.traj':'experience + certifications','cm.contact':'available for red team',
   'stack.title':'What I do','stack.lead':'Day to day I work between defense and offense: EDR, firewall, Active Directory, privacy (LGPD), internal web-app pentesting and code review.',

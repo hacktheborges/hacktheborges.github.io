@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0d0c1c">
+<title>404 · hacktheborges</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0c1c;--surface:#15132a;--line:#302849;--text:#eeeaf8;--muted:#aaa2c7;--violet:#a277ff;--cyan:#7cdaff;--mono:'JetBrains Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px 16px;background:radial-gradient(ellipse at 50% 0%,#1d1640 0%,var(--bg) 60%);color:var(--text);font:16px/1.7 Inter,system-ui,sans-serif}
+.box{width:100%;max-width:560px;border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:28px}
+.term{font:13px/1.9 var(--mono);color:var(--muted);margin:0 0 22px;overflow-wrap:anywhere}
+.term b{color:var(--violet);font-weight:600}
+.term .err{color:#ff7668}
+h1{font:600 clamp(40px,10vw,64px)/1 var(--mono);letter-spacing:-2px;margin:0 0 8px}
+h1 span{color:var(--violet)}
+p{color:var(--muted);margin:0 0 22px}
+a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:9px;background:var(--violet);color:#110b20;text-decoration:none;font:600 14px var(--mono)}
+a:hover{background:#b69aff}
+a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+</style>
+</head>
+<body>
+<main class="box">
+<p class="term"><b>~$</b> cat <span id="path">/</span><br><span class="err" id="err">cat: arquivo ou diretório inexistente</span></p>
+<h1>4<span>0</span>4</h1>
+<p id="msg">Essa página não existe, ou foi movida. Nem toda enumeração encontra alguma coisa.</p>
+<a href="/" id="back">← Voltar ao início</a>
+</main>
+<script>
+document.getElementById('path').textContent=location.pathname;
+if(!/^pt/i.test(navigator.language||'')){
+  document.documentElement.lang='en';
+  document.getElementById('err').textContent='cat: no such file or directory';
+  document.getElementById('msg').textContent="This page doesn't exist, or it has moved. Not every enumeration finds something.";
+  document.getElementById('back').textContent='← Back to home';
+}
+</script>
+</body>
+</html>

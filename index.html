@@ -438,7 +438,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
  const canvas=document.getElementById('ambient-commits');if(!canvas)return;
  const ctx=canvas.getContext('2d');if(!ctx)return;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
- let width=0,height=0,dpr=1,cells=[],rings=[],mouseX=-9999,mouseY=-9999,raf=0,last=0,resizeTimer=0;
+ let width=0,height=0,dpr=1,cells=[],mouseX=-9999,mouseY=-9999,raf=0,last=0,resizeTimer=0;
  function build(){
   width=innerWidth;height=innerHeight;dpr=Math.min(devicePixelRatio||1,1.5);
   canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);
@@ -453,29 +453,25 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
  }
  function draw(now){
   ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,width,height);
-  rings=rings.filter(r=>now-r.t<1600);
   for(const c of cells){
    const driftX=reduced.matches?0:Math.sin(now*.0003+c.phase)*4;
    const driftY=reduced.matches?0:Math.cos(now*.0004+c.phase)*5;
    const x=c.x+driftX,y=c.y+driftY;
    const pointer=reduced.matches?0:Math.max(0,1-Math.hypot(x-mouseX,y-mouseY)/150);
    let heat=pointer*.18;
-   if(!reduced.matches)for(const r of rings){const age=now-r.t,band=Math.abs(Math.hypot(x-r.x,y-r.y)-age*.3);if(band<38)heat=Math.max(heat,(1-band/38)*(1-age/1600)*.22);}
    const breathe=reduced.matches?1:.8+.2*Math.sin(now*.0007+c.phase);
    const alpha=Math.min(.75,c.alpha*breathe+heat),size=c.size*(1+heat*.55);
    ctx.fillStyle=c.cyan?'rgba(76,200,255,'+alpha+')':'rgba(164,111,255,'+alpha+')';
    ctx.beginPath();if(typeof ctx.roundRect==='function')ctx.roundRect(x-size/2,y-size/2,size,size,1);else ctx.rect(x-size/2,y-size/2,size,size);ctx.fill();
   }
-  if(!reduced.matches)for(const r of rings){const age=now-r.t;ctx.beginPath();ctx.arc(r.x,r.y,age*.3,0,Math.PI*2);ctx.strokeStyle='rgba(164,111,255,'+(.13*(1-age/1600))+')';ctx.lineWidth=1;ctx.stroke();}
  }
  function tick(now){raf=0;if(document.hidden||reduced.matches)return;if(now-last>=32){draw(now);last=now;}raf=requestAnimationFrame(tick);}
  function start(){if(!raf&&!document.hidden&&!reduced.matches)raf=requestAnimationFrame(tick);}
  addEventListener('pointermove',e=>{if(e.pointerType==='mouse'){mouseX=e.clientX;mouseY=e.clientY;}},{passive:true});
  const forget=()=>{mouseX=mouseY=-9999;};document.addEventListener('pointerleave',forget);addEventListener('blur',forget);
- addEventListener('click',e=>{if(reduced.matches||e.target.closest('a,button,input,textarea,select,dialog'))return;rings.push({x:e.clientX,y:e.clientY,t:performance.now()});if(rings.length>3)rings.shift();},{passive:true});
  addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(build,100);},{passive:true});
  document.addEventListener('visibilitychange',()=>{if(raf)cancelAnimationFrame(raf);raf=0;last=0;if(!document.hidden)start();});
- reduced.addEventListener('change',()=>{if(raf)cancelAnimationFrame(raf);raf=0;rings=[];forget();draw(performance.now());start();});
+ reduced.addEventListener('change',()=>{if(raf)cancelAnimationFrame(raf);raf=0;forget();draw(performance.now());start();});
  build();
 })();
 </script><style id="assessment-refinements">#borges-portfolio .pb-journey-actions{display:grid;gap:8px}

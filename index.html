@@ -435,6 +435,12 @@ body{isolation:isolate}
  select(0,false);
 })();
 </script><style id="assessment-refinements">#borges-portfolio .pb-journey-actions{display:grid;gap:8px}
+/* Botões dos slides: contorno simples, sem a faixa lateral. */
+#borges-portfolio .pb-slide .pb-journey-button{color:var(--hb-text);background:transparent;border:1px solid color-mix(in srgb,var(--cert-accent) 30%,var(--hb-line));border-radius:10px;box-shadow:none;transition:border-color .2s,background .2s}
+#borges-portfolio .pb-slide .pb-journey-button svg{color:var(--cert-accent)}
+#borges-portfolio .pb-slide .pb-journey-button .pb-arrow{color:var(--hb-muted);transition:transform .2s,color .2s}
+#borges-portfolio .pb-slide .pb-journey-button:hover{transform:none;background:color-mix(in srgb,var(--cert-accent) 8%,transparent);border-color:color-mix(in srgb,var(--cert-accent) 65%,var(--hb-line))}
+#borges-portfolio .pb-slide .pb-journey-button:hover .pb-arrow{color:var(--cert-accent);transform:translate(2px,-2px)}
 
 html,body{background:#070810}
 

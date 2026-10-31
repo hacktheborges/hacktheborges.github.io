@@ -435,43 +435,77 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 })();
 </script><script id="ambient-background-engine">(function(){
  'use strict';
+ // Fundo "mapa de rede": nós ligados aos vizinhos mais próximos; um pulso salta de nó em nó
+ // (movimento lateral) até um nó final em vermelho (o controlador de domínio) e recomeça.
  const canvas=document.getElementById('ambient-commits');if(!canvas)return;
  const ctx=canvas.getContext('2d');if(!ctx)return;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
- let width=0,height=0,dpr=1,cells=[],mouseX=-9999,mouseY=-9999,raf=0,last=0,resizeTimer=0;
+ const HOP=700,HOLD=1600,HOPS=6;
+ let width=0,height=0,dpr=1,nodes=[],edges=[],path=[],seg=0,hopT=0,hold=0,mouseX=-9999,mouseY=-9999,raf=0,last=0,resizeTimer=0;
  function build(){
   width=innerWidth;height=innerHeight;dpr=Math.min(devicePixelRatio||1,1.5);
   canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);
-  cells=[];let seed=107;
+  nodes=[];edges=[];let seed=107;
   const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
-  const pitch=width<600?40:38;
-  for(let y=19;y<height;y+=pitch)for(let x=19;x<width;x+=pitch){
-   if(random()>.28)continue;
-   cells.push({x,y,size:random()<.17?4.5:2.8,phase:random()*Math.PI*2,alpha:.055+random()*.055,cyan:random()<.25});
-  }
-  draw(performance.now());start();
+  const step=width<600?110:150,jitter=step*.27;
+  for(let y=step*.4;y<height;y+=step)for(let x=step*.4;x<width;x+=step)
+   nodes.push({x:x+(random()-.5)*2*jitter,y:y+(random()-.5)*2*jitter,phase:random()*Math.PI*2,owned:false});
+  const seen=new Set();
+  nodes.forEach((a,i)=>{
+   nodes.map((b,j)=>({j,d:Math.hypot(a.x-b.x,a.y-b.y)})).filter(o=>o.j!==i).sort((p,q)=>p.d-q.d).slice(0,2).forEach(o=>{
+    const key=Math.min(i,o.j)+'-'+Math.max(i,o.j);if(!seen.has(key)){seen.add(key);edges.push([i,o.j]);}
+   });
+  });
+  newPath();draw(performance.now(),0);start();
  }
- function draw(now){
+ function newPath(){
+  for(const n of nodes)n.owned=false;
+  path=[];seg=0;hopT=0;hold=0;if(!nodes.length)return;
+  let cur=Math.floor(Math.random()*nodes.length);path.push(cur);
+  for(let k=0;k<HOPS;k++){
+   const next=edges.filter(e=>e[0]===cur||e[1]===cur).map(e=>e[0]===cur?e[1]:e[0]).filter(j=>!path.includes(j));
+   if(!next.length)break;cur=next[Math.floor(Math.random()*next.length)];path.push(cur);
+  }
+  nodes[path[0]].owned=true;
+ }
+ function advance(dt){
+  if(path.length<2){newPath();return;}
+  if(seg>=path.length-1){hold+=dt;if(hold>HOLD)newPath();return;}
+  hopT+=dt/HOP;
+  if(hopT>=1){hopT=0;seg++;nodes[path[seg]].owned=true;}
+ }
+ function line(a,b){ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);}
+ function square(x,y,size){ctx.beginPath();if(typeof ctx.roundRect==='function')ctx.roundRect(x-size/2,y-size/2,size,size,1);else ctx.rect(x-size/2,y-size/2,size,size);ctx.fill();}
+ function draw(now,dt){
   ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,width,height);
-  for(const c of cells){
-   const driftX=reduced.matches?0:Math.sin(now*.0003+c.phase)*4;
-   const driftY=reduced.matches?0:Math.cos(now*.0004+c.phase)*5;
-   const x=c.x+driftX,y=c.y+driftY;
-   const pointer=reduced.matches?0:Math.max(0,1-Math.hypot(x-mouseX,y-mouseY)/150);
-   let heat=pointer*.18;
-   const breathe=reduced.matches?1:.8+.2*Math.sin(now*.0007+c.phase);
-   const alpha=Math.min(.75,c.alpha*breathe+heat),size=c.size*(1+heat*.55);
-   ctx.fillStyle=c.cyan?'rgba(76,200,255,'+alpha+')':'rgba(164,111,255,'+alpha+')';
-   ctx.beginPath();if(typeof ctx.roundRect==='function')ctx.roundRect(x-size/2,y-size/2,size,size,1);else ctx.rect(x-size/2,y-size/2,size,size);ctx.fill();
+  const still=reduced.matches;
+  if(!still)advance(dt);
+  ctx.lineWidth=1;ctx.strokeStyle='rgba(164,111,255,.09)';ctx.beginPath();for(const[a,b]of edges)line(nodes[a],nodes[b]);ctx.stroke();
+  if(!still&&path.length>1){
+   ctx.strokeStyle='rgba(124,218,255,.3)';ctx.beginPath();
+   for(let k=0;k<Math.min(seg,path.length-1);k++)line(nodes[path[k]],nodes[path[k+1]]);
+   if(seg<path.length-1){
+    const a=nodes[path[seg]],b=nodes[path[seg+1]],x=a.x+(b.x-a.x)*hopT,y=a.y+(b.y-a.y)*hopT;
+    ctx.moveTo(a.x,a.y);ctx.lineTo(x,y);ctx.stroke();
+    ctx.fillStyle='rgba(124,218,255,.9)';square(x,y,4);
+   }else ctx.stroke();
   }
+  const target=!still&&seg>=path.length-1?path[path.length-1]:-1;
+  nodes.forEach((n,i)=>{
+   const pointer=still?0:Math.max(0,1-Math.hypot(n.x-mouseX,n.y-mouseY)/150)*.25;
+   const breathe=still?0:.04*Math.sin(now*.001+n.phase);
+   if(i===target){ctx.fillStyle='rgba(255,73,104,'+(.85*Math.min(1,(HOLD-hold)/400+.2))+')';square(n.x,n.y,8);}
+   else if(n.owned&&!still){ctx.fillStyle='rgba(124,218,255,.55)';square(n.x,n.y,5);}
+   else{ctx.fillStyle='rgba(164,111,255,'+(.16+breathe+pointer)+')';square(n.x,n.y,4*(1+pointer));}
+  });
  }
- function tick(now){raf=0;if(document.hidden||reduced.matches)return;if(now-last>=32){draw(now);last=now;}raf=requestAnimationFrame(tick);}
+ function tick(now){raf=0;if(document.hidden||reduced.matches)return;if(now-last>=32){draw(now,last?Math.min(64,now-last):0);last=now;}raf=requestAnimationFrame(tick);}
  function start(){if(!raf&&!document.hidden&&!reduced.matches)raf=requestAnimationFrame(tick);}
  addEventListener('pointermove',e=>{if(e.pointerType==='mouse'){mouseX=e.clientX;mouseY=e.clientY;}},{passive:true});
  const forget=()=>{mouseX=mouseY=-9999;};document.addEventListener('pointerleave',forget);addEventListener('blur',forget);
  addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(build,100);},{passive:true});
  document.addEventListener('visibilitychange',()=>{if(raf)cancelAnimationFrame(raf);raf=0;last=0;if(!document.hidden)start();});
- reduced.addEventListener('change',()=>{if(raf)cancelAnimationFrame(raf);raf=0;forget();draw(performance.now());start();});
+ reduced.addEventListener('change',()=>{if(raf)cancelAnimationFrame(raf);raf=0;last=0;forget();newPath();draw(performance.now(),0);start();});
  build();
 })();
 </script><style id="assessment-refinements">#borges-portfolio .pb-journey-actions{display:grid;gap:8px}

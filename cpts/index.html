@@ -88,6 +88,8 @@
 .lh-diff{color:var(--d);font-weight:600;display:inline-flex;align-items:center;gap:6px}
 .lh-diff::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--d)}
 .lh-os{color:var(--muted)}
+.lh-cta{display:inline-block;margin-top:6px;background:var(--accent);color:var(--bg);text-decoration:none;font:600 12px var(--mono);letter-spacing:.4px;padding:9px 15px;border-radius:9px;transition:filter .15s,transform .15s}
+.lh-cta:hover{filter:brightness(1.08);transform:translateY(-1px)}
 .lab-strip{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 12px;scrollbar-width:thin}
 .lab-strip::-webkit-scrollbar{height:7px}.lab-strip::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
 .lab-thumb{flex:0 0 auto;width:58px;height:58px;border-radius:12px;border:1px solid var(--line);background:var(--panel);padding:5px;cursor:pointer;transition:.15s;--d:#86d9a6}
@@ -251,7 +253,7 @@
  function renderHero(){var m=M[sel];hero.className='lab-hero '+m.d;
   hero.innerHTML='<img src="'+ic(m.slug)+'" alt="'+m.name+'"><div class="lh-meta">'+
    '<div class="lh-num">'+pad(m.n)+' / 16 · '+L('track CPTS Preparation','CPTS Preparation track')+'</div>'+
-   '<h3>'+m.name+'</h3><div class="lh-tags"><span class="lh-diff">'+m.dl+'</span><span class="lh-os">'+m.os+'</span></div></div>';}
+   '<h3>'+m.name+'</h3><div class="lh-tags"><span class="lh-diff">'+m.dl+'</span><span class="lh-os">'+m.os+'</span></div><a class="lh-cta" href="'+m.slug+'.html">'+L('Ver writeup','View writeup')+' →</a></div>';}
  function renderGrid(){grid.innerHTML=M.filter(function(_,i){return i!==sel;}).map(function(m){
   return '<article class="htb-card '+m.d+'" role="button" tabindex="0" data-i="'+(m.n-1)+'" aria-label="'+L('Selecionar ','Select ')+m.name+'"><span class="htb-num">'+pad(m.n)+'</span>'+
    '<div class="htb-ava"><img src="'+ic(m.slug)+'" alt="'+m.name+'" loading="lazy" decoding="async"></div>'+

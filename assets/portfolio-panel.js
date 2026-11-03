@@ -11,11 +11,27 @@
  const pageName=document.getElementById('workspace-page');
  const backLink=document.getElementById('workspace-back');
  const homeTitle=document.title;
- const styleURL=new URL('panel-content.css?v=7e19ec2a22cb',document.currentScript.src).href;
+ const styleURL=new URL('panel-content.css?v=4fedd85c1a6e',document.currentScript.src).href;
  const T=(pt,en)=>window.BorgesI18n?window.BorgesI18n.text(pt,en):pt;
  const language=()=>window.BorgesI18n?window.BorgesI18n.language:'pt';
  const homePath=location.pathname;
- let current=null,ready=false,loadTimer=null;
+ const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+ let current=null,ready=false,loadTimer=null,loadingTimer=null;
+ let navigationVersion=0,frameAnimation=null;
+
+ function cancelFrameMotion(){
+  if(frameAnimation){frameAnimation.cancel();frameAnimation=null;}
+ }
+ function enterContent(element){
+  if(reducedMotion.matches||!element.animate)return;
+  element.getAnimations().forEach(animation=>animation.cancel());
+  const animation=element.animate([
+   {opacity:0,transform:'translateY(5px)'},
+   {opacity:1,transform:'translateY(0)'}
+  ],{duration:210,easing:'cubic-bezier(.2,.7,.25,1)'});
+  if(element===frame)frameAnimation=animation;
+  animation.finished.catch(()=>{});
+ }
 
  // Only the two existing, same-origin collections can open in the reader.
  function routeFor(value,base){
@@ -70,7 +86,10 @@
   if(!ready)statusText.textContent=T('Carregando conteúdo…','Loading content…');
  }
  function error(){
+  navigationVersion++;
   clearTimeout(loadTimer);
+  clearTimeout(loadingTimer);
+  cancelFrameMotion();
   ready=false;
   frame.style.visibility='hidden';
   status.hidden=false;
@@ -78,14 +97,14 @@
   statusText.textContent=T('Não foi possível carregar este conteúdo.','This content could not be loaded.');
   workspace.setAttribute('aria-busy','false');
  }
- function scrollToAnchor(){
+ function scrollToAnchor(smooth){
   if(!ready||!current||!current.hash)return;
   const doc=frame.contentDocument;
   let id;try{id=decodeURIComponent(current.hash.slice(1));}catch{return;}
   const target=doc.getElementById(id);
-  if(target&&!target.hidden)target.scrollIntoView({block:'start',behavior:'instant'});
+  if(target&&!target.hidden)target.scrollIntoView({block:'start',behavior:smooth&&!reducedMotion.matches?'smooth':'instant'});
  }
- function replaceChildHash(){
+ function replaceChildHash(smooth){
   const win=frame.contentWindow;
   const url=new URL(win.location.href);
   if(url.hash!==current.hash){
@@ -93,7 +112,7 @@
    win.history.replaceState(null,'',url.href);
    win.dispatchEvent(new win.HashChangeEvent('hashchange',{oldURL,newURL:url.href}));
   }
-  win.requestAnimationFrame(scrollToAnchor);
+  win.requestAnimationFrame(()=>scrollToAnchor(smooth));
  }
  function open(route,mode){
   const same=current&&current.key===route.key;
@@ -102,16 +121,39 @@
   dashboard.hidden=true;workspace.hidden=false;shell.dataset.view='track';
   document.querySelector('.skip-link').setAttribute('href','#track-workspace');
   selectTrack();chrome();notify();
-  if(same&&ready){replaceChildHash();return;}
+  if(same&&ready){replaceChildHash(mode!=='none');return;}
+  const animateExit=ready&&!reducedMotion.matches&&!!frame.animate;
+  const version=++navigationVersion;
+  cancelFrameMotion();
   ready=false;
   pageName.textContent='';
   workspace.setAttribute('aria-busy','true');
-  frame.style.visibility='hidden';status.hidden=false;retry.hidden=true;
+  status.hidden=true;retry.hidden=true;
   statusText.textContent=T('Carregando conteúdo…','Loading content…');
+  clearTimeout(loadingTimer);
+  // Cached pages can appear before the loading message needs to be shown.
+  loadingTimer=setTimeout(()=>{if(version===navigationVersion&&!ready)status.hidden=false;},140);
   clearTimeout(loadTimer);loadTimer=setTimeout(error,25000);
-  frame.contentWindow.location.replace(frameURL(route).href);
+  const navigate=()=>{
+   if(version!==navigationVersion)return;
+   frame.style.visibility='hidden';
+   cancelFrameMotion();
+   frame.contentWindow.location.replace(frameURL(route).href);
+  };
+  if(animateExit){
+   frameAnimation=frame.animate([
+    {opacity:1,transform:'translateY(0)'},
+    {opacity:0,transform:'translateY(-3px)'}
+   ],{duration:90,easing:'ease-out',fill:'forwards'});
+   // A history restoration may already have revealed the requested document.
+   // Cancelling its outgoing effect must not hide that document again.
+   frameAnimation.finished.then(navigate,()=>{});
+  }else navigate();
  }
  function home(hash,mode){
+  const returning=!!current;
+  navigationVersion++;
+  clearTimeout(loadingTimer);cancelFrameMotion();
   clearTimeout(loadTimer);current=null;ready=false;
   const url=new URL(location.href);url.searchParams.delete('view');url.hash=hash||'';
   if(mode!=='none'&&url.href!==location.href)history[mode==='replace'?'replaceState':'pushState'](null,'',url.href);
@@ -122,7 +164,8 @@
   document.title=title.getAttribute('data-'+language())||homeTitle;
   selectTrack();notify();
   let target;try{target=document.getElementById(decodeURIComponent((hash||'#perfil').slice(1)));}catch{}
-  if(target)requestAnimationFrame(()=>target.scrollIntoView({block:'start',behavior:'instant'}));
+  if(returning)enterContent(dashboard);
+  if(target)requestAnimationFrame(()=>target.scrollIntoView({block:'start',behavior:mode!=='none'&&!reducedMotion.matches?'smooth':'instant'}));
  }
  function fromLocation(){
   const selected=new URLSearchParams(location.search).get('view');
@@ -157,12 +200,13 @@
   try{doc=frame.contentDocument;win=frame.contentWindow;loaded=routeFor(win.location.href);}catch{error();return;}
   if(!loaded||loaded.key!==current.key)return;
   if(!doc.querySelector('main')){error();return;}
+  const version=navigationVersion;
   const expected=doc;
   doc.documentElement.dataset.panel='true';
   doc.documentElement.dataset.theme='dark';
   const style=doc.createElement('link');style.rel='stylesheet';style.href=styleURL;
-  try{await new Promise((resolve,reject)=>{style.onload=resolve;style.onerror=reject;doc.head.appendChild(style);});}catch{error();return;}
-  if(frame.contentDocument!==expected||!current)return;
+  try{await new Promise((resolve,reject)=>{style.onload=resolve;style.onerror=reject;doc.head.appendChild(style);});}catch{if(version===navigationVersion)error();return;}
+  if(version!==navigationVersion||frame.contentDocument!==expected||!current)return;
   doc.addEventListener('click',event=>{
    if(handleLink(event,win.location.href))event.stopPropagation();
    else if(ordinaryClick(event))win.queueMicrotask(()=>{
@@ -176,12 +220,12 @@
    const selected=routeFor(win.location.href);
    if(selected&&selected.key===current.key){current.hash=selected.hash;saveLocation(current,'replace');}
   });
-  clearTimeout(loadTimer);ready=true;
+  clearTimeout(loadTimer);clearTimeout(loadingTimer);ready=true;
   workspace.setAttribute('aria-busy','false');status.hidden=true;retry.hidden=true;
   const heading=doc.querySelector('main h1');
   pageName.textContent=heading?heading.textContent.trim().replace(/\s+/g,' '):'';
   document.title=doc.title;
-  frame.style.visibility='visible';chrome();replaceChildHash();
+  frame.style.visibility='visible';chrome();replaceChildHash(false);enterContent(frame);
  });
  retry.addEventListener('click',()=>{if(current)open(current,'none');});
  window.addEventListener('popstate',fromLocation);

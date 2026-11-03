@@ -207,3 +207,18 @@ details[open]>summary>.chevron{transform:rotate(180deg)}
 @media(max-width:480px){.portfolio-shell[data-view=track]{display:flex;flex-direction:column;overflow:hidden}.portfolio-shell[data-view=track] .app-header{height:var(--header);min-height:var(--header);flex-shrink:0}.portfolio-shell[data-view=track] .sidebar{height:auto;flex-shrink:0;max-height:45svh}.portfolio-shell[data-view=track] .main-content{flex:1;min-height:0;padding:12px 12px 10px}.workspace-toolbar{gap:8px;align-items:flex-start}.workspace-breadcrumb{font-size:10px;gap:7px;flex:1}.workspace-page{font-size:10px;flex-basis:100%;max-width:none}.workspace-page::before{display:none}.workspace-back{font-size:10px;padding:6px 8px;min-height:32px}.workspace-reader{padding-top:10px}}
 @media(max-width:480px){.sidebar-group{display:block;border-top:1px solid var(--line);margin-top:10px;padding-top:10px}}
 
+/* Short, quiet feedback for navigation and controls. */
+.side-nav a,.language-switch button,.primary-button,.secondary-button,.header-github,.text-link,.subtle-link{transition:background-color 170ms ease,border-color 170ms ease,color 170ms ease,transform 170ms ease}
+.side-nav a .icon,.machine-icon,.row-arrow{transition:color 170ms ease,background-color 170ms ease,transform 190ms ease}
+.profile-tabs a::after{content:"";height:2px;background:var(--purple);position:absolute;bottom:-1px;left:0;right:0;transform:scaleX(0);transform-origin:left;transition:transform 190ms cubic-bezier(.2,.7,.25,1)}
+.profile-tabs a.is-active::after{transform:scaleX(1)}
+.primary-button:active,.secondary-button:active{transform:translateY(1px)}
+.workspace-status{animation:loading-message-in 160ms ease-out both}
+.track-workspace[aria-busy=true] .workspace-status::before{content:"";display:block;width:112px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--line) 0%,var(--purple) 50%,var(--line) 100%);background-size:220% 100%;animation:reader-loading 1100ms ease-in-out infinite}
+@keyframes reader-loading{from{background-position:180% 0}to{background-position:-40% 0}}
+@keyframes loading-message-in{from{opacity:0}to{opacity:1}}
+@keyframes mobile-menu-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+@media(hover:hover) and (pointer:fine){.side-nav a:hover .icon{transform:translateX(1px)}.writeup-row:hover .machine-icon{background:var(--purple-soft);color:var(--purple)}.writeup-row:hover .row-arrow{transform:translate(2px,-2px)}}
+@media(max-width:480px){.portfolio-shell[data-menu-open=true] .sidebar{animation:mobile-menu-in 160ms ease-out both}}
+@media(prefers-reduced-motion:reduce){.side-nav a,.side-nav a .icon,.language-switch button,.primary-button,.secondary-button,.header-github,.text-link,.subtle-link,.machine-icon,.row-arrow,.profile-tabs a::after{transition:none}.workspace-status,.track-workspace[aria-busy=true] .workspace-status::before,.portfolio-shell[data-menu-open=true] .sidebar{animation:none}.side-nav a:hover .icon,.writeup-row:hover .row-arrow,.primary-button:active,.secondary-button:active{transform:none}}
+

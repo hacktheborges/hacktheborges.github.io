@@ -3,8 +3,8 @@
  const T=(pt,en)=>window.BorgesI18n?window.BorgesI18n.text(pt,en):pt;
  const tabs=Array.from(document.querySelectorAll('[data-oscp-tab]'));
  function select(id,writeHash){
-  if(!tabs.some(t=>t.dataset.oscpTab===id))id='jornada';
-  tabs.forEach(t=>{const active=t.dataset.oscpTab===id;t.setAttribute('aria-selected',String(active));t.tabIndex=active?0:-1;document.getElementById(t.dataset.oscpTab).hidden=!active;});
+  if(!tabs.some(t=>t.dataset.oscpTab===id))id=null;
+  tabs.forEach((t,i)=>{const active=t.dataset.oscpTab===id;t.setAttribute('aria-selected',String(active));t.tabIndex=active||(!id&&i===0)?0:-1;document.getElementById(t.dataset.oscpTab).hidden=!active;});
   if(writeHash)history.replaceState(null,'','#'+id);
  }
  tabs.forEach((tab,i)=>{

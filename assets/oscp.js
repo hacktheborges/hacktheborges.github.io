@@ -21,7 +21,8 @@
  let records=[];
  try{const data=JSON.parse(document.getElementById('oscp-labs-data').textContent);if(Array.isArray(data))records=data.filter(l=>l&&typeof l.name==='string'&&typeof l.slug==='string'&&/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(l.slug));}catch{}
  const grid=document.getElementById('lab-grid'),search=document.getElementById('lab-search'),filters=Array.from(document.querySelectorAll('[data-lab-filter]'));
- const counter=document.getElementById('lab-count');let filter='all';
+ const counter=document.getElementById('lab-count');const requestedOS=new URLSearchParams(location.search).get('os');let filter=['Linux','Windows'].includes(requestedOS)?requestedOS:'all';
+ filters.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.labFilter===filter)));
  function normalize(text){return String(text).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();}
  function element(tag,text,className){const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(className)el.className=className;return el;}
  function render(){
@@ -32,17 +33,29 @@
   const query=normalize(search.value||'');
   const shown=records.filter(l=>(filter==='all'||l.os===filter)&&normalize([l.name,l.os,l.platform,...(Array.isArray(l.tags)?l.tags:[])].join(' ')).includes(query));
   grid.replaceChildren();
-  shown.forEach(l=>{
-   const card=element('a',undefined,'lab-card');card.href=l.slug+'.html?lang='+(en?'en':'pt');
-   card.appendChild(element('span',[l.platform,l.os].filter(Boolean).join(' / '),'lab-meta'));
-   card.appendChild(element('h3',l.name));
-   if(l.completed)card.appendChild(element('span',T('✓ Concluída','✓ Completed'),'lab-done'));
-   const summary=l.summary&&(en?l.summary.en:l.summary.pt);if(typeof summary==='string')card.appendChild(element('p',summary));
-   if(Array.isArray(l.tags)&&l.tags.length)card.appendChild(element('span',l.tags.join(' · '),'lab-meta'));
-   card.appendChild(element('span',T('Ler write-up →','Read write-up →'),'lab-read'));grid.appendChild(card);
+  const systems=filter==='all'?['Linux','Windows']:[filter];
+  systems.forEach(os=>{
+   const groupRecords=shown.filter(l=>l.os===os);
+   if(query&&!groupRecords.length)return;
+   const group=element('section',undefined,'lab-os-group');
+   group.setAttribute('aria-label',os);
+   const head=element('div',undefined,'lab-os-head');head.appendChild(element('h3',os));head.appendChild(element('span',groupRecords.length===1?T('1 publicado','1 published'):groupRecords.length+T(' publicados',' published')));group.appendChild(head);
+   const cards=element('div',undefined,'lab-group-grid');
+   groupRecords.forEach(l=>{
+    const card=element('a',undefined,'lab-card');card.href=l.slug+'.html?lang='+(en?'en':'pt');
+    const mark=element('div',undefined,'lab-card-mark');const icon=element('span','>_','lab-card-terminal');icon.setAttribute('aria-hidden','true');mark.appendChild(icon);if(l.completed)mark.appendChild(element('span',T('✓ Concluída','✓ Completed'),'lab-done'));card.appendChild(mark);
+    card.appendChild(element('span',[l.platform,l.os].filter(Boolean).join(' / '),'lab-meta'));
+    card.appendChild(element('h4',l.name));
+    const summary=l.summary&&(en?l.summary.en:l.summary.pt);if(typeof summary==='string')card.appendChild(element('p',summary));
+    if(Array.isArray(l.tags)&&l.tags.length)card.appendChild(element('span',l.tags.join(' · '),'lab-meta'));
+    card.appendChild(element('span',T('Ler write-up →','Read write-up →'),'lab-read'));cards.appendChild(card);
+   });
+   if(groupRecords.length)group.appendChild(cards);
+   else group.appendChild(element('p',T('Os write-ups de '+os+' aparecerão aqui.','The '+os+' write-ups will appear here.'),'os-group-empty'));
+   grid.appendChild(group);
   });
-  counter.textContent=shown.length+T(' de ',' of ')+total+T(' write-ups',' write-ups');
-  document.getElementById('no-results').hidden=!total||!!shown.length;
+  counter.textContent=T('Exibindo ','Showing ')+shown.length+T(' de ',' of ')+total;
+  document.getElementById('no-results').hidden=!total||!!shown.length||!query;
  }
  search.addEventListener('input',render);
  filters.forEach(button=>button.addEventListener('click',()=>{filter=button.dataset.labFilter;filters.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));render();}));

@@ -12,12 +12,12 @@
  'use strict';
  var button=document.getElementById('pwn-button'),party=document.getElementById('pwn3d'),status=document.getElementById('pwn-status');
  if(!button||!party||!status)return;
- var machine=party.dataset.machine||'ClamAV';
+ var machine=party.dataset.machine||'ClamAV',access=party.dataset.access||'root';
  var canvas=null,frame=0,timer=0,celebrated=false;
  var motion=window.matchMedia('(prefers-reduced-motion: reduce)');
  function label(){
   var en=window.BorgesI18n&&window.BorgesI18n.language==='en';
-  status.textContent=celebrated?(en?machine+' Pwn3d! Root access confirmed.':machine+' Pwn3d! Acesso root confirmado.'):(en?'Click to celebrate '+machine+'.':'Clique para comemorar a '+machine+'.');
+  status.textContent=celebrated?(en?machine+' Pwn3d! '+(access==='root'?'Root':access)+' access confirmed.':machine+' Pwn3d! Acesso '+access+' confirmado.'):(en?'Click to celebrate '+machine+'.':'Clique para comemorar a '+machine+'.');
  }
  function clearCanvas(){if(frame)cancelAnimationFrame(frame);frame=0;if(canvas)canvas.remove();canvas=null;}
  function finish(){clearCanvas();clearTimeout(timer);timer=0;party.classList.remove('is-celebrating');button.disabled=false;}
@@ -53,3 +53,4 @@
  document.addEventListener('visibilitychange',function(){if(document.hidden)finish();});
  label();
 })();
+

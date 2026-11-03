@@ -57,6 +57,10 @@
 .labs-tracklink a:hover{text-decoration:underline}
 .labs-grid.htb{grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:16px}
 .htb-card{position:relative;text-decoration:none;color:inherit;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 12px 15px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:11px;cursor:pointer;transition:transform .18s,border-color .18s,background .18s}
+.lab-completion{display:inline-flex;align-items:center;gap:6px;align-self:center;padding:4px 9px;border:1px solid color-mix(in srgb,var(--ok,#91d8b3) 45%,var(--line));border-radius:999px;background:color-mix(in srgb,var(--ok,#91d8b3) 10%,var(--panel));color:var(--ok,#91d8b3);font:600 11px/1.5 var(--mono);white-space:nowrap}
+.htb-card.is-complete,.lab-hero.is-complete{border-color:color-mix(in srgb,var(--ok,#91d8b3) 48%,var(--line))}
+.lh-meta>.lab-completion{margin-bottom:12px}
+[data-theme=light] .lab-completion{color:#17613e;background:#eaf7ef;border-color:#9fcbb0}
 .htb-card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .htb-card:hover{transform:translateY(-4px);background:var(--raised);border-color:color-mix(in srgb,var(--d) 55%,var(--line))}
 .htb-num{position:absolute;top:9px;left:11px;font:10px var(--mono);color:var(--muted);letter-spacing:.5px}
@@ -241,7 +245,7 @@
  var hero=document.getElementById('labhero'),strip=document.getElementById('labstrip'),grid=document.getElementById('labgrid');
  if(!hero||!strip||!grid)return;
  var M=[
- {n:1,name:'Fluffy',slug:'fluffy',d:'easy',dl:'Easy',os:'Windows'},
+ {n:1,name:'Fluffy',slug:'fluffy',d:'easy',dl:'Easy',os:'Windows',done:true},
  {n:2,name:'Jeeves',slug:'jeeves',d:'medium',dl:'Medium',os:'Windows'},
  {n:3,name:'Trick',slug:'trick',d:'easy',dl:'Easy',os:'Linux'},
  {n:4,name:'Postman',slug:'postman',d:'easy',dl:'Easy',os:'Linux'},
@@ -261,14 +265,15 @@
  function pad(x){return ('0'+x).slice(-2);}
  function ic(s){return '../assets/img/labs/htb-'+s+'.png';}
  function L(pt,en){return (window.BorgesI18n&&window.BorgesI18n.language==='en')?en:pt;}
- function renderHero(){var m=M[sel];hero.className='lab-hero '+m.d;
+ function completion(m){return m.done?'<span class="lab-completion"><span aria-hidden="true">✓</span> '+L('Concluída','Completed')+'</span>':'';}
+ function renderHero(){var m=M[sel];hero.className='lab-hero '+m.d+(m.done?' is-complete':'');
   hero.innerHTML='<img src="'+ic(m.slug)+'" alt="'+m.name+'"><div class="lh-meta">'+
    '<div class="lh-num">'+pad(m.n)+' / 16 · '+L('track CPTS Preparation','CPTS Preparation track')+'</div>'+
-   '<h3>'+m.name+'</h3><div class="lh-tags"><span class="lh-diff">'+m.dl+'</span><span class="lh-os">'+m.os+'</span></div><a class="lh-cta" href="'+m.slug+'.html">'+L('Ver writeup','View writeup')+' →</a></div>';}
+   '<h3>'+m.name+'</h3>'+completion(m)+'<div class="lh-tags"><span class="lh-diff">'+m.dl+'</span><span class="lh-os">'+m.os+'</span></div><a class="lh-cta" href="'+m.slug+'.html">'+L('Ver writeup','View writeup')+' →</a></div>';}
  function renderGrid(){grid.innerHTML=M.filter(function(_,i){return i!==sel;}).map(function(m){
-  return '<article class="htb-card '+m.d+'" role="button" tabindex="0" data-i="'+(m.n-1)+'" aria-label="'+L('Selecionar ','Select ')+m.name+'"><span class="htb-num">'+pad(m.n)+'</span>'+
+  return '<article class="htb-card '+m.d+(m.done?' is-complete':'')+'" role="button" tabindex="0" data-i="'+(m.n-1)+'" aria-label="'+L('Selecionar ','Select ')+m.name+(m.done?L(' — Concluída',' — Completed'):'')+'"><span class="htb-num">'+pad(m.n)+'</span>'+
    '<div class="htb-ava"><img src="'+ic(m.slug)+'" alt="'+m.name+'" loading="lazy" decoding="async"></div>'+
-   '<h3 class="htb-name">'+m.name+'</h3><div class="htb-tags"><span class="htb-diff">'+m.dl+'</span><span class="htb-os">'+m.os+'</span></div></article>';}).join('');}
+   '<h3 class="htb-name">'+m.name+'</h3>'+completion(m)+'<div class="htb-tags"><span class="htb-diff">'+m.dl+'</span><span class="htb-os">'+m.os+'</span></div></article>';}).join('');}
  function select(i,scroll){if(isNaN(i)||i===sel)return;sel=i;
   [].forEach.call(strip.children,function(c,j){c.classList.toggle('active',j===sel);});
   renderHero();renderGrid();

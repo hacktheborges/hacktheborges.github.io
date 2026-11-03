@@ -1,0 +1,44 @@
+/* Applied by the portfolio reader only; direct article URLs keep their layout. */
+:root[data-panel=true],:root[data-panel=true][data-theme=light]{--bg:#09090c;--panel:#121216;--raised:#1a191f;--fg:#f1eef7;--muted:#a49db2;--line:#27232e;--accent:#b68afa;--blue:#c3a0f6;--ok:#c3a0f6;--mint:#c3a0f6;--body:Inter,system-ui,sans-serif;color-scheme:dark;scroll-padding-top:22px}
+html[data-panel=true] body{background:var(--bg);color:var(--fg)}
+html[data-panel=true] .topbar,html[data-panel=true] .hub-footer,html[data-panel=true] .writeup-footer,html[data-panel=true] main>.footer{display:none!important}
+html[data-panel=true] .container,html[data-panel=true] .lab-wrap{max-width:none;margin:0;padding:7px 17px 40px 2px}
+html[data-panel=true] .hub-hero{gap:24px;padding:10px 0 25px}
+html[data-panel=true] .hub-badge{width:85px;height:85px;object-fit:contain;flex-shrink:0}
+html[data-panel=true] .page-title{font-size:45px;letter-spacing:-1.4px}
+html[data-panel=true] .page-title span{font-size:24px}
+html[data-panel=true] .intro{font-size:14px;max-width:68ch}
+html[data-panel=true] .hub-tabs{margin:23px 0;gap:9px}
+html[data-panel=true] .hub-tab{border-radius:5px;background:var(--panel)}
+html[data-panel=true] .hub-tab[aria-selected=true]{color:var(--accent);background:var(--raised);border-color:var(--accent)}
+html[data-panel=true] .hero{grid-template-columns:minmax(0,1fr) 210px;background:var(--panel);border-radius:8px;border-color:var(--line);min-height:0}
+html[data-panel=true] .hero-copy{padding:26px}
+html[data-panel=true] .hero h1{font-size:48px;letter-spacing:-2px}
+html[data-panel=true] .hero h1 span{font-size:26px;color:var(--accent)}
+html[data-panel=true] .hero-desc{font-size:14px;margin-bottom:0}
+html[data-panel=true] .hero-art{min-height:225px}
+html[data-panel=true] .hero-art img{width:168px;height:168px;filter:none}
+html[data-panel=true] .hero-art::before,html[data-panel=true] .hero-art::after,html[data-panel=true] .art-label{display:none}
+html[data-panel=true] .hero-status{margin:15px 0 23px}
+html[data-panel=true] .route-cards{gap:13px;margin-bottom:24px}
+html[data-panel=true] .route-card{border-radius:6px;padding:18px;background:var(--panel);box-shadow:none}
+html[data-panel=true] .route-card[aria-selected=true]{background:var(--raised)}
+html[data-panel=true] .route-card:hover,html[data-panel=true] .lab-card:hover{transform:none}
+html[data-panel=true] .route-title{font-size:21px}
+html[data-panel=true] .route-number,html[data-panel=true] .route-icon{color:var(--accent)}
+html[data-panel=true] .lab-card,html[data-panel=true] .labs-empty,html[data-panel=true] .ad-feature{border-radius:7px;background:var(--panel);border-color:var(--line)}
+html[data-panel=true] .lab-card .lab-done{color:var(--accent)}
+html[data-panel=true] .lab-hero,html[data-panel=true] .htb-card{background:var(--panel);border-color:var(--line);box-shadow:none}
+html[data-panel=true] .lab-hero .lh-cta{background:var(--raised);color:var(--accent);border:1px solid var(--line)}
+html[data-panel=true] .labs-grid,html[data-panel=true] .lab-group-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+html[data-panel=true] .walkthrough-page>header{margin-left:0}
+html[data-panel=true] .writeup-title h1{font-size:46px;letter-spacing:-1.5px}
+html[data-panel=true] .writeup-subtitle{font-size:19px}
+html[data-panel=true] .walkthrough-layout{gap:26px;grid-template-columns:194px minmax(0,1fr)}
+html[data-panel=true] .article,html[data-panel=true] .prose{font-size:16px;line-height:1.9}
+html[data-panel=true] .article h2,html[data-panel=true] .prose h2{font-size:25px}
+html[data-panel=true] .walkthrough-toc{--walkthrough-offset:18px}
+html[data-panel=true] .walkthrough-toc details{border-radius:6px}
+html[data-panel=true] .walkthrough-toc a{font-size:12px}
+@media(max-width:900px){html[data-panel=true] .labs-grid,html[data-panel=true] .lab-group-grid{grid-template-columns:repeat(2,minmax(0,1fr))}html[data-panel=true] .hero{grid-template-columns:minmax(0,1fr) 160px}html[data-panel=true] .hero-art{min-height:210px}html[data-panel=true] .hero-art img{width:134px;height:134px}html[data-panel=true] .hero-copy{padding:23px}html[data-panel=true] .hero h1 span{font-size:23px}}
+@media(max-width:600px){html[data-panel=true] .container,html[data-panel=true] .lab-wrap{padding:5px 11px 30px 1px}html[data-panel=true] .hub-hero{gap:15px;align-items:flex-start}html[data-panel=true] .hub-badge{width:57px;height:57px}html[data-panel=true] .page-title{font-size:37px}html[data-panel=true] .page-title span{font-size:22px}html[data-panel=true] .intro{font-size:13px}html[data-panel=true] .hero{display:block}html[data-panel=true] .hero-copy{padding:23px}html[data-panel=true] .hero h1{font-size:40px}html[data-panel=true] .hero h1 span{font-size:23px}html[data-panel=true] .hero-art{display:none}html[data-panel=true] .hero-status{font-size:10px;gap:9px}html[data-panel=true] .route-card{padding:14px}html[data-panel=true] .route-title{font-size:19px}html[data-panel=true] .labs-grid,html[data-panel=true] .lab-group-grid{grid-template-columns:1fr}html[data-panel=true] .writeup-title h1{font-size:35px}html[data-panel=true] .article,html[data-panel=true] .prose{font-size:16px}}

@@ -54,6 +54,7 @@
  const sideLinks=Array.from(document.querySelectorAll('[data-section]'));
  const tabs=Array.from(document.querySelectorAll('[data-tab-section]'));
  function markSection(){
+  if(new URLSearchParams(location.search).has('view'))return;
   const id=location.hash.slice(1)||'perfil';
   sideLinks.forEach(link=>{
    if(link.dataset.section===id||(id==='inicio'&&link.dataset.section==='perfil'))link.setAttribute('aria-current','location');
@@ -66,7 +67,9 @@
   });
  }
  window.addEventListener('hashchange',markSection);
+ document.addEventListener('portfolio:viewchange',markSection);
  markSection();
  document.getElementById('site-year').textContent=new Date().getFullYear();
 })();
+
 

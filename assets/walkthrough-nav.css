@@ -1,0 +1,32 @@
+html.walkthrough-document{scroll-padding-top:0}
+.lab-wrap.walkthrough-page{max-width:1160px}
+.walkthrough-page>header{margin-left:264px}
+.walkthrough-layout{display:grid;grid-template-columns:224px minmax(0,1fr);gap:40px;align-items:start}
+.walkthrough-layout>.article{max-width:none;min-width:0}
+.walkthrough-page .article section[id]{scroll-margin-top:calc(var(--walkthrough-offset,100px) + 16px)}
+.walkthrough-toc{position:sticky;top:var(--walkthrough-offset,100px);align-self:start;min-width:0;z-index:20}
+.walkthrough-toc details{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:16px 10px}
+.walkthrough-toc summary{padding:0 10px 12px;list-style:none;font:600 11px/1.6 var(--mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--fg)}
+.walkthrough-toc summary::-webkit-details-marker{display:none}
+.walkthrough-toc-toggle{display:none}
+.walkthrough-toc nav{display:grid;gap:4px;max-height:calc(100svh - var(--walkthrough-offset,100px) - 90px);overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.walkthrough-toc a{display:block;padding:9px 10px;border-left:2px solid transparent;border-radius:0 6px 6px 0;color:var(--muted);font:12px/1.65 var(--body);text-decoration:none;overflow-wrap:anywhere;transition:color .15s,background .15s,border-color .15s}
+.walkthrough-toc a:hover{color:var(--fg);background:var(--raised)}
+.walkthrough-toc a[aria-current=location]{color:var(--accent);border-left-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--panel));font-weight:600}
+.walkthrough-toc a:focus-visible,.walkthrough-toc summary:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+@media(min-width:1001px){.walkthrough-toc summary{pointer-events:none}}
+@media(max-width:1000px){
+ .lab-wrap.walkthrough-page{max-width:900px}
+ .walkthrough-page>header{margin-left:0}
+ .walkthrough-layout{display:block}
+ .walkthrough-toc{margin-bottom:26px}
+ .walkthrough-toc details{padding:0;box-shadow:0 5px 20px #00000012}
+ .walkthrough-toc summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;padding:13px 16px;cursor:pointer}
+ .walkthrough-toc-toggle{display:inline-block;font-size:18px;line-height:1;transition:transform .2s}
+ .walkthrough-toc details[open] .walkthrough-toc-toggle{transform:rotate(180deg)}
+ .walkthrough-toc nav{max-height:min(52svh,calc(100svh - var(--walkthrough-offset,100px) - 100px));padding:0 10px 10px}
+ .walkthrough-toc a{min-height:44px;display:flex;align-items:center}
+ .walkthrough-page .article section[id]{scroll-margin-top:calc(var(--walkthrough-offset,100px) + 76px)}
+}
+@media(prefers-reduced-motion:reduce){.walkthrough-toc a,.walkthrough-toc-toggle{transition:none}}
+@media print{.walkthrough-toc{display:none!important}.walkthrough-layout{display:block}.walkthrough-page>header{margin-left:0}.lab-wrap.walkthrough-page{max-width:none}}

@@ -34,6 +34,27 @@
   window.addEventListener('storage', event => {
     if (event.key === key) apply(event.newValue, false);
   });
+  const panes = Array.from(document.querySelectorAll('.workspace .pane'));
+  function activatePane(pane) {
+    panes.forEach(item => item.classList.toggle('is-active', item === pane));
+  }
+  function activateHashPane() {
+    const target = document.getElementById(location.hash.slice(1));
+    const pane = target && target.closest('.pane');
+    if (pane) activatePane(pane);
+  }
+  panes.forEach(pane => {
+    pane.addEventListener('pointerdown', event => {
+      activatePane(pane);
+      if (!event.target.closest('a, button, input, select, textarea, [contenteditable]')) {
+        pane.focus({ preventScroll: true });
+      }
+    });
+    pane.addEventListener('focusin', () => activatePane(pane));
+  });
+  window.addEventListener('hashchange', activateHashPane);
+  activatePane(panes.find(pane => pane.classList.contains('is-active')) || panes[0]);
+  activateHashPane();
   document.getElementById('year').textContent = new Date().getFullYear();
   apply(normalize(new URLSearchParams(location.search).get('lang')) || saved || 'pt', false);
 })();

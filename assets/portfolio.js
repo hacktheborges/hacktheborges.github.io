@@ -55,6 +55,21 @@
   window.addEventListener('hashchange', activateHashPane);
   activatePane(panes.find(pane => pane.classList.contains('is-active')) || panes[0]);
   activateHashPane();
+  function animateCommands() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const introKey = 'borges-terminal-intro-v1';
+    try {
+      if (sessionStorage.getItem(introKey)) return;
+      sessionStorage.setItem(introKey, 'shown');
+    } catch {}
+    document.querySelectorAll('.command-text').forEach((command, index) => {
+      command.style.setProperty('--typing-steps', command.textContent.length);
+      command.style.setProperty('--typing-delay', (index * 110) + 'ms');
+      command.classList.add('is-typing');
+      command.addEventListener('animationend', () => command.classList.remove('is-typing'), { once: true });
+    });
+  }
   document.getElementById('year').textContent = new Date().getFullYear();
   apply(normalize(new URLSearchParams(location.search).get('lang')) || saved || 'pt', false);
+  animateCommands();
 })();
